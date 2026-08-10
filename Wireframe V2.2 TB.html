@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trackerboard Configuration — Lofi Wireframe</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#000;background:#fff;font-size:13px}
+  h1,h2,h3,h4{margin:0;font-weight:bold}
+  button{font:inherit;background:#fff;border:1px solid #000;padding:5px 10px;cursor:pointer}
+  button:hover{background:#eee}
+  button.primary{background:#000;color:#fff}
+  button.primary:hover{background:#333}
+  input,select,textarea{font:inherit;border:1px solid #000;padding:4px 6px;width:100%;background:#fff}
+  textarea{resize:vertical}
+  table{border-collapse:collapse;width:100%}
+  th,td{border:1px solid #000;padding:5px 7px;text-align:left;vertical-align:middle}
+  th{background:#eee}
+  .muted{color:#666;font-size:11px}
+  .locked{background:#eee}
+  .tag{border:1px solid #000;padding:1px 5px;font-size:10px}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .row > *{flex:1;min-width:180px}
+  .field{margin-bottom:10px}
+  .field label{display:block;font-weight:bold;margin-bottom:3px}
+  .box{border:1px solid #000;padding:12px;margin-bottom:14px}
+  .box h3{border-bottom:1px solid #000;padding-bottom:6px;margin-bottom:10px}
+  fieldset{border:1px dashed #000;margin:0 0 10px}
+  legend{font-weight:bold;padding:0 4px}
+
+  /* ---- SCREEN: LIST ---- */
+  #screen-list{max-width:1100px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:14px}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+  .toolbar select,.toolbar input{width:auto}
+
+  /* ---- BACKDROP / DRAWER ---- */
+  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.25);display:none;z-index:50}
+  .backdrop.open{display:block}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:92vw;max-width:960px;background:#fff;border-left:2px solid #000;display:none;flex-direction:column;z-index:60}
+  .drawer.open{display:flex}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:2px solid #000}
+  .quicknav{display:flex;flex-wrap:wrap;border-bottom:1px solid #000}
+  .quicknav button{flex:1;min-width:140px;border:0;border-right:1px solid #000;padding:10px 6px;background:#fff;font-size:12px}
+  .quicknav button:last-child{border-right:0}
+  .quicknav button.active{background:#000;color:#fff;font-weight:bold}
+  .drawer-body{flex:1;overflow:auto;padding:16px;background:#fafafa;scroll-behavior:smooth}
+  .form-section{margin-bottom:30px}
+  .form-section > h2{border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:14px}
+  .drawer-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 16px;border-top:2px solid #000}
+  .drawer-foot .left{margin-right:auto;font-size:11px;color:#666;align-self:center}
+
+  /* ---- MODAL ---- */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:100}
+  .modal-backdrop.open{display:flex}
+  .modal-box{background:#fff;border:2px solid #000;padding:18px;width:min(480px,92vw)}
+  .modal-box h2{border-bottom:1px solid #000;padding-bottom:8px;margin-bottom:12px}
+  .modal-box .choices{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+  .modal-box .choices button{text-align:left;padding:10px}
+
+  .history-modal .modal-box{width:min(640px,94vw)}
+</style>
+</head>
+<body>
+
+<!-- ================= SCREEN 1: TRACKERBOARD LIST ================= -->
+<div id="screen-list">
+  <div class="topbar">
+    <h1>Trackerboard Configuration</h1>
+    <span class="muted">[ wireframe scaffold — not final visual design ]</span>
+  </div>
+
+  <div class="toolbar">
+    <div class="row" style="flex:2">
+      <input type="search" placeholder="Search Trackerboards...">
+      <select><option>All Care Settings</option><option>ED</option><option>IP</option></select>
+      <select><option>All Statuses</option><option>Draft</option><option>Active</option><option>Inactive</option></select>
+    </div>
+    <button class="primary" id="btnNewBoard">+ New Trackerboard</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Board Name</th><th>Care Setting</th><th>Facility</th><th>Status</th><th>Updated</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ED Trackerboard</td><td>Emergency Department</td><td>Main Hospital, North Campus</td>
+        <td><span class="tag">ACTIVE</span></td><td>07/24/2026</td>
+        <td><button data-open-editor>Edit</button> <button data-open-history>History</button></td>
+      </tr>
+      <tr>
+        <td>Inpatient Trackerboard</td><td>Hospitalization</td><td>Main Hospital</td>
+        <td><span class="tag">ACTIVE</span></td><td>07/20/2026</td>
+        <td><button data-open-editor>Edit</button> <button data-open-history>History</button></td>
+      </tr>
+      <tr>
+        <td>Endoscopy Trackerboard</td><td>Endoscopy</td><td>North Campus, Eastside</td>
+        <td><span class="tag">DRAFT</span></td><td>08/01/2026</td>
+        <td><button data-open-editor>Edit</button> <button data-open-history>History</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="muted">Rows are sample data only.</p>
+</div>
+
+<!-- ================= MODAL: NEW TRACKERBOARD ENTRY ================= -->
+<div class="modal-backdrop" id="entryModal">
+  <div class="modal-box">
+    <h2>New Trackerboard</h2>
+    <div class="choices">
+      <button data-open-editor>Start from Existing Template</button>
+      <button data-open-editor>Start from Blank Board</button>
+    </div>
+    <button id="cancelEntry">Cancel</button>
+  </div>
+</div>
+
+<!-- ================= MODAL: VERSION HISTORY ================= -->
+<div class="modal-backdrop history-modal" id="historyModal">
+  <div class="modal-box">
+    <h2>Version History — ED Trackerboard</h2>
+    <table>
+      <thead><tr><th>Version</th><th>Status</th><th>Change</th><th>Date</th></tr></thead>
+      <tbody>
+        <tr><td>v1</td><td><span class="tag">ACTIVE</span></td><td>Initial ED workflow</td><td>06/02/2026</td></tr>
+        <tr><td>v2</td><td><span class="tag">DRAFT</span></td><td>Prepare Eastside rollout</td><td>08/02/2026</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <button id="closeHistory">Close</button>
+  </div>
+</div>
+
+<!-- ================= DRAWER: BOARD EDITOR ================= -->
+<div class="backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h2>Configure Trackerboard</h2>
+    <button id="closeDrawer">Close ✕</button>
+  </div>
+
+  <nav class="quicknav" id="quicknav">
+    <button data-target="sec-basic" class="active">1. Basic Details</button>
+    <button data-target="sec-widgets">2. Widgets &amp; Panels</button>
+    <button data-target="sec-table">3. Patient Table</button>
+    <button data-target="sec-rules">4. Rules &amp; Access</button>
+    <button data-target="sec-review">5. Review &amp; Save</button>
+  </nav>
+
+  <div class="drawer-body">
+
+    <!-- SECTION 1: BASIC DETAILS -->
+    <section class="form-section" id="sec-basic">
+      <h2>1. Basic Details</h2>
+      <div class="box">
+        <h3>Board Details &amp; Scope</h3>
+        <div class="row">
+          <div class="field"><label>Board Name *</label><input type="text" placeholder="e.g. ED Trackerboard"></div>
+          <div class="field"><label>Short Name</label><input type="text" placeholder="Auto-generated"></div>
+        </div>
+        <div class="field"><label>Description</label><textarea rows="2" placeholder="Purpose of this board"></textarea></div>
+        <div class="row">
+          <div class="field"><label>Care Setting *</label><select><option>Select Care Setting</option><option>Emergency Department</option><option>Hospitalization</option></select></div>
+          <div class="field"><label>Facility (inherited)</label><input class="locked" value="Main Hospital, North Campus" readonly></div>
+        </div>
+        <div class="field"><label>Board State</label>
+          <label><input type="radio" name="state" checked> Active</label> &nbsp;
+          <label><input type="radio" name="state"> Inactive</label>
+        </div>
+      </div>
+
+      <div class="box">
+        <h3>Header Controls</h3>
+        <table>
+          <thead><tr><th>Enabled</th><th>Control</th><th>Order</th><th>Permission</th></tr></thead>
+          <tbody>
+            <tr><td><input type="checkbox" checked></td><td>Board Name</td><td><input type="number" value="1"></td><td><select><option>All roles</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Facility</td><td><input type="number" value="2"></td><td><select><option>All roles</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Change Date (default: Today)</td><td><input type="number" value="3"></td><td><select><option>All roles</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Add New Patient</td><td><input type="number" value="4"></td><td><select><option>Front Desk</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Search Patient to Add</td><td><input type="number" value="5"></td><td><select><option>Front Desk</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Refresh</td><td><input type="number" value="6"></td><td><select><option>All roles</option></select></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 2: WIDGETS & PANELS -->
+    <section class="form-section" id="sec-widgets">
+      <h2>2. Widgets &amp; Panels</h2>
+      <details class="box" open>
+        <summary><strong>Patients</strong></summary>
+        <div class="row" style="margin-top:10px">
+          <div class="field"><label>Enabled</label><input type="checkbox" checked></div>
+          <div class="field"><label>Title</label><input value="Patients"></div>
+          <div class="field"><label>Order</label><input type="number" value="1"></div>
+          <div class="field"><label>Size</label><select><option>S</option><option>M</option><option>L</option></select></div>
+        </div>
+        <label><input type="checkbox"> Show triage breakdown (High/Med/Low) — <span class="muted">optional, ED only</span></label>
+      </details>
+
+      <details class="box">
+        <summary><strong>Resources</strong></summary>
+        <div class="row" style="margin-top:10px">
+          <div class="field"><label>Enabled</label><input type="checkbox" checked></div>
+          <div class="field"><label>Title</label><input value="Resources"></div>
+          <div class="field"><label>Order</label><input type="number" value="2"></div>
+        </div>
+        <fieldset><legend>Resource types to show</legend>
+          <label><input type="checkbox" checked> Beds</label> &nbsp;
+          <label><input type="checkbox" checked> Chairs</label> &nbsp;
+          <label><input type="checkbox"> Lobby spaces</label>
+        </fieldset>
+      </details>
+
+      <details class="box">
+        <summary><strong>Code Team</strong></summary>
+        <div class="row" style="margin-top:10px">
+          <div class="field"><label>Enabled</label><input type="checkbox" checked></div>
+          <div class="field"><label>Title</label><input value="Code Team"></div>
+          <div class="field"><label>Order</label><input type="number" value="3"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>View Permission</label><select><option>All roles</option></select></div>
+          <div class="field"><label>Manage (Add) Permission</label><select><option>Charge Nurse</option></select></div>
+        </div>
+        <fieldset><legend>Fixed — not editable here</legend>
+          <span class="muted">Fields: Name (required), Role (optional), Shift (required). Add flow ends with a confirmation dialog. Current-shift entry replaces prior-shift data.</span>
+        </fieldset>
+      </details>
+
+      <details class="box">
+        <summary><strong>Doctors on Duty</strong></summary>
+        <div class="row" style="margin-top:10px">
+          <div class="field"><label>Enabled</label><input type="checkbox"></div>
+          <div class="field"><label>Title</label><input value="Doctors on Duty"></div>
+          <div class="field"><label>Order</label><input type="number" value="4"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>View Permission</label><select><option>All roles</option></select></div>
+          <div class="field"><label>Manage (Add) Permission</label><select><option>Charge Nurse</option></select></div>
+        </div>
+        <fieldset><legend>Fixed — not editable here</legend>
+          <span class="muted">Grouped by shift. Columns: Name, Phone, Email. Entries can be deleted only — no edit action (delete and re-add).</span>
+        </fieldset>
+      </details>
+
+      <details class="box">
+        <summary><strong>Cardex Panel</strong></summary>
+        <label style="display:block;margin:10px 0"><input type="checkbox" checked> Show Cardex panel</label>
+        <table>
+          <thead><tr><th>Show</th><th>Sub-widget</th><th>Order</th></tr></thead>
+          <tbody>
+            <tr><td><input type="checkbox" checked></td><td>MAR</td><td><input type="number" value="1"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Medications</td><td><input type="number" value="2"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Lab / Radiology</td><td><input type="number" value="3"></td></tr>
+            <tr><td><input type="checkbox"></td><td>Rejected Medication List</td><td><input type="number" value="4"></td></tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+    <!-- SECTION 3: PATIENT TABLE -->
+    <section class="form-section" id="sec-table">
+      <h2>3. Patient Table</h2>
+      <details class="box" open>
+        <summary><strong>Columns</strong></summary>
+        <table style="margin-top:10px">
+          <thead><tr><th>Visible</th><th>Column</th><th>Order</th><th>Label</th></tr></thead>
+          <tbody>
+            <tr class="locked"><td><input type="checkbox" checked disabled></td><td>Name / PID <span class="tag">locked</span></td><td>1</td><td><input value="Name / PID"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Care Setting</td><td><input type="number" value="2"></td><td><input value="Care Setting"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Chief Complaint</td><td><input type="number" value="3"></td><td><input value="Chief Complaint"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Vitals</td><td><input type="number" value="4"></td><td><input value="Vitals"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Triage <span class="tag">ED only</span></td><td><input type="number" value="5"></td><td><input value="Triage"></td></tr>
+            <tr><td><input type="checkbox"></td><td>Time Spent <span class="muted">(pending decision)</span></td><td><input type="number" value="6"></td><td><input value="Time Spent"></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Bed No.</td><td><input type="number" value="7"></td><td><input value="Bed No."></td></tr>
+            <tr class="locked"><td><input type="checkbox" checked disabled></td><td>Actions <span class="tag">locked</span></td><td>8</td><td><input value="Actions"></td></tr>
+          </tbody>
+        </table>
+      </details>
+
+      <details class="box">
+        <summary><strong>Actions</strong></summary>
+        <table style="margin-top:10px">
+          <thead><tr><th>Enabled</th><th>Action</th><th>Order</th><th>Permission</th></tr></thead>
+          <tbody>
+            <tr><td><input type="checkbox" checked></td><td>Status Change</td><td><input type="number" value="1"></td><td><select><option>All roles</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Encounter Note</td><td><input type="number" value="2"></td><td><select><option>Clinical</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Referral</td><td><input type="number" value="3"></td><td><select><option>Clinical</option></select></td></tr>
+            <tr><td><input type="checkbox"></td><td>Intake Form</td><td><input type="number" value="4"></td><td><select><option>Front Desk</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Documents</td><td><input type="number" value="5"></td><td><select><option>All roles</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Cardex Alerts</td><td><input type="number" value="6"></td><td><select><option>Clinical</option></select></td></tr>
+            <tr><td><input type="checkbox"></td><td>Payment</td><td><input type="number" value="7"></td><td><select><option>Billing</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Past Visits</td><td><input type="number" value="8"></td><td><select><option>All roles</option></select></td></tr>
+            <tr><td><input type="checkbox"></td><td>Specimen Collection</td><td><input type="number" value="9"></td><td><select><option>Clinical</option></select></td></tr>
+            <tr><td><input type="checkbox"></td><td>After Visit Summary</td><td><input type="number" value="10"></td><td><select><option>Clinical</option></select></td></tr>
+            <tr><td><input type="checkbox" checked></td><td>Patient Demographics</td><td><input type="number" value="11"></td><td><select><option>All roles</option></select></td></tr>
+          </tbody>
+        </table>
+      </details>
+    </section>
+
+    <!-- SECTION 4: RULES & ACCESS -->
+    <section class="form-section" id="sec-rules">
+      <h2>4. Rules &amp; Access</h2>
+      <div class="box">
+        <h3>Status &amp; Workflow</h3>
+        <p class="muted">Each Trackerboard defines its own statuses and transitions independently.</p>
+        <table>
+          <thead><tr><th>Order</th><th>Status Name</th><th>Starting</th><th>Completion</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><input value="Waiting List"></td><td><input type="radio" name="start" checked></td><td><input type="checkbox"></td></tr>
+            <tr><td>2</td><td><input value="Triage"></td><td><input type="radio" name="start"></td><td><input type="checkbox"></td></tr>
+            <tr><td>3</td><td><input value="In Treatment"></td><td><input type="radio" name="start"></td><td><input type="checkbox"></td></tr>
+            <tr><td>4</td><td><input value="Discharged"></td><td><input type="radio" name="start"></td><td><input type="checkbox" checked></td></tr>
+          </tbody>
+        </table>
+        <br><button>+ Add Status</button>
+      </div>
+
+      <div class="box">
+        <h3>Permissions</h3>
+        <table>
+          <thead><tr><th>Role</th><th>Configure Board</th><th>Manage Code Team</th><th>Manage Doctors on Duty</th><th>Add Patient</th><th>Change Status</th></tr></thead>
+          <tbody>
+            <tr><td>Administrator</td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td></tr>
+            <tr><td>Charge Nurse</td><td><input type="checkbox"></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td><td><input type="checkbox" checked></td></tr>
+            <tr><td>Nurse</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox" checked></td></tr>
+            <tr><td>Front Desk</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox" checked></td><td><input type="checkbox"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: REVIEW & SAVE -->
+    <section class="form-section" id="sec-review">
+      <h2>5. Review &amp; Save</h2>
+      <div class="box">
+        <h3>Review</h3>
+        <table>
+          <tbody>
+            <tr><td style="width:200px"><strong>Board Name</strong></td><td>ED Trackerboard</td></tr>
+            <tr><td><strong>Care Setting</strong></td><td>Emergency Department</td></tr>
+            <tr><td><strong>Facility (inherited)</strong></td><td>Main Hospital, North Campus</td></tr>
+            <tr><td><strong>Widgets enabled</strong></td><td>Patients, Resources, Code Team, Cardex Panel</td></tr>
+            <tr><td><strong>Table columns</strong></td><td>7 of 8 visible</td></tr>
+            <tr><td><strong>Actions enabled</strong></td><td>7 of 11</td></tr>
+            <tr><td><strong>Statuses</strong></td><td>4 configured</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">Preview screen is deferred for this pass — Save moves directly to Draft or Active.</p>
+    </section>
+
+  </div>
+
+  <div class="drawer-foot">
+    <span class="left">Last saved: —</span>
+    <button id="cancelEdit">Cancel</button>
+    <button>Save as Draft</button>
+    <button class="primary">Activate</button>
+  </div>
+</aside>
+
+<script>
+"use strict";
+const drawer=document.getElementById("drawer"),drawerBackdrop=document.getElementById("drawerBackdrop");
+const entryModal=document.getElementById("entryModal"),historyModal=document.getElementById("historyModal");
+
+function openDrawer(){
+  entryModal.classList.remove("open");
+  drawer.classList.add("open");
+  drawerBackdrop.classList.add("open");
+}
+function closeDrawer(){
+  drawer.classList.remove("open");
+  drawerBackdrop.classList.remove("open");
+}
+function scrollToSection(id){
+  document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function setActiveNav(btn){
+  document.querySelectorAll("#quicknav button").forEach(b=>b.classList.toggle("active",b===btn));
+}
+
+document.getElementById("btnNewBoard").addEventListener("click",()=>entryModal.classList.add("open"));
+document.getElementById("cancelEntry").addEventListener("click",()=>entryModal.classList.remove("open"));
+document.querySelectorAll("[data-open-editor]").forEach(b=>b.addEventListener("click",()=>{
+  openDrawer();
+  scrollToSection("sec-basic");
+  setActiveNav(document.querySelector('#quicknav button[data-target="sec-basic"]'));
+}));
+document.getElementById("closeDrawer").addEventListener("click",closeDrawer);
+document.getElementById("cancelEdit").addEventListener("click",closeDrawer);
+drawerBackdrop.addEventListener("click",closeDrawer);
+
+document.querySelectorAll("#quicknav button").forEach(b=>b.addEventListener("click",()=>{scrollToSection(b.dataset.target);setActiveNav(b)}));
+
+document.querySelectorAll("[data-open-history]").forEach(b=>b.addEventListener("click",()=>historyModal.classList.add("open")));
+document.getElementById("closeHistory").addEventListener("click",()=>historyModal.classList.remove("open"));
+</script>
+</body>
+</html>

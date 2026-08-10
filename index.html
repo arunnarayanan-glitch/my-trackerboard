@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trackerboard Configuration — Simplified Wireframe</title>
+<title>Trackerboard Configuration — High-Fidelity Mockup</title>
 <style>
 /* Dependency-free prototype. Reusable primitives: .btn, .field, .card, .pill,
    .table, .drawer, .modal, .facility-option, .status-item, .flow-node. */
@@ -29,499 +29,783 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:16px}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #e8edf1}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f1f4f7;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:12px}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:11px}
 @media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
 </style>
+<style>
+/* Mockup-only additions layered on top of the reference design system above.
+   The Create screen is now the reference's own drawer/backdrop pattern,
+   only widened to 70vw per request and given a light (non-navy) quick-nav
+   so it reads correctly on the drawer's white background. */
+.drawer{ width:70vw; }
+.drawer-nav{ display:flex; overflow-x:auto; background:#f8fafb; border-bottom:1px solid var(--line); }
+.drawer-nav a{ padding:11px 18px; font-size:12.5px; font-weight:700; color:#245f96; text-decoration:none; white-space:nowrap; border-right:1px solid var(--line); }
+.drawer-nav a:hover{ background:var(--blue-soft); }
+.check-grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+.check-option.locked{ opacity:.6; }
+.widget-card{ padding:11px 12px; background:#fafbfc; border:1px solid #e2e7eb; border-top:1px solid #e2e7eb; }
+.widget-card .widget-body{ margin-top:9px; }
+.disclosure-toggle{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:0; background:transparent; border:0; text-align:left; cursor:pointer; }
+.disclosure-title{ font-weight:700; font-size:13px; flex:0 0 auto; }
+.disclosure-summary{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:right; }
+.disclosure-chevron{ flex:0 0 auto; color:var(--muted); transition:transform .15s; }
+.disclosure.open .disclosure-chevron{ transform:rotate(180deg); }
+.disclosure-body{ margin-top:11px; }
+.switch-heading{ display:flex; align-items:center; gap:9px; cursor:pointer; }
+.switch-heading input{ position:absolute; opacity:0; width:1px; height:1px; }
+.switch-track{ position:relative; flex:0 0 auto; width:34px; height:19px; background:#c4ced8; border-radius:10px; transition:background .15s; }
+.switch-track::after{ content:''; position:absolute; top:2px; left:2px; width:15px; height:15px; background:#fff; border-radius:50%; transition:transform .15s; box-shadow:0 1px 2px rgba(0,0,0,.25); }
+.switch-heading input:checked ~ .switch-track{ background:var(--blue); }
+.switch-heading input:checked ~ .switch-track::after{ transform:translateX(15px); }
+.switch-heading input:focus-visible ~ .switch-track{ outline:2px solid #8eb6db; outline-offset:2px; }
+.switch-label{ font-size:13px; font-weight:700; }
+#careSettingInfo{ display:block; padding:11px 13px; margin-top:10px; }
+#careSettingInfo .derived-scope-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:11px; }
+#careSettingInfo .derived-scope-head strong{ font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
+#careSettingInfo .info-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px 20px; }
+#careSettingInfo .info-item.full{ grid-column:1/-1; }
+#careSettingInfo .info-label{ display:block; color:var(--muted); font-size:11px; margin-bottom:3px; }
+#careSettingInfo .info-value{ display:block; color:var(--ink); font-size:13px; font-weight:600; }
+#careSettingInfo .info-value.link{ color:var(--navy2); }
+#careSettingInfo .info-value.muted{ color:var(--muted); font-weight:400; }
+.check-option.heading{ border:0; background:none; padding:0; font-weight:700; font-size:13px; }
+.status-item{ cursor:pointer; width:100%; font:inherit; color:inherit; background:transparent; display:flex; flex-direction:column; align-items:stretch; gap:3px; }
+.status-row1{ display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; }
+.status-name{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+.status-tag-row{ align-self:flex-start; }
+@media(max-width:1280px){ .drawer{ width:88vw; } }
+@media(max-width:980px){ .drawer{ width:100vw; } }
+</style>
 </head>
 <body>
+
 <div class="app">
   <header class="topbar">
     <div class="topgroup">
-      <button class="sq" type="button" aria-label="Open menu">☰</button>
-      <span class="brand">blueEHR</span>
-      <div class="search">
-        <label class="visually-hidden" for="globalSearch">Search Trackerboards</label>
-        <input id="globalSearch" type="search" placeholder="Search Trackerboard, Facility, Care Setting...">
-        <button type="button" aria-label="Search">⌕</button>
-      </div>
+      <button class="sq" type="button" aria-label="Menu">&#9776;</button>
+      <span class="brand">Trackerboard Admin</span>
     </div>
     <div class="topgroup">
-      <button class="sq" type="button" aria-label="Settings">⚙</button>
-      <button class="sq" type="button" aria-label="Notifications">♢</button>
-      <span class="avatar">JW</span><span>J. Weaver</span>
+      <span class="avatar">AR</span><span>Arun</span>
     </div>
   </header>
-
   <main class="main">
     <section class="toolbar" aria-label="Trackerboard list controls">
       <div class="toolbar-left">
         <h1>Trackerboard Configuration</h1>
         <div class="filters">
-          <select class="control compact" id="facilityFilter" aria-label="Filter by facility"></select>
-          <select class="control compact" id="statusFilter" aria-label="Filter by version state">
-            <option value="">All version states</option>
-            <option value="live">Live only</option>
-            <option value="draft">Draft only</option>
-            <option value="live-draft">Live + Draft</option>
-            <option value="inactive">Inactive</option>
-            <option value="retired">Retired</option>
-          </select>
-          <select class="control compact" id="readinessFilter" aria-label="Filter by readiness">
-            <option value="">All readiness</option>
-            <option value="ready">Ready</option>
-            <option value="attention">Needs attention</option>
-            <option value="blocked">Blocked</option>
-          </select>
-          <select class="control compact" id="creatorFilter" aria-label="Filter by creator"></select>
+          <select class="control compact"><option>Facility: All</option></select>
+          <select class="control compact"><option>Care Setting: All</option></select>
         </div>
       </div>
       <div class="toolbar-right">
-        <span class="summary" id="resultSummary"></span>
-        <button class="btn primary" id="createButton" type="button">+ Create Trackerboard</button>
+        <span class="summary" id="dashboardSummary">3 trackerboards</span>
+        <button class="btn primary" type="button" onclick="openDrawer()">+ Create New Trackerboard</button>
       </div>
     </section>
 
     <section class="content">
       <div class="table-shell">
         <table class="table" aria-label="Trackerboards">
-          <colgroup><col style="width:20%"><col style="width:18%"><col style="width:15%"><col style="width:15%"><col style="width:14%"><col style="width:13%"><col style="width:5%"></colgroup>
+          <colgroup><col style="width:24%"><col style="width:16%"><col style="width:18%"><col style="width:14%"><col style="width:12%"><col style="width:16%"></colgroup>
           <thead><tr>
-            <th><button class="sort" type="button" data-sort="name">Trackerboard <span data-sort-icon="name"></span></button></th>
-            <th>Facilities</th><th>Care Settings</th><th>Versions</th>
-            <th><button class="sort" type="button" data-sort="readiness">Readiness <span data-sort-icon="readiness"></span></button></th>
-            <th><button class="sort" type="button" data-sort="updated">Updated <span data-sort-icon="updated"></span></button></th>
-            <th class="actions">Actions</th>
+            <th>Board Name</th><th>Care Setting</th><th>Facility</th><th>Updated Date</th><th>Status</th><th class="actions">Actions</th>
           </tr></thead>
-          <tbody id="listRows"></tbody>
+          <tbody id="dashboardBody"></tbody>
         </table>
         <div class="table-footer">
-          <span id="pageSummary"></span>
+          <span class="muted" id="dashboardFooterSummary">Showing 3 of 3 trackerboards</span>
           <div class="pager">
-            <label for="pageSize">Rows</label>
-            <select class="control compact" id="pageSize"><option>5</option><option selected>10</option><option>25</option></select>
-            <button class="icon-btn" id="prevPage" type="button" aria-label="Previous page">‹</button>
-            <span id="pageNumber"></span>
-            <button class="icon-btn" id="nextPage" type="button" aria-label="Next page">›</button>
+            <button class="icon-btn" type="button" aria-label="Previous page">&#8249;</button>
+            <span>1</span>
+            <button class="icon-btn" type="button" aria-label="Next page">&#8250;</button>
           </div>
         </div>
       </div>
     </section>
   </main>
-  <footer class="proto"><strong>Prototype</strong><span>List</span><span>Inherited facility scope</span><span>Workflow</span><span>Activation checks</span></footer>
 </div>
 
-<div class="backdrop" id="drawerBackdrop"></div>
-<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
-  <header class="drawer-head">
-    <div><h2 class="drawer-title" id="drawerTitle">Create Trackerboard</h2><div class="drawer-sub" id="drawerSub">Draft configuration</div></div>
+<!-- ============ CREATE NEW TRACKERBOARD — right-side drawer, 70% width ============ -->
+<div class="backdrop" id="backdrop" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Create New Trackerboard">
+  <div class="drawer-head">
+    <div><h2 class="drawer-title">Create New Trackerboard</h2><p class="drawer-sub">Define statuses, widgets, and columns for this board</p></div>
     <div class="drawer-actions">
-      <button class="btn small" id="checksButton" type="button">✓ <span>Checks</span></button>
-      <button class="btn small" id="previewButton" type="button">▣ <span>Preview</span></button>
-      <button class="btn small" id="historyButton" type="button">↺ <span>History</span></button>
-      <button class="icon-btn" id="closeDrawer" type="button" aria-label="Close">✕</button>
+      <button class="icon-btn" type="button" onclick="closeDrawer()" aria-label="Close">&#10005;</button>
     </div>
-  </header>
-  <div>
-    <div class="validation-strip" id="validationStrip" aria-live="polite"></div>
-    <div class="recovery" id="recovery"><span id="recoveryText"></span><span><button class="link-btn" id="restoreRecovery" type="button">Restore</button> · <button class="link-btn" id="discardRecovery" type="button">Discard</button></span></div>
   </div>
 
-  <div class="drawer-body" id="drawerBody">
-    <section class="card" id="section-basic">
-      <header class="card-head">
-        <div><h3 class="card-title">Basic Details</h3><p class="card-desc">Name the operational workspace. The short name can remain automatically linked to the full name or be edited manually.</p></div>
-        <span class="section-state" id="stateBasic">Not started</span>
-      </header>
+  <nav class="drawer-nav">
+    <a href="#sec-basic">1. Basic Information</a>
+    <a href="#sec-caresetting">2. Care Setting</a>
+    <a href="#sec-workflow">3. Statuses &amp; Workflow</a>
+    <a href="#sec-widgets">4. Widgets</a>
+    <a href="#sec-table">5. Patient Table</a>
+  </nav>
+
+  <div class="drawer-body">
+
+    <div class="card" id="sec-basic">
+      <div class="card-head">
+        <div><h2 class="card-title">1. Basic Information</h2><p class="card-desc">Core identity of this trackerboard.</p></div>
+        <span class="muted">Step 1 of 5</span>
+      </div>
       <div class="card-body">
         <div class="form-grid">
-          <div class="field" id="field-name"><label for="boardName">Trackerboard Name *</label><input class="text" id="boardName" type="text" placeholder="e.g. Endoscopy Trackerboard"><div class="field-error" id="nameError"></div></div>
-          <div class="field" id="field-short"><label for="shortName">Short Name *</label><input class="text" id="shortName" type="text" placeholder="Auto-generated"><div class="short-meta"><span id="shortMode">Auto-generated from name</span><button class="link-btn" id="resetShort" type="button" hidden>Reset to auto</button></div><div class="field-error" id="shortError"></div></div>
-          <div class="field full"><label for="description">Description</label><textarea class="textarea" id="description" placeholder="Explain what this Trackerboard manages and who uses it."></textarea></div>
+          <div class="field"><label>Name</label><input class="text" type="text" placeholder="e.g. Emergency Department Trackerboard"></div>
+          <div class="field"><label>Short Name</label><input class="text" type="text" placeholder="e.g. EDT"></div>
+          <div class="field"><label>Unique ID</label><input class="text" type="text" placeholder="e.g. EDT001"></div>
+          <div class="field full"><label>Description</label><textarea class="textarea" placeholder="Short description of what this trackerboard is used for"></textarea></div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="card" id="section-assignment">
-      <header class="card-head">
-        <div><h3 class="card-title">Care Settings</h3><p class="card-desc">Select the clinical Care Settings this Trackerboard supports. Applicable Facilities are inherited automatically from each Care Setting, so there is no second Facility configuration to conflict with it.</p></div>
-        <span class="section-state" id="stateAssignment">Not started</span>
-      </header>
-      <div class="card-body">
-        <div class="picker" id="carePicker">
-          <label class="field-label" for="careSearch">Add Care Setting *</label>
-          <div class="picker-input"><input class="text" id="careSearch" type="search" placeholder="Search active Care Settings..."><button class="btn" id="browseCare" type="button">Browse</button></div>
-          <div class="picker-menu" id="careMenu" role="listbox"></div>
-          <div class="help" id="careHelp">Only active Care Settings can be newly selected. Facility access and readiness are inherited from Care Setting configuration.</div>
-        </div>
-
-        <div class="selected-shell">
-          <div class="table-toolbar"><div><strong>Selected Care Settings</strong> <span class="help" id="careCount"></span></div><button class="link-btn" id="clearCare" type="button">Clear all</button></div>
-          <div id="careTable"></div>
-        </div>
-        <div class="field-error" id="careError"></div>
-        <div class="derived-scope" id="facilityScope" aria-live="polite"></div>
-        <a class="manage" href="Care%20Settings%20Wireframe.html">Manage Care Settings →</a>
+    <div class="card" id="sec-caresetting">
+      <div class="card-head">
+        <div><h2 class="card-title">2. Care Setting</h2><p class="card-desc">Connects this board to a Care Setting and Facility.</p></div>
+        <span class="muted">Step 2 of 5</span>
       </div>
-    </section>
-
-    <section class="card" id="section-workflow">
-      <header class="card-head">
-        <div><h3 class="card-title">Workflow</h3><p class="card-desc">Build the patient flow in one place. Select a status to define its next statuses, requirements, and timer.</p></div>
-        <span class="section-state" id="stateWorkflow">In progress</span>
-      </header>
       <div class="card-body">
-        <div class="flow-shell">
-          <div class="flow-head"><div><strong>Flow overview</strong><div class="help">The diagram updates while the workflow is edited.</div></div><button class="btn small" id="addStatusEnd" type="button">+ Add status at end</button></div>
-          <div class="flow-map" id="flowMap"></div>
+        <div class="form-grid">
+          <div class="field"><label>Care Setting</label>
+            <select class="control" id="careSettingSelect" onchange="onCareSettingChange(this.value)">
+              <option>Select Care Setting...</option>
+              <option>Emergency Department</option>
+              <option>Inpatient</option>
+              <option>Operating Room</option>
+              <option>Outpatient Clinic</option>
+            </select>
+          </div>
+          <div class="field"><label>Facility</label>
+            <select class="control" id="facilitySelect"><option>Select Facility...</option></select>
+            <span class="short-meta"><span class="help">List depends on the Care Setting selected above</span></span>
+          </div>
         </div>
+        <div class="derived-scope" id="careSettingInfo">
+          <div class="derived-scope-head">
+            <strong>Care Setting Information</strong>
+            <span class="muted">(read-only, from Care Setting Configuration)</span>
+          </div>
+          <div class="info-grid" id="careSettingInfoGrid">
+            <div class="info-item full"><span class="info-value muted">Select a Care Setting to view its configuration</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="sec-workflow">
+      <div class="card-head">
+        <div><h2 class="card-title">3. Statuses &amp; Workflow</h2><p class="card-desc">Defines how patients move through this trackerboard.</p></div>
+        <span class="muted">Step 3 of 5</span>
+      </div>
+      <div class="card-body">
+
         <div class="workflow">
-          <div class="status-list"><div class="panel-head"><strong>Statuses</strong><span class="help" id="statusCount"></span></div><div class="status-list-body" id="statusList"></div></div>
-          <div class="status-editor"><div class="panel-head"><strong id="editorTitle">Status details</strong><span class="help">Internal identifiers are hidden.</span></div><div class="status-editor-body" id="statusEditor"></div></div>
+          <div class="status-list">
+            <div class="panel-head"><strong>Statuses</strong><span class="muted" id="statusCountLabel"></span></div>
+            <div class="status-list-body" id="statusListBody"></div>
+          </div>
+          <div class="status-editor">
+            <div class="panel-head"><strong id="statusEditorTitle"></strong><span class="muted">Internal identifiers are hidden</span></div>
+            <div class="status-editor-body" id="statusEditorBody"></div>
+          </div>
         </div>
-        <div class="scope-note"><span>ⓘ</span><span><strong>Kept in existing Trackerboard settings:</strong> Board components, table columns, row actions, check-in fields, feature flags, and exports. This configurator does not duplicate them.</span></div>
+
+        <div class="subsection">
+          <h4><label class="switch-heading"><input type="checkbox" id="transferEnabled" onchange="toggleTransferEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Enable transfer to another Care Setting</span></label></h4>
+          <div class="widget-body" id="transferBody" style="display:none;">
+            <p>Lets the user move a patient from this board directly into a different Care Setting.</p>
+            <div class="check-grid cols-3" id="transferDestinations"></div>
+          </div>
+        </div>
+
       </div>
-    </section>
+    </div>
+
+    <div class="card" id="sec-widgets">
+      <div class="card-head">
+        <div><h2>4. Widgets</h2><p class="card-desc">Quick-overview components shown on the trackerboard.</p></div>
+        <span class="muted">Step 4 of 5</span>
+      </div>
+      <div class="card-body">
+
+        <div class="subsection widget-card" style="margin-top:0;">
+          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Total Patients</span></label></h4>
+          <div class="widget-body">
+            <p>Optional breakdown grouping (Care Setting dependent)</p>
+            <div class="check-grid cols-3">
+              <label class="check-option"><input type="checkbox"> Group by Triage (High / Medium / Low)</label>
+              <label class="check-option"><input type="checkbox"> Group by Unit (ICU / General / Other)</label>
+              <label class="check-option"><input type="checkbox"> Group by Workflow Status (Pre-OR / In OR / Post-OR)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection widget-card">
+          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Resource Availability</span></label></h4>
+          <div class="widget-body">
+            <div class="check-grid cols-3">
+              <label class="check-option"><input type="checkbox" checked> Beds</label>
+              <label class="check-option"><input type="checkbox"> Rooms</label>
+              <label class="check-option"><input type="checkbox"> Chairs</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection widget-card">
+          <h4><label class="switch-heading"><input type="checkbox" onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Code Team</span></label></h4>
+          <div class="widget-body" style="display:none;">
+            <p>Displays Name, Role. Roster managed at runtime, not part of this configuration.</p>
+          </div>
+        </div>
+
+        <div class="subsection widget-card">
+          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Doctors on Duty</span></label></h4>
+          <div class="widget-body">
+            <p>Displays Doctor Name, Role/Specialty. Roster managed at runtime, not part of this configuration.</p>
+          </div>
+        </div>
+
+        <div class="subsection widget-card">
+          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Cardex Panel</span></label></h4>
+          <div class="widget-body">
+            <div class="check-grid cols-3">
+              <label class="check-option"><input type="checkbox" checked> Awaiting Approvals</label>
+              <label class="check-option"><input type="checkbox" checked> MAR</label>
+              <label class="check-option"><input type="checkbox" checked> Medications</label>
+              <label class="check-option"><input type="checkbox"> Lab / Radiology</label>
+              <label class="check-option"><input type="checkbox"> Rejected Medication List</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" id="sec-table">
+      <div class="card-head">
+        <div><h2>5. Patient Table</h2><p class="card-desc">Columns and expanded-row fields shown per patient.</p></div>
+        <span class="muted">Step 5 of 5</span>
+      </div>
+      <div class="card-body">
+
+        <div class="subsection disclosure" style="margin-top:0;padding-top:0;border-top:0;">
+          <button type="button" class="disclosure-toggle" onclick="toggleDisclosure(this)">
+            <span class="disclosure-title">Common Columns</span>
+            <span class="muted disclosure-summary"></span>
+            <span class="disclosure-chevron">&#9662;</span>
+          </button>
+          <div class="disclosure-body" style="display:none;">
+            <div class="check-grid cols-3" onchange="updateDisclosureSummary(this)">
+              <label class="check-option locked"><input type="checkbox" checked disabled> Patient Name <span class="tag">Always included</span></label>
+              <label class="check-option locked"><input type="checkbox" checked disabled> PID <span class="tag">Always included</span></label>
+              <label class="check-option"><input type="checkbox" checked> Age</label>
+              <label class="check-option"><input type="checkbox" checked> Assigned Bed</label>
+              <label class="check-option"><input type="checkbox" checked> Vitals</label>
+              <label class="check-option"><input type="checkbox" checked> Care Setting</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection" id="careSpecificColumnsSection" style="display:none;">
+          <h4>Care Setting-Specific Columns</h4>
+          <p>Shown only when the matching Care Setting is selected.</p>
+          <div class="check-grid cols-3" id="careSpecificColumnsGrid"></div>
+        </div>
+
+        <div class="subsection disclosure">
+          <button type="button" class="disclosure-toggle" onclick="toggleDisclosure(this)">
+            <span class="disclosure-title">Patient Actions</span>
+            <span class="muted disclosure-summary"></span>
+            <span class="disclosure-chevron">&#9662;</span>
+          </button>
+          <div class="disclosure-body" style="display:none;">
+            <div class="check-grid cols-3" onchange="updateDisclosureSummary(this)">
+              <label class="check-option"><input type="checkbox" checked> Status Change</label>
+              <label class="check-option"><input type="checkbox" checked> Encounter Note</label>
+              <label class="check-option"><input type="checkbox"> Referral</label>
+              <label class="check-option"><input type="checkbox"> Intake Form</label>
+              <label class="check-option"><input type="checkbox" checked> Documents</label>
+              <label class="check-option"><input type="checkbox" checked> Cardex Alerts</label>
+              <label class="check-option"><input type="checkbox"> Payment</label>
+              <label class="check-option"><input type="checkbox"> Past Visits</label>
+              <label class="check-option"><input type="checkbox"> Specimen Collection</label>
+              <label class="check-option"><input type="checkbox" checked> Patient Demographics</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection widget-card">
+          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Expanded Row Fields</span></label></h4>
+          <div class="widget-body">
+            <p>Shown when a patient row is expanded.</p>
+            <div class="check-grid cols-3">
+              <label class="check-option"><input type="checkbox" checked> Provider</label>
+              <label class="check-option"><input type="checkbox" checked> Nurse</label>
+              <label class="check-option"><input type="checkbox"> Patient Type</label>
+              <label class="check-option"><input type="checkbox" checked> Medical Conditions</label>
+              <label class="check-option"><input type="checkbox"> Isolation Information</label>
+              <label class="check-option"><input type="checkbox" checked> Allergies</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
-  <footer class="drawer-foot"><span class="autosave" id="autosave">Not saved</span><button class="btn" id="cancelButton" type="button">Cancel</button><button class="btn" id="saveButton" type="button">Save Draft</button><button class="btn primary" id="activateButton" type="button">Activate</button></footer>
-</aside>
-
-<div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
-  <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <header class="modal-head"><h2 id="modalTitle"></h2><button class="icon-btn" id="closeModal" type="button" aria-label="Close dialog">✕</button></header>
-    <div class="modal-body" id="modalBody"></div><footer class="modal-foot" id="modalFoot"></footer>
-  </section>
+  <div class="drawer-foot">
+    <button class="btn" type="button" onclick="closeDrawer()">Cancel</button>
+    <button class="btn" type="button">Save as Draft</button>
+    <button class="btn primary" type="button">Activate</button>
+  </div>
 </div>
-<div class="toast-region" id="toasts" aria-live="polite"></div>
+
 <script>
-"use strict";
-const CURRENT_USER="J. Weaver",TODAY="2026-08-03";
-const FACILITIES=[
-  {id:"main",name:"Main Hospital",code:"MH"},{id:"north",name:"North Campus",code:"NC"},{id:"east",name:"Eastside Medical Center",code:"EM"}
-];
-const CARE_SETTINGS=[
-  {id:"ed",name:"Emergency Department",short:"ED",active:true,setup:{main:{ready:true,visit:"Urgent",resources:"12 beds · 6 chairs",issues:[]},north:{ready:true,visit:"Urgent",resources:"8 beds · 4 chairs",issues:[]},east:{ready:false,visit:"Urgent",resources:"6 beds",issues:["Provider group is not assigned"]}}},
-  {id:"hospitalization",name:"Hospitalization",short:"IP",active:true,setup:{main:{ready:true,visit:"Follow-up",resources:"40 beds",issues:[]},north:{ready:true,visit:"Follow-up",resources:"24 beds",issues:[]}}},
-  {id:"icu",name:"Intensive Care Unit",short:"ICU",active:true,setup:{main:{ready:true,visit:"Urgent",resources:"16 beds",issues:[]},east:{ready:false,visit:"Urgent",resources:"8 beds",issues:["Billing group is not mapped"]}}},
-  {id:"or",name:"Operating Room",short:"OR",active:true,setup:{main:{ready:true,visit:"Procedure",resources:"6 rooms · 18 providers",issues:[]},north:{ready:true,visit:"Procedure",resources:"3 rooms · 9 providers",issues:[]},east:{ready:true,visit:"Procedure",resources:"2 rooms · 7 providers",issues:[]}}},
-  {id:"endoscopy",name:"Endoscopy",short:"ENDO",active:true,setup:{north:{ready:true,visit:"Procedure",resources:"2 rooms · 4 chairs",issues:[]},east:{ready:false,visit:"Procedure",resources:"1 room",issues:["Visit duration is not configured"]}}},
-  {id:"cath-lab",name:"Cath Lab",short:"CATH",active:true,setup:{north:{ready:true,visit:"Procedure",resources:"2 rooms",issues:[]},east:{ready:false,visit:"Procedure",resources:"1 room",issues:["Receiving provider group is missing"]}}},
-  {id:"legacy-observation",name:"Legacy Observation",short:"OBS",active:false,setup:{main:{ready:false,visit:"Observation",resources:"8 beds",issues:["Care Setting is inactive"]}}}
-];
-const REQUIREMENTS=["Room assigned","Provider assigned","Consent completed","Vitals recorded","Transfer destination selected"];
-const SAMPLE={
-  ed:[["A. Rivera · P10231","Chest pain","ED-03","Dr. Patel","18 min"],["J. Chen · P20419","Fever","Waiting","Unassigned","9 min"]],
-  hospitalization:[["M. Okafor · P11903","Post-operative care","4A-212","Dr. Nguyen","2 d"],["R. Singh · P18742","Respiratory monitoring","4A-208","Dr. Ortiz","14 hr"]],
-  icu:[["C. Morgan · P30119","Critical monitoring","ICU-07","Dr. Shah","6 hr"],["S. Lopez · P26611","Sepsis protocol","ICU-03","Dr. Patel","3 hr"]],
-  or:[["L. Grant · P29102","Scheduled procedure","OR-02","Dr. Menon","42 min"],["N. Brooks · P11972","Procedure recovery","PACU-04","Dr. Chen","28 min"]],
-  endoscopy:[["D. Silva · P22714","Colonoscopy","ENDO-01","Dr. Ortiz","21 min"],["K. Thomas · P18022","Upper GI scope","Recovery-02","Dr. Singh","11 min"]],
-  "cath-lab":[["P. Davis · P14407","Cardiac catheterization","CATH-02","Dr. Shah","33 min"],["A. Kumar · P23711","Post-procedure recovery","CATH-R1","Dr. Patel","17 min"]]
-};
-function timer(enabled=false,value=30,unit="minutes",message=""){return{enabled,value,unit,message}}
-function st(key,name,{description="",starting=false,completion=false,next=[],requirements=[],clock=timer()}={}){return{key,name,description,starting,completion,nextKeys:next,requirements,timer:clock}}
-const TRACKERBOARDS=[
-  {boardId:"ED",version:1,status:"active",name:"ED Trackerboard",shortName:"ED",description:"Emergency Department patient flow across the hospital group.",facilityIds:["main","north"],careSettingIds:["ed"],shortNameMode:"manual",createdBy:"J. Weaver",createdDate:"2026-06-01",updated:"2026-07-24",updatedBy:"J. Weaver",changeReason:"Initial ED workflow.",workflow:{statuses:[
-    st("ed-waiting","Waiting List",{description:"Patient has arrived and is waiting.",starting:true,next:["ed-triage"],clock:timer(true,30,"minutes","Patient waiting over 30 minutes.")}),
-    st("ed-triage","Triage",{description:"Triage assessment is in progress.",next:["ed-treatment"],requirements:["Vitals recorded"]}),
-    st("ed-treatment","In Treatment",{description:"Patient is receiving treatment.",next:["ed-discharged","ed-admitted"],requirements:["Room assigned","Provider assigned"]}),
-    st("ed-discharged","Discharged",{description:"Patient has left the ED.",completion:true}),
-    st("ed-admitted","Admitted",{description:"Patient continues to inpatient care.",completion:true,requirements:["Transfer destination selected"]})]}},
-  {boardId:"ED",version:2,basedOnVersion:1,status:"draft",name:"ED Trackerboard",shortName:"ED",description:"Emergency Department patient flow across three facilities.",facilityIds:["main","north","east"],careSettingIds:["ed"],shortNameMode:"manual",createdBy:"J. Weaver",createdDate:"2026-07-29",updated:"2026-08-02",updatedBy:"J. Weaver",changeReason:"Prepare the Eastside rollout.",workflow:{statuses:[
-    st("ed-waiting","Arrival Queue",{description:"Patient has arrived and is waiting.",starting:true,next:["ed-triage"],clock:timer(true,30,"minutes","Patient waiting over 30 minutes.")}),
-    st("ed-triage","Triage",{description:"Triage assessment is in progress.",next:["ed-treatment"],requirements:["Vitals recorded"]}),
-    st("ed-treatment","In Treatment",{description:"Patient is receiving treatment.",next:["ed-discharged","ed-admitted"],requirements:["Room assigned","Provider assigned"]}),
-    st("ed-discharged","Discharged",{description:"Patient has left the ED.",completion:true}),
-    st("ed-admitted","Admitted",{description:"Patient continues to inpatient care.",completion:true,requirements:["Transfer destination selected"]})]}},
-  {boardId:"IP",version:1,status:"active",name:"Inpatient Trackerboard",shortName:"IP",description:"Hospitalization and intensive-care patient flow.",facilityIds:["main"],careSettingIds:["hospitalization","icu"],shortNameMode:"manual",createdBy:"J. Weaver",createdDate:"2026-05-15",updated:"2026-07-20",updatedBy:"J. Weaver",changeReason:"Initial inpatient workflow.",workflow:{statuses:[
-    st("ip-admitted","Admitted",{description:"Patient has entered inpatient care.",starting:true,next:["ip-care"],requirements:["Room assigned"]}),
-    st("ip-care","In Care",{description:"Ongoing inpatient treatment.",next:["ip-discharge"],requirements:["Provider assigned"]}),
-    st("ip-discharge","Queued for Discharge",{description:"Discharge is planned.",next:["ip-done"],clock:timer(true,2,"hours","Discharge pending over 2 hours.")}),
-    st("ip-done","Discharged",{completion:true})]}},
-  {boardId:"OR",version:1,status:"active",name:"OR Trackerboard",shortName:"OR",description:"Operating room case flow shared by Main Hospital and North Campus.",facilityIds:["main","north"],careSettingIds:["or"],shortNameMode:"manual",createdBy:"A. Menon",createdDate:"2026-06-10",updated:"2026-07-22",updatedBy:"A. Menon",changeReason:"Initial OR workflow.",workflow:{statuses:[
-    st("or-scheduled","Scheduled",{starting:true,next:["or-pre"]}),st("or-pre","Pre-Op",{next:["or-progress"],requirements:["Room assigned","Consent completed"]}),st("or-progress","In Progress",{next:["or-recovery"],requirements:["Provider assigned"]}),st("or-recovery","Recovery",{next:["or-done"],clock:timer(true,45,"minutes","Recovery exceeding 45 minutes.")}),st("or-done","Completed",{completion:true})]}},
-  {boardId:"ENDO",version:1,status:"draft",name:"Endoscopy Trackerboard",shortName:"ENDO",description:"Endoscopy preparation, procedure, recovery, and completion.",facilityIds:["north","east"],careSettingIds:["endoscopy"],shortNameMode:"manual",createdBy:"A. Menon",createdDate:"2026-07-28",updated:"2026-08-01",updatedBy:"A. Menon",changeReason:"Initial draft.",workflow:{statuses:[
-    st("endo-wait","Waiting",{starting:true,next:["endo-prep"]}),st("endo-prep","Preparation",{next:["endo-procedure"],requirements:["Consent completed"]}),st("endo-procedure","Procedure",{next:["endo-recovery"],requirements:["Provider assigned"]}),st("endo-recovery","Recovery",{next:["endo-done"],clock:timer(true,45,"minutes","Recovery exceeding expected duration.")}),st("endo-done","Completed",{completion:true})]}}
-];
-const HISTORY={ED:[{version:1,status:"active",change:"Initial ED workflow.",author:"J. Weaver",date:"2026-06-02"},{version:2,status:"draft",change:"Prepare the Eastside rollout.",author:"J. Weaver",date:"2026-08-02"}],IP:[{version:1,status:"active",change:"Initial inpatient workflow.",author:"J. Weaver",date:"2026-05-18"}],OR:[{version:1,status:"active",change:"Initial OR workflow.",author:"A. Menon",date:"2026-06-11"}],ENDO:[{version:1,status:"draft",change:"Initial draft.",author:"A. Menon",date:"2026-08-01"}]};
-const state={currentIndex:null,working:null,original:null,dirty:false,validation:null,selectedStatus:null,shortMode:"auto",page:1,pageSize:10,sort:"updated",dir:"desc",autosaveTimer:null,recovery:null,lastFocus:null,hasStarted:false,activationAttempted:false,touched:{basic:false,assignment:false,workflow:false}};
-const $=id=>document.getElementById(id),clone=v=>JSON.parse(JSON.stringify(v));
-function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-function uid(){return`status-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}`}
-function fac(id){return FACILITIES.find(x=>x.id===id)}function care(id){return CARE_SETTINGS.find(x=>x.id===id)}
-function facilityIdsForCare(careId){const c=care(careId);if(!c)return[];return FACILITIES.map(f=>f.id).filter(id=>Object.prototype.hasOwnProperty.call(c.setup||{},id))}
-function deriveFacilityIds(careSettingIds=[]){return[...new Set(careSettingIds.flatMap(facilityIdsForCare))]}
-function syncDerivedFacilities(record){record.facilityIds=deriveFacilityIds(record.careSettingIds||[]);return record}
-function fmt(d){if(!d)return"—";const[y,m,day]=d.split("-");return`${m}/${day}/${y}`}
-function autoShort(name){const words=String(name||"").replace(/trackerboard/gi,"").trim().split(/\s+/).filter(Boolean);return words.length>1?words.map(w=>w[0]).join("").slice(0,10).toUpperCase():(words[0]||"").slice(0,10).toUpperCase()}
-function groups(){const map=new Map;TRACKERBOARDS.forEach((record,index)=>{if(!map.has(record.boardId))map.set(record.boardId,[]);map.get(record.boardId).push({record,index})});return[...map].map(([boardId,entries])=>{const active=entries.find(e=>e.record.status==="active"),draft=entries.find(e=>e.record.status==="draft"),inactive=entries.find(e=>e.record.status==="inactive"),retired=entries.find(e=>e.record.status==="retired"),display=draft||active||inactive||retired||entries[0];return{boardId,entries,active,draft,inactive,retired,display}})}
-function coverage(careId){
-  const c=care(careId);
-  if(!c)return{ready:false,facilities:[],issues:["Care Setting no longer exists"]};
-  const facilities=facilityIdsForCare(careId).map(id=>{
-    const setup=c.setup[id],f=fac(id),issues=[];
-    if(!setup)issues.push("Facility assignment is missing");
-    else if(!setup.ready)issues.push(...(setup.issues||["Setup incomplete"]));
-    return{id,name:f?.name||id,ready:Boolean(setup?.ready),issues,setup};
+  function openDrawer(){
+    document.getElementById('backdrop').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+  }
+  function closeDrawer(){
+    document.getElementById('backdrop').classList.remove('open');
+    document.getElementById('drawer').classList.remove('open');
+  }
+
+  function toggleMenu(btn){
+    var menu = btn.nextElementSibling;
+    document.querySelectorAll('.menu.open').forEach(function(m){ if(m!==menu) m.classList.remove('open'); });
+    menu.classList.toggle('open');
+  }
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.menu-wrap')) document.querySelectorAll('.menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(!e.target.closest('.picker')) document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
   });
-  const issues=facilities.flatMap(f=>f.issues.map(i=>`${f.name}: ${i}`));
-  if(!facilities.length)issues.push("Not assigned to any Facility");
-  if(!c.active)issues.unshift("Care Setting is inactive");
-  return{ready:c.active&&facilities.length>0&&facilities.every(f=>f.ready),facilities,issues};
-}
-function validateWorkflow(workflow){
-  const blocking=[],warnings=[],statuses=workflow.statuses||[],names=statuses.map(s=>s.name.trim()),lower=names.map(n=>n.toLowerCase());
-  statuses.forEach(s=>{if(!s.name.trim())blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:"Status name is required."})});
-  [...new Set(lower.filter((n,i)=>n&&lower.indexOf(n)!==i))].forEach(n=>statuses.filter(s=>s.name.trim().toLowerCase()===n).forEach(s=>blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`Status name “${s.name.trim()}” is duplicated.`})));
-  const starts=statuses.filter(s=>s.starting),completes=statuses.filter(s=>s.completion);
-  if(starts.length!==1)blocking.push({section:"workflow",target:"section-workflow",message:starts.length?"Only one status can be the Starting status.":"Choose one Starting status."});
-  if(!completes.length)blocking.push({section:"workflow",target:"section-workflow",message:"Choose at least one Completion status."});
-  const keys=new Set(statuses.map(s=>s.key));
-  statuses.forEach(s=>{
-    if(s.nextKeys.some(k=>!keys.has(k)))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} references a status that no longer exists.`});
-    if(s.nextKeys.includes(s.key))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} cannot transition to itself.`});
-    if(!s.completion&&!s.nextKeys.length)blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} has no allowed next status.`});
-    if(s.completion&&s.nextKeys.length)warnings.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} is marked Completion but has an outgoing transition.`});
-    if(s.timer.enabled&&(!Number(s.timer.value)||Number(s.timer.value)<=0))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} needs a valid timer duration.`});
-  });
-  if(starts.length===1){
-    const reached=new Set([starts[0].key]),queue=[starts[0].key];
-    while(queue.length){const currentKey=queue.shift(),cur=statuses.find(s=>s.key===currentKey);(cur?.nextKeys||[]).forEach(k=>{if(!reached.has(k)){reached.add(k);queue.push(k)}})}
-    statuses.forEach(s=>{if(!reached.has(s.key))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} cannot be reached from the Starting status.`})});
-    const canFinish=new Set(completes.map(s=>s.key));let changed=true;
-    while(changed){changed=false;statuses.forEach(s=>{if(!canFinish.has(s.key)&&s.nextKeys.some(k=>canFinish.has(k))){canFinish.add(s.key);changed=true}})}
-    statuses.forEach(s=>{if(!canFinish.has(s.key))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} has no path to a Completion status.`})});
-  }
-  blocking.forEach(i=>i.severity="blocking");warnings.forEach(i=>i.severity="warning");return{blocking,warnings};
-}
-function validateRecord(record){
-  syncDerivedFacilities(record);
-  const blocking=[],warnings=[],passed=[];
-  if(!record.name.trim())blocking.push({section:"basic",target:"field-name",message:"Trackerboard Name is required."});else passed.push("Trackerboard name is provided.");
-  if(!record.shortName.trim())blocking.push({section:"basic",target:"field-short",message:"Short Name is required."});
-  if(!record.careSettingIds.length)blocking.push({section:"assignment",target:"section-assignment",message:"Select at least one Care Setting."});
-  else{
-    record.careSettingIds.forEach(id=>{
-      const c=care(id),cov=coverage(id);
-      if(!c)blocking.push({section:"assignment",target:"section-assignment",message:"A selected Care Setting no longer exists."});
-      else cov.issues.forEach(issue=>blocking.push({section:"assignment",target:"section-assignment",message:`${c.name} — ${issue}.`}));
-    });
-    if(!blocking.some(i=>i.section==="assignment"))passed.push(`${record.facilityIds.length} applicable Facilit${record.facilityIds.length===1?"y is":"ies are"} inherited from the selected Care Settings.`);
-  }
-  const wf=validateWorkflow(record.workflow);blocking.push(...wf.blocking);warnings.push(...wf.warnings);if(!wf.blocking.length)passed.push("Workflow has a valid start, path, and completion.");
-  blocking.forEach(i=>i.severity=i.severity||"blocking");warnings.forEach(i=>i.severity=i.severity||"warning");return{blocking,warnings,passed};
-}
-function readiness(record){const v=validateRecord(record);return v.blocking.length?"blocked":v.warnings.length?"attention":"ready"}
-function statusIssues(key){if(!state.validation)return[];return[...state.validation.blocking,...state.validation.warnings].filter(i=>i.statusKey===key)}
-function sectionIssues(section){return state.validation?.blocking.filter(i=>i.section===section).length||0}
-
-
-function syncCreatorFilter(){
-  const el=$("creatorFilter"),creators=[...new Set(TRACKERBOARDS.map(r=>r.createdBy).filter(Boolean))].sort(),previous=el.value;
-  if(creators.length<=1){
-    const only=creators[0]||CURRENT_USER;
-    el.innerHTML=`<option value="">Created by: ${esc(only)}</option>`;
-    el.value="";el.disabled=true;el.title="Only one creator is available.";return;
-  }
-  el.disabled=false;el.title="";
-  el.innerHTML='<option value="">All creators</option>'+creators.map(name=>`<option value="${esc(name)}">Created by: ${name===CURRENT_USER?"Me":esc(name)}</option>`).join("");
-  if(creators.includes(previous))el.value=previous;
-}
-function filteredGroups(){
-  const facility=$("facilityFilter").value,status=$("statusFilter").value,ready=$("readinessFilter").value,creator=$("creatorFilter").value,q=$("globalSearch").value.trim().toLowerCase();
-  const out=groups().filter(g=>{
-    const recs=g.entries.map(e=>syncDerivedFacilities(e.record)),d=syncDerivedFacilities(g.display.record);
-    if(facility&&!recs.some(r=>r.facilityIds.includes(facility)))return false;
-    if(creator&&!recs.some(r=>r.createdBy===creator))return false;
-    if(status==="live"&&!g.active)return false;if(status==="draft"&&!g.draft)return false;if(status==="live-draft"&&!(g.active&&g.draft))return false;if(status==="inactive"&&!g.inactive)return false;if(status==="retired"&&!g.retired)return false;
-    if(ready&&readiness(d)!==ready)return false;
-    if(q){const hay=[d.name,...recs.flatMap(r=>r.facilityIds.map(id=>fac(id)?.name||id)),...recs.flatMap(r=>r.careSettingIds.map(id=>care(id)?.name||id))].join(" ").toLowerCase();if(!hay.includes(q))return false}
-    return true;
-  });
-  const dir=state.dir==="asc"?1:-1;out.sort((a,b)=>{const A=a.display.record,B=b.display.record;if(state.sort==="name")return A.name.localeCompare(B.name)*dir;if(state.sort==="readiness")return readiness(A).localeCompare(readiness(B))*dir;return String(A.updated).localeCompare(String(B.updated))*dir});return out;
-}
-function versionButton(entry,label){return entry?`<button class="version-link" type="button" data-action="open-record" data-index="${entry.index}"><span class="pill ${entry.record.status}">${label}</span> v${entry.record.version}</button>`:""}
-function actionsFor(g){const a=[];if(g.draft)a.push(`<button type="button" data-action="open-record" data-index="${g.draft.index}">Edit Draft</button>`);if(g.active)a.push(`<button type="button" data-action="open-record" data-index="${g.active.index}">View Live</button>`);if(g.active&&!g.draft)a.push(`<button type="button" data-action="create-version" data-board-id="${g.boardId}">Create New Version</button>`);a.push(`<button type="button" data-action="history" data-board-id="${g.boardId}">History</button>`);return`<span class="menu-wrap"><button class="icon-btn" type="button" data-action="toggle-menu" aria-expanded="false">⋮</button><span class="menu">${a.join("")}</span></span>`}
-function renderList(){
-  syncCreatorFilter();
-  const all=filteredGroups(),pages=Math.max(1,Math.ceil(all.length/state.pageSize));state.page=Math.min(state.page,pages);const start=(state.page-1)*state.pageSize,items=all.slice(start,start+state.pageSize);
-  document.querySelectorAll("[data-sort-icon]").forEach(el=>el.textContent=el.dataset.sortIcon===state.sort?(state.dir==="asc"?"▲":"▼"):"");
-  $("listRows").innerHTML=items.length?items.map(g=>{const d=syncDerivedFacilities(g.display.record),r=readiness(d),label=r==="ready"?"✓ Ready":r==="attention"?"⚠ Needs attention":"✕ Blocked",cls=r==="ready"?"ok":r==="attention"?"warn":"bad",facilityIds=[...new Set(g.entries.flatMap(e=>syncDerivedFacilities(e.record).facilityIds))],careIds=[...new Set(g.entries.flatMap(e=>e.record.careSettingIds))];return`<tr><td><div class="cell-title">${esc(d.name)}</div><div class="cell-meta">${esc(d.shortName||"No short name")}</div></td><td><div class="tags">${facilityIds.map(id=>`<span class="tag">${esc(fac(id)?.name||id)}</span>`).join("")||"—"}</div></td><td><div class="tags">${careIds.map(id=>`<span class="tag">${esc(care(id)?.short||id)}</span>`).join("")||"—"}</div></td><td><div class="versions">${versionButton(g.active,"Live")}${versionButton(g.draft,"Draft")}${versionButton(g.inactive,"Inactive")}${versionButton(g.retired,"Retired")}</div></td><td><span class="ready ${cls}">${label}</span><div class="cell-meta">${g.draft?"Draft configuration":"Current version"}</div></td><td>${fmt(d.updated)}<div class="cell-meta">${esc(d.updatedBy||"")}</div></td><td class="actions">${actionsFor(g)}</td></tr>`}).join(""):`<tr><td colspan="7"><div class="empty"><strong>No Trackerboards match the current filters.</strong><span class="muted">Clear a filter or create a new Trackerboard.</span></div></td></tr>`;
-  const activeFilters=[$("facilityFilter").value,$("statusFilter").value,$("readinessFilter").value,$("creatorFilter").value,$("globalSearch").value.trim()].filter(Boolean).length;
-  $("resultSummary").textContent=activeFilters?`${activeFilters} filter${activeFilters===1?"":"s"} applied`:"";
-  $("pageSummary").textContent=all.length?`${start+1}–${Math.min(start+state.pageSize,all.length)} of ${all.length}`:"0 results";
-  $("pageNumber").textContent=`${state.page} / ${pages}`;$("prevPage").disabled=state.page<=1;$("nextPage").disabled=state.page>=pages;
-}
-
-function newRecord(){const a=uid(),b=uid(),c=uid();return{boardId:`TB-${Math.random().toString(36).slice(2,7).toUpperCase()}`,version:1,status:"draft",name:"",shortName:"",description:"",facilityIds:[],careSettingIds:[],shortNameMode:"auto",createdBy:CURRENT_USER,createdDate:TODAY,updated:TODAY,updatedBy:CURRENT_USER,changeReason:"",workflow:{statuses:[st(a,"Waiting",{starting:true,next:[b]}),st(b,"In Progress",{next:[c]}),st(c,"Completed",{completion:true})]}}}
-function recoveryKey(){return`trackerboard-recovery:${state.working.boardId}:v${state.working.version}`}
-function openDrawer(index=null){
-  closeMenus();state.currentIndex=index;state.working=index===null?newRecord():clone(TRACKERBOARDS[index]);syncDerivedFacilities(state.working);state.original=clone(state.working);state.dirty=false;state.shortMode=state.working.shortNameMode||"manual";state.selectedStatus=state.working.workflow.statuses[0]?.key||null;state.validation=validateRecord(state.working);state.recovery=null;state.hasStarted=index!==null;state.activationAttempted=false;state.touched={basic:index!==null,assignment:index!==null,workflow:index!==null};
-  $("drawerTitle").textContent=index===null?"Create Trackerboard":`${state.working.status==="active"?"View":"Configure"}: ${state.working.name}`;$("drawerSub").textContent=`${state.working.status[0].toUpperCase()+state.working.status.slice(1)} · Version ${state.working.version}`;
-  renderBasic();renderAssignment();renderWorkflow();renderValidation();checkRecovery();$("drawerBackdrop").classList.add("open");$("drawer").classList.add("open");$("drawer").setAttribute("aria-hidden","false");setTimeout(()=>$("boardName").focus(),50);
-}
-async function requestClose(){if(state.dirty&&!await confirmBox("Discard unsaved changes?","Your latest edits are stored as a local recovery copy, but they have not been saved as a Trackerboard draft.","Discard and close",true))return;closeDrawer()}
-function closeDrawer(){$("drawerBackdrop").classList.remove("open");$("drawer").classList.remove("open");$("drawer").setAttribute("aria-hidden","true");$("careMenu").classList.remove("open");clearTimeout(state.autosaveTimer)}
-function renderBasic(){$("boardName").value=state.working.name;$("shortName").value=state.working.shortName;$("description").value=state.working.description;renderShortMode()}
-function renderShortMode(){const manual=state.shortMode==="manual";$("shortMode").textContent=manual?"Manual value":"Auto-generated from name";$("resetShort").hidden=!manual}
-function renderAssignment(){
-  syncDerivedFacilities(state.working);
-  $("careSearch").disabled=false;$("browseCare").disabled=false;
-  $("careHelp").textContent="Only active Care Settings can be newly selected. Facility access and readiness are inherited from Care Setting configuration.";
-  renderCarePicker();renderCareTable();renderFacilityScope();
-}
-function availableCare(){const selected=new Set(state.working.careSettingIds);return CARE_SETTINGS.filter(c=>c.active&&!selected.has(c.id))}
-function renderCarePicker(query=""){
-  const q=query.trim().toLowerCase(),options=availableCare().filter(c=>!q||`${c.name} ${c.short}`.toLowerCase().includes(q));
-  $("careMenu").innerHTML=options.length?options.map(c=>{const facilities=facilityIdsForCare(c.id),names=facilities.map(id=>fac(id)?.code||id).join(" · ");return`<button class="picker-option" type="button" data-action="add-care" data-care="${c.id}"><span><strong>${esc(c.name)}</strong><br><small>${esc(c.short)} · ${esc(names||"No Facility assignment")}</small></span><small>${facilities.length} Facilit${facilities.length===1?"y":"ies"}</small></button>`}).join(""):`<div class="empty" style="padding:18px 10px"><span class="muted">No active Care Settings match.</span></div>`;
-}
-function renderCareTable(){
-  const selected=state.working.careSettingIds;$("careCount").textContent=`· ${selected.length} selected`;$("clearCare").disabled=!selected.length;
-  if(!selected.length){$("careTable").innerHTML=`<div class="empty" style="padding:24px 12px"><strong>No Care Settings selected.</strong><span class="muted">Use the search field above to add one.</span></div>`;return}
-  const rows=selected.map(id=>{const c=care(id),cov=coverage(id);return`<tr><td><div class="cell-title">${esc(c?.name||id)}</div><div class="cell-meta">${c?.active?"Active":"Inactive — retained because it was already selected"}</div></td><td><div class="coverage">${cov.facilities.map(f=>`<span class="${f.ready?"ok":"bad"}">${f.ready?"✓":"✕"} ${esc(f.name)}</span>`).join("")||'<span class="bad">✕ No Facility assignment</span>'}</div></td><td><span class="ready ${cov.ready?"ok":"bad"}">${cov.ready?"✓ Ready":"✕ Needs attention"}</span></td><td><span class="cell-meta">${esc(cov.issues.join(" · ")||"No issues")}</span></td><td class="actions"><button class="btn small danger" type="button" data-action="remove-care" data-care="${id}">Remove</button></td></tr>`}).join("");
-  $("careTable").innerHTML=`<table class="table" aria-label="Selected Care Settings"><thead><tr><th>Care Setting</th><th>Applicable Facilities</th><th>Readiness</th><th>Issue</th><th class="actions">Action</th></tr></thead><tbody>${rows}</tbody></table>`;
-}
-function renderFacilityScope(){
-  syncDerivedFacilities(state.working);
-  const ids=state.working.facilityIds;
-  $("facilityScope").innerHTML=`<div class="derived-scope-copy"><strong>Applicable Facilities</strong><div class="help">Read-only scope inherited from the selected Care Settings.</div></div><div class="tags">${ids.length?ids.map(id=>`<span class="tag">${esc(fac(id)?.name||id)}</span>`).join(""):'<span class="muted">Select a Care Setting to derive Facility scope.</span>'}</div>`;
-}
-
-function selectedStatus(){return state.working.workflow.statuses.find(s=>s.key===state.selectedStatus)||null}
-function renderWorkflow(){if(!selectedStatus()&&state.working.workflow.statuses.length)state.selectedStatus=state.working.workflow.statuses[0].key;renderFlow();renderStatusList();renderStatusEditor();renderFooter()}
-function renderFlow(){const statuses=state.working.workflow.statuses;$("flowMap").innerHTML=statuses.length?statuses.map((s,i)=>{const next=s.nextKeys.map(k=>statuses.find(x=>x.key===k)?.name||"Missing status"),issues=statusIssues(s.key);return`${i?'<span class="flow-arrow">→</span>':""}<button class="flow-node ${s.key===state.selectedStatus?"selected":""} ${issues.some(x=>x.severity!=="warning")?"bad":""}" type="button" data-action="select-status" data-status="${s.key}"><strong>${esc(s.name||"Unnamed status")}</strong><span class="tags">${s.starting?'<span class="tag">Start</span>':""}${s.completion?'<span class="tag">Complete</span>':""}</span><small>Next: ${esc(next.join(", ")||"None")}</small></button>`}).join(""):'<span class="muted">No statuses have been added.</span>'}
-function renderStatusList(){const statuses=state.working.workflow.statuses;$("statusCount").textContent=`${statuses.length} status${statuses.length===1?"":"es"}`;if(!statuses.length){$("statusList").innerHTML='<div class="empty"><strong>No statuses yet.</strong><button class="btn" type="button" data-action="insert-status" data-index="0">+ Add first status</button></div>';return}
-  $("statusList").innerHTML=statuses.map((s,i)=>{const issues=statusIssues(s.key);return`<div class="insert"><button type="button" data-action="insert-status" data-index="${i}" title="Insert status here">＋</button></div><div class="status-item ${s.key===state.selectedStatus?"selected":""} ${issues.some(x=>x.severity!=="warning")?"bad":""}"><button class="status-main" type="button" data-action="select-status" data-status="${s.key}"><strong>${esc(s.name||"Unnamed status")}</strong><span class="tags">${s.starting?'<span class="tag">Starting</span>':""}${s.completion?'<span class="tag">Completion</span>':""}${issues.length?`<span class="tag">${issues.length} issue${issues.length===1?"":"s"}</span>`:""}</span></button><span class="status-actions"><button class="icon-btn" type="button" data-action="move-status" data-status="${s.key}" data-direction="up" ${i===0?"disabled":""} aria-label="Move up">↑</button><button class="icon-btn" type="button" data-action="move-status" data-status="${s.key}" data-direction="down" ${i===statuses.length-1?"disabled":""} aria-label="Move down">↓</button><button class="icon-btn" type="button" data-action="delete-status" data-status="${s.key}" aria-label="Delete status">🗑</button></span></div>`}).join("")+`<div class="insert"><button type="button" data-action="insert-status" data-index="${statuses.length}" title="Add status at end">＋</button></div>`}
-function renderStatusEditor(){const s=selectedStatus();if(!s){$("editorTitle").textContent="Status details";$("statusEditor").innerHTML='<div class="empty">Select a status to configure it.</div>';return}$("editorTitle").textContent=s.name||"Unnamed status";const others=state.working.workflow.statuses.filter(x=>x.key!==s.key),issues=statusIssues(s.key);$("statusEditor").innerHTML=`
-  <div class="form-grid">
-    <div class="field full"><label for="statusNameInput">Status Name *</label><input class="text" id="statusNameInput" type="text" data-status-field="name" value="${esc(s.name)}"><div class="help">Display name only. Existing transitions remain connected when renamed.</div></div>
-    <div class="field full"><label for="statusDescInput">Description</label><textarea class="textarea" id="statusDescInput" data-status-field="description" placeholder="Explain what this operational status means.">${esc(s.description)}</textarea></div>
-  </div>
-  <div class="flags"><label><input type="radio" name="startingStatus" data-status-flag="starting" ${s.starting?"checked":""}> Starting status</label><label><input type="checkbox" data-status-flag="completion" ${s.completion?"checked":""}> Completion status</label></div>
-  <div class="subsection"><h4>Allowed next statuses</h4><p>Choose where a Board Record can move from this status.</p><div class="check-grid">${others.length?others.map(o=>`<label class="check-option"><input type="checkbox" data-next="${o.key}" ${s.nextKeys.includes(o.key)?"checked":""}>${esc(o.name||"Unnamed status")}</label>`).join(""):'<span class="muted">Add another status before creating a transition.</span>'}</div></div>
-  <div class="subsection"><h4>Requirements before leaving this status</h4><p>Select only checks that must be complete before the status changes.</p><div class="check-grid">${REQUIREMENTS.map(r=>`<label class="check-option"><input type="checkbox" data-requirement="${esc(r)}" ${s.requirements.includes(r)?"checked":""}>${esc(r)}</label>`).join("")}</div></div>
-  <div class="subsection"><h4>Timer and alert</h4><p>Alert the team when a Board Record remains here longer than expected.</p><label class="toggle" style="margin-bottom:9px"><input type="checkbox" data-timer="enabled" ${s.timer.enabled?"checked":""}>Enable timer</label><div class="timer-grid"><input class="text" type="number" min="1" data-timer="value" value="${esc(s.timer.value)}" ${s.timer.enabled?"":"disabled"} aria-label="Timer duration"><select class="control" data-timer="unit" ${s.timer.enabled?"":"disabled"}><option ${s.timer.unit==="minutes"?"selected":""}>minutes</option><option ${s.timer.unit==="hours"?"selected":""}>hours</option></select><input class="text" type="text" data-timer="message" value="${esc(s.timer.message)}" ${s.timer.enabled?"":"disabled"} placeholder="Alert message"></div></div>
-  ${issues.length?`<div class="inline-issues"><strong>${issues.length} issue${issues.length===1?"":"s"} in this status</strong><ul>${issues.map(i=>`<li>${esc(i.message)}</li>`).join("")}</ul></div>`:""}`}
-function setSection(id,count,touched){const el=$(id);el.className="section-state";if(count){el.classList.add("bad");el.textContent=`${count} issue${count===1?"":"s"}`}else if(touched){el.classList.add("ok");el.textContent="✓ Complete"}else el.textContent="Not started"}
-function renderValidation(){
-  state.validation=validateRecord(state.working);
-  const v=state.validation,strip=$("validationStrip"),showReadiness=state.hasStarted||state.currentIndex!==null||state.activationAttempted;
-  strip.className="validation-strip";
-  if(!showReadiness){
-    strip.classList.add("neutral");
-    strip.innerHTML='<span class="validation-summary"><span class="validation-dot"></span><span><strong>Start configuring.</strong> Checks run automatically as you work.</span></span>';
-  }else if(v.blocking.length){
-    strip.classList.add("error");
-    strip.innerHTML=`<span class="validation-summary"><span class="validation-dot"></span><span><strong>${v.blocking.length} issue${v.blocking.length===1?"":"s"} remaining.</strong> Resolve them before activation.</span></span><button class="link-btn" type="button" data-action="checks">View issues</button>`;
-  }else if(v.warnings.length){
-    strip.classList.add("warning");
-    strip.innerHTML=`<span class="validation-summary"><span class="validation-dot"></span><span><strong>${v.warnings.length} warning${v.warnings.length===1?"":"s"} to review.</strong></span></span><button class="link-btn" type="button" data-action="checks">View checks</button>`;
-  }else{
-    strip.classList.add("success");
-    strip.innerHTML='<span class="validation-summary"><span class="validation-dot"></span><span><strong>Ready for activation.</strong> Final checks will run automatically.</span></span><button class="link-btn" type="button" data-action="checks">View checks</button>';
-  }
-  const showBasic=state.touched.basic||state.activationAttempted||state.currentIndex!==null;
-  const nameIssue=showBasic?v.blocking.find(i=>i.target==="field-name"):null,shortIssue=showBasic?v.blocking.find(i=>i.target==="field-short"):null;
-  $("field-name").classList.toggle("error",!!nameIssue);$("nameError").textContent=nameIssue?.message||"";$("field-short").classList.toggle("error",!!shortIssue);$("shortError").textContent=shortIssue?.message||"";
-  const showAssignment=state.touched.assignment||state.activationAttempted||state.currentIndex!==null,careIssue=showAssignment?v.blocking.find(i=>i.message==="Select at least one Care Setting."):null;
-  $("careError").style.display=careIssue?"block":"none";$("careError").textContent=careIssue?.message||"";
-  const showWorkflow=state.touched.workflow||state.activationAttempted||state.currentIndex!==null;
-  setSection("stateBasic",showBasic?sectionIssues("basic"):0,showBasic&&!!(state.working.name||state.working.shortName||state.working.description));
-  setSection("stateAssignment",showAssignment?sectionIssues("assignment"):0,showAssignment&&!!state.working.careSettingIds.length);
-  setSection("stateWorkflow",showWorkflow?sectionIssues("workflow"):0,showWorkflow&&!!state.working.workflow.statuses.length);
-  renderFooter();
-}
-function renderFooter(){
-  const readonly=["active","retired","superseded"].includes(state.working.status);
-  $("saveButton").hidden=readonly;$("activateButton").hidden=readonly;$("activateButton").disabled=false;$("activateButton").textContent=state.working.status==="inactive"?"Reactivate":"Activate";
-  document.querySelectorAll("#drawerBody input,#drawerBody textarea,#drawerBody select,#drawerBody button").forEach(el=>{el.disabled=readonly&&el.dataset.action!=="select-status"});
-}
-function markDirty(section){
-  state.dirty=true;state.hasStarted=true;if(section)state.touched[section]=true;
-  state.validation=validateRecord(state.working);renderValidation();scheduleAutosave();
-}
-function scheduleAutosave(){clearTimeout(state.autosaveTimer);$("autosave").textContent="Autosaving…";state.autosaveTimer=setTimeout(()=>{try{const snap={savedAt:new Date().toISOString(),record:state.working,shortMode:state.shortMode};localStorage.setItem(recoveryKey(),JSON.stringify(snap));$("autosave").textContent=`Recovery copy saved at ${new Date(snap.savedAt).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}`}catch{$("autosave").textContent="Recovery save unavailable"}},650)}
-function clearRecovery(){try{localStorage.removeItem(recoveryKey())}catch{}$("recovery").classList.remove("open")}
-function checkRecovery(){let snap=null;try{snap=JSON.parse(localStorage.getItem(recoveryKey())||"null")}catch{}if(!snap?.record){$("recovery").classList.remove("open");$("autosave").textContent="Not saved";return}state.recovery=snap;$("recoveryText").textContent=`An unsaved recovery copy from ${new Date(snap.savedAt).toLocaleString()} is available.`;$("recovery").classList.add("open")}
-function restoreRecovery(){
-  if(!state.recovery)return;state.working=clone(state.recovery.record);syncDerivedFacilities(state.working);state.shortMode=state.recovery.shortMode||"manual";state.selectedStatus=state.working.workflow.statuses[0]?.key||null;state.dirty=true;state.hasStarted=true;state.activationAttempted=false;state.touched={basic:true,assignment:true,workflow:true};state.validation=validateRecord(state.working);renderBasic();renderAssignment();renderWorkflow();renderValidation();$("recovery").classList.remove("open");toast("Recovery copy restored.");
-}
-function insertStatus(index){const s=st(uid(),"New Status");state.working.workflow.statuses.splice(index,0,s);state.selectedStatus=s.key;markDirty("workflow");renderWorkflow();setTimeout(()=>$("statusNameInput")?.select(),0)}
-async function deleteStatus(key){const s=state.working.workflow.statuses.find(x=>x.key===key);if(!s)return;const refs=state.working.workflow.statuses.filter(x=>x.nextKeys.includes(key));if(!await confirmBox(`Delete “${s.name||"Unnamed status"}”?`,refs.length?`This status is referenced by ${refs.map(x=>x.name).join(", ")}. Those transition links will also be removed.`:"This removes the status from the workflow.","Delete status",true))return;state.working.workflow.statuses=state.working.workflow.statuses.filter(x=>x.key!==key);state.working.workflow.statuses.forEach(x=>x.nextKeys=x.nextKeys.filter(k=>k!==key));state.selectedStatus=state.working.workflow.statuses[0]?.key||null;markDirty("workflow");renderWorkflow()}
-function moveStatus(key,dir){const a=state.working.workflow.statuses,i=a.findIndex(x=>x.key===key),j=dir==="up"?i-1:i+1;if(i<0||j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];markDirty("workflow");renderWorkflow()}
-function persist(){
-  syncDerivedFacilities(state.working);state.working.updated=TODAY;state.working.updatedBy=CURRENT_USER;state.working.shortNameMode=state.shortMode;
-  if(state.currentIndex===null){TRACKERBOARDS.push(clone(state.working));state.currentIndex=TRACKERBOARDS.length-1;HISTORY[state.working.boardId]=[{version:state.working.version,status:state.working.status,change:"Draft created.",author:CURRENT_USER,date:TODAY}]}
-  else TRACKERBOARDS[state.currentIndex]=clone(state.working);
-  state.original=clone(state.working);state.dirty=false;clearRecovery();renderList();
-}
-function saveDraft(){
-  if(!state.working.name.trim()){
-    state.hasStarted=true;state.touched.basic=true;state.validation=validateRecord(state.working);renderValidation();goTo({target:"field-name"});toast("Enter a Trackerboard Name before saving the draft.");return;
-  }
-  persist();$("autosave").textContent="Draft saved";toast("Trackerboard draft saved.");
-}
-
-function openActivation(){
-  state.hasStarted=true;state.activationAttempted=true;state.touched={basic:true,assignment:true,workflow:true};syncDerivedFacilities(state.working);
-  const v=validateRecord(state.working);state.validation=v;renderValidation();const checks=[
-    [!!(state.working.name.trim()&&state.working.shortName.trim()),"Basic details are complete"],
-    [state.working.careSettingIds.length>0,"At least one Care Setting is selected"],
-    [state.working.careSettingIds.length>0&&!v.blocking.some(i=>i.section==="assignment"),"Care Settings are ready in their assigned Facilities"],
-    [!v.blocking.some(i=>i.section==="workflow"),"Workflow has a valid start, route, and completion"]
+  var TRACKERBOARDS = [
+    { name:'Emergency Department Trackerboard', id:'EDT001', careSetting:'Emergency Department', facility:'Central City Health', updated:'07 Aug 2026', status:'Active' },
+    { name:'ED Overflow Trackerboard', id:'EDT003', careSetting:'Emergency Department', facility:'Riverside Clinic', updated:'26 Jul 2026', status:'Active' },
+    { name:'Inpatient Trackerboard', id:'IPT004', careSetting:'Inpatient', facility:'Lakeside Medical Center', updated:'05 Aug 2026', status:'Draft' },
+    { name:'ICU Trackerboard', id:'IPT005', careSetting:'Inpatient', facility:'Central City Health', updated:'22 Jul 2026', status:'Active' },
+    { name:'Operating Room Trackerboard', id:'ORT002', careSetting:'Operating Room', facility:'Riverside Clinic', updated:'28 Jul 2026', status:'Inactive' },
+    { name:'Same-Day Surgery Trackerboard', id:'ORT006', careSetting:'Operating Room', facility:'Central City Health', updated:'19 Jul 2026', status:'Draft' },
+    { name:'Post-Op Recovery Trackerboard', id:'ORT008', careSetting:'Operating Room', facility:'Lakeside Medical Center', updated:'02 Jul 2026', status:'Inactive' },
+    { name:'Outpatient Clinic Trackerboard', id:'OPC007', careSetting:'Outpatient Clinic', facility:'Riverside Clinic', updated:'14 Jul 2026', status:'Active' }
   ];
-  openModal({title:"Activation pre-check",body:`<p class="help" style="margin-top:0">Final validation runs automatically when activation is requested.</p>${checks.map(([ok,label])=>`<div class="check-row"><span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'✓':'✕'}</span><span>${esc(label)}</span><strong>${ok?'Ready':'Required'}</strong></div>`).join("")}${v.blocking.length?`<div class="inline-issues"><strong>Activation is blocked</strong><ul>${v.blocking.map(i=>`<li>${esc(i.message)}</li>`).join("")}</ul></div>`:""}`,actions:[{label:"Cancel",close:true},{label:"Activate",primary:true,disabled:!!v.blocking.length,handler:activate}]});
-}
-function activate(){const v=validateRecord(state.working);if(v.blocking.length)return;const old=TRACKERBOARDS.find(r=>r.boardId===state.working.boardId&&r.status==="active"&&r.version!==state.working.version);if(old)old.status="superseded";state.working.status="active";persist();HISTORY[state.working.boardId]=HISTORY[state.working.boardId]||[];const h=HISTORY[state.working.boardId],existing=h.find(x=>x.version===state.working.version);if(existing){existing.status="active";existing.change=state.working.changeReason||"Version activated.";existing.date=TODAY}else h.push({version:state.working.version,status:"active",change:state.working.changeReason||"Version activated.",author:CURRENT_USER,date:TODAY});closeModal();closeDrawer();renderList();toast("Trackerboard activated.")}
-function createVersion(boardId){const active=TRACKERBOARDS.find(r=>r.boardId===boardId&&r.status==="active");if(!active)return;const copy=clone(active);copy.version=Math.max(...TRACKERBOARDS.filter(r=>r.boardId===boardId).map(r=>r.version))+1;copy.basedOnVersion=active.version;copy.status="draft";copy.createdBy=CURRENT_USER;copy.createdDate=TODAY;copy.updated=TODAY;copy.updatedBy=CURRENT_USER;copy.changeReason="";TRACKERBOARDS.push(copy);HISTORY[boardId]=HISTORY[boardId]||[];HISTORY[boardId].push({version:copy.version,status:"draft",change:"New version created for editing.",author:CURRENT_USER,date:TODAY});renderList();openDrawer(TRACKERBOARDS.length-1)}
 
-function issueRows(items,type){return items.map(i=>`<div class="issue-row"><span style="color:${type==='error'?'var(--bad)':'var(--warn)'}">${type==='error'?'✕':'⚠'}</span><span>${esc(i.message)}</span><button class="link-btn" type="button" data-action="go-issue" data-target="${esc(i.target||'section-workflow')}" data-status="${esc(i.statusKey||'')}">Go to</button></div>`).join("")}
-function openChecks(){const v=validateRecord(state.working);state.validation=v;renderValidation();openModal({title:"Configuration checks",body:`${v.blocking.length?`<div class="issue-group"><h4>Blocking issues (${v.blocking.length})</h4>${issueRows(v.blocking,"error")}</div>`:""}${v.warnings.length?`<div class="issue-group"><h4>Warnings (${v.warnings.length})</h4>${issueRows(v.warnings,"warning")}</div>`:""}${!v.blocking.length&&!v.warnings.length?'<div class="issue-row"><span style="color:var(--ok)">✓</span><span>All configuration checks passed.</span><span></span></div>':""}<div class="issue-group"><h4>Checks passed (${v.passed.length})</h4>${v.passed.map(p=>`<div class="issue-row"><span style="color:var(--ok)">✓</span><span>${esc(p)}</span><span></span></div>`).join("")}</div>`,actions:[{label:"Close",close:true}]})}
-function openHistory(boardId=state.working?.boardId){const records=TRACKERBOARDS.filter(r=>r.boardId===boardId).sort((a,b)=>a.version-b.version),history=HISTORY[boardId]||[],options=records.map(r=>`<option value="${r.version}">Version ${r.version} · ${r.status}</option>`).join("");openModal({title:"Version history",large:true,body:`<table class="history"><thead><tr><th>Version</th><th>Status</th><th>Change</th><th>Owner</th><th>Date</th></tr></thead><tbody>${history.length?history.map(h=>`<tr><td>v${h.version}</td><td><span class="pill ${h.status}">${esc(h.status)}</span></td><td>${esc(h.change)}</td><td>${esc(h.author)}</td><td>${fmt(h.date)}</td></tr>`).join(""):'<tr><td colspan="5">No history yet.</td></tr>'}</tbody></table><div class="compare"><strong>Compare versions</strong><div class="compare-controls" style="margin-top:8px"><select class="control compact" id="compareA">${options}</select><span>with</span><select class="control compact" id="compareB">${options}</select><button class="btn small" id="compareButton" type="button">Compare</button><span class="help" id="compareMessage"></span></div><div id="compareResult"></div></div>`,actions:[{label:"Close",close:true}]});if(records.length>1){$("compareA").value=String(records[0].version);$("compareB").value=String(records.at(-1).version)}updateCompare();$("compareA")?.addEventListener("change",updateCompare);$("compareB")?.addEventListener("change",updateCompare);$("compareButton")?.addEventListener("click",()=>runCompare(boardId))}
-function updateCompare(){const a=$("compareA"),b=$("compareB"),button=$("compareButton"),message=$("compareMessage");if(!a||!b)return;const same=a.value===b.value;button.disabled=same;message.textContent=same?"Choose two different versions.":"";[...b.options].forEach(o=>o.disabled=o.value===a.value)}
-function diff(a,b){const out=[];if(a.name!==b.name)out.push(`Trackerboard renamed from “${a.name}” to “${b.name}”.`);const addF=b.facilityIds.filter(x=>!a.facilityIds.includes(x)),removeF=a.facilityIds.filter(x=>!b.facilityIds.includes(x));if(addF.length)out.push(`Facilities added: ${addF.map(x=>fac(x)?.name||x).join(", ")}.`);if(removeF.length)out.push(`Facilities removed: ${removeF.map(x=>fac(x)?.name||x).join(", ")}.`);const A=new Map(a.workflow.statuses.map(s=>[s.key,s])),B=new Map(b.workflow.statuses.map(s=>[s.key,s]));B.forEach((s,k)=>{if(!A.has(k))out.push(`Status added: ${s.name}.`);else if(A.get(k).name!==s.name)out.push(`Status renamed: “${A.get(k).name}” → “${s.name}”.`)});A.forEach((s,k)=>{if(!B.has(k))out.push(`Status removed: ${s.name}.`)});return out}
-function runCompare(boardId){const a=Number($("compareA").value),b=Number($("compareB").value);if(a===b)return;const A=TRACKERBOARDS.find(r=>r.boardId===boardId&&r.version===a),B=TRACKERBOARDS.find(r=>r.boardId===boardId&&r.version===b),changes=A&&B?diff(A,B):[];$("compareResult").innerHTML=changes.length?`<ul>${changes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:'<p class="help">No differences were found.</p>'}
-function openPreview(){
-  const r=state.working,careOptions=r.careSettingIds.map(id=>`<option value="${id}">${esc(care(id)?.name||id)}</option>`).join("");
-  openModal({title:`${r.name||"Trackerboard"} — Preview`,large:true,body:`<div class="preview-controls"><label>Care Setting <select class="control compact" id="previewCare">${careOptions||'<option value="">No Care Setting selected</option>'}</select></label><label>Facility <select class="control compact" id="previewFacility"></select></label><span class="help">Facility choices are inherited from the selected Care Setting.</span></div><div class="tags" style="margin:12px 0">${r.workflow.statuses.map(s=>`<span class="tag">${esc(s.name)}</span>`).join("")}</div><div id="previewTable"></div>`,actions:[{label:"Close",close:true}]});
-  $("previewCare")?.addEventListener("change",()=>{renderPreviewFacilities();renderPreview()});$("previewFacility")?.addEventListener("change",renderPreview);renderPreviewFacilities();renderPreview();
-}
-function renderPreviewFacilities(){const careId=$("previewCare")?.value,ids=facilityIdsForCare(careId),select=$("previewFacility");if(!select)return;select.innerHTML=ids.length?ids.map(id=>`<option value="${id}">${esc(fac(id)?.name||id)}</option>`).join(""):'<option value="">No Facility assignment</option>'}
-function renderPreview(){const careId=$("previewCare")?.value,facilityId=$("previewFacility")?.value,rows=SAMPLE[careId]||[];if(!$("previewTable"))return;$("previewTable").innerHTML=`<table class="table"><thead><tr><th>Patient</th><th>Care Setting</th><th>Current Need</th><th>Resource</th><th>Provider</th><th>Elapsed</th></tr></thead><tbody>${rows.length?rows.map(p=>`<tr><td>${esc(p[0])}</td><td>${esc(care(careId)?.short||"—")} · ${esc(fac(facilityId)?.code||"—")}</td><td>${esc(p[1])}</td><td>${esc(p[2])}</td><td>${esc(p[3])}</td><td>${esc(p[4])}</td></tr>`).join(""):'<tr><td colspan="6"><div class="empty"><strong>No sample data available.</strong></div></td></tr>'}</tbody></table>`}
-function goTo(issue){closeModal();if(issue.statusKey){state.selectedStatus=issue.statusKey;renderWorkflow()}const target=$(issue.target||"section-workflow");target?.scrollIntoView({behavior:"smooth",block:"start"});target?.animate([{boxShadow:"0 0 0 2px #a23a2c88"},{boxShadow:"0 0 0 0 #a23a2c00"}],{duration:1300});if(issue.target==="field-name")$("boardName")?.focus();if(issue.target==="field-short")$("shortName")?.focus();if(issue.target==="section-assignment")$("careSearch")?.focus();if(issue.statusKey)$("statusNameInput")?.focus()}
+  function renderDashboard(){
+    var body = document.getElementById('dashboardBody');
+    body.innerHTML = TRACKERBOARDS.map(function(t){
+      var statusClass = t.status.toLowerCase();
+      return '<tr>'+
+        '<td><span class="cell-title">'+t.name+'</span><span class="cell-meta">'+t.id+'</span></td>'+
+        '<td>'+t.careSetting+'</td>'+
+        '<td>'+t.facility+'</td>'+
+        '<td>'+t.updated+'</td>'+
+        '<td><span class="pill '+statusClass+'">'+t.status+'</span></td>'+
+        '<td class="actions"><div class="menu-wrap">'+
+          '<button class="icon-btn" type="button" onclick="toggleMenu(this)" aria-label="Row actions">&#8942;</button>'+
+          '<div class="menu"><button type="button">Edit</button><button type="button">Duplicate</button><button type="button">Delete</button><button type="button">History Log</button></div>'+
+        '</div></td>'+
+      '</tr>';
+    }).join('');
+    document.getElementById('dashboardSummary').textContent = TRACKERBOARDS.length + ' trackerboards';
+    document.getElementById('dashboardFooterSummary').textContent = 'Showing ' + TRACKERBOARDS.length + ' of ' + TRACKERBOARDS.length + ' trackerboards';
+  }
+  var CARE_SETTINGS = {
+    'Emergency Department': { visit:'Outpatient', los:'4–6 hours (avg)', form:'ED Intake Form v2', facilities:['Central City Health','Riverside Clinic'] },
+    'Inpatient': { visit:'Inpatient Admission', los:'3–5 days (avg)', form:'IP Admission Form v1', facilities:['Central City Health','Lakeside Medical Center'] },
+    'Operating Room': { visit:'Same-day Surgical', los:'2–4 hours (avg)', form:'Pre-Surgical Intake Form', facilities:['Central City Health','Riverside Clinic'] },
+    'Outpatient Clinic': { visit:'Scheduled Outpatient', los:'30–45 minutes (avg)', form:'Outpatient Visit Form v1', facilities:['Riverside Clinic','Lakeside Medical Center'] }
+  };
 
-function openModal({title,body,actions=[],large=false}){state.lastFocus=document.activeElement;$("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modal").classList.toggle("large",large);$("modalFoot").innerHTML="";actions.forEach(a=>{const b=document.createElement("button");b.type="button";b.className=`btn ${a.primary?"primary":""} ${a.danger?"danger":""}`;b.textContent=a.label;b.disabled=!!a.disabled;b.addEventListener("click",()=>{if(a.close)closeModal();a.handler?.()});$("modalFoot").appendChild(b)});$("modalBackdrop").classList.add("open");$("modalBackdrop").setAttribute("aria-hidden","false");setTimeout(()=>$("closeModal").focus(),0)}
-function closeModal(){$("modalBackdrop").classList.remove("open");$("modalBackdrop").setAttribute("aria-hidden","true");$("modalBody").innerHTML="";$("modalFoot").innerHTML="";state.lastFocus?.focus?.()}
-function confirmBox(title,message,label,danger=false){return new Promise(resolve=>openModal({title,body:`<p style="margin:0;line-height:1.5">${esc(message)}</p>`,actions:[{label:"Cancel",handler:()=>{closeModal();resolve(false)}},{label,primary:!danger,danger,handler:()=>{closeModal();resolve(true)}}]}))}
-function toast(message){const el=document.createElement("div");el.className="toast";el.textContent=message;$("toasts").appendChild(el);setTimeout(()=>el.remove(),3000)}
-function closeMenus(){document.querySelectorAll(".menu.open").forEach(m=>m.classList.remove("open"));document.querySelectorAll("[data-action='toggle-menu']").forEach(b=>b.setAttribute("aria-expanded","false"))}
-$("createButton").addEventListener("click",()=>openDrawer());$("closeDrawer").addEventListener("click",requestClose);$("cancelButton").addEventListener("click",requestClose);$("drawerBackdrop").addEventListener("click",requestClose);$("closeModal").addEventListener("click",closeModal);$("modalBackdrop").addEventListener("click",e=>{if(e.target===$("modalBackdrop"))closeModal()});
-$("checksButton").addEventListener("click",openChecks);$("previewButton").addEventListener("click",openPreview);$("historyButton").addEventListener("click",()=>openHistory());$("saveButton").addEventListener("click",saveDraft);$("activateButton").addEventListener("click",openActivation);$("addStatusEnd").addEventListener("click",()=>insertStatus(state.working.workflow.statuses.length));
-$("restoreRecovery").addEventListener("click",restoreRecovery);$("discardRecovery").addEventListener("click",()=>{clearRecovery();state.recovery=null;toast("Recovery copy discarded.")});
-$("boardName").addEventListener("input",e=>{state.working.name=e.target.value;if(state.shortMode==="auto"){state.working.shortName=autoShort(e.target.value);$("shortName").value=state.working.shortName}markDirty("basic")});
-$("shortName").addEventListener("input",e=>{state.working.shortName=e.target.value;state.shortMode="manual";renderShortMode();markDirty("basic")});$("description").addEventListener("input",e=>{state.working.description=e.target.value;markDirty("basic")});
-$("resetShort").addEventListener("click",()=>{state.shortMode="auto";state.working.shortName=autoShort(state.working.name);$("shortName").value=state.working.shortName;renderShortMode();markDirty("basic")});
+  var CARE_SETTING_COLUMNS = {
+    'Emergency Department': [
+      { label:'Chief Complaint', tag:'ED', checked:true },
+      { label:'Triage Level', tag:'ED', checked:true }
+    ],
+    'Operating Room': [
+      { label:'Scheduled Time', tag:'OR', checked:false },
+      { label:'Surgery Type', tag:'OR', checked:false }
+    ],
+    'Inpatient': [
+      { label:'Diagnosis', tag:'IP', checked:false }
+    ]
+  };
 
+  var REQUIREMENT_CATALOG = {
+    'Emergency Department': ['Triage level assigned','Chief complaint recorded','Bed assigned','Provider assigned','Initial vitals recorded','Discharge summary signed','Outstanding payment cleared','Isolation precautions confirmed','Consent for treatment signed'],
+    'Operating Room': ['Surgical consent signed','Anesthesia consult completed','Surgical team confirmed','Time-out checklist completed','Vitals stable','Post-op orders entered','Follow-up appointment scheduled','Implant/equipment confirmed','Blood products available'],
+    'Inpatient': ['Admission orders entered','Bed assigned','ICU bed confirmed','Attending sign-off','Care plan updated','Discharge summary signed','Outstanding payment cleared','Discharge instructions reviewed','Medication reconciliation completed']
+  };
 
-$("careSearch").addEventListener("focus",()=>{$("careMenu").classList.add("open")});$("careSearch").addEventListener("input",e=>{renderCarePicker(e.target.value);$("careMenu").classList.add("open")});$("browseCare").addEventListener("click",()=>{renderCarePicker($("careSearch").value);$("careMenu").classList.toggle("open")});
-$("clearCare").addEventListener("click",async()=>{if(!state.working.careSettingIds.length)return;if(!await confirmBox("Clear all Care Settings?","The selected Care Settings and inherited Facility scope will be removed from this draft.","Clear all",true))return;state.working.careSettingIds=[];markDirty("assignment");renderAssignment()});
-$("statusEditor").addEventListener("input",e=>{const s=selectedStatus();if(!s)return;if(e.target.matches("[data-status-field='name']")){s.name=e.target.value;$("editorTitle").textContent=s.name||"Unnamed status";markDirty("workflow");renderFlow();renderStatusList()}else if(e.target.matches("[data-status-field='description']")){s.description=e.target.value;markDirty("workflow")}else if(e.target.matches("[data-timer='value']")){s.timer.value=Number(e.target.value);markDirty("workflow")}else if(e.target.matches("[data-timer='message']")){s.timer.message=e.target.value;markDirty("workflow")}});
-$("statusEditor").addEventListener("focusout",e=>{if(e.target.matches("[data-status-field='name']"))renderWorkflow()});
-$("statusEditor").addEventListener("change",e=>{const s=selectedStatus();if(!s)return;if(e.target.matches("[data-status-flag='starting']"))state.working.workflow.statuses.forEach(x=>x.starting=x.key===s.key);else if(e.target.matches("[data-status-flag='completion']"))s.completion=e.target.checked;else if(e.target.matches("[data-next]")){const key=e.target.dataset.next;if(e.target.checked&&!s.nextKeys.includes(key))s.nextKeys.push(key);else if(!e.target.checked)s.nextKeys=s.nextKeys.filter(x=>x!==key)}else if(e.target.matches("[data-requirement]")){const r=e.target.dataset.requirement;if(e.target.checked&&!s.requirements.includes(r))s.requirements.push(r);else if(!e.target.checked)s.requirements=s.requirements.filter(x=>x!==r)}else if(e.target.matches("[data-timer='enabled']"))s.timer.enabled=e.target.checked;else if(e.target.matches("[data-timer='unit']"))s.timer.unit=e.target.value;markDirty("workflow");renderWorkflow()});
+  function currentRequirementOptions(){
+    var careSetting = document.getElementById('careSettingSelect').value;
+    return REQUIREMENT_CATALOG[careSetting] || [];
+  }
 
-document.addEventListener("click",async e=>{const el=e.target.closest("[data-action]");if(!el){if(!e.target.closest(".menu-wrap"))closeMenus();if(!e.target.closest("#carePicker"))$("careMenu").classList.remove("open");return}const action=el.dataset.action;
-  if(action==="toggle-menu"){e.stopPropagation();const menu=el.nextElementSibling,open=!menu.classList.contains("open");closeMenus();menu.classList.toggle("open",open);el.setAttribute("aria-expanded",String(open));return}
-  if(action==="open-record")openDrawer(Number(el.dataset.index));
-  else if(action==="create-version")createVersion(el.dataset.boardId);
-  else if(action==="history")openHistory(el.dataset.boardId);
-  else if(action==="checks")openChecks();
-  else if(action==="add-care"){const id=el.dataset.care;if(!state.working.careSettingIds.includes(id))state.working.careSettingIds.push(id);$("careSearch").value="";$("careMenu").classList.remove("open");markDirty("assignment");renderAssignment()}
-  else if(action==="remove-care"){state.working.careSettingIds=state.working.careSettingIds.filter(x=>x!==el.dataset.care);markDirty("assignment");renderAssignment()}
-  else if(action==="select-status"){state.selectedStatus=el.dataset.status;renderWorkflow()}
-  else if(action==="insert-status")insertStatus(Number(el.dataset.index));
-  else if(action==="move-status")moveStatus(el.dataset.status,el.dataset.direction);
-  else if(action==="delete-status")await deleteStatus(el.dataset.status);
-  else if(action==="go-issue")goTo({target:el.dataset.target,statusKey:el.dataset.status||null});
-});
-["facilityFilter","statusFilter","readinessFilter","creatorFilter"].forEach(id=>$(id).addEventListener("change",()=>{state.page=1;renderList()}));$("globalSearch").addEventListener("input",()=>{state.page=1;renderList()});$("pageSize").addEventListener("change",e=>{state.pageSize=Number(e.target.value);state.page=1;renderList()});$("prevPage").addEventListener("click",()=>{state.page=Math.max(1,state.page-1);renderList()});$("nextPage").addEventListener("click",()=>{state.page++;renderList()});document.querySelectorAll("[data-sort]").forEach(b=>b.addEventListener("click",()=>{if(state.sort===b.dataset.sort)state.dir=state.dir==="asc"?"desc":"asc";else{state.sort=b.dataset.sort;state.dir="asc"}renderList()}));
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if($("modalBackdrop").classList.contains("open"))closeModal();else if($("drawer").classList.contains("open"))requestClose()});
-TRACKERBOARDS.forEach(syncDerivedFacilities);$("facilityFilter").innerHTML='<option value="">All facilities</option>'+FACILITIES.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join("");renderList();
+  function filterRequirementOptions(query){
+    var s = STATUSES[selectedIndex];
+    var already = s.requirements.map(function(r){ return r.label; });
+    var all = currentRequirementOptions();
+    var options = all.filter(function(opt){
+      return already.indexOf(opt) === -1 && opt.toLowerCase().indexOf((query || '').toLowerCase()) > -1;
+    });
+    var menu = document.getElementById('requirementPickerMenu');
+    if(!all.length){
+      menu.innerHTML = '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting to see available requirements</div>';
+    } else if(!options.length){
+      menu.innerHTML = '<div class="picker-option" style="cursor:default;color:var(--muted)">No matching requirements</div>';
+    } else {
+      menu.innerHTML = options.map(function(opt){
+        return '<button type="button" class="picker-option" onclick="selectRequirementOption(\''+opt.replace(/'/g,"\\'")+'\')">'+opt+'</button>';
+      }).join('');
+    }
+    menu.classList.add('open');
+  }
+
+  function selectRequirementOption(label){
+    STATUSES[selectedIndex].requirements.push({label:label, met:false});
+    renderStatusEditor();
+  }
+
+  function renderCareSettingColumns(careSetting){
+    var section = document.getElementById('careSpecificColumnsSection');
+    var cols = CARE_SETTING_COLUMNS[careSetting];
+    if(!cols || !cols.length){ section.style.display = 'none'; return; }
+    section.style.display = '';
+    document.getElementById('careSpecificColumnsGrid').innerHTML = cols.map(function(c){
+      return '<label class="check-option"><input type="checkbox"'+(c.checked?' checked':'')+'> '+c.label+' <span class="tag">'+c.tag+'</span></label>';
+    }).join('');
+  }
+
+  function renderCareSettingInfo(cfg){
+    var grid = document.getElementById('careSettingInfoGrid');
+    if(!cfg){
+      grid.innerHTML = '<div class="info-item full"><span class="info-value muted">Select a Care Setting to view its configuration</span></div>';
+      return;
+    }
+    var items = [
+      { label:'Default Visit Category', value:cfg.visit },
+      { label:'Expected Length of Stay', value:cfg.los }
+    ];
+    if(cfg.form) items.push({ label:'Chief Complaint Form', value:cfg.form, link:true });
+    items.push({ label:'Other Config Detail', value:'[ placeholder ]', link:true });
+    grid.innerHTML = items.map(function(it){
+      return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
+    }).join('');
+  }
+
+  function onCareSettingChange(value){
+    var facilitySelect = document.getElementById('facilitySelect');
+    var cfg = CARE_SETTINGS[value];
+    if(!cfg){
+      facilitySelect.innerHTML = '<option>Select Facility...</option>';
+      renderCareSettingInfo(null);
+      renderCareSettingColumns(value);
+      return;
+    }
+    facilitySelect.innerHTML = '<option>Select Facility...</option>' + cfg.facilities.map(function(f){ return '<option>'+f+'</option>'; }).join('');
+    renderCareSettingInfo(cfg);
+    applyStatusPreset(value);
+    renderCareSettingColumns(value);
+    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+  }
+
+  function toggleTransferEnabled(checked){
+    document.getElementById('transferBody').style.display = checked ? '' : 'none';
+    if(checked) renderTransferDestinations();
+  }
+
+  function renderTransferDestinations(){
+    var current = document.getElementById('careSettingSelect').value;
+    var defaults = ['Operating Room','Inpatient'];
+    var options = Object.keys(CARE_SETTINGS).filter(function(cs){ return cs !== current; });
+    document.getElementById('transferDestinations').innerHTML = options.map(function(cs){
+      var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
+      return '<label class="check-option"><input type="checkbox"'+checked+'> '+cs+'</label>';
+    }).join('');
+  }
+
+  function toggleWidgetBody(checkbox){
+    var card = checkbox.closest('.subsection');
+    var body = card ? card.querySelector('.widget-body') : null;
+    if(body) body.style.display = checkbox.checked ? '' : 'none';
+  }
+
+  function toggleDisclosure(btn){
+    var wrap = btn.closest('.disclosure');
+    var body = wrap.querySelector('.disclosure-body');
+    var open = wrap.classList.toggle('open');
+    body.style.display = open ? '' : 'none';
+  }
+
+  function updateDisclosureSummary(grid){
+    var wrap = grid.closest('.disclosure');
+    var summaryEl = wrap.querySelector('.disclosure-summary');
+    var labels = Array.prototype.slice.call(grid.querySelectorAll('.check-option')).filter(function(label){
+      return label.querySelector('input').checked;
+    }).map(function(label){
+      return label.querySelector('input').nextSibling.textContent.trim();
+    });
+    if(!labels.length){ summaryEl.textContent = 'None selected'; return; }
+    var shown = labels.slice(0, 3).join(', ');
+    var rest = labels.length - 3;
+    summaryEl.textContent = labels.length + ' selected: ' + shown + (rest > 0 ? ' +' + rest + ' more' : '');
+  }
+
+  function initDisclosureSummaries(){
+    document.querySelectorAll('.disclosure').forEach(function(wrap){
+      var grid = wrap.querySelector('.check-grid');
+      if(grid) updateDisclosureSummary(grid);
+    });
+  }
+
+  /* ---------- Statuses & Workflow ---------- */
+
+  var STATUS_PRESETS = {
+    'Emergency Department': [
+      { name:'Waiting List', desc:'Patient has arrived and is waiting to be seen.',
+        start:true, complete:false, allowLWOT:true,
+        allowedNext:[1],
+        requirements:[{label:'Triage level assigned', met:true},{label:'Chief complaint recorded', met:false}],
+        enableTimer:true, timerValue:'30', timerUnit:'minutes', alert:'Patient waiting longer than expected' },
+      { name:'ED Admission', desc:'Patient has been admitted and is being treated.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[2],
+        requirements:[{label:'Bed assigned', met:false},{label:'Provider assigned', met:false},{label:'Initial vitals recorded', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Queued for Discharge', desc:'Patient is ready and awaiting discharge processing.',
+        start:false, complete:true, allowLWOT:false,
+        allowedNext:[1],
+        requirements:[{label:'Discharge summary signed', met:false},{label:'Outstanding payment cleared', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
+    ],
+    'Operating Room': [
+      { name:'Pre-OR', desc:'Patient is being prepped ahead of the procedure.',
+        start:true, complete:false, allowLWOT:true,
+        allowedNext:[1],
+        requirements:[{label:'Surgical consent signed', met:false},{label:'Anesthesia consult completed', met:false}],
+        enableTimer:true, timerValue:'45', timerUnit:'minutes', alert:'Patient in Pre-OR longer than expected' },
+      { name:'In Procedure', desc:'Patient is currently in surgery.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[2],
+        requirements:[{label:'Surgical team confirmed', met:false},{label:'Time-out checklist completed', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Recovery', desc:'Patient is recovering post-procedure under observation.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[3],
+        requirements:[{label:'Vitals stable', met:false},{label:'Post-op orders entered', met:false}],
+        enableTimer:true, timerValue:'60', timerUnit:'minutes', alert:'Patient in Recovery longer than expected' },
+      { name:'Queued for Discharge', desc:'Patient is ready and awaiting discharge processing.',
+        start:false, complete:true, allowLWOT:false,
+        allowedNext:[2],
+        requirements:[{label:'Discharge summary signed', met:false},{label:'Follow-up appointment scheduled', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
+    ],
+    'Inpatient': [
+      { name:'Admitted', desc:'Patient has been admitted to the unit.',
+        start:true, complete:false, allowLWOT:true,
+        allowedNext:[1,2],
+        requirements:[{label:'Admission orders entered', met:false},{label:'Bed assigned', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'ICU', desc:'Patient requires intensive care monitoring.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[2],
+        requirements:[{label:'ICU bed confirmed', met:false},{label:'Attending sign-off', met:false}],
+        enableTimer:true, timerValue:'4', timerUnit:'hours', alert:'Patient in ICU longer than expected without review' },
+      { name:'General Floor', desc:'Patient has been stepped down to general care.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[1,3],
+        requirements:[{label:'Care plan updated', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Queued for Discharge', desc:'Patient is ready and awaiting discharge processing.',
+        start:false, complete:true, allowLWOT:false,
+        allowedNext:[2],
+        requirements:[{label:'Discharge summary signed', met:false},{label:'Outstanding payment cleared', met:false}],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
+    ]
+  };
+
+  function clonePreset(preset){ return preset.map(function(s){ return JSON.parse(JSON.stringify(s)); }); }
+
+  function applyStatusPreset(careSetting){
+    var preset = STATUS_PRESETS[careSetting];
+    if(!preset) return;
+    STATUSES = clonePreset(preset);
+    selectStatus(0);
+  }
+
+  var STATUSES = clonePreset(STATUS_PRESETS['Emergency Department']);
+  var selectedIndex = 0;
+
+  function insertPointHtml(atIndex){
+    return '<div class="insert"><button type="button" onclick="insertStatus('+atIndex+')">+ Add Status</button></div>';
+  }
+
+  function renderStatusList(){
+    document.getElementById('statusCountLabel').textContent = STATUSES.length + (STATUSES.length===1 ? ' status' : ' statuses');
+    var body = document.getElementById('statusListBody');
+    var html = insertPointHtml(0);
+    STATUSES.forEach(function(s,i){
+      var tagText = s.start ? 'Starting' : s.complete ? 'Completion' : '';
+      var selected = i === selectedIndex;
+      var actionsHtml = selected ?
+        '<span class="status-actions">'+
+          '<button class="icon-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',-1)" aria-label="Move up">&#8593;</button>'+
+          '<button class="icon-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',1)" aria-label="Move down">&#8595;</button>'+
+          '<button class="icon-btn" type="button" onclick="event.stopPropagation();deleteStatus('+i+')" aria-label="Delete">&#10005;</button>'+
+        '</span>' : '';
+      html += '<button type="button" class="status-item'+(selected?' selected':'')+'" onclick="selectStatus('+i+')">'+
+        '<span class="status-row1">'+
+          '<strong class="status-name">'+s.name+'</strong>'+
+          actionsHtml+
+        '</span>'+
+        (tagText ? '<span class="tag status-tag-row">'+tagText+'</span>' : '')+
+      '</button>';
+      html += insertPointHtml(i+1);
+      html += insertPointHtml(i+1);
+    });
+    body.innerHTML = html;
+  }
+
+  function insertStatus(atIndex){
+    STATUSES.forEach(function(s){ s.allowedNext = s.allowedNext.map(function(idx){ return idx>=atIndex ? idx+1 : idx; }); });
+    STATUSES.splice(atIndex, 0, { name:'New Status', desc:'', start:false, complete:false, allowLWOT:false,
+      allowedNext:[], requirements:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' });
+    selectedIndex = atIndex;
+    renderStatusList();
+    renderStatusEditor();
+  }
+
+  function deleteStatus(i){
+    if(STATUSES.length<=1) return;
+    if(!confirm('Delete "'+STATUSES[i].name+'"? This cannot be undone.')) return;
+    STATUSES.splice(i,1);
+    STATUSES.forEach(function(s){
+      s.allowedNext = s.allowedNext.filter(function(idx){ return idx!==i; }).map(function(idx){ return idx>i ? idx-1 : idx; });
+    });
+    if(selectedIndex>=STATUSES.length) selectedIndex = STATUSES.length-1;
+    else if(selectedIndex>i) selectedIndex--;
+    renderStatusList();
+    renderStatusEditor();
+  }
+
+  function moveStatus(i, dir){
+    var j = i+dir;
+    if(j<0 || j>=STATUSES.length) return;
+    var tmp = STATUSES[i]; STATUSES[i]=STATUSES[j]; STATUSES[j]=tmp;
+    if(selectedIndex===i) selectedIndex=j;
+    else if(selectedIndex===j) selectedIndex=i;
+    renderStatusList();
+    renderStatusEditor();
+  }
+
+  function selectStatus(i){
+    selectedIndex = i;
+    renderStatusList();
+    renderStatusEditor();
+  }
+
+  function renameStatus(value){
+    STATUSES[selectedIndex].name = value;
+    renderStatusList();
+    document.getElementById('statusEditorTitle').textContent = value;
+  }
+
+  function setStarting(){
+    STATUSES.forEach(function(s,idx){ s.start = (idx === selectedIndex); });
+    renderStatusList();
+    renderStatusEditor();
+  }
+
+  function setCompleting(){
+    STATUSES.forEach(function(s,idx){ s.complete = (idx === selectedIndex); });
+    renderStatusList();
+    renderStatusEditor();
+  }
+
+  function toggleLWOT(checked){ STATUSES[selectedIndex].allowLWOT = checked; }
+
+  function toggleAllowedNext(targetIndex, checked){
+    var s = STATUSES[selectedIndex];
+    var pos = s.allowedNext.indexOf(targetIndex);
+    if(checked && pos===-1) s.allowedNext.push(targetIndex);
+    if(!checked && pos>-1) s.allowedNext.splice(pos,1);
+  }
+
+  function toggleRequirement(idx, checked){ STATUSES[selectedIndex].requirements[idx].met = checked; }
+
+  function toggleTimerEnabled(checked){ STATUSES[selectedIndex].enableTimer = checked; renderStatusEditor(); }
+  function updateTimerValue(v){ STATUSES[selectedIndex].timerValue = v; }
+  function updateTimerUnit(v){ STATUSES[selectedIndex].timerUnit = v; }
+  function updateAlertMessage(v){ STATUSES[selectedIndex].alert = v; }
+
+  function renderStatusEditor(){
+    var s = STATUSES[selectedIndex];
+    document.getElementById('statusEditorTitle').textContent = s.name;
+
+    var lwotBlock = '';
+    if(s.start){
+      lwotBlock =
+        '<div class="subsection">'+
+          '<h4>Left Without Treatment</h4>'+
+          '<p>This exit is exclusive to the Starting status.</p>'+
+          '<label class="check-option"><input type="checkbox"'+(s.allowLWOT?' checked':'')+' onchange="toggleLWOT(this.checked)"> Allow patients to exit as &quot;Left Without Treatment&quot; from this status</label>'+
+        '</div>';
+    }
+
+    var allowedNextHtml = STATUSES.map(function(other, idx){
+      if(idx===selectedIndex) return '';
+      var checked = s.allowedNext.indexOf(idx)>-1;
+      return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext('+idx+', this.checked)"> '+other.name+'</label>';
+    }).join('');
+
+    var requirementsHtml = s.requirements.map(function(r, idx){
+      return '<label class="check-option"><input type="checkbox"'+(r.met?' checked':'')+' onchange="toggleRequirement('+idx+', this.checked)"> '+r.label+'</label>';
+    }).join('');
+
+    document.getElementById('statusEditorBody').innerHTML =
+      '<div class="field full"><label>Status Name <span style="color:var(--bad)">*</span></label>'+
+        '<input class="text" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
+        '<span class="short-meta"><span class="help">Display name only. Existing transitions remain connected when renamed.</span></span>'+
+      '</div>'+
+      '<div class="field full" style="margin-top:14px"><label>Description</label><textarea class="textarea">'+s.desc+'</textarea></div>'+
+      '<div class="flags">'+
+        '<label><input type="radio" name="start"'+(s.start?' checked':'')+' onchange="setStarting()"> Starting Status</label>'+
+        '<label><input type="radio" name="complete"'+(s.complete?' checked':'')+' onchange="setCompleting()"> Completion Status</label>'+
+      '</div>'+
+      lwotBlock+
+      '<div class="subsection">'+
+        '<h4>Allowed next statuses</h4>'+
+        '<p>Choose where a patient can move from this status.</p>'+
+        '<div class="check-grid">'+allowedNextHtml+'</div>'+
+      '</div>'+
+      '<div class="subsection">'+
+        '<h4>Requirements before leaving this status</h4>'+
+        '<p>Checks that must be complete before the status changes (illustrative only in this mockup).</p>'+
+        '<div class="check-grid">'+requirementsHtml+'</div>'+
+        '<div class="picker" id="requirementPicker">'+
+          '<div class="picker-input">'+
+            '<input class="text" type="text" id="requirementSearchInput" placeholder="Search requirements for this Care Setting..." oninput="filterRequirementOptions(this.value)" onfocus="filterRequirementOptions(this.value)">'+
+            '<button class="btn" type="button" onclick="document.getElementById(\'requirementSearchInput\').focus();filterRequirementOptions(document.getElementById(\'requirementSearchInput\').value)">Add</button>'+
+          '</div>'+
+          '<div class="picker-menu" id="requirementPickerMenu"></div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="subsection">'+
+        '<h4>Timer and Alert</h4>'+
+        '<p>Alert the team when a patient remains in this status longer than expected.</p>'+
+        '<label class="check-option" style="margin-bottom:10px;"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"> Enable timer</label>'+
+        '<div class="form-grid">'+
+          '<div class="field"><label>Duration</label><input class="text" type="text" value="'+s.timerValue+'" placeholder="e.g. 30"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerValue(this.value)"></div>'+
+          '<div class="field"><label>Unit</label><select class="control"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
+          '<div class="field"><label>Alert Message</label><input class="text" type="text" value="'+s.alert+'" placeholder="Alert message"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertMessage(this.value)"></div>'+
+        '</div>'+
+      '</div>';
+  }
+
+  renderDashboard();
+  renderStatusList();
+  renderStatusEditor();
+  initDisclosureSummaries();
 </script>
 </body>
 </html>

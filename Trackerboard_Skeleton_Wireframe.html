@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trackerboard Configuration — Skeleton Wireframe</title>
+<style>
+  :root{ --line:#000; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#fff; color:#000;
+    font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4{ margin:0; font-weight:600; }
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  /* ---- top bar ---- */
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 40px; border-bottom:2px solid var(--line); }
+  .topbar h1{ font-size:21px; font-weight:600; }
+  .tag-label{ font-size:11px; font-weight:600; letter-spacing:.06em; border:1px solid var(--line); padding:4px 9px; margin-left:12px; vertical-align:2px; }
+
+  /* ---- generic building blocks ---- */
+  .btn{ display:inline-block; padding:11px 20px; border:1px solid var(--line); background:#fff; color:#000; font-size:14px; font-weight:500; cursor:pointer; text-align:center; border-radius:2px; }
+  .btn:hover{ background:#000; color:#fff; }
+  .btn.primary{ background:#000; color:#fff; }
+  .btn.primary:hover{ background:#fff; color:#000; }
+
+  .page{ padding:36px 40px 130px; max-width:1240px; margin:0 auto; }
+
+  /* ---- dashboard ---- */
+  .toolbar{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-bottom:28px; }
+  .toolbar .spacer{ flex:1; }
+  input[type=text], select, textarea{ font:inherit; font-size:14px; border:1px solid var(--line); border-radius:2px; padding:10px 12px; background:#fff; color:#000; }
+  .search-box{ width:280px; }
+  select{ min-width:170px; }
+  .filter-chip{ font-size:13px; border:1px dashed var(--line); padding:9px 14px; background:#fff; border-radius:2px; }
+
+  table{ width:100%; border-collapse:collapse; }
+  th,td{ border:1px solid var(--line); padding:14px 16px; text-align:left; font-size:14px; vertical-align:top; }
+  th{ font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; background:#fff; }
+  .status-pill{ display:inline-block; border:1px solid var(--line); padding:3px 10px; font-size:11.5px; font-weight:600; letter-spacing:.02em; white-space:nowrap; border-radius:2px; }
+  .row-actions a{ color:#000; text-decoration:underline; font-size:13px; margin-right:16px; }
+  .table-footer{ display:flex; justify-content:space-between; align-items:center; padding:14px 2px; font-size:13px; border-top:1px solid var(--line); margin-top:-1px; }
+
+  /* ---- create screen layout ---- */
+  .section-nav{ position:sticky; top:0; z-index:5; display:flex; background:#fff; border-bottom:2px solid var(--line); overflow-x:auto; }
+  .section-nav a{ display:block; padding:16px 24px; font-size:13.5px; font-weight:500; text-decoration:none; color:#000; border-right:1px solid var(--line); white-space:nowrap; }
+  .section-nav a:hover{ background:#000; color:#fff; }
+
+  .config-section{ border:1px solid var(--line); margin-bottom:40px; border-radius:2px; }
+  .config-section-head{ padding:20px 28px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline; }
+  .config-section-head h2{ font-size:17px; }
+  .config-section-head .step-no{ font-size:12.5px; color:#000; opacity:.65; }
+  .config-section-body{ padding:28px; }
+
+  .field-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:24px; }
+  .field-row.two{ grid-template-columns:repeat(2,1fr); }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field.full{ grid-column:1/-1; }
+  .field label{ font-size:13px; font-weight:600; }
+  .field .hint{ font-size:12px; opacity:.65; }
+  textarea{ min-height:80px; resize:vertical; }
+
+  .readonly-panel{ border:1px dashed var(--line); padding:20px 22px; margin-top:20px; border-radius:2px; }
+  .readonly-panel h4{ font-size:12.5px; font-weight:600; letter-spacing:.03em; margin-bottom:16px; }
+  .kv-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; font-size:14px; }
+  .kv-grid div span{ display:block; font-weight:600; font-size:12px; opacity:.65; margin-bottom:4px; }
+
+  .subhead{ font-size:15px; font-weight:600; margin:36px 0 14px; padding-top:28px; border-top:1px solid var(--line); }
+  .subhead:first-child{ margin-top:0; padding-top:0; border-top:0; }
+  .subtext{ font-size:13px; opacity:.7; margin:-4px 0 16px; }
+
+  /* status list */
+  .status-row{ border:1px solid var(--line); padding:20px 22px; margin-bottom:14px; border-radius:2px; }
+  .status-row-fields{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px; }
+  .status-row-fields input[type=text]{ width:100%; }
+  .status-row-fields .field{ gap:6px; }
+  .status-row-fields .field label{ font-size:11.5px; font-weight:600; opacity:.65; text-transform:uppercase; letter-spacing:.03em; }
+  .status-row-flags{ display:flex; flex-wrap:wrap; gap:28px; padding-top:14px; border-top:1px solid #ddd; font-size:13.5px; }
+  .status-row-flags label{ display:flex; align-items:center; gap:8px; white-space:nowrap; }
+  .add-row-link{ display:inline-block; margin-top:8px; font-size:14px; font-weight:500; text-decoration:underline; cursor:pointer; }
+
+  .flow-strip{ display:flex; align-items:center; gap:16px; overflow-x:auto; padding:20px 0; }
+  .flow-box{ flex:0 0 auto; border:1px solid var(--line); padding:14px 18px; font-size:13.5px; min-width:130px; text-align:center; border-radius:2px; }
+  .flow-arrow{ font-size:18px; opacity:.6; }
+
+  .timer-table th, .timer-table td{ font-size:13.5px; padding:14px 16px; }
+  .timer-table input[type=text]{ width:100%; }
+
+  .checklist{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px 24px; }
+  .checklist.cols-3{ grid-template-columns:repeat(3,1fr); }
+  .checklist label{ display:flex; align-items:center; gap:10px; font-size:14px; border:1px solid var(--line); padding:12px 14px; border-radius:2px; }
+  .checklist label.disabled{ opacity:.5; }
+
+  .widget-block{ border:1px solid var(--line); padding:22px 24px; margin-bottom:18px; border-radius:2px; }
+  .widget-block-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .widget-block-head label{ font-weight:600; font-size:15px; display:flex; align-items:center; gap:10px; }
+  .widget-sub{ margin-left:30px; }
+  .widget-sub .checklist{ grid-template-columns:repeat(3,1fr); }
+
+  .cs-note{ font-size:11.5px; font-weight:500; border:1px dashed var(--line); padding:4px 8px; margin-left:10px; opacity:.75; border-radius:2px; }
+
+  /* footer action bar */
+  .action-bar{ position:fixed; bottom:0; left:0; right:0; display:flex; justify-content:flex-end; gap:14px; padding:20px 40px; background:#fff; border-top:2px solid var(--line); }
+
+  input[type=checkbox], input[type=radio]{ width:16px; height:16px; margin:0; flex:0 0 auto; }
+</style>
+</head>
+<body>
+
+<!-- ============ SCREEN 1: DASHBOARD ============ -->
+<div class="screen active" id="screen-dashboard">
+  <div class="topbar">
+    <h1>Trackerboard Configuration <span class="tag-label">SKELETON WIREFRAME</span></h1>
+    <button class="btn primary" onclick="showScreen('screen-create')">+ Create New Trackerboard</button>
+  </div>
+
+  <div class="page">
+    <div class="toolbar">
+      <input class="search-box" type="text" placeholder="Search trackerboards...">
+      <select><option>Facility: All</option></select>
+      <select><option>Care Setting: All</option></select>
+      <span class="filter-chip">+ Add Filter</span>
+      <div class="spacer"></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Board Name</th>
+          <th>Care Setting</th>
+          <th>Facility</th>
+          <th>Updated Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Emergency Department Trackerboard</td>
+          <td>Emergency Department</td>
+          <td>Central City Health</td>
+          <td>07 Aug 2026</td>
+          <td><span class="status-pill">ACTIVE</span></td>
+          <td class="row-actions"><a>Edit</a><a>Duplicate</a><a>Delete</a><a>History Log</a></td>
+        </tr>
+        <tr>
+          <td>Inpatient Trackerboard</td>
+          <td>Inpatient</td>
+          <td>Central City Health</td>
+          <td>05 Aug 2026</td>
+          <td><span class="status-pill">DRAFT</span></td>
+          <td class="row-actions"><a>Edit</a><a>Duplicate</a><a>Delete</a><a>History Log</a></td>
+        </tr>
+        <tr>
+          <td>Operating Room Trackerboard</td>
+          <td>Operating Room</td>
+          <td>Riverside Clinic</td>
+          <td>28 Jul 2026</td>
+          <td><span class="status-pill">INACTIVE</span></td>
+          <td class="row-actions"><a>Edit</a><a>Duplicate</a><a>Delete</a><a>History Log</a></td>
+        </tr>
+        <tr>
+          <td colspan="6" style="text-align:center; font-size:13px; opacity:.65; padding:20px;">[ additional rows depend on user's role / permission scope ]</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-footer">
+      <span>Showing 3 of 3 trackerboards</span>
+      <span>&lt; Prev &nbsp; 1 &nbsp; Next &gt;</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SCREEN 2: CREATE NEW TRACKERBOARD ============ -->
+<div class="screen" id="screen-create">
+  <div class="topbar">
+    <h1>Create New Trackerboard <span class="tag-label">SKELETON WIREFRAME</span></h1>
+    <button class="btn" onclick="showScreen('screen-dashboard')">&larr; Back to Dashboard</button>
+  </div>
+
+  <nav class="section-nav">
+    <a href="#sec-basic">1. Basic Information</a>
+    <a href="#sec-caresetting">2. Care Setting</a>
+    <a href="#sec-workflow">3. Statuses &amp; Workflow</a>
+    <a href="#sec-widgets">4. Widgets</a>
+    <a href="#sec-table">5. Patient Table</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- 1. Basic Information -->
+    <section class="config-section" id="sec-basic">
+      <div class="config-section-head"><h2>1. Basic Information</h2><span class="step-no">Step 1 of 5</span></div>
+      <div class="config-section-body">
+        <div class="field-row">
+          <div class="field">
+            <label>Name</label>
+            <input type="text" placeholder="e.g. Emergency Department Trackerboard">
+          </div>
+          <div class="field">
+            <label>Short Name</label>
+            <input type="text" placeholder="e.g. EDT">
+          </div>
+          <div class="field">
+            <label>Unique ID</label>
+            <input type="text" placeholder="e.g. EDT001">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field full">
+            <label>Description</label>
+            <textarea placeholder="Short description of what this trackerboard is used for"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Care Setting -->
+    <section class="config-section" id="sec-caresetting">
+      <div class="config-section-head"><h2>2. Care Setting</h2><span class="step-no">Step 2 of 5</span></div>
+      <div class="config-section-body">
+        <div class="field-row two">
+          <div class="field">
+            <label>Care Setting</label>
+            <select><option>Select Care Setting...</option><option>Emergency Department</option><option>Inpatient</option><option>Operating Room</option></select>
+          </div>
+          <div class="field">
+            <label>Facility</label>
+            <select><option>Select Facility...</option><option>Central City Health</option></select>
+            <span class="hint">List depends on the Care Setting selected above</span>
+          </div>
+        </div>
+
+        <div class="readonly-panel">
+          <h4>CARE SETTING INFORMATION &nbsp;(read-only, from Care Setting Configuration)</h4>
+          <div class="kv-grid">
+            <div><span>Default Visit Category</span>Outpatient</div>
+            <div><span>Expected Length of Stay</span>4 hours</div>
+            <div><span>Chief Complaint Form</span>ED Intake Form v2</div>
+            <div><span>Other Config Detail</span>[ placeholder ]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Statuses & Workflow -->
+    <section class="config-section" id="sec-workflow">
+      <div class="config-section-head"><h2>3. Statuses &amp; Workflow</h2><span class="step-no">Step 3 of 5</span></div>
+      <div class="config-section-body">
+
+        <div class="subhead">Statuses</div>
+
+        <div class="status-row">
+          <div class="status-row-fields">
+            <div class="field"><label>Status Name</label><input type="text" value="Waiting List"></div>
+            <div class="field"><label>Description</label><input type="text" placeholder="Optional description"></div>
+          </div>
+          <div class="status-row-flags">
+            <label><input type="radio" name="start"> Starting Status</label>
+            <label><input type="radio" name="complete"> Completion Status</label>
+            <label><input type="checkbox"> Other Exit Option</label>
+          </div>
+        </div>
+
+        <div class="status-row">
+          <div class="status-row-fields">
+            <div class="field"><label>Status Name</label><input type="text" value="ED Admission"></div>
+            <div class="field"><label>Description</label><input type="text" placeholder="Optional description"></div>
+          </div>
+          <div class="status-row-flags">
+            <label><input type="radio" name="start" checked> Starting Status</label>
+            <label><input type="radio" name="complete"> Completion Status</label>
+            <label><input type="checkbox"> Other Exit Option</label>
+          </div>
+        </div>
+
+        <div class="status-row">
+          <div class="status-row-fields">
+            <div class="field"><label>Status Name</label><input type="text" value="Queued for Discharge"></div>
+            <div class="field"><label>Description</label><input type="text" placeholder="Optional description"></div>
+          </div>
+          <div class="status-row-flags">
+            <label><input type="radio" name="start"> Starting Status</label>
+            <label><input type="radio" name="complete" checked> Completion Status</label>
+            <label><input type="checkbox"> Other Exit Option</label>
+          </div>
+        </div>
+
+        <div class="status-row">
+          <div class="status-row-fields">
+            <div class="field"><label>Status Name</label><input type="text" value="Left Without Treatment"></div>
+            <div class="field"><label>Description</label><input type="text" placeholder="Optional description"></div>
+          </div>
+          <div class="status-row-flags">
+            <label><input type="radio" name="start"> Starting Status</label>
+            <label><input type="radio" name="complete"> Completion Status</label>
+            <label><input type="checkbox" checked> Other Exit Option</label>
+          </div>
+        </div>
+
+        <span class="add-row-link">+ Add Status</span>
+
+        <div class="subhead">Status Transitions</div>
+        <p class="subtext">Order below defines forward flow. Backward movement between adjacent statuses may be allowed per link.</p>
+        <div class="flow-strip">
+          <div class="flow-box">Waiting List</div>
+          <div class="flow-arrow">&#8596;</div>
+          <div class="flow-box">ED Admission</div>
+          <div class="flow-arrow">&#8596;</div>
+          <div class="flow-box">Queued for Discharge</div>
+          <div class="flow-arrow">&#8594;</div>
+          <div class="flow-box">Discharged</div>
+        </div>
+        <label style="font-size:13.5px; display:flex; align-items:center; gap:8px;"><input type="checkbox" checked> Allow backward transitions between adjacent statuses</label>
+
+        <div class="subhead">Transfer to Another Care Setting</div>
+        <p class="subtext">Select which Care Settings this board may transfer patients to.</p>
+        <div class="checklist cols-3">
+          <label><input type="checkbox" checked> Operating Room</label>
+          <label><input type="checkbox" checked> Inpatient</label>
+          <label><input type="checkbox"> Outpatient Clinic</label>
+        </div>
+
+        <div class="subhead">Status Alert / Timer</div>
+        <table class="timer-table">
+          <thead><tr><th>Status</th><th>Timer Duration</th><th>Alert Message</th></tr></thead>
+          <tbody>
+            <tr><td>Waiting List</td><td><input type="text" placeholder="e.g. 30 min"></td><td><input type="text" placeholder="e.g. Patient waiting over 30 minutes"></td></tr>
+            <tr><td>ED Admission</td><td><input type="text" placeholder="No timer"></td><td><input type="text" placeholder="—"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. Widgets -->
+    <section class="config-section" id="sec-widgets">
+      <div class="config-section-head"><h2>4. Widgets</h2><span class="step-no">Step 4 of 5</span></div>
+      <div class="config-section-body">
+
+        <div class="widget-block">
+          <div class="widget-block-head"><label><input type="checkbox" checked> Total Patients</label></div>
+          <div class="widget-sub">
+            <p class="subtext" style="margin-top:0;">Optional breakdown grouping (Care Setting dependent)</p>
+            <div class="checklist">
+              <label><input type="checkbox"> Group by Triage (High / Medium / Low)</label>
+              <label><input type="checkbox"> Group by Unit (ICU / General / Other)</label>
+              <label><input type="checkbox"> Group by Workflow Status (Pre-OR / In OR / Post-OR)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-block">
+          <div class="widget-block-head"><label><input type="checkbox" checked> Resource Availability</label></div>
+          <div class="widget-sub">
+            <div class="checklist">
+              <label><input type="checkbox" checked> Beds</label>
+              <label><input type="checkbox"> Rooms</label>
+              <label><input type="checkbox"> Chairs</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-block">
+          <div class="widget-block-head"><label><input type="checkbox"> Code Team</label></div>
+          <div class="widget-sub">
+            <p class="subtext" style="margin-top:0; margin-bottom:0;">Displays Name, Role. Roster managed at runtime, not part of this configuration.</p>
+          </div>
+        </div>
+
+        <div class="widget-block">
+          <div class="widget-block-head"><label><input type="checkbox" checked> Doctors on Duty</label></div>
+          <div class="widget-sub">
+            <p class="subtext" style="margin-top:0; margin-bottom:0;">Displays Doctor Name, Role/Specialty. Roster managed at runtime, not part of this configuration.</p>
+          </div>
+        </div>
+
+        <div class="widget-block">
+          <div class="widget-block-head"><label><input type="checkbox" checked> Cardex Panel</label></div>
+          <div class="widget-sub">
+            <div class="checklist">
+              <label><input type="checkbox" checked> Awaiting Approvals</label>
+              <label><input type="checkbox" checked> MAR</label>
+              <label><input type="checkbox" checked> Medications</label>
+              <label><input type="checkbox"> Lab / Radiology</label>
+              <label><input type="checkbox"> Rejected Medication List</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Patient Table -->
+    <section class="config-section" id="sec-table">
+      <div class="config-section-head"><h2>5. Patient Table</h2><span class="step-no">Step 5 of 5</span></div>
+      <div class="config-section-body">
+
+        <div class="subhead">Common Columns</div>
+        <div class="checklist cols-3">
+          <label class="disabled"><input type="checkbox" checked disabled> Patient Name (required)</label>
+          <label class="disabled"><input type="checkbox" checked disabled> PID (required)</label>
+          <label><input type="checkbox" checked> Age</label>
+          <label><input type="checkbox" checked> Assigned Bed</label>
+          <label><input type="checkbox" checked> Vitals</label>
+          <label><input type="checkbox" checked> Care Setting</label>
+          <label class="disabled"><input type="checkbox" checked disabled> Actions (required)</label>
+        </div>
+
+        <div class="subhead">Care Setting-Specific Columns <span class="cs-note">shown only when matching Care Setting is selected</span></div>
+        <div class="checklist cols-3">
+          <label><input type="checkbox"> Scheduled Time (Operating Room)</label>
+          <label><input type="checkbox"> Surgery Type (Operating Room)</label>
+          <label><input type="checkbox" checked> Chief Complaint (Emergency Department)</label>
+          <label><input type="checkbox" checked> Triage Level (Emergency Department)</label>
+          <label><input type="checkbox"> Diagnosis (Inpatient)</label>
+        </div>
+
+        <div class="subhead">Patient Actions</div>
+        <div class="checklist cols-3">
+          <label><input type="checkbox" checked> Status Change</label>
+          <label><input type="checkbox" checked> Encounter Note</label>
+          <label><input type="checkbox"> Referral</label>
+          <label><input type="checkbox"> Intake Form</label>
+          <label><input type="checkbox" checked> Documents</label>
+          <label><input type="checkbox" checked> Cardex Alerts</label>
+          <label><input type="checkbox"> Payment</label>
+          <label><input type="checkbox"> Past Visits</label>
+          <label><input type="checkbox"> Specimen Collection</label>
+          <label><input type="checkbox" checked> Patient Demographics</label>
+        </div>
+
+        <div class="subhead">Expanded Row Fields <span class="cs-note">shown when a patient row is expanded</span></div>
+        <div class="checklist cols-3">
+          <label><input type="checkbox" checked> Provider</label>
+          <label><input type="checkbox" checked> Nurse</label>
+          <label><input type="checkbox"> Patient Type</label>
+          <label><input type="checkbox" checked> Medical Conditions</label>
+          <label><input type="checkbox"> Isolation Information</label>
+          <label><input type="checkbox" checked> Allergies</label>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <div class="action-bar">
+    <button class="btn" onclick="showScreen('screen-dashboard')">Cancel</button>
+    <button class="btn">Save as Draft</button>
+    <button class="btn primary">Activate</button>
+  </div>
+</div>
+
+<script>
+  function showScreen(id){
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
