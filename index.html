@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trackerboard Configuration — Simplified Wireframe</title>
+<style>
+/* Dependency-free prototype. Reusable primitives: .btn, .field, .card, .pill,
+   .table, .drawer, .modal, .facility-option, .status-item, .flow-node. */
+:root{
+  --navy:#003466;--navy2:#174f84;--blue:#2f6da8;--blue-soft:#edf4fa;
+  --ink:#18242f;--muted:#687681;--line:#d6dee6;--bg:#f5f7f9;--white:#fff;
+  --ok:#1d7046;--ok-bg:#e7f5ed;--warn:#806116;--warn-bg:#fff6d9;
+  --bad:#a23a2c;--bad-bg:#fdecea;--neutral:#e9edf1;
+  --font:"Arial Narrow","Roboto Condensed",Arial,sans-serif;
+}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.35 var(--font)}
+button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #8eb6db;outline-offset:2px}
+.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
+.app{display:grid;grid-template-rows:42px minmax(0,1fr) 25px;width:100vw;height:100vh;min-width:760px}.main{display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--navy);color:#fff}.topgroup,.toolbar-left,.toolbar-right,.filters{display:flex;align-items:center;gap:9px;min-width:0}.brand{font-weight:700}.sq{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#2671a6;color:#fff;border:1px solid #ffffff2b;border-radius:2px;cursor:pointer}.search{position:relative;width:clamp(280px,34vw,540px)}.search input{width:100%;height:28px;padding:0 34px 0 10px;border:0;border-radius:2px}.search button{position:absolute;right:0;top:0;width:30px;height:28px;background:transparent;color:var(--navy);cursor:pointer}.avatar{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:#dceaf4;color:var(--navy);font-size:11px;font-weight:700}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:17px}.summary,.muted,.help{color:var(--muted);font-size:12px}.filters{flex-wrap:wrap}.control{height:30px;padding:0 9px;background:#fff;border:1px solid #c4ced8;border-radius:2px}.control.compact{width:auto;min-width:125px;height:29px;font-size:12px}.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4d5d6a;white-space:nowrap}.toggle input{width:15px;height:15px;margin:0}
+.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:2px}.btn{min-height:30px;padding:0 13px;background:#fff;border:1px solid #c4ced8}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:#eef2f5}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.primary:hover:not(:disabled){background:var(--navy2)}.btn.small{min-height:26px;padding:0 9px;font-size:12px}.btn.danger{color:var(--bad);border-color:#e6bbb5}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:29px;height:29px;padding:0;background:#fff;border:1px solid #c4ced8}.link-btn{padding:0;background:transparent;color:#245f96;font-weight:700}.link-btn:hover{text-decoration:underline}
+.content{min-height:0;overflow:auto;padding:14px 18px 20px}.table-shell{min-width:930px;background:#fff;border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:9px 10px;text-align:left;vertical-align:middle;border-bottom:1px solid #e7ebef}.table th{background:#f7f9fb;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.table tbody tr:hover{background:#f7fbfe}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:700;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:700}.cell-meta{margin-top:2px;color:var(--muted);font-size:11.5px}.tags{display:flex;flex-wrap:wrap;gap:5px}.tag,.pill{display:inline-flex;align-items:center;gap:4px;min-height:21px;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}.tag{background:var(--neutral);color:#4d5d6a}.pill.active{background:var(--ok-bg);color:var(--ok)}.pill.draft{background:#dbe8f4;color:var(--navy2)}.pill.inactive{background:var(--warn-bg);color:var(--warn)}.pill.retired,.pill.superseded{background:var(--neutral);color:#596673}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:#245f96;font-size:12px;font-weight:700;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.actions{text-align:right!important}.menu-wrap{position:relative;display:inline-flex}.menu{position:absolute;z-index:40;top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:#fff;border:1px solid #c4ced8;box-shadow:0 8px 22px #001f3d29}.menu.open{display:block}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:#fafbfc;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.pager{display:flex;align-items:center;gap:6px}
+.backdrop{position:fixed;z-index:90;inset:0;display:none;background:#00224438}.backdrop.open{display:block}.drawer{position:fixed;z-index:100;top:0;right:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;width:min(1120px,78vw);height:100vh;background:#fff;box-shadow:-8px 0 24px #00264d2e;transform:translateX(105%);transition:.18s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:17px}.drawer-sub{margin-top:3px;color:var(--muted);font-size:12px}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:#fff;border-bottom:1px solid var(--line);color:#4d5d6a;font-size:12px}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:#9aa7b2;flex:0 0 auto}.validation-strip.error{background:#fff;color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:#fff;color:var(--warn)}.validation-strip.warning .validation-dot{background:#d09a21}.validation-strip.success{background:#fff;color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #dbe8f4;font-size:12px}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:#f7f9fb}.drawer-foot{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:12px}
+.card{margin-bottom:14px;background:#fff;border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 11px;border-bottom:1px solid #e8edf1}.card-title{margin:0;font-size:15px}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:12px}.section-state{flex:0 0 auto;padding:2px 7px;border-radius:10px;background:var(--neutral);color:#4d5d6a;font-size:11px;font-weight:700}.section-state.ok{background:var(--ok-bg);color:var(--ok)}.section-state.bad{background:var(--bad-bg);color:var(--bad)}.card-body{padding:15px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:#4d5d6a;font-size:12px;font-weight:700}.text,.textarea{width:100%;background:#fff;border:1px solid #c4ced8;border-radius:2px}.text{height:30px;padding:0 9px}.textarea{min-height:78px;padding:8px 9px;resize:vertical}.field-error{display:none;margin-top:5px;color:var(--bad);font-size:12px}.field.error .text,.field.error .textarea{border-color:#d9988f;background:#fffafa}.field.error .field-error{display:block}.short-meta{display:flex;align-items:center;justify-content:space-between;min-height:23px;margin-top:4px;color:var(--muted);font-size:11px}
+.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:#f5f8fb;border:1px solid #dce5ed}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:2px 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:220px;overflow:auto;background:#fff;border:1px solid #c4ced8;box-shadow:0 8px 20px #001f3d24}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:8px 10px;text-align:left;background:transparent;cursor:pointer}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f8fafb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:11px}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#245f96;font-weight:700;text-decoration:none}.manage:hover{text-decoration:underline}
+.flow-shell{margin-bottom:14px;padding:11px;background:var(--blue-soft);border:1px solid #dbe8f4}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:#fff;border:1px solid #c4ced8;cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.flow-node.bad{border-color:#d9988f;background:#fffafa}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:#7f8b95;font-size:18px}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:#f8fafb;border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;min-height:53px;padding:7px 8px;border:1px solid transparent}.status-item:hover{background:var(--blue-soft)}.status-item.selected{background:var(--blue-soft);border-color:#8db0d0}.status-item.bad{border-left:3px solid var(--bad)}.status-main{min-width:0;padding:0;text-align:left;background:transparent;cursor:pointer}.status-main strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:11px}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:#f1f4f7;border:1px solid #e1e6ea}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid #e4e9ed}.subsection h4{margin:0 0 4px;font-size:13px}.subsection p{margin:0 0 9px;color:var(--muted);font-size:11.5px}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}.check-option{min-height:30px;padding:5px 7px;background:#fafbfc;border:1px solid #e2e7eb;font-size:12px}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:12px}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:#f6f7f8;border-left:3px solid #aeb8c1;color:#4d5d6a;font-size:12px}
+.modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:16px}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #e8edf1}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f1f4f7;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:12px}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:11px}
+@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="topgroup">
+      <button class="sq" type="button" aria-label="Open menu">☰</button>
+      <span class="brand">blueEHR</span>
+      <div class="search">
+        <label class="visually-hidden" for="globalSearch">Search Trackerboards</label>
+        <input id="globalSearch" type="search" placeholder="Search Trackerboard, Facility, Care Setting...">
+        <button type="button" aria-label="Search">⌕</button>
+      </div>
+    </div>
+    <div class="topgroup">
+      <button class="sq" type="button" aria-label="Settings">⚙</button>
+      <button class="sq" type="button" aria-label="Notifications">♢</button>
+      <span class="avatar">JW</span><span>J. Weaver</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="toolbar" aria-label="Trackerboard list controls">
+      <div class="toolbar-left">
+        <h1>Trackerboard Configuration</h1>
+        <div class="filters">
+          <select class="control compact" id="facilityFilter" aria-label="Filter by facility"></select>
+          <select class="control compact" id="statusFilter" aria-label="Filter by version state">
+            <option value="">All version states</option>
+            <option value="live">Live only</option>
+            <option value="draft">Draft only</option>
+            <option value="live-draft">Live + Draft</option>
+            <option value="inactive">Inactive</option>
+            <option value="retired">Retired</option>
+          </select>
+          <select class="control compact" id="readinessFilter" aria-label="Filter by readiness">
+            <option value="">All readiness</option>
+            <option value="ready">Ready</option>
+            <option value="attention">Needs attention</option>
+            <option value="blocked">Blocked</option>
+          </select>
+          <select class="control compact" id="creatorFilter" aria-label="Filter by creator"></select>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <span class="summary" id="resultSummary"></span>
+        <button class="btn primary" id="createButton" type="button">+ Create Trackerboard</button>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="table-shell">
+        <table class="table" aria-label="Trackerboards">
+          <colgroup><col style="width:20%"><col style="width:18%"><col style="width:15%"><col style="width:15%"><col style="width:14%"><col style="width:13%"><col style="width:5%"></colgroup>
+          <thead><tr>
+            <th><button class="sort" type="button" data-sort="name">Trackerboard <span data-sort-icon="name"></span></button></th>
+            <th>Facilities</th><th>Care Settings</th><th>Versions</th>
+            <th><button class="sort" type="button" data-sort="readiness">Readiness <span data-sort-icon="readiness"></span></button></th>
+            <th><button class="sort" type="button" data-sort="updated">Updated <span data-sort-icon="updated"></span></button></th>
+            <th class="actions">Actions</th>
+          </tr></thead>
+          <tbody id="listRows"></tbody>
+        </table>
+        <div class="table-footer">
+          <span id="pageSummary"></span>
+          <div class="pager">
+            <label for="pageSize">Rows</label>
+            <select class="control compact" id="pageSize"><option>5</option><option selected>10</option><option>25</option></select>
+            <button class="icon-btn" id="prevPage" type="button" aria-label="Previous page">‹</button>
+            <span id="pageNumber"></span>
+            <button class="icon-btn" id="nextPage" type="button" aria-label="Next page">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="proto"><strong>Prototype</strong><span>List</span><span>Inherited facility scope</span><span>Workflow</span><span>Activation checks</span></footer>
+</div>
+
+<div class="backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <header class="drawer-head">
+    <div><h2 class="drawer-title" id="drawerTitle">Create Trackerboard</h2><div class="drawer-sub" id="drawerSub">Draft configuration</div></div>
+    <div class="drawer-actions">
+      <button class="btn small" id="checksButton" type="button">✓ <span>Checks</span></button>
+      <button class="btn small" id="previewButton" type="button">▣ <span>Preview</span></button>
+      <button class="btn small" id="historyButton" type="button">↺ <span>History</span></button>
+      <button class="icon-btn" id="closeDrawer" type="button" aria-label="Close">✕</button>
+    </div>
+  </header>
+  <div>
+    <div class="validation-strip" id="validationStrip" aria-live="polite"></div>
+    <div class="recovery" id="recovery"><span id="recoveryText"></span><span><button class="link-btn" id="restoreRecovery" type="button">Restore</button> · <button class="link-btn" id="discardRecovery" type="button">Discard</button></span></div>
+  </div>
+
+  <div class="drawer-body" id="drawerBody">
+    <section class="card" id="section-basic">
+      <header class="card-head">
+        <div><h3 class="card-title">Basic Details</h3><p class="card-desc">Name the operational workspace. The short name can remain automatically linked to the full name or be edited manually.</p></div>
+        <span class="section-state" id="stateBasic">Not started</span>
+      </header>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="field" id="field-name"><label for="boardName">Trackerboard Name *</label><input class="text" id="boardName" type="text" placeholder="e.g. Endoscopy Trackerboard"><div class="field-error" id="nameError"></div></div>
+          <div class="field" id="field-short"><label for="shortName">Short Name *</label><input class="text" id="shortName" type="text" placeholder="Auto-generated"><div class="short-meta"><span id="shortMode">Auto-generated from name</span><button class="link-btn" id="resetShort" type="button" hidden>Reset to auto</button></div><div class="field-error" id="shortError"></div></div>
+          <div class="field full"><label for="description">Description</label><textarea class="textarea" id="description" placeholder="Explain what this Trackerboard manages and who uses it."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="section-assignment">
+      <header class="card-head">
+        <div><h3 class="card-title">Care Settings</h3><p class="card-desc">Select the clinical Care Settings this Trackerboard supports. Applicable Facilities are inherited automatically from each Care Setting, so there is no second Facility configuration to conflict with it.</p></div>
+        <span class="section-state" id="stateAssignment">Not started</span>
+      </header>
+      <div class="card-body">
+        <div class="picker" id="carePicker">
+          <label class="field-label" for="careSearch">Add Care Setting *</label>
+          <div class="picker-input"><input class="text" id="careSearch" type="search" placeholder="Search active Care Settings..."><button class="btn" id="browseCare" type="button">Browse</button></div>
+          <div class="picker-menu" id="careMenu" role="listbox"></div>
+          <div class="help" id="careHelp">Only active Care Settings can be newly selected. Facility access and readiness are inherited from Care Setting configuration.</div>
+        </div>
+
+        <div class="selected-shell">
+          <div class="table-toolbar"><div><strong>Selected Care Settings</strong> <span class="help" id="careCount"></span></div><button class="link-btn" id="clearCare" type="button">Clear all</button></div>
+          <div id="careTable"></div>
+        </div>
+        <div class="field-error" id="careError"></div>
+        <div class="derived-scope" id="facilityScope" aria-live="polite"></div>
+        <a class="manage" href="Care%20Settings%20Wireframe.html">Manage Care Settings →</a>
+      </div>
+    </section>
+
+    <section class="card" id="section-workflow">
+      <header class="card-head">
+        <div><h3 class="card-title">Workflow</h3><p class="card-desc">Build the patient flow in one place. Select a status to define its next statuses, requirements, and timer.</p></div>
+        <span class="section-state" id="stateWorkflow">In progress</span>
+      </header>
+      <div class="card-body">
+        <div class="flow-shell">
+          <div class="flow-head"><div><strong>Flow overview</strong><div class="help">The diagram updates while the workflow is edited.</div></div><button class="btn small" id="addStatusEnd" type="button">+ Add status at end</button></div>
+          <div class="flow-map" id="flowMap"></div>
+        </div>
+        <div class="workflow">
+          <div class="status-list"><div class="panel-head"><strong>Statuses</strong><span class="help" id="statusCount"></span></div><div class="status-list-body" id="statusList"></div></div>
+          <div class="status-editor"><div class="panel-head"><strong id="editorTitle">Status details</strong><span class="help">Internal identifiers are hidden.</span></div><div class="status-editor-body" id="statusEditor"></div></div>
+        </div>
+        <div class="scope-note"><span>ⓘ</span><span><strong>Kept in existing Trackerboard settings:</strong> Board components, table columns, row actions, check-in fields, feature flags, and exports. This configurator does not duplicate them.</span></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="drawer-foot"><span class="autosave" id="autosave">Not saved</span><button class="btn" id="cancelButton" type="button">Cancel</button><button class="btn" id="saveButton" type="button">Save Draft</button><button class="btn primary" id="activateButton" type="button">Activate</button></footer>
+</aside>
+
+<div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+  <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <header class="modal-head"><h2 id="modalTitle"></h2><button class="icon-btn" id="closeModal" type="button" aria-label="Close dialog">✕</button></header>
+    <div class="modal-body" id="modalBody"></div><footer class="modal-foot" id="modalFoot"></footer>
+  </section>
+</div>
+<div class="toast-region" id="toasts" aria-live="polite"></div>
+<script>
+"use strict";
+const CURRENT_USER="J. Weaver",TODAY="2026-08-03";
+const FACILITIES=[
+  {id:"main",name:"Main Hospital",code:"MH"},{id:"north",name:"North Campus",code:"NC"},{id:"east",name:"Eastside Medical Center",code:"EM"}
+];
+const CARE_SETTINGS=[
+  {id:"ed",name:"Emergency Department",short:"ED",active:true,setup:{main:{ready:true,visit:"Urgent",resources:"12 beds · 6 chairs",issues:[]},north:{ready:true,visit:"Urgent",resources:"8 beds · 4 chairs",issues:[]},east:{ready:false,visit:"Urgent",resources:"6 beds",issues:["Provider group is not assigned"]}}},
+  {id:"hospitalization",name:"Hospitalization",short:"IP",active:true,setup:{main:{ready:true,visit:"Follow-up",resources:"40 beds",issues:[]},north:{ready:true,visit:"Follow-up",resources:"24 beds",issues:[]}}},
+  {id:"icu",name:"Intensive Care Unit",short:"ICU",active:true,setup:{main:{ready:true,visit:"Urgent",resources:"16 beds",issues:[]},east:{ready:false,visit:"Urgent",resources:"8 beds",issues:["Billing group is not mapped"]}}},
+  {id:"or",name:"Operating Room",short:"OR",active:true,setup:{main:{ready:true,visit:"Procedure",resources:"6 rooms · 18 providers",issues:[]},north:{ready:true,visit:"Procedure",resources:"3 rooms · 9 providers",issues:[]},east:{ready:true,visit:"Procedure",resources:"2 rooms · 7 providers",issues:[]}}},
+  {id:"endoscopy",name:"Endoscopy",short:"ENDO",active:true,setup:{north:{ready:true,visit:"Procedure",resources:"2 rooms · 4 chairs",issues:[]},east:{ready:false,visit:"Procedure",resources:"1 room",issues:["Visit duration is not configured"]}}},
+  {id:"cath-lab",name:"Cath Lab",short:"CATH",active:true,setup:{north:{ready:true,visit:"Procedure",resources:"2 rooms",issues:[]},east:{ready:false,visit:"Procedure",resources:"1 room",issues:["Receiving provider group is missing"]}}},
+  {id:"legacy-observation",name:"Legacy Observation",short:"OBS",active:false,setup:{main:{ready:false,visit:"Observation",resources:"8 beds",issues:["Care Setting is inactive"]}}}
+];
+const REQUIREMENTS=["Room assigned","Provider assigned","Consent completed","Vitals recorded","Transfer destination selected"];
+const SAMPLE={
+  ed:[["A. Rivera · P10231","Chest pain","ED-03","Dr. Patel","18 min"],["J. Chen · P20419","Fever","Waiting","Unassigned","9 min"]],
+  hospitalization:[["M. Okafor · P11903","Post-operative care","4A-212","Dr. Nguyen","2 d"],["R. Singh · P18742","Respiratory monitoring","4A-208","Dr. Ortiz","14 hr"]],
+  icu:[["C. Morgan · P30119","Critical monitoring","ICU-07","Dr. Shah","6 hr"],["S. Lopez · P26611","Sepsis protocol","ICU-03","Dr. Patel","3 hr"]],
+  or:[["L. Grant · P29102","Scheduled procedure","OR-02","Dr. Menon","42 min"],["N. Brooks · P11972","Procedure recovery","PACU-04","Dr. Chen","28 min"]],
+  endoscopy:[["D. Silva · P22714","Colonoscopy","ENDO-01","Dr. Ortiz","21 min"],["K. Thomas · P18022","Upper GI scope","Recovery-02","Dr. Singh","11 min"]],
+  "cath-lab":[["P. Davis · P14407","Cardiac catheterization","CATH-02","Dr. Shah","33 min"],["A. Kumar · P23711","Post-procedure recovery","CATH-R1","Dr. Patel","17 min"]]
+};
+function timer(enabled=false,value=30,unit="minutes",message=""){return{enabled,value,unit,message}}
+function st(key,name,{description="",starting=false,completion=false,next=[],requirements=[],clock=timer()}={}){return{key,name,description,starting,completion,nextKeys:next,requirements,timer:clock}}
+const TRACKERBOARDS=[
+  {boardId:"ED",version:1,status:"active",name:"ED Trackerboard",shortName:"ED",description:"Emergency Department patient flow across the hospital group.",facilityIds:["main","north"],careSettingIds:["ed"],shortNameMode:"manual",createdBy:"J. Weaver",createdDate:"2026-06-01",updated:"2026-07-24",updatedBy:"J. Weaver",changeReason:"Initial ED workflow.",workflow:{statuses:[
+    st("ed-waiting","Waiting List",{description:"Patient has arrived and is waiting.",starting:true,next:["ed-triage"],clock:timer(true,30,"minutes","Patient waiting over 30 minutes.")}),
+    st("ed-triage","Triage",{description:"Triage assessment is in progress.",next:["ed-treatment"],requirements:["Vitals recorded"]}),
+    st("ed-treatment","In Treatment",{description:"Patient is receiving treatment.",next:["ed-discharged","ed-admitted"],requirements:["Room assigned","Provider assigned"]}),
+    st("ed-discharged","Discharged",{description:"Patient has left the ED.",completion:true}),
+    st("ed-admitted","Admitted",{description:"Patient continues to inpatient care.",completion:true,requirements:["Transfer destination selected"]})]}},
+  {boardId:"ED",version:2,basedOnVersion:1,status:"draft",name:"ED Trackerboard",shortName:"ED",description:"Emergency Department patient flow across three facilities.",facilityIds:["main","north","east"],careSettingIds:["ed"],shortNameMode:"manual",createdBy:"J. Weaver",createdDate:"2026-07-29",updated:"2026-08-02",updatedBy:"J. Weaver",changeReason:"Prepare the Eastside rollout.",workflow:{statuses:[
+    st("ed-waiting","Arrival Queue",{description:"Patient has arrived and is waiting.",starting:true,next:["ed-triage"],clock:timer(true,30,"minutes","Patient waiting over 30 minutes.")}),
+    st("ed-triage","Triage",{description:"Triage assessment is in progress.",next:["ed-treatment"],requirements:["Vitals recorded"]}),
+    st("ed-treatment","In Treatment",{description:"Patient is receiving treatment.",next:["ed-discharged","ed-admitted"],requirements:["Room assigned","Provider assigned"]}),
+    st("ed-discharged","Discharged",{description:"Patient has left the ED.",completion:true}),
+    st("ed-admitted","Admitted",{description:"Patient continues to inpatient care.",completion:true,requirements:["Transfer destination selected"]})]}},
+  {boardId:"IP",version:1,status:"active",name:"Inpatient Trackerboard",shortName:"IP",description:"Hospitalization and intensive-care patient flow.",facilityIds:["main"],careSettingIds:["hospitalization","icu"],shortNameMode:"manual",createdBy:"J. Weaver",createdDate:"2026-05-15",updated:"2026-07-20",updatedBy:"J. Weaver",changeReason:"Initial inpatient workflow.",workflow:{statuses:[
+    st("ip-admitted","Admitted",{description:"Patient has entered inpatient care.",starting:true,next:["ip-care"],requirements:["Room assigned"]}),
+    st("ip-care","In Care",{description:"Ongoing inpatient treatment.",next:["ip-discharge"],requirements:["Provider assigned"]}),
+    st("ip-discharge","Queued for Discharge",{description:"Discharge is planned.",next:["ip-done"],clock:timer(true,2,"hours","Discharge pending over 2 hours.")}),
+    st("ip-done","Discharged",{completion:true})]}},
+  {boardId:"OR",version:1,status:"active",name:"OR Trackerboard",shortName:"OR",description:"Operating room case flow shared by Main Hospital and North Campus.",facilityIds:["main","north"],careSettingIds:["or"],shortNameMode:"manual",createdBy:"A. Menon",createdDate:"2026-06-10",updated:"2026-07-22",updatedBy:"A. Menon",changeReason:"Initial OR workflow.",workflow:{statuses:[
+    st("or-scheduled","Scheduled",{starting:true,next:["or-pre"]}),st("or-pre","Pre-Op",{next:["or-progress"],requirements:["Room assigned","Consent completed"]}),st("or-progress","In Progress",{next:["or-recovery"],requirements:["Provider assigned"]}),st("or-recovery","Recovery",{next:["or-done"],clock:timer(true,45,"minutes","Recovery exceeding 45 minutes.")}),st("or-done","Completed",{completion:true})]}},
+  {boardId:"ENDO",version:1,status:"draft",name:"Endoscopy Trackerboard",shortName:"ENDO",description:"Endoscopy preparation, procedure, recovery, and completion.",facilityIds:["north","east"],careSettingIds:["endoscopy"],shortNameMode:"manual",createdBy:"A. Menon",createdDate:"2026-07-28",updated:"2026-08-01",updatedBy:"A. Menon",changeReason:"Initial draft.",workflow:{statuses:[
+    st("endo-wait","Waiting",{starting:true,next:["endo-prep"]}),st("endo-prep","Preparation",{next:["endo-procedure"],requirements:["Consent completed"]}),st("endo-procedure","Procedure",{next:["endo-recovery"],requirements:["Provider assigned"]}),st("endo-recovery","Recovery",{next:["endo-done"],clock:timer(true,45,"minutes","Recovery exceeding expected duration.")}),st("endo-done","Completed",{completion:true})]}}
+];
+const HISTORY={ED:[{version:1,status:"active",change:"Initial ED workflow.",author:"J. Weaver",date:"2026-06-02"},{version:2,status:"draft",change:"Prepare the Eastside rollout.",author:"J. Weaver",date:"2026-08-02"}],IP:[{version:1,status:"active",change:"Initial inpatient workflow.",author:"J. Weaver",date:"2026-05-18"}],OR:[{version:1,status:"active",change:"Initial OR workflow.",author:"A. Menon",date:"2026-06-11"}],ENDO:[{version:1,status:"draft",change:"Initial draft.",author:"A. Menon",date:"2026-08-01"}]};
+const state={currentIndex:null,working:null,original:null,dirty:false,validation:null,selectedStatus:null,shortMode:"auto",page:1,pageSize:10,sort:"updated",dir:"desc",autosaveTimer:null,recovery:null,lastFocus:null,hasStarted:false,activationAttempted:false,touched:{basic:false,assignment:false,workflow:false}};
+const $=id=>document.getElementById(id),clone=v=>JSON.parse(JSON.stringify(v));
+function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function uid(){return`status-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}`}
+function fac(id){return FACILITIES.find(x=>x.id===id)}function care(id){return CARE_SETTINGS.find(x=>x.id===id)}
+function facilityIdsForCare(careId){const c=care(careId);if(!c)return[];return FACILITIES.map(f=>f.id).filter(id=>Object.prototype.hasOwnProperty.call(c.setup||{},id))}
+function deriveFacilityIds(careSettingIds=[]){return[...new Set(careSettingIds.flatMap(facilityIdsForCare))]}
+function syncDerivedFacilities(record){record.facilityIds=deriveFacilityIds(record.careSettingIds||[]);return record}
+function fmt(d){if(!d)return"—";const[y,m,day]=d.split("-");return`${m}/${day}/${y}`}
+function autoShort(name){const words=String(name||"").replace(/trackerboard/gi,"").trim().split(/\s+/).filter(Boolean);return words.length>1?words.map(w=>w[0]).join("").slice(0,10).toUpperCase():(words[0]||"").slice(0,10).toUpperCase()}
+function groups(){const map=new Map;TRACKERBOARDS.forEach((record,index)=>{if(!map.has(record.boardId))map.set(record.boardId,[]);map.get(record.boardId).push({record,index})});return[...map].map(([boardId,entries])=>{const active=entries.find(e=>e.record.status==="active"),draft=entries.find(e=>e.record.status==="draft"),inactive=entries.find(e=>e.record.status==="inactive"),retired=entries.find(e=>e.record.status==="retired"),display=draft||active||inactive||retired||entries[0];return{boardId,entries,active,draft,inactive,retired,display}})}
+function coverage(careId){
+  const c=care(careId);
+  if(!c)return{ready:false,facilities:[],issues:["Care Setting no longer exists"]};
+  const facilities=facilityIdsForCare(careId).map(id=>{
+    const setup=c.setup[id],f=fac(id),issues=[];
+    if(!setup)issues.push("Facility assignment is missing");
+    else if(!setup.ready)issues.push(...(setup.issues||["Setup incomplete"]));
+    return{id,name:f?.name||id,ready:Boolean(setup?.ready),issues,setup};
+  });
+  const issues=facilities.flatMap(f=>f.issues.map(i=>`${f.name}: ${i}`));
+  if(!facilities.length)issues.push("Not assigned to any Facility");
+  if(!c.active)issues.unshift("Care Setting is inactive");
+  return{ready:c.active&&facilities.length>0&&facilities.every(f=>f.ready),facilities,issues};
+}
+function validateWorkflow(workflow){
+  const blocking=[],warnings=[],statuses=workflow.statuses||[],names=statuses.map(s=>s.name.trim()),lower=names.map(n=>n.toLowerCase());
+  statuses.forEach(s=>{if(!s.name.trim())blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:"Status name is required."})});
+  [...new Set(lower.filter((n,i)=>n&&lower.indexOf(n)!==i))].forEach(n=>statuses.filter(s=>s.name.trim().toLowerCase()===n).forEach(s=>blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`Status name “${s.name.trim()}” is duplicated.`})));
+  const starts=statuses.filter(s=>s.starting),completes=statuses.filter(s=>s.completion);
+  if(starts.length!==1)blocking.push({section:"workflow",target:"section-workflow",message:starts.length?"Only one status can be the Starting status.":"Choose one Starting status."});
+  if(!completes.length)blocking.push({section:"workflow",target:"section-workflow",message:"Choose at least one Completion status."});
+  const keys=new Set(statuses.map(s=>s.key));
+  statuses.forEach(s=>{
+    if(s.nextKeys.some(k=>!keys.has(k)))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} references a status that no longer exists.`});
+    if(s.nextKeys.includes(s.key))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} cannot transition to itself.`});
+    if(!s.completion&&!s.nextKeys.length)blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} has no allowed next status.`});
+    if(s.completion&&s.nextKeys.length)warnings.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} is marked Completion but has an outgoing transition.`});
+    if(s.timer.enabled&&(!Number(s.timer.value)||Number(s.timer.value)<=0))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} needs a valid timer duration.`});
+  });
+  if(starts.length===1){
+    const reached=new Set([starts[0].key]),queue=[starts[0].key];
+    while(queue.length){const currentKey=queue.shift(),cur=statuses.find(s=>s.key===currentKey);(cur?.nextKeys||[]).forEach(k=>{if(!reached.has(k)){reached.add(k);queue.push(k)}})}
+    statuses.forEach(s=>{if(!reached.has(s.key))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} cannot be reached from the Starting status.`})});
+    const canFinish=new Set(completes.map(s=>s.key));let changed=true;
+    while(changed){changed=false;statuses.forEach(s=>{if(!canFinish.has(s.key)&&s.nextKeys.some(k=>canFinish.has(k))){canFinish.add(s.key);changed=true}})}
+    statuses.forEach(s=>{if(!canFinish.has(s.key))blocking.push({section:"workflow",statusKey:s.key,target:"section-workflow",message:`${s.name||"This status"} has no path to a Completion status.`})});
+  }
+  blocking.forEach(i=>i.severity="blocking");warnings.forEach(i=>i.severity="warning");return{blocking,warnings};
+}
+function validateRecord(record){
+  syncDerivedFacilities(record);
+  const blocking=[],warnings=[],passed=[];
+  if(!record.name.trim())blocking.push({section:"basic",target:"field-name",message:"Trackerboard Name is required."});else passed.push("Trackerboard name is provided.");
+  if(!record.shortName.trim())blocking.push({section:"basic",target:"field-short",message:"Short Name is required."});
+  if(!record.careSettingIds.length)blocking.push({section:"assignment",target:"section-assignment",message:"Select at least one Care Setting."});
+  else{
+    record.careSettingIds.forEach(id=>{
+      const c=care(id),cov=coverage(id);
+      if(!c)blocking.push({section:"assignment",target:"section-assignment",message:"A selected Care Setting no longer exists."});
+      else cov.issues.forEach(issue=>blocking.push({section:"assignment",target:"section-assignment",message:`${c.name} — ${issue}.`}));
+    });
+    if(!blocking.some(i=>i.section==="assignment"))passed.push(`${record.facilityIds.length} applicable Facilit${record.facilityIds.length===1?"y is":"ies are"} inherited from the selected Care Settings.`);
+  }
+  const wf=validateWorkflow(record.workflow);blocking.push(...wf.blocking);warnings.push(...wf.warnings);if(!wf.blocking.length)passed.push("Workflow has a valid start, path, and completion.");
+  blocking.forEach(i=>i.severity=i.severity||"blocking");warnings.forEach(i=>i.severity=i.severity||"warning");return{blocking,warnings,passed};
+}
+function readiness(record){const v=validateRecord(record);return v.blocking.length?"blocked":v.warnings.length?"attention":"ready"}
+function statusIssues(key){if(!state.validation)return[];return[...state.validation.blocking,...state.validation.warnings].filter(i=>i.statusKey===key)}
+function sectionIssues(section){return state.validation?.blocking.filter(i=>i.section===section).length||0}
+
+
+function syncCreatorFilter(){
+  const el=$("creatorFilter"),creators=[...new Set(TRACKERBOARDS.map(r=>r.createdBy).filter(Boolean))].sort(),previous=el.value;
+  if(creators.length<=1){
+    const only=creators[0]||CURRENT_USER;
+    el.innerHTML=`<option value="">Created by: ${esc(only)}</option>`;
+    el.value="";el.disabled=true;el.title="Only one creator is available.";return;
+  }
+  el.disabled=false;el.title="";
+  el.innerHTML='<option value="">All creators</option>'+creators.map(name=>`<option value="${esc(name)}">Created by: ${name===CURRENT_USER?"Me":esc(name)}</option>`).join("");
+  if(creators.includes(previous))el.value=previous;
+}
+function filteredGroups(){
+  const facility=$("facilityFilter").value,status=$("statusFilter").value,ready=$("readinessFilter").value,creator=$("creatorFilter").value,q=$("globalSearch").value.trim().toLowerCase();
+  const out=groups().filter(g=>{
+    const recs=g.entries.map(e=>syncDerivedFacilities(e.record)),d=syncDerivedFacilities(g.display.record);
+    if(facility&&!recs.some(r=>r.facilityIds.includes(facility)))return false;
+    if(creator&&!recs.some(r=>r.createdBy===creator))return false;
+    if(status==="live"&&!g.active)return false;if(status==="draft"&&!g.draft)return false;if(status==="live-draft"&&!(g.active&&g.draft))return false;if(status==="inactive"&&!g.inactive)return false;if(status==="retired"&&!g.retired)return false;
+    if(ready&&readiness(d)!==ready)return false;
+    if(q){const hay=[d.name,...recs.flatMap(r=>r.facilityIds.map(id=>fac(id)?.name||id)),...recs.flatMap(r=>r.careSettingIds.map(id=>care(id)?.name||id))].join(" ").toLowerCase();if(!hay.includes(q))return false}
+    return true;
+  });
+  const dir=state.dir==="asc"?1:-1;out.sort((a,b)=>{const A=a.display.record,B=b.display.record;if(state.sort==="name")return A.name.localeCompare(B.name)*dir;if(state.sort==="readiness")return readiness(A).localeCompare(readiness(B))*dir;return String(A.updated).localeCompare(String(B.updated))*dir});return out;
+}
+function versionButton(entry,label){return entry?`<button class="version-link" type="button" data-action="open-record" data-index="${entry.index}"><span class="pill ${entry.record.status}">${label}</span> v${entry.record.version}</button>`:""}
+function actionsFor(g){const a=[];if(g.draft)a.push(`<button type="button" data-action="open-record" data-index="${g.draft.index}">Edit Draft</button>`);if(g.active)a.push(`<button type="button" data-action="open-record" data-index="${g.active.index}">View Live</button>`);if(g.active&&!g.draft)a.push(`<button type="button" data-action="create-version" data-board-id="${g.boardId}">Create New Version</button>`);a.push(`<button type="button" data-action="history" data-board-id="${g.boardId}">History</button>`);return`<span class="menu-wrap"><button class="icon-btn" type="button" data-action="toggle-menu" aria-expanded="false">⋮</button><span class="menu">${a.join("")}</span></span>`}
+function renderList(){
+  syncCreatorFilter();
+  const all=filteredGroups(),pages=Math.max(1,Math.ceil(all.length/state.pageSize));state.page=Math.min(state.page,pages);const start=(state.page-1)*state.pageSize,items=all.slice(start,start+state.pageSize);
+  document.querySelectorAll("[data-sort-icon]").forEach(el=>el.textContent=el.dataset.sortIcon===state.sort?(state.dir==="asc"?"▲":"▼"):"");
+  $("listRows").innerHTML=items.length?items.map(g=>{const d=syncDerivedFacilities(g.display.record),r=readiness(d),label=r==="ready"?"✓ Ready":r==="attention"?"⚠ Needs attention":"✕ Blocked",cls=r==="ready"?"ok":r==="attention"?"warn":"bad",facilityIds=[...new Set(g.entries.flatMap(e=>syncDerivedFacilities(e.record).facilityIds))],careIds=[...new Set(g.entries.flatMap(e=>e.record.careSettingIds))];return`<tr><td><div class="cell-title">${esc(d.name)}</div><div class="cell-meta">${esc(d.shortName||"No short name")}</div></td><td><div class="tags">${facilityIds.map(id=>`<span class="tag">${esc(fac(id)?.name||id)}</span>`).join("")||"—"}</div></td><td><div class="tags">${careIds.map(id=>`<span class="tag">${esc(care(id)?.short||id)}</span>`).join("")||"—"}</div></td><td><div class="versions">${versionButton(g.active,"Live")}${versionButton(g.draft,"Draft")}${versionButton(g.inactive,"Inactive")}${versionButton(g.retired,"Retired")}</div></td><td><span class="ready ${cls}">${label}</span><div class="cell-meta">${g.draft?"Draft configuration":"Current version"}</div></td><td>${fmt(d.updated)}<div class="cell-meta">${esc(d.updatedBy||"")}</div></td><td class="actions">${actionsFor(g)}</td></tr>`}).join(""):`<tr><td colspan="7"><div class="empty"><strong>No Trackerboards match the current filters.</strong><span class="muted">Clear a filter or create a new Trackerboard.</span></div></td></tr>`;
+  const activeFilters=[$("facilityFilter").value,$("statusFilter").value,$("readinessFilter").value,$("creatorFilter").value,$("globalSearch").value.trim()].filter(Boolean).length;
+  $("resultSummary").textContent=activeFilters?`${activeFilters} filter${activeFilters===1?"":"s"} applied`:"";
+  $("pageSummary").textContent=all.length?`${start+1}–${Math.min(start+state.pageSize,all.length)} of ${all.length}`:"0 results";
+  $("pageNumber").textContent=`${state.page} / ${pages}`;$("prevPage").disabled=state.page<=1;$("nextPage").disabled=state.page>=pages;
+}
+
+function newRecord(){const a=uid(),b=uid(),c=uid();return{boardId:`TB-${Math.random().toString(36).slice(2,7).toUpperCase()}`,version:1,status:"draft",name:"",shortName:"",description:"",facilityIds:[],careSettingIds:[],shortNameMode:"auto",createdBy:CURRENT_USER,createdDate:TODAY,updated:TODAY,updatedBy:CURRENT_USER,changeReason:"",workflow:{statuses:[st(a,"Waiting",{starting:true,next:[b]}),st(b,"In Progress",{next:[c]}),st(c,"Completed",{completion:true})]}}}
+function recoveryKey(){return`trackerboard-recovery:${state.working.boardId}:v${state.working.version}`}
+function openDrawer(index=null){
+  closeMenus();state.currentIndex=index;state.working=index===null?newRecord():clone(TRACKERBOARDS[index]);syncDerivedFacilities(state.working);state.original=clone(state.working);state.dirty=false;state.shortMode=state.working.shortNameMode||"manual";state.selectedStatus=state.working.workflow.statuses[0]?.key||null;state.validation=validateRecord(state.working);state.recovery=null;state.hasStarted=index!==null;state.activationAttempted=false;state.touched={basic:index!==null,assignment:index!==null,workflow:index!==null};
+  $("drawerTitle").textContent=index===null?"Create Trackerboard":`${state.working.status==="active"?"View":"Configure"}: ${state.working.name}`;$("drawerSub").textContent=`${state.working.status[0].toUpperCase()+state.working.status.slice(1)} · Version ${state.working.version}`;
+  renderBasic();renderAssignment();renderWorkflow();renderValidation();checkRecovery();$("drawerBackdrop").classList.add("open");$("drawer").classList.add("open");$("drawer").setAttribute("aria-hidden","false");setTimeout(()=>$("boardName").focus(),50);
+}
+async function requestClose(){if(state.dirty&&!await confirmBox("Discard unsaved changes?","Your latest edits are stored as a local recovery copy, but they have not been saved as a Trackerboard draft.","Discard and close",true))return;closeDrawer()}
+function closeDrawer(){$("drawerBackdrop").classList.remove("open");$("drawer").classList.remove("open");$("drawer").setAttribute("aria-hidden","true");$("careMenu").classList.remove("open");clearTimeout(state.autosaveTimer)}
+function renderBasic(){$("boardName").value=state.working.name;$("shortName").value=state.working.shortName;$("description").value=state.working.description;renderShortMode()}
+function renderShortMode(){const manual=state.shortMode==="manual";$("shortMode").textContent=manual?"Manual value":"Auto-generated from name";$("resetShort").hidden=!manual}
+function renderAssignment(){
+  syncDerivedFacilities(state.working);
+  $("careSearch").disabled=false;$("browseCare").disabled=false;
+  $("careHelp").textContent="Only active Care Settings can be newly selected. Facility access and readiness are inherited from Care Setting configuration.";
+  renderCarePicker();renderCareTable();renderFacilityScope();
+}
+function availableCare(){const selected=new Set(state.working.careSettingIds);return CARE_SETTINGS.filter(c=>c.active&&!selected.has(c.id))}
+function renderCarePicker(query=""){
+  const q=query.trim().toLowerCase(),options=availableCare().filter(c=>!q||`${c.name} ${c.short}`.toLowerCase().includes(q));
+  $("careMenu").innerHTML=options.length?options.map(c=>{const facilities=facilityIdsForCare(c.id),names=facilities.map(id=>fac(id)?.code||id).join(" · ");return`<button class="picker-option" type="button" data-action="add-care" data-care="${c.id}"><span><strong>${esc(c.name)}</strong><br><small>${esc(c.short)} · ${esc(names||"No Facility assignment")}</small></span><small>${facilities.length} Facilit${facilities.length===1?"y":"ies"}</small></button>`}).join(""):`<div class="empty" style="padding:18px 10px"><span class="muted">No active Care Settings match.</span></div>`;
+}
+function renderCareTable(){
+  const selected=state.working.careSettingIds;$("careCount").textContent=`· ${selected.length} selected`;$("clearCare").disabled=!selected.length;
+  if(!selected.length){$("careTable").innerHTML=`<div class="empty" style="padding:24px 12px"><strong>No Care Settings selected.</strong><span class="muted">Use the search field above to add one.</span></div>`;return}
+  const rows=selected.map(id=>{const c=care(id),cov=coverage(id);return`<tr><td><div class="cell-title">${esc(c?.name||id)}</div><div class="cell-meta">${c?.active?"Active":"Inactive — retained because it was already selected"}</div></td><td><div class="coverage">${cov.facilities.map(f=>`<span class="${f.ready?"ok":"bad"}">${f.ready?"✓":"✕"} ${esc(f.name)}</span>`).join("")||'<span class="bad">✕ No Facility assignment</span>'}</div></td><td><span class="ready ${cov.ready?"ok":"bad"}">${cov.ready?"✓ Ready":"✕ Needs attention"}</span></td><td><span class="cell-meta">${esc(cov.issues.join(" · ")||"No issues")}</span></td><td class="actions"><button class="btn small danger" type="button" data-action="remove-care" data-care="${id}">Remove</button></td></tr>`}).join("");
+  $("careTable").innerHTML=`<table class="table" aria-label="Selected Care Settings"><thead><tr><th>Care Setting</th><th>Applicable Facilities</th><th>Readiness</th><th>Issue</th><th class="actions">Action</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function renderFacilityScope(){
+  syncDerivedFacilities(state.working);
+  const ids=state.working.facilityIds;
+  $("facilityScope").innerHTML=`<div class="derived-scope-copy"><strong>Applicable Facilities</strong><div class="help">Read-only scope inherited from the selected Care Settings.</div></div><div class="tags">${ids.length?ids.map(id=>`<span class="tag">${esc(fac(id)?.name||id)}</span>`).join(""):'<span class="muted">Select a Care Setting to derive Facility scope.</span>'}</div>`;
+}
+
+function selectedStatus(){return state.working.workflow.statuses.find(s=>s.key===state.selectedStatus)||null}
+function renderWorkflow(){if(!selectedStatus()&&state.working.workflow.statuses.length)state.selectedStatus=state.working.workflow.statuses[0].key;renderFlow();renderStatusList();renderStatusEditor();renderFooter()}
+function renderFlow(){const statuses=state.working.workflow.statuses;$("flowMap").innerHTML=statuses.length?statuses.map((s,i)=>{const next=s.nextKeys.map(k=>statuses.find(x=>x.key===k)?.name||"Missing status"),issues=statusIssues(s.key);return`${i?'<span class="flow-arrow">→</span>':""}<button class="flow-node ${s.key===state.selectedStatus?"selected":""} ${issues.some(x=>x.severity!=="warning")?"bad":""}" type="button" data-action="select-status" data-status="${s.key}"><strong>${esc(s.name||"Unnamed status")}</strong><span class="tags">${s.starting?'<span class="tag">Start</span>':""}${s.completion?'<span class="tag">Complete</span>':""}</span><small>Next: ${esc(next.join(", ")||"None")}</small></button>`}).join(""):'<span class="muted">No statuses have been added.</span>'}
+function renderStatusList(){const statuses=state.working.workflow.statuses;$("statusCount").textContent=`${statuses.length} status${statuses.length===1?"":"es"}`;if(!statuses.length){$("statusList").innerHTML='<div class="empty"><strong>No statuses yet.</strong><button class="btn" type="button" data-action="insert-status" data-index="0">+ Add first status</button></div>';return}
+  $("statusList").innerHTML=statuses.map((s,i)=>{const issues=statusIssues(s.key);return`<div class="insert"><button type="button" data-action="insert-status" data-index="${i}" title="Insert status here">＋</button></div><div class="status-item ${s.key===state.selectedStatus?"selected":""} ${issues.some(x=>x.severity!=="warning")?"bad":""}"><button class="status-main" type="button" data-action="select-status" data-status="${s.key}"><strong>${esc(s.name||"Unnamed status")}</strong><span class="tags">${s.starting?'<span class="tag">Starting</span>':""}${s.completion?'<span class="tag">Completion</span>':""}${issues.length?`<span class="tag">${issues.length} issue${issues.length===1?"":"s"}</span>`:""}</span></button><span class="status-actions"><button class="icon-btn" type="button" data-action="move-status" data-status="${s.key}" data-direction="up" ${i===0?"disabled":""} aria-label="Move up">↑</button><button class="icon-btn" type="button" data-action="move-status" data-status="${s.key}" data-direction="down" ${i===statuses.length-1?"disabled":""} aria-label="Move down">↓</button><button class="icon-btn" type="button" data-action="delete-status" data-status="${s.key}" aria-label="Delete status">🗑</button></span></div>`}).join("")+`<div class="insert"><button type="button" data-action="insert-status" data-index="${statuses.length}" title="Add status at end">＋</button></div>`}
+function renderStatusEditor(){const s=selectedStatus();if(!s){$("editorTitle").textContent="Status details";$("statusEditor").innerHTML='<div class="empty">Select a status to configure it.</div>';return}$("editorTitle").textContent=s.name||"Unnamed status";const others=state.working.workflow.statuses.filter(x=>x.key!==s.key),issues=statusIssues(s.key);$("statusEditor").innerHTML=`
+  <div class="form-grid">
+    <div class="field full"><label for="statusNameInput">Status Name *</label><input class="text" id="statusNameInput" type="text" data-status-field="name" value="${esc(s.name)}"><div class="help">Display name only. Existing transitions remain connected when renamed.</div></div>
+    <div class="field full"><label for="statusDescInput">Description</label><textarea class="textarea" id="statusDescInput" data-status-field="description" placeholder="Explain what this operational status means.">${esc(s.description)}</textarea></div>
+  </div>
+  <div class="flags"><label><input type="radio" name="startingStatus" data-status-flag="starting" ${s.starting?"checked":""}> Starting status</label><label><input type="checkbox" data-status-flag="completion" ${s.completion?"checked":""}> Completion status</label></div>
+  <div class="subsection"><h4>Allowed next statuses</h4><p>Choose where a Board Record can move from this status.</p><div class="check-grid">${others.length?others.map(o=>`<label class="check-option"><input type="checkbox" data-next="${o.key}" ${s.nextKeys.includes(o.key)?"checked":""}>${esc(o.name||"Unnamed status")}</label>`).join(""):'<span class="muted">Add another status before creating a transition.</span>'}</div></div>
+  <div class="subsection"><h4>Requirements before leaving this status</h4><p>Select only checks that must be complete before the status changes.</p><div class="check-grid">${REQUIREMENTS.map(r=>`<label class="check-option"><input type="checkbox" data-requirement="${esc(r)}" ${s.requirements.includes(r)?"checked":""}>${esc(r)}</label>`).join("")}</div></div>
+  <div class="subsection"><h4>Timer and alert</h4><p>Alert the team when a Board Record remains here longer than expected.</p><label class="toggle" style="margin-bottom:9px"><input type="checkbox" data-timer="enabled" ${s.timer.enabled?"checked":""}>Enable timer</label><div class="timer-grid"><input class="text" type="number" min="1" data-timer="value" value="${esc(s.timer.value)}" ${s.timer.enabled?"":"disabled"} aria-label="Timer duration"><select class="control" data-timer="unit" ${s.timer.enabled?"":"disabled"}><option ${s.timer.unit==="minutes"?"selected":""}>minutes</option><option ${s.timer.unit==="hours"?"selected":""}>hours</option></select><input class="text" type="text" data-timer="message" value="${esc(s.timer.message)}" ${s.timer.enabled?"":"disabled"} placeholder="Alert message"></div></div>
+  ${issues.length?`<div class="inline-issues"><strong>${issues.length} issue${issues.length===1?"":"s"} in this status</strong><ul>${issues.map(i=>`<li>${esc(i.message)}</li>`).join("")}</ul></div>`:""}`}
+function setSection(id,count,touched){const el=$(id);el.className="section-state";if(count){el.classList.add("bad");el.textContent=`${count} issue${count===1?"":"s"}`}else if(touched){el.classList.add("ok");el.textContent="✓ Complete"}else el.textContent="Not started"}
+function renderValidation(){
+  state.validation=validateRecord(state.working);
+  const v=state.validation,strip=$("validationStrip"),showReadiness=state.hasStarted||state.currentIndex!==null||state.activationAttempted;
+  strip.className="validation-strip";
+  if(!showReadiness){
+    strip.classList.add("neutral");
+    strip.innerHTML='<span class="validation-summary"><span class="validation-dot"></span><span><strong>Start configuring.</strong> Checks run automatically as you work.</span></span>';
+  }else if(v.blocking.length){
+    strip.classList.add("error");
+    strip.innerHTML=`<span class="validation-summary"><span class="validation-dot"></span><span><strong>${v.blocking.length} issue${v.blocking.length===1?"":"s"} remaining.</strong> Resolve them before activation.</span></span><button class="link-btn" type="button" data-action="checks">View issues</button>`;
+  }else if(v.warnings.length){
+    strip.classList.add("warning");
+    strip.innerHTML=`<span class="validation-summary"><span class="validation-dot"></span><span><strong>${v.warnings.length} warning${v.warnings.length===1?"":"s"} to review.</strong></span></span><button class="link-btn" type="button" data-action="checks">View checks</button>`;
+  }else{
+    strip.classList.add("success");
+    strip.innerHTML='<span class="validation-summary"><span class="validation-dot"></span><span><strong>Ready for activation.</strong> Final checks will run automatically.</span></span><button class="link-btn" type="button" data-action="checks">View checks</button>';
+  }
+  const showBasic=state.touched.basic||state.activationAttempted||state.currentIndex!==null;
+  const nameIssue=showBasic?v.blocking.find(i=>i.target==="field-name"):null,shortIssue=showBasic?v.blocking.find(i=>i.target==="field-short"):null;
+  $("field-name").classList.toggle("error",!!nameIssue);$("nameError").textContent=nameIssue?.message||"";$("field-short").classList.toggle("error",!!shortIssue);$("shortError").textContent=shortIssue?.message||"";
+  const showAssignment=state.touched.assignment||state.activationAttempted||state.currentIndex!==null,careIssue=showAssignment?v.blocking.find(i=>i.message==="Select at least one Care Setting."):null;
+  $("careError").style.display=careIssue?"block":"none";$("careError").textContent=careIssue?.message||"";
+  const showWorkflow=state.touched.workflow||state.activationAttempted||state.currentIndex!==null;
+  setSection("stateBasic",showBasic?sectionIssues("basic"):0,showBasic&&!!(state.working.name||state.working.shortName||state.working.description));
+  setSection("stateAssignment",showAssignment?sectionIssues("assignment"):0,showAssignment&&!!state.working.careSettingIds.length);
+  setSection("stateWorkflow",showWorkflow?sectionIssues("workflow"):0,showWorkflow&&!!state.working.workflow.statuses.length);
+  renderFooter();
+}
+function renderFooter(){
+  const readonly=["active","retired","superseded"].includes(state.working.status);
+  $("saveButton").hidden=readonly;$("activateButton").hidden=readonly;$("activateButton").disabled=false;$("activateButton").textContent=state.working.status==="inactive"?"Reactivate":"Activate";
+  document.querySelectorAll("#drawerBody input,#drawerBody textarea,#drawerBody select,#drawerBody button").forEach(el=>{el.disabled=readonly&&el.dataset.action!=="select-status"});
+}
+function markDirty(section){
+  state.dirty=true;state.hasStarted=true;if(section)state.touched[section]=true;
+  state.validation=validateRecord(state.working);renderValidation();scheduleAutosave();
+}
+function scheduleAutosave(){clearTimeout(state.autosaveTimer);$("autosave").textContent="Autosaving…";state.autosaveTimer=setTimeout(()=>{try{const snap={savedAt:new Date().toISOString(),record:state.working,shortMode:state.shortMode};localStorage.setItem(recoveryKey(),JSON.stringify(snap));$("autosave").textContent=`Recovery copy saved at ${new Date(snap.savedAt).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}`}catch{$("autosave").textContent="Recovery save unavailable"}},650)}
+function clearRecovery(){try{localStorage.removeItem(recoveryKey())}catch{}$("recovery").classList.remove("open")}
+function checkRecovery(){let snap=null;try{snap=JSON.parse(localStorage.getItem(recoveryKey())||"null")}catch{}if(!snap?.record){$("recovery").classList.remove("open");$("autosave").textContent="Not saved";return}state.recovery=snap;$("recoveryText").textContent=`An unsaved recovery copy from ${new Date(snap.savedAt).toLocaleString()} is available.`;$("recovery").classList.add("open")}
+function restoreRecovery(){
+  if(!state.recovery)return;state.working=clone(state.recovery.record);syncDerivedFacilities(state.working);state.shortMode=state.recovery.shortMode||"manual";state.selectedStatus=state.working.workflow.statuses[0]?.key||null;state.dirty=true;state.hasStarted=true;state.activationAttempted=false;state.touched={basic:true,assignment:true,workflow:true};state.validation=validateRecord(state.working);renderBasic();renderAssignment();renderWorkflow();renderValidation();$("recovery").classList.remove("open");toast("Recovery copy restored.");
+}
+function insertStatus(index){const s=st(uid(),"New Status");state.working.workflow.statuses.splice(index,0,s);state.selectedStatus=s.key;markDirty("workflow");renderWorkflow();setTimeout(()=>$("statusNameInput")?.select(),0)}
+async function deleteStatus(key){const s=state.working.workflow.statuses.find(x=>x.key===key);if(!s)return;const refs=state.working.workflow.statuses.filter(x=>x.nextKeys.includes(key));if(!await confirmBox(`Delete “${s.name||"Unnamed status"}”?`,refs.length?`This status is referenced by ${refs.map(x=>x.name).join(", ")}. Those transition links will also be removed.`:"This removes the status from the workflow.","Delete status",true))return;state.working.workflow.statuses=state.working.workflow.statuses.filter(x=>x.key!==key);state.working.workflow.statuses.forEach(x=>x.nextKeys=x.nextKeys.filter(k=>k!==key));state.selectedStatus=state.working.workflow.statuses[0]?.key||null;markDirty("workflow");renderWorkflow()}
+function moveStatus(key,dir){const a=state.working.workflow.statuses,i=a.findIndex(x=>x.key===key),j=dir==="up"?i-1:i+1;if(i<0||j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];markDirty("workflow");renderWorkflow()}
+function persist(){
+  syncDerivedFacilities(state.working);state.working.updated=TODAY;state.working.updatedBy=CURRENT_USER;state.working.shortNameMode=state.shortMode;
+  if(state.currentIndex===null){TRACKERBOARDS.push(clone(state.working));state.currentIndex=TRACKERBOARDS.length-1;HISTORY[state.working.boardId]=[{version:state.working.version,status:state.working.status,change:"Draft created.",author:CURRENT_USER,date:TODAY}]}
+  else TRACKERBOARDS[state.currentIndex]=clone(state.working);
+  state.original=clone(state.working);state.dirty=false;clearRecovery();renderList();
+}
+function saveDraft(){
+  if(!state.working.name.trim()){
+    state.hasStarted=true;state.touched.basic=true;state.validation=validateRecord(state.working);renderValidation();goTo({target:"field-name"});toast("Enter a Trackerboard Name before saving the draft.");return;
+  }
+  persist();$("autosave").textContent="Draft saved";toast("Trackerboard draft saved.");
+}
+
+function openActivation(){
+  state.hasStarted=true;state.activationAttempted=true;state.touched={basic:true,assignment:true,workflow:true};syncDerivedFacilities(state.working);
+  const v=validateRecord(state.working);state.validation=v;renderValidation();const checks=[
+    [!!(state.working.name.trim()&&state.working.shortName.trim()),"Basic details are complete"],
+    [state.working.careSettingIds.length>0,"At least one Care Setting is selected"],
+    [state.working.careSettingIds.length>0&&!v.blocking.some(i=>i.section==="assignment"),"Care Settings are ready in their assigned Facilities"],
+    [!v.blocking.some(i=>i.section==="workflow"),"Workflow has a valid start, route, and completion"]
+  ];
+  openModal({title:"Activation pre-check",body:`<p class="help" style="margin-top:0">Final validation runs automatically when activation is requested.</p>${checks.map(([ok,label])=>`<div class="check-row"><span style="color:${ok?'var(--ok)':'var(--bad)'}">${ok?'✓':'✕'}</span><span>${esc(label)}</span><strong>${ok?'Ready':'Required'}</strong></div>`).join("")}${v.blocking.length?`<div class="inline-issues"><strong>Activation is blocked</strong><ul>${v.blocking.map(i=>`<li>${esc(i.message)}</li>`).join("")}</ul></div>`:""}`,actions:[{label:"Cancel",close:true},{label:"Activate",primary:true,disabled:!!v.blocking.length,handler:activate}]});
+}
+function activate(){const v=validateRecord(state.working);if(v.blocking.length)return;const old=TRACKERBOARDS.find(r=>r.boardId===state.working.boardId&&r.status==="active"&&r.version!==state.working.version);if(old)old.status="superseded";state.working.status="active";persist();HISTORY[state.working.boardId]=HISTORY[state.working.boardId]||[];const h=HISTORY[state.working.boardId],existing=h.find(x=>x.version===state.working.version);if(existing){existing.status="active";existing.change=state.working.changeReason||"Version activated.";existing.date=TODAY}else h.push({version:state.working.version,status:"active",change:state.working.changeReason||"Version activated.",author:CURRENT_USER,date:TODAY});closeModal();closeDrawer();renderList();toast("Trackerboard activated.")}
+function createVersion(boardId){const active=TRACKERBOARDS.find(r=>r.boardId===boardId&&r.status==="active");if(!active)return;const copy=clone(active);copy.version=Math.max(...TRACKERBOARDS.filter(r=>r.boardId===boardId).map(r=>r.version))+1;copy.basedOnVersion=active.version;copy.status="draft";copy.createdBy=CURRENT_USER;copy.createdDate=TODAY;copy.updated=TODAY;copy.updatedBy=CURRENT_USER;copy.changeReason="";TRACKERBOARDS.push(copy);HISTORY[boardId]=HISTORY[boardId]||[];HISTORY[boardId].push({version:copy.version,status:"draft",change:"New version created for editing.",author:CURRENT_USER,date:TODAY});renderList();openDrawer(TRACKERBOARDS.length-1)}
+
+function issueRows(items,type){return items.map(i=>`<div class="issue-row"><span style="color:${type==='error'?'var(--bad)':'var(--warn)'}">${type==='error'?'✕':'⚠'}</span><span>${esc(i.message)}</span><button class="link-btn" type="button" data-action="go-issue" data-target="${esc(i.target||'section-workflow')}" data-status="${esc(i.statusKey||'')}">Go to</button></div>`).join("")}
+function openChecks(){const v=validateRecord(state.working);state.validation=v;renderValidation();openModal({title:"Configuration checks",body:`${v.blocking.length?`<div class="issue-group"><h4>Blocking issues (${v.blocking.length})</h4>${issueRows(v.blocking,"error")}</div>`:""}${v.warnings.length?`<div class="issue-group"><h4>Warnings (${v.warnings.length})</h4>${issueRows(v.warnings,"warning")}</div>`:""}${!v.blocking.length&&!v.warnings.length?'<div class="issue-row"><span style="color:var(--ok)">✓</span><span>All configuration checks passed.</span><span></span></div>':""}<div class="issue-group"><h4>Checks passed (${v.passed.length})</h4>${v.passed.map(p=>`<div class="issue-row"><span style="color:var(--ok)">✓</span><span>${esc(p)}</span><span></span></div>`).join("")}</div>`,actions:[{label:"Close",close:true}]})}
+function openHistory(boardId=state.working?.boardId){const records=TRACKERBOARDS.filter(r=>r.boardId===boardId).sort((a,b)=>a.version-b.version),history=HISTORY[boardId]||[],options=records.map(r=>`<option value="${r.version}">Version ${r.version} · ${r.status}</option>`).join("");openModal({title:"Version history",large:true,body:`<table class="history"><thead><tr><th>Version</th><th>Status</th><th>Change</th><th>Owner</th><th>Date</th></tr></thead><tbody>${history.length?history.map(h=>`<tr><td>v${h.version}</td><td><span class="pill ${h.status}">${esc(h.status)}</span></td><td>${esc(h.change)}</td><td>${esc(h.author)}</td><td>${fmt(h.date)}</td></tr>`).join(""):'<tr><td colspan="5">No history yet.</td></tr>'}</tbody></table><div class="compare"><strong>Compare versions</strong><div class="compare-controls" style="margin-top:8px"><select class="control compact" id="compareA">${options}</select><span>with</span><select class="control compact" id="compareB">${options}</select><button class="btn small" id="compareButton" type="button">Compare</button><span class="help" id="compareMessage"></span></div><div id="compareResult"></div></div>`,actions:[{label:"Close",close:true}]});if(records.length>1){$("compareA").value=String(records[0].version);$("compareB").value=String(records.at(-1).version)}updateCompare();$("compareA")?.addEventListener("change",updateCompare);$("compareB")?.addEventListener("change",updateCompare);$("compareButton")?.addEventListener("click",()=>runCompare(boardId))}
+function updateCompare(){const a=$("compareA"),b=$("compareB"),button=$("compareButton"),message=$("compareMessage");if(!a||!b)return;const same=a.value===b.value;button.disabled=same;message.textContent=same?"Choose two different versions.":"";[...b.options].forEach(o=>o.disabled=o.value===a.value)}
+function diff(a,b){const out=[];if(a.name!==b.name)out.push(`Trackerboard renamed from “${a.name}” to “${b.name}”.`);const addF=b.facilityIds.filter(x=>!a.facilityIds.includes(x)),removeF=a.facilityIds.filter(x=>!b.facilityIds.includes(x));if(addF.length)out.push(`Facilities added: ${addF.map(x=>fac(x)?.name||x).join(", ")}.`);if(removeF.length)out.push(`Facilities removed: ${removeF.map(x=>fac(x)?.name||x).join(", ")}.`);const A=new Map(a.workflow.statuses.map(s=>[s.key,s])),B=new Map(b.workflow.statuses.map(s=>[s.key,s]));B.forEach((s,k)=>{if(!A.has(k))out.push(`Status added: ${s.name}.`);else if(A.get(k).name!==s.name)out.push(`Status renamed: “${A.get(k).name}” → “${s.name}”.`)});A.forEach((s,k)=>{if(!B.has(k))out.push(`Status removed: ${s.name}.`)});return out}
+function runCompare(boardId){const a=Number($("compareA").value),b=Number($("compareB").value);if(a===b)return;const A=TRACKERBOARDS.find(r=>r.boardId===boardId&&r.version===a),B=TRACKERBOARDS.find(r=>r.boardId===boardId&&r.version===b),changes=A&&B?diff(A,B):[];$("compareResult").innerHTML=changes.length?`<ul>${changes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:'<p class="help">No differences were found.</p>'}
+function openPreview(){
+  const r=state.working,careOptions=r.careSettingIds.map(id=>`<option value="${id}">${esc(care(id)?.name||id)}</option>`).join("");
+  openModal({title:`${r.name||"Trackerboard"} — Preview`,large:true,body:`<div class="preview-controls"><label>Care Setting <select class="control compact" id="previewCare">${careOptions||'<option value="">No Care Setting selected</option>'}</select></label><label>Facility <select class="control compact" id="previewFacility"></select></label><span class="help">Facility choices are inherited from the selected Care Setting.</span></div><div class="tags" style="margin:12px 0">${r.workflow.statuses.map(s=>`<span class="tag">${esc(s.name)}</span>`).join("")}</div><div id="previewTable"></div>`,actions:[{label:"Close",close:true}]});
+  $("previewCare")?.addEventListener("change",()=>{renderPreviewFacilities();renderPreview()});$("previewFacility")?.addEventListener("change",renderPreview);renderPreviewFacilities();renderPreview();
+}
+function renderPreviewFacilities(){const careId=$("previewCare")?.value,ids=facilityIdsForCare(careId),select=$("previewFacility");if(!select)return;select.innerHTML=ids.length?ids.map(id=>`<option value="${id}">${esc(fac(id)?.name||id)}</option>`).join(""):'<option value="">No Facility assignment</option>'}
+function renderPreview(){const careId=$("previewCare")?.value,facilityId=$("previewFacility")?.value,rows=SAMPLE[careId]||[];if(!$("previewTable"))return;$("previewTable").innerHTML=`<table class="table"><thead><tr><th>Patient</th><th>Care Setting</th><th>Current Need</th><th>Resource</th><th>Provider</th><th>Elapsed</th></tr></thead><tbody>${rows.length?rows.map(p=>`<tr><td>${esc(p[0])}</td><td>${esc(care(careId)?.short||"—")} · ${esc(fac(facilityId)?.code||"—")}</td><td>${esc(p[1])}</td><td>${esc(p[2])}</td><td>${esc(p[3])}</td><td>${esc(p[4])}</td></tr>`).join(""):'<tr><td colspan="6"><div class="empty"><strong>No sample data available.</strong></div></td></tr>'}</tbody></table>`}
+function goTo(issue){closeModal();if(issue.statusKey){state.selectedStatus=issue.statusKey;renderWorkflow()}const target=$(issue.target||"section-workflow");target?.scrollIntoView({behavior:"smooth",block:"start"});target?.animate([{boxShadow:"0 0 0 2px #a23a2c88"},{boxShadow:"0 0 0 0 #a23a2c00"}],{duration:1300});if(issue.target==="field-name")$("boardName")?.focus();if(issue.target==="field-short")$("shortName")?.focus();if(issue.target==="section-assignment")$("careSearch")?.focus();if(issue.statusKey)$("statusNameInput")?.focus()}
+
+function openModal({title,body,actions=[],large=false}){state.lastFocus=document.activeElement;$("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modal").classList.toggle("large",large);$("modalFoot").innerHTML="";actions.forEach(a=>{const b=document.createElement("button");b.type="button";b.className=`btn ${a.primary?"primary":""} ${a.danger?"danger":""}`;b.textContent=a.label;b.disabled=!!a.disabled;b.addEventListener("click",()=>{if(a.close)closeModal();a.handler?.()});$("modalFoot").appendChild(b)});$("modalBackdrop").classList.add("open");$("modalBackdrop").setAttribute("aria-hidden","false");setTimeout(()=>$("closeModal").focus(),0)}
+function closeModal(){$("modalBackdrop").classList.remove("open");$("modalBackdrop").setAttribute("aria-hidden","true");$("modalBody").innerHTML="";$("modalFoot").innerHTML="";state.lastFocus?.focus?.()}
+function confirmBox(title,message,label,danger=false){return new Promise(resolve=>openModal({title,body:`<p style="margin:0;line-height:1.5">${esc(message)}</p>`,actions:[{label:"Cancel",handler:()=>{closeModal();resolve(false)}},{label,primary:!danger,danger,handler:()=>{closeModal();resolve(true)}}]}))}
+function toast(message){const el=document.createElement("div");el.className="toast";el.textContent=message;$("toasts").appendChild(el);setTimeout(()=>el.remove(),3000)}
+function closeMenus(){document.querySelectorAll(".menu.open").forEach(m=>m.classList.remove("open"));document.querySelectorAll("[data-action='toggle-menu']").forEach(b=>b.setAttribute("aria-expanded","false"))}
+$("createButton").addEventListener("click",()=>openDrawer());$("closeDrawer").addEventListener("click",requestClose);$("cancelButton").addEventListener("click",requestClose);$("drawerBackdrop").addEventListener("click",requestClose);$("closeModal").addEventListener("click",closeModal);$("modalBackdrop").addEventListener("click",e=>{if(e.target===$("modalBackdrop"))closeModal()});
+$("checksButton").addEventListener("click",openChecks);$("previewButton").addEventListener("click",openPreview);$("historyButton").addEventListener("click",()=>openHistory());$("saveButton").addEventListener("click",saveDraft);$("activateButton").addEventListener("click",openActivation);$("addStatusEnd").addEventListener("click",()=>insertStatus(state.working.workflow.statuses.length));
+$("restoreRecovery").addEventListener("click",restoreRecovery);$("discardRecovery").addEventListener("click",()=>{clearRecovery();state.recovery=null;toast("Recovery copy discarded.")});
+$("boardName").addEventListener("input",e=>{state.working.name=e.target.value;if(state.shortMode==="auto"){state.working.shortName=autoShort(e.target.value);$("shortName").value=state.working.shortName}markDirty("basic")});
+$("shortName").addEventListener("input",e=>{state.working.shortName=e.target.value;state.shortMode="manual";renderShortMode();markDirty("basic")});$("description").addEventListener("input",e=>{state.working.description=e.target.value;markDirty("basic")});
+$("resetShort").addEventListener("click",()=>{state.shortMode="auto";state.working.shortName=autoShort(state.working.name);$("shortName").value=state.working.shortName;renderShortMode();markDirty("basic")});
+
+
+$("careSearch").addEventListener("focus",()=>{$("careMenu").classList.add("open")});$("careSearch").addEventListener("input",e=>{renderCarePicker(e.target.value);$("careMenu").classList.add("open")});$("browseCare").addEventListener("click",()=>{renderCarePicker($("careSearch").value);$("careMenu").classList.toggle("open")});
+$("clearCare").addEventListener("click",async()=>{if(!state.working.careSettingIds.length)return;if(!await confirmBox("Clear all Care Settings?","The selected Care Settings and inherited Facility scope will be removed from this draft.","Clear all",true))return;state.working.careSettingIds=[];markDirty("assignment");renderAssignment()});
+$("statusEditor").addEventListener("input",e=>{const s=selectedStatus();if(!s)return;if(e.target.matches("[data-status-field='name']")){s.name=e.target.value;$("editorTitle").textContent=s.name||"Unnamed status";markDirty("workflow");renderFlow();renderStatusList()}else if(e.target.matches("[data-status-field='description']")){s.description=e.target.value;markDirty("workflow")}else if(e.target.matches("[data-timer='value']")){s.timer.value=Number(e.target.value);markDirty("workflow")}else if(e.target.matches("[data-timer='message']")){s.timer.message=e.target.value;markDirty("workflow")}});
+$("statusEditor").addEventListener("focusout",e=>{if(e.target.matches("[data-status-field='name']"))renderWorkflow()});
+$("statusEditor").addEventListener("change",e=>{const s=selectedStatus();if(!s)return;if(e.target.matches("[data-status-flag='starting']"))state.working.workflow.statuses.forEach(x=>x.starting=x.key===s.key);else if(e.target.matches("[data-status-flag='completion']"))s.completion=e.target.checked;else if(e.target.matches("[data-next]")){const key=e.target.dataset.next;if(e.target.checked&&!s.nextKeys.includes(key))s.nextKeys.push(key);else if(!e.target.checked)s.nextKeys=s.nextKeys.filter(x=>x!==key)}else if(e.target.matches("[data-requirement]")){const r=e.target.dataset.requirement;if(e.target.checked&&!s.requirements.includes(r))s.requirements.push(r);else if(!e.target.checked)s.requirements=s.requirements.filter(x=>x!==r)}else if(e.target.matches("[data-timer='enabled']"))s.timer.enabled=e.target.checked;else if(e.target.matches("[data-timer='unit']"))s.timer.unit=e.target.value;markDirty("workflow");renderWorkflow()});
+
+document.addEventListener("click",async e=>{const el=e.target.closest("[data-action]");if(!el){if(!e.target.closest(".menu-wrap"))closeMenus();if(!e.target.closest("#carePicker"))$("careMenu").classList.remove("open");return}const action=el.dataset.action;
+  if(action==="toggle-menu"){e.stopPropagation();const menu=el.nextElementSibling,open=!menu.classList.contains("open");closeMenus();menu.classList.toggle("open",open);el.setAttribute("aria-expanded",String(open));return}
+  if(action==="open-record")openDrawer(Number(el.dataset.index));
+  else if(action==="create-version")createVersion(el.dataset.boardId);
+  else if(action==="history")openHistory(el.dataset.boardId);
+  else if(action==="checks")openChecks();
+  else if(action==="add-care"){const id=el.dataset.care;if(!state.working.careSettingIds.includes(id))state.working.careSettingIds.push(id);$("careSearch").value="";$("careMenu").classList.remove("open");markDirty("assignment");renderAssignment()}
+  else if(action==="remove-care"){state.working.careSettingIds=state.working.careSettingIds.filter(x=>x!==el.dataset.care);markDirty("assignment");renderAssignment()}
+  else if(action==="select-status"){state.selectedStatus=el.dataset.status;renderWorkflow()}
+  else if(action==="insert-status")insertStatus(Number(el.dataset.index));
+  else if(action==="move-status")moveStatus(el.dataset.status,el.dataset.direction);
+  else if(action==="delete-status")await deleteStatus(el.dataset.status);
+  else if(action==="go-issue")goTo({target:el.dataset.target,statusKey:el.dataset.status||null});
+});
+["facilityFilter","statusFilter","readinessFilter","creatorFilter"].forEach(id=>$(id).addEventListener("change",()=>{state.page=1;renderList()}));$("globalSearch").addEventListener("input",()=>{state.page=1;renderList()});$("pageSize").addEventListener("change",e=>{state.pageSize=Number(e.target.value);state.page=1;renderList()});$("prevPage").addEventListener("click",()=>{state.page=Math.max(1,state.page-1);renderList()});$("nextPage").addEventListener("click",()=>{state.page++;renderList()});document.querySelectorAll("[data-sort]").forEach(b=>b.addEventListener("click",()=>{if(state.sort===b.dataset.sort)state.dir=state.dir==="asc"?"desc":"asc";else{state.sort=b.dataset.sort;state.dir="asc"}renderList()}));
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if($("modalBackdrop").classList.contains("open"))closeModal();else if($("drawer").classList.contains("open"))requestClose()});
+TRACKERBOARDS.forEach(syncDerivedFacilities);$("facilityFilter").innerHTML='<option value="">All facilities</option>'+FACILITIES.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join("");renderList();
+</script>
+</body>
+</html>
