@@ -66,10 +66,25 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 #careSettingInfo .info-value.link{ color:var(--navy2); }
 #careSettingInfo .info-value.muted{ color:var(--muted); font-weight:400; }
 .check-option.heading{ border:0; background:none; padding:0; font-weight:700; font-size:13px; }
-.status-item{ cursor:pointer; width:100%; font:inherit; color:inherit; background:transparent; display:flex; flex-direction:column; align-items:stretch; gap:3px; }
-.status-row1{ display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; }
-.status-name{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
-.status-tag-row{ align-self:flex-start; }
+.status-list-body{ display:flex; flex-direction:column; gap:4px; }
+.status-item-wrapper{ display:flex; flex-direction:column; }
+.status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:8px; border:1px solid transparent; background-color:transparent; cursor:pointer; transition:background-color .15s ease, border-color .15s ease; }
+.status-card:hover{ background-color:#f8fafc; }
+.status-card.selected{ background-color:#f0f6ff; border-color:#bfdbfe; }
+.status-info{ display:flex; flex-direction:column; gap:3px; flex-grow:1; min-width:0; }
+.status-title{ font:inherit; font-size:15.5px; font-weight:400; color:var(--ink); line-height:1.3; border:none; background:transparent; outline:none; width:100%; padding:0; }
+.status-title:focus{ border-bottom:1px solid var(--blue); }
+.status-subtitle{ font-size:13px; color:var(--muted); }
+.status-card.selected .status-subtitle{ color:#60a5fa; }
+.status-actions{ display:flex; align-items:center; gap:16px; margin-left:12px; opacity:0; visibility:hidden; transition:opacity .15s ease, visibility .15s ease; }
+.status-card.selected .status-actions, .status-card:hover .status-actions{ opacity:1; visibility:visible; }
+.action-btn{ width:auto; height:auto; padding:2px; background:transparent; border:0; color:var(--ink); cursor:pointer; transition:color .15s ease, transform .1s ease; }
+.action-btn:hover{ background:transparent; border-color:transparent; color:var(--blue); transform:scale(1.1); }
+.action-btn svg{ width:18px; height:18px; display:block; }
+.tag-remove{ margin-left:2px; border:0; background:transparent; color:inherit; cursor:pointer; font-size:13px; line-height:1; padding:0; }
+.add-status-btn{ width:100%; text-align:left; display:flex; align-items:center; gap:8px; padding:10px 14px; background:transparent; border:0; color:var(--muted); font:inherit; font-size:14px; cursor:pointer; border-radius:6px; transition:background-color .15s ease, color .15s ease; }
+.add-status-btn:hover{ background:#f1f5f9; color:var(--ink); }
+.add-status-btn svg{ width:16px; height:16px; display:block; }
 @media(max-width:1280px){ .drawer{ width:88vw; } }
 @media(max-width:980px){ .drawer{ width:100vw; } }
 </style>
@@ -636,34 +651,43 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   var STATUSES = clonePreset(STATUS_PRESETS['Emergency Department']);
   var selectedIndex = 0;
 
-  function insertPointHtml(atIndex){
-    return '<div class="insert"><button type="button" onclick="insertStatus('+atIndex+')">+ Add Status</button></div>';
-  }
+  var ICON_ADD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
+  var ICON_UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  var ICON_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
+  var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>';
 
   function renderStatusList(){
     document.getElementById('statusCountLabel').textContent = STATUSES.length + (STATUSES.length===1 ? ' status' : ' statuses');
     var body = document.getElementById('statusListBody');
-    var html = insertPointHtml(0);
+    var html = '';
     STATUSES.forEach(function(s,i){
       var tagText = s.start ? 'Starting' : s.complete ? 'Completion' : '';
       var selected = i === selectedIndex;
-      var actionsHtml = selected ?
-        '<span class="status-actions">'+
-          '<button class="icon-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',-1)" aria-label="Move up">&#8593;</button>'+
-          '<button class="icon-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',1)" aria-label="Move down">&#8595;</button>'+
-          '<button class="icon-btn" type="button" onclick="event.stopPropagation();deleteStatus('+i+')" aria-label="Delete">&#10005;</button>'+
-        '</span>' : '';
-      html += '<button type="button" class="status-item'+(selected?' selected':'')+'" onclick="selectStatus('+i+')">'+
-        '<span class="status-row1">'+
-          '<strong class="status-name">'+s.name+'</strong>'+
-          actionsHtml+
-        '</span>'+
-        (tagText ? '<span class="tag status-tag-row">'+tagText+'</span>' : '')+
-      '</button>';
-      html += insertPointHtml(i+1);
-      html += insertPointHtml(i+1);
+      html += '<div class="status-item-wrapper">'+
+        '<div class="status-card'+(selected?' selected':'')+'" onclick="if(event.target.tagName!==\'INPUT\' && !event.target.closest(\'.action-btn\')) selectStatus('+i+')">'+
+          '<div class="status-info">'+
+            '<input class="status-title" value="'+s.name+'" placeholder="Status title..." oninput="updateStatusName('+i+', this.value)" onfocus="selectStatus('+i+')">'+
+            (tagText ? '<div class="status-subtitle">'+tagText+'</div>' : '')+
+          '</div>'+
+          '<div class="status-actions">'+
+            '<button class="action-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',-1)" aria-label="Move up">'+ICON_UP+'</button>'+
+            '<button class="action-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',1)" aria-label="Move down">'+ICON_DOWN+'</button>'+
+            '<button class="action-btn" type="button" onclick="event.stopPropagation();deleteStatus('+i+')" aria-label="Delete">'+ICON_CLOSE+'</button>'+
+          '</div>'+
+        '</div>'+
+        '<button class="add-status-btn" type="button" onclick="insertStatus('+(i+1)+')">'+ICON_ADD+' Add status</button>'+
+      '</div>';
     });
     body.innerHTML = html;
+  }
+
+  function updateStatusName(i, value){
+    STATUSES[i].name = value;
+    if(i === selectedIndex){
+      document.getElementById('statusEditorTitle').textContent = value;
+      var nameInput = document.getElementById('statusNameInput');
+      if(nameInput) nameInput.value = value;
+    }
   }
 
   function insertStatus(atIndex){
@@ -712,12 +736,14 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   function setStarting(){
     STATUSES.forEach(function(s,idx){ s.start = (idx === selectedIndex); });
+    STATUSES[selectedIndex].complete = false;
     renderStatusList();
     renderStatusEditor();
   }
 
   function setCompleting(){
     STATUSES.forEach(function(s,idx){ s.complete = (idx === selectedIndex); });
+    STATUSES[selectedIndex].start = false;
     renderStatusList();
     renderStatusEditor();
   }
@@ -731,7 +757,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     if(!checked && pos>-1) s.allowedNext.splice(pos,1);
   }
 
-  function toggleRequirement(idx, checked){ STATUSES[selectedIndex].requirements[idx].met = checked; }
+  function removeRequirement(idx){ STATUSES[selectedIndex].requirements.splice(idx,1); renderStatusEditor(); }
 
   function toggleTimerEnabled(checked){ STATUSES[selectedIndex].enableTimer = checked; renderStatusEditor(); }
   function updateTimerValue(v){ STATUSES[selectedIndex].timerValue = v; }
@@ -758,13 +784,13 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext('+idx+', this.checked)"> '+other.name+'</label>';
     }).join('');
 
-    var requirementsHtml = s.requirements.map(function(r, idx){
-      return '<label class="check-option"><input type="checkbox"'+(r.met?' checked':'')+' onchange="toggleRequirement('+idx+', this.checked)"> '+r.label+'</label>';
-    }).join('');
+    var requirementsHtml = s.requirements.length ? s.requirements.map(function(r, idx){
+      return '<span class="tag">'+r.label+'<button type="button" class="tag-remove" onclick="removeRequirement('+idx+')" aria-label="Remove">&times;</button></span>';
+    }).join('') : '<span class="muted">No requirements selected</span>';
 
     document.getElementById('statusEditorBody').innerHTML =
       '<div class="field full"><label>Status Name <span style="color:var(--bad)">*</span></label>'+
-        '<input class="text" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
+        '<input class="text" id="statusNameInput" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
         '<span class="short-meta"><span class="help">Display name only. Existing transitions remain connected when renamed.</span></span>'+
       '</div>'+
       '<div class="field full" style="margin-top:14px"><label>Description</label><textarea class="textarea">'+s.desc+'</textarea></div>'+
@@ -781,7 +807,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       '<div class="subsection">'+
         '<h4>Requirements before leaving this status</h4>'+
         '<p>Checks that must be complete before the status changes (illustrative only in this mockup).</p>'+
-        '<div class="check-grid">'+requirementsHtml+'</div>'+
+        '<div class="tags" style="margin-bottom:10px;">'+requirementsHtml+'</div>'+
         '<div class="picker" id="requirementPicker">'+
           '<div class="picker-input">'+
             '<input class="text" type="text" id="requirementSearchInput" placeholder="Search requirements for this Care Setting..." oninput="filterRequirementOptions(this.value)" onfocus="filterRequirementOptions(this.value)">'+
@@ -791,9 +817,8 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
         '</div>'+
       '</div>'+
       '<div class="subsection">'+
-        '<h4>Timer and Alert</h4>'+
+        '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Timer and Alert</span></label></h4>'+
         '<p>Alert the team when a patient remains in this status longer than expected.</p>'+
-        '<label class="check-option" style="margin-bottom:10px;"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"> Enable timer</label>'+
         '<div class="form-grid">'+
           '<div class="field"><label>Duration</label><input class="text" type="text" value="'+s.timerValue+'" placeholder="e.g. 30"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerValue(this.value)"></div>'+
           '<div class="field"><label>Unit</label><select class="control"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
