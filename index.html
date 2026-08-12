@@ -75,13 +75,16 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .status-title{ font:inherit; font-size:15.5px; font-weight:400; color:var(--ink); line-height:1.3; border:none; background:transparent; outline:none; width:100%; padding:0; }
 .status-title:focus{ border-bottom:1px solid var(--blue); }
 .status-subtitle{ font-size:13px; color:var(--muted); }
-.status-card.selected .status-subtitle{ color:#60a5fa; }
+.status-card.selected .status-subtitle{ color:var(--navy2); }
 .status-actions{ display:flex; align-items:center; gap:16px; margin-left:12px; opacity:0; visibility:hidden; transition:opacity .15s ease, visibility .15s ease; }
-.status-card.selected .status-actions, .status-card:hover .status-actions{ opacity:1; visibility:visible; }
-.action-btn{ width:auto; height:auto; padding:2px; background:transparent; border:0; color:var(--ink); cursor:pointer; transition:color .15s ease, transform .1s ease; }
+.status-card.selected .status-actions, .status-card:hover .status-actions, .status-card:focus-within .status-actions{ opacity:1; visibility:visible; }
+.action-btn{ width:auto; height:auto; min-width:24px; min-height:24px; padding:4px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:0; color:var(--ink); cursor:pointer; transition:color .15s ease, transform .1s ease; }
 .action-btn:hover{ background:transparent; border-color:transparent; color:var(--blue); transform:scale(1.1); }
 .action-btn svg{ width:18px; height:18px; display:block; }
 .tag-remove{ margin-left:2px; border:0; background:transparent; color:inherit; cursor:pointer; font-size:13px; line-height:1; padding:0; }
+.field .control{ width:100%; }
+.flow-node.next{ border-color:var(--ok); box-shadow:inset 0 0 0 1px var(--ok); }
+#facilitySelect{ height:auto; min-height:88px; }
 .add-status-btn{ width:100%; text-align:left; display:flex; align-items:center; gap:8px; padding:10px 14px; background:transparent; border:0; color:var(--muted); font:inherit; font-size:14px; cursor:pointer; border-radius:6px; transition:background-color .15s ease, color .15s ease; }
 .add-status-btn:hover{ background:#f1f5f9; color:var(--ink); }
 .add-status-btn svg{ width:16px; height:16px; display:block; }
@@ -106,8 +109,8 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       <div class="toolbar-left">
         <h1>Trackerboard Configuration</h1>
         <div class="filters">
-          <select class="control compact"><option>Facility: All</option></select>
-          <select class="control compact"><option>Care Setting: All</option></select>
+          <select class="control compact" id="facilityFilter" onchange="renderDashboard()"><option value="">Facility: All</option></select>
+          <select class="control compact" id="careSettingFilter" onchange="renderDashboard()"><option value="">Care Setting: All</option></select>
         </div>
       </div>
       <div class="toolbar-right">
@@ -119,9 +122,9 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     <section class="content">
       <div class="table-shell">
         <table class="table" aria-label="Trackerboards">
-          <colgroup><col style="width:24%"><col style="width:16%"><col style="width:18%"><col style="width:14%"><col style="width:12%"><col style="width:16%"></colgroup>
+          <colgroup><col style="width:20%"><col style="width:12%"><col style="width:14%"><col style="width:16%"><col style="width:13%"><col style="width:11%"><col style="width:14%"></colgroup>
           <thead><tr>
-            <th>Board Name</th><th>Care Setting</th><th>Facility</th><th>Updated Date</th><th>Status</th><th class="actions">Actions</th>
+            <th>Board Name</th><th>Unique ID</th><th>Care Setting</th><th>Facility</th><th>Updated Date</th><th>Status</th><th class="actions">Actions</th>
           </tr></thead>
           <tbody id="dashboardBody"></tbody>
         </table>
@@ -140,7 +143,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
 <!-- ============ CREATE NEW TRACKERBOARD — right-side drawer, 70% width ============ -->
 <div class="backdrop" id="backdrop" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer" role="dialog" aria-label="Create New Trackerboard">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Create New Trackerboard">
   <div class="drawer-head">
     <div><h2 class="drawer-title">Create New Trackerboard</h2><p class="drawer-sub">Define statuses, widgets, and columns for this board</p></div>
     <div class="drawer-actions">
@@ -165,10 +168,10 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
       <div class="card-body">
         <div class="form-grid">
-          <div class="field"><label>Name</label><input class="text" type="text" placeholder="e.g. Emergency Department Trackerboard"></div>
-          <div class="field"><label>Short Name</label><input class="text" type="text" placeholder="e.g. EDT"></div>
-          <div class="field"><label>Unique ID</label><input class="text" type="text" placeholder="e.g. EDT001"></div>
-          <div class="field full"><label>Description</label><textarea class="textarea" placeholder="Short description of what this trackerboard is used for"></textarea></div>
+          <div class="field"><label for="trackerboardNameInput">Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"></div>
+          <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"></div>
+          <div class="field"><label for="uniqueIdInput">Unique ID</label><input class="text" type="text" id="uniqueIdInput" placeholder="e.g. EDT001" readonly style="background:#f5f7f9;color:var(--muted);cursor:not-allowed"></div>
+          <div class="field full"><label for="trackerboardDescInput">Description</label><textarea class="textarea" id="trackerboardDescInput" placeholder="Short description of what this trackerboard is used for"></textarea></div>
         </div>
       </div>
     </div>
@@ -180,7 +183,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
       <div class="card-body">
         <div class="form-grid">
-          <div class="field"><label>Care Setting</label>
+          <div class="field"><label for="careSettingSelect">Care Setting</label>
             <select class="control" id="careSettingSelect" onchange="onCareSettingChange(this.value)">
               <option>Select Care Setting...</option>
               <option>Emergency Department</option>
@@ -189,9 +192,9 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
               <option>Outpatient Clinic</option>
             </select>
           </div>
-          <div class="field"><label>Facility</label>
-            <select class="control" id="facilitySelect"><option>Select Facility...</option></select>
-            <span class="short-meta"><span class="help">List depends on the Care Setting selected above</span></span>
+          <div class="field"><label for="facilitySelect">Deploy to Facilities</label>
+            <select class="control" id="facilitySelect" multiple onchange="onFacilityChange(Array.prototype.map.call(this.selectedOptions, function(o){ return o.value; }))"></select>
+            <span class="short-meta"><span class="help">Select one or more facilities. List depends on the Care Setting selected above</span></span>
           </div>
         </div>
         <div class="derived-scope" id="careSettingInfo">
@@ -213,6 +216,10 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
       <div class="card-body">
 
+        <div class="flow-shell">
+          <div class="flow-head"><strong>Workflow Overview</strong><span class="muted">Green = reachable from the selected status</span></div>
+          <div class="flow-map" id="flowMap"></div>
+        </div>
         <div class="workflow">
           <div class="status-list">
             <div class="panel-head"><strong>Statuses</strong><span class="muted" id="statusCountLabel"></span></div>
@@ -368,21 +375,135 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   </div>
 
+  <div class="validation-strip neutral" id="readinessIndicator">Not reviewed</div>
   <div class="drawer-foot">
     <button class="btn" type="button" onclick="closeDrawer()">Cancel</button>
     <button class="btn" type="button">Save as Draft</button>
-    <button class="btn primary" type="button">Activate</button>
+    <button class="btn primary" type="button" id="activateBtn">Activate</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="confirmModalBackdrop">
+  <div class="modal" id="confirmModal" role="alertdialog" aria-label="Confirm">
+    <div class="modal-head"><h2 id="confirmModalTitle"></h2></div>
+    <div class="modal-body"><p id="confirmModalBody"></p></div>
+    <div class="modal-foot">
+      <button class="btn" type="button" onclick="closeConfirmModal(false)">Cancel</button>
+      <button class="btn primary" type="button" onclick="closeConfirmModal(true)">Continue</button>
+    </div>
   </div>
 </div>
 
 <script>
+  var drawerTriggerEl = null;
   function openDrawer(){
+    formDirty = false;
+    drawerTriggerEl = document.activeElement;
     document.getElementById('backdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
+    updateReadiness();
+    var closeBtn = document.querySelector('#drawer .drawer-actions .icon-btn');
+    if(closeBtn) closeBtn.focus();
   }
   function closeDrawer(){
+    if(formDirty){
+      openConfirmModal('Discard changes?', 'You have unsaved changes in this trackerboard configuration. Closing now will discard them.', function(){ formDirty = false; hideDrawer(); });
+      return;
+    }
+    hideDrawer();
+  }
+
+  function hideDrawer(){
     document.getElementById('backdrop').classList.remove('open');
     document.getElementById('drawer').classList.remove('open');
+    if(drawerTriggerEl && drawerTriggerEl.focus) drawerTriggerEl.focus();
+  }
+
+  function computeReadiness(){
+    var issues = [];
+    if(!document.getElementById('trackerboardNameInput').value.trim()) issues.push('trackerboard name');
+    if(!CARE_SETTINGS[document.getElementById('careSettingSelect').value]) issues.push('Care Setting');
+    if(!document.getElementById('facilitySelect').value) issues.push('Facility');
+    if(!STATUSES.some(function(s){ return s.start; })) issues.push('an entry status');
+    if(!STATUSES.some(function(s){ return s.complete; })) issues.push('a terminal outcome');
+    var reachable = {};
+    STATUSES.forEach(function(st){ st.allowedNext.forEach(function(id){ reachable[id] = true; }); });
+    if(STATUSES.some(function(st){ return !st.start && !reachable[st.id]; })) issues.push('an unreachable status');
+    return issues;
+  }
+
+  function updateReadiness(){
+    var indicator = document.getElementById('readinessIndicator');
+    var activateBtn = document.getElementById('activateBtn');
+    if(!indicator || !activateBtn) return;
+    var issues = computeReadiness();
+    activateBtn.disabled = issues.length > 0;
+    if(!issues.length){
+      indicator.textContent = 'Ready to publish';
+      indicator.className = 'validation-strip success';
+    } else {
+      indicator.textContent = issues.length + (issues.length===1 ? ' blocking issue' : ' blocking issues') + ': missing ' + issues.join(', ');
+      indicator.className = 'validation-strip error';
+    }
+  }
+
+  var formDirty = false;
+  document.getElementById('drawer').addEventListener('input', function(){ formDirty = true; updateReadiness(); });
+  document.getElementById('drawer').addEventListener('change', function(){ formDirty = true; updateReadiness(); });
+  document.getElementById('drawer').addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      e.stopPropagation();
+      closeDrawer();
+      return;
+    }
+    if(e.key === 'Tab'){
+      var focusable = Array.prototype.slice.call(document.querySelectorAll('#drawer button, #drawer input, #drawer select, #drawer textarea, #drawer a[href]')).filter(function(el){ return !el.disabled && el.offsetParent !== null; });
+      if(!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+
+  var confirmModalCallback = null;
+  function openConfirmModal(title, message, onConfirm){
+    document.getElementById('confirmModalTitle').textContent = title;
+    document.getElementById('confirmModalBody').textContent = message;
+    confirmModalCallback = onConfirm;
+    document.getElementById('confirmModalBackdrop').classList.add('open');
+  }
+  function closeConfirmModal(confirmed){
+    document.getElementById('confirmModalBackdrop').classList.remove('open');
+    var cb = confirmModalCallback;
+    confirmModalCallback = null;
+    if(confirmed && cb) cb();
+  }
+
+  var shortNameEdited = false;
+  function generateShortName(name){
+    var words = name.trim().split(/\s+/).filter(Boolean);
+    if(!words.length) return '';
+    return words.map(function(w){ return w.charAt(0).toUpperCase(); }).join('').slice(0,6);
+  }
+  function generateUniqueId(shortName){
+    if(!shortName) return '';
+    var existing = TRACKERBOARDS.map(function(t){ return t.id; });
+    var n = 1, id;
+    do {
+      id = shortName + String(n).padStart(3, '0');
+      n++;
+    } while(existing.indexOf(id) > -1);
+    return id;
+  }
+  function onTrackerboardNameInput(value){
+    if(!shortNameEdited){
+      document.getElementById('shortNameInput').value = generateShortName(value);
+    }
+    document.getElementById('uniqueIdInput').value = generateUniqueId(document.getElementById('shortNameInput').value);
+  }
+  function onShortNameInput(value){
+    shortNameEdited = true;
+    document.getElementById('uniqueIdInput').value = generateUniqueId(value);
   }
 
   function toggleMenu(btn){
@@ -405,24 +526,45 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     { name:'Outpatient Clinic Trackerboard', id:'OPC007', careSetting:'Outpatient Clinic', facility:'Riverside Clinic', updated:'14 Jul 2026', status:'Active' }
   ];
 
+  function initDashboardFilters(){
+    var facilities = Array.from(new Set(TRACKERBOARDS.map(function(t){ return t.facility; }))).sort();
+    document.getElementById('facilityFilter').innerHTML = '<option value="">Facility: All</option>' + facilities.map(function(f){ return '<option value="'+f+'">'+f+'</option>'; }).join('');
+    var careSettings = Array.from(new Set(TRACKERBOARDS.map(function(t){ return t.careSetting; }))).sort();
+    document.getElementById('careSettingFilter').innerHTML = '<option value="">Care Setting: All</option>' + careSettings.map(function(cs){ return '<option value="'+cs+'">'+cs+'</option>'; }).join('');
+  }
+
+  function deleteTrackerboard(id){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
+    if(!t) return;
+    if(!confirm('Delete "'+t.name+'"? This cannot be undone.')) return;
+    TRACKERBOARDS = TRACKERBOARDS.filter(function(x){ return x.id !== id; });
+    renderDashboard();
+  }
+
   function renderDashboard(){
+    var facilityFilter = document.getElementById('facilityFilter') ? document.getElementById('facilityFilter').value : '';
+    var careSettingFilter = document.getElementById('careSettingFilter') ? document.getElementById('careSettingFilter').value : '';
+    var filtered = TRACKERBOARDS.filter(function(t){
+      return (!facilityFilter || t.facility === facilityFilter) && (!careSettingFilter || t.careSetting === careSettingFilter);
+    });
     var body = document.getElementById('dashboardBody');
-    body.innerHTML = TRACKERBOARDS.map(function(t){
+    body.innerHTML = filtered.map(function(t){
       var statusClass = t.status.toLowerCase();
       return '<tr>'+
-        '<td><span class="cell-title">'+t.name+'</span><span class="cell-meta">'+t.id+'</span></td>'+
+        '<td><span class="cell-title">'+t.name+'</span></td>'+
+        '<td>'+t.id+'</td>'+
         '<td>'+t.careSetting+'</td>'+
         '<td>'+t.facility+'</td>'+
         '<td>'+t.updated+'</td>'+
         '<td><span class="pill '+statusClass+'">'+t.status+'</span></td>'+
         '<td class="actions"><div class="menu-wrap">'+
           '<button class="icon-btn" type="button" onclick="toggleMenu(this)" aria-label="Row actions">&#8942;</button>'+
-          '<div class="menu"><button type="button">Edit</button><button type="button">Duplicate</button><button type="button">Delete</button><button type="button">History Log</button></div>'+
+          '<div class="menu"><button type="button" onclick="openDrawer()">Edit</button><button type="button">Duplicate</button><button type="button" onclick="deleteTrackerboard(\''+t.id+'\')">Delete</button><button type="button">History Log</button></div>'+
         '</div></td>'+
       '</tr>';
     }).join('');
     document.getElementById('dashboardSummary').textContent = TRACKERBOARDS.length + ' trackerboards';
-    document.getElementById('dashboardFooterSummary').textContent = 'Showing ' + TRACKERBOARDS.length + ' of ' + TRACKERBOARDS.length + ' trackerboards';
+    document.getElementById('dashboardFooterSummary').textContent = 'Showing ' + filtered.length + ' of ' + TRACKERBOARDS.length + ' trackerboards';
   }
   var CARE_SETTINGS = {
     'Emergency Department': { visit:'Outpatient', los:'4–6 hours (avg)', form:'ED Intake Form v2', facilities:['Central City Health','Riverside Clinic'] },
@@ -430,6 +572,21 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     'Operating Room': { visit:'Same-day Surgical', los:'2–4 hours (avg)', form:'Pre-Surgical Intake Form', facilities:['Central City Health','Riverside Clinic'] },
     'Outpatient Clinic': { visit:'Scheduled Outpatient', los:'30–45 minutes (avg)', form:'Outpatient Visit Form v1', facilities:['Riverside Clinic','Lakeside Medical Center'] }
   };
+
+  var FACILITY_RESOURCES = {
+    'Central City Health': { beds:10, rooms:4, chairs:6 },
+    'Riverside Clinic': { beds:6, rooms:2, chairs:3 },
+    'Lakeside Medical Center': { beds:8, rooms:3, chairs:4 }
+  };
+  function formatFacilityResources(facility){
+    var r = FACILITY_RESOURCES[facility];
+    if(!r) return null;
+    var parts = [];
+    if(r.beds) parts.push(r.beds + ' beds');
+    if(r.rooms) parts.push(r.rooms + ' rooms');
+    if(r.chairs) parts.push(r.chairs + ' chairs');
+    return parts.join(', ');
+  }
 
   var CARE_SETTING_COLUMNS = {
     'Emergency Department': [
@@ -491,7 +648,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     }).join('');
   }
 
-  function renderCareSettingInfo(cfg){
+  function renderCareSettingInfo(cfg, facility){
     var grid = document.getElementById('careSettingInfoGrid');
     if(!cfg){
       grid.innerHTML = '<div class="info-item full"><span class="info-value muted">Select a Care Setting to view its configuration</span></div>';
@@ -502,26 +659,58 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       { label:'Expected Length of Stay', value:cfg.los }
     ];
     if(cfg.form) items.push({ label:'Chief Complaint Form', value:cfg.form, link:true });
-    items.push({ label:'Other Config Detail', value:'[ placeholder ]', link:true });
+    var resourceSummary = formatFacilityResources(facility);
+    if(resourceSummary){
+      items.push({ label:'Facility Resources', value:resourceSummary });
+    } else {
+      items.push({ label:'Other Config Detail', value:'[ placeholder ]', link:true });
+    }
     grid.innerHTML = items.map(function(it){
       return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
     }).join('');
   }
 
+  var currentCareSetting = '';
+  function statusesMatchPreset(careSetting){
+    var preset = STATUS_PRESETS[careSetting];
+    if(!preset) return true;
+    return JSON.stringify(STATUSES) === JSON.stringify(preset);
+  }
+
   function onCareSettingChange(value){
-    var facilitySelect = document.getElementById('facilitySelect');
     var cfg = CARE_SETTINGS[value];
-    if(!cfg){
-      facilitySelect.innerHTML = '<option>Select Facility...</option>';
-      renderCareSettingInfo(null);
-      renderCareSettingColumns(value);
+    if(cfg && currentCareSetting && !statusesMatchPreset(currentCareSetting)){
+      var select = document.getElementById('careSettingSelect');
+      select.value = currentCareSetting;
+      openConfirmModal('Change Care Setting?', 'Changing Care Setting will reset your configured statuses to the ' + value + ' default. Continue?', function(){ select.value = value; applyCareSettingChange(value); });
       return;
     }
-    facilitySelect.innerHTML = '<option>Select Facility...</option>' + cfg.facilities.map(function(f){ return '<option>'+f+'</option>'; }).join('');
-    renderCareSettingInfo(cfg);
+    applyCareSettingChange(value);
+  }
+
+  function applyCareSettingChange(value){
+    var facilitySelect = document.getElementById('facilitySelect');
+    var cfg = CARE_SETTINGS[value];
+    currentCareSetting = value;
+    if(!cfg){
+      facilitySelect.innerHTML = '';
+      renderCareSettingInfo(null);
+      renderCareSettingColumns(value);
+      updateReadiness();
+      return;
+    }
+    facilitySelect.innerHTML = cfg.facilities.map(function(f){ return '<option>'+f+'</option>'; }).join('');
+    renderCareSettingInfo(cfg, '');
     applyStatusPreset(value);
     renderCareSettingColumns(value);
     if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+    updateReadiness();
+  }
+
+  function onFacilityChange(values){
+    var cfg = CARE_SETTINGS[document.getElementById('careSettingSelect').value];
+    renderCareSettingInfo(cfg, values[0] || '');
+    updateReadiness();
   }
 
   function toggleTransferEnabled(checked){
@@ -580,75 +769,122 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       { name:'Waiting List', desc:'Patient has arrived and is waiting to be seen.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1],
-        requirements:[{label:'Triage level assigned', met:true},{label:'Chief complaint recorded', met:false}],
+        requirements:[],
         enableTimer:true, timerValue:'30', timerUnit:'minutes', alert:'Patient waiting longer than expected' },
       { name:'ED Admission', desc:'Patient has been admitted and is being treated.',
         start:false, complete:false, allowLWOT:false,
         allowedNext:[2],
-        requirements:[{label:'Bed assigned', met:false},{label:'Provider assigned', met:false},{label:'Initial vitals recorded', met:false}],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
       { name:'Queued for Discharge', desc:'Patient is ready and awaiting discharge processing.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[3],
+        requirements:[],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Discharged', desc:'Patient has left the department.',
         start:false, complete:true, allowLWOT:false,
-        allowedNext:[1],
-        requirements:[{label:'Discharge summary signed', met:false},{label:'Outstanding payment cleared', met:false}],
+        allowedNext:[],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
     ],
     'Operating Room': [
       { name:'Pre-OR', desc:'Patient is being prepped ahead of the procedure.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1],
-        requirements:[{label:'Surgical consent signed', met:false},{label:'Anesthesia consult completed', met:false}],
+        requirements:[],
         enableTimer:true, timerValue:'45', timerUnit:'minutes', alert:'Patient in Pre-OR longer than expected' },
       { name:'In Procedure', desc:'Patient is currently in surgery.',
         start:false, complete:false, allowLWOT:false,
         allowedNext:[2],
-        requirements:[{label:'Surgical team confirmed', met:false},{label:'Time-out checklist completed', met:false}],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
       { name:'Recovery', desc:'Patient is recovering post-procedure under observation.',
         start:false, complete:false, allowLWOT:false,
         allowedNext:[3],
-        requirements:[{label:'Vitals stable', met:false},{label:'Post-op orders entered', met:false}],
+        requirements:[],
         enableTimer:true, timerValue:'60', timerUnit:'minutes', alert:'Patient in Recovery longer than expected' },
       { name:'Queued for Discharge', desc:'Patient is ready and awaiting discharge processing.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[4],
+        requirements:[],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Discharged', desc:'Patient has left the department.',
         start:false, complete:true, allowLWOT:false,
-        allowedNext:[2],
-        requirements:[{label:'Discharge summary signed', met:false},{label:'Follow-up appointment scheduled', met:false}],
+        allowedNext:[],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
     ],
     'Inpatient': [
       { name:'Admitted', desc:'Patient has been admitted to the unit.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1,2],
-        requirements:[{label:'Admission orders entered', met:false},{label:'Bed assigned', met:false}],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
       { name:'ICU', desc:'Patient requires intensive care monitoring.',
         start:false, complete:false, allowLWOT:false,
         allowedNext:[2],
-        requirements:[{label:'ICU bed confirmed', met:false},{label:'Attending sign-off', met:false}],
+        requirements:[],
         enableTimer:true, timerValue:'4', timerUnit:'hours', alert:'Patient in ICU longer than expected without review' },
       { name:'General Floor', desc:'Patient has been stepped down to general care.',
         start:false, complete:false, allowLWOT:false,
         allowedNext:[1,3],
-        requirements:[{label:'Care plan updated', met:false}],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
       { name:'Queued for Discharge', desc:'Patient is ready and awaiting discharge processing.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[4],
+        requirements:[],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Discharged', desc:'Patient has left the unit.',
         start:false, complete:true, allowLWOT:false,
+        allowedNext:[],
+        requirements:[],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
+    ],
+    'Outpatient Clinic': [
+      { name:'Checked In', desc:'Patient has checked in for their scheduled visit.',
+        start:true, complete:false, allowLWOT:true,
+        allowedNext:[1],
+        requirements:[],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'With Provider', desc:'Patient is currently being seen by the provider.',
+        start:false, complete:false, allowLWOT:false,
         allowedNext:[2],
-        requirements:[{label:'Discharge summary signed', met:false},{label:'Outstanding payment cleared', met:false}],
+        requirements:[],
+        enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Checked Out', desc:'Visit is complete and the patient has checked out.',
+        start:false, complete:true, allowLWOT:false,
+        allowedNext:[],
+        requirements:[],
         enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
     ]
   };
 
-  function clonePreset(preset){ return preset.map(function(s){ return JSON.parse(JSON.stringify(s)); }); }
+  var statusIdCounter = 0;
+  function nextStatusId(){ return 'st_' + (statusIdCounter++); }
+
+  function clonePreset(preset){
+    var cloned = preset.map(function(s){
+      var copy = JSON.parse(JSON.stringify(s));
+      copy.id = nextStatusId();
+      return copy;
+    });
+    cloned.forEach(function(s, i){
+      s.allowedNext = preset[i].allowedNext.map(function(idx){ return cloned[idx].id; });
+    });
+    return cloned;
+  }
 
   function applyStatusPreset(careSetting){
     var preset = STATUS_PRESETS[careSetting];
     if(!preset) return;
     STATUSES = clonePreset(preset);
-    selectStatus(0);
+    selectedIndex = 0;
+    renderStatusList();
+    renderStatusEditor();
   }
 
-  var STATUSES = clonePreset(STATUS_PRESETS['Emergency Department']);
+  var STATUSES = [];
   var selectedIndex = 0;
 
   var ICON_ADD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
@@ -659,6 +895,10 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   function renderStatusList(){
     document.getElementById('statusCountLabel').textContent = STATUSES.length + (STATUSES.length===1 ? ' status' : ' statuses');
     var body = document.getElementById('statusListBody');
+    if(!STATUSES.length){
+      body.innerHTML = '<p class="muted" style="padding:14px;">Select a Care Setting above to define statuses.</p>';
+      return;
+    }
     var html = '';
     STATUSES.forEach(function(s,i){
       var tagText = s.start ? 'Starting' : s.complete ? 'Completion' : '';
@@ -690,9 +930,27 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     }
   }
 
+  function renderFlowMap(){
+    var container = document.getElementById('flowMap');
+    if(!container) return;
+    if(!STATUSES.length){ container.innerHTML = ''; return; }
+    var s = STATUSES[selectedIndex];
+    var reachable = {};
+    STATUSES.forEach(function(st){ st.allowedNext.forEach(function(id){ reachable[id] = true; }); });
+    container.innerHTML = STATUSES.map(function(st, i){
+      var unreachable = !st.start && !reachable[st.id];
+      var deadEnd = !st.complete && st.allowedNext.length === 0;
+      var cls = 'flow-node';
+      if(i === selectedIndex) cls += ' selected';
+      else if(s.allowedNext.indexOf(st.id) > -1) cls += ' next';
+      if(unreachable || deadEnd) cls += ' bad';
+      var tag = st.start ? 'Starting' : (st.complete ? 'Completion' : (unreachable ? 'Unreachable' : (deadEnd ? 'Dead end' : '')));
+      return '<button type="button" class="'+cls+'" onclick="selectStatus('+i+')"><strong>'+st.name+'</strong>'+(tag?'<small>'+tag+'</small>':'')+'</button>';
+    }).join('<span class="flow-arrow">&#8594;</span>');
+  }
+
   function insertStatus(atIndex){
-    STATUSES.forEach(function(s){ s.allowedNext = s.allowedNext.map(function(idx){ return idx>=atIndex ? idx+1 : idx; }); });
-    STATUSES.splice(atIndex, 0, { name:'New Status', desc:'', start:false, complete:false, allowLWOT:false,
+    STATUSES.splice(atIndex, 0, { id:nextStatusId(), name:'New Status', desc:'', start:false, complete:false, allowLWOT:false,
       allowedNext:[], requirements:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' });
     selectedIndex = atIndex;
     renderStatusList();
@@ -702,9 +960,10 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   function deleteStatus(i){
     if(STATUSES.length<=1) return;
     if(!confirm('Delete "'+STATUSES[i].name+'"? This cannot be undone.')) return;
+    var removedId = STATUSES[i].id;
     STATUSES.splice(i,1);
     STATUSES.forEach(function(s){
-      s.allowedNext = s.allowedNext.filter(function(idx){ return idx!==i; }).map(function(idx){ return idx>i ? idx-1 : idx; });
+      s.allowedNext = s.allowedNext.filter(function(id){ return id!==removedId; });
     });
     if(selectedIndex>=STATUSES.length) selectedIndex = STATUSES.length-1;
     else if(selectedIndex>i) selectedIndex--;
@@ -724,8 +983,13 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   function selectStatus(i){
     selectedIndex = i;
-    renderStatusList();
+    updateStatusListSelection();
     renderStatusEditor();
+  }
+
+  function updateStatusListSelection(){
+    var cards = document.querySelectorAll('#statusListBody .status-card');
+    cards.forEach(function(card, idx){ card.classList.toggle('selected', idx === selectedIndex); });
   }
 
   function renameStatus(value){
@@ -750,14 +1014,17 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   function toggleLWOT(checked){ STATUSES[selectedIndex].allowLWOT = checked; }
 
-  function toggleAllowedNext(targetIndex, checked){
+  function toggleAllowedNext(targetId, checked){
     var s = STATUSES[selectedIndex];
-    var pos = s.allowedNext.indexOf(targetIndex);
-    if(checked && pos===-1) s.allowedNext.push(targetIndex);
+    var pos = s.allowedNext.indexOf(targetId);
+    if(checked && pos===-1) s.allowedNext.push(targetId);
     if(!checked && pos>-1) s.allowedNext.splice(pos,1);
+    renderFlowMap();
   }
 
   function removeRequirement(idx){ STATUSES[selectedIndex].requirements.splice(idx,1); renderStatusEditor(); }
+
+  function updateStatusDesc(value){ STATUSES[selectedIndex].desc = value; }
 
   function toggleTimerEnabled(checked){ STATUSES[selectedIndex].enableTimer = checked; renderStatusEditor(); }
   function updateTimerValue(v){ STATUSES[selectedIndex].timerValue = v; }
@@ -765,6 +1032,13 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   function updateAlertMessage(v){ STATUSES[selectedIndex].alert = v; }
 
   function renderStatusEditor(){
+    if(!STATUSES.length){
+      document.getElementById('statusEditorTitle').textContent = '';
+      document.getElementById('statusEditorBody').innerHTML = '<p class="muted" style="padding:13px;">No status selected. Select a Care Setting to get started.</p>';
+      renderFlowMap();
+      updateReadiness();
+      return;
+    }
     var s = STATUSES[selectedIndex];
     document.getElementById('statusEditorTitle').textContent = s.name;
 
@@ -780,8 +1054,8 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
     var allowedNextHtml = STATUSES.map(function(other, idx){
       if(idx===selectedIndex) return '';
-      var checked = s.allowedNext.indexOf(idx)>-1;
-      return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext('+idx+', this.checked)"> '+other.name+'</label>';
+      var checked = s.allowedNext.indexOf(other.id)>-1;
+      return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext(\''+other.id+'\', this.checked)"> '+other.name+'</label>';
     }).join('');
 
     var requirementsHtml = s.requirements.length ? s.requirements.map(function(r, idx){
@@ -789,11 +1063,11 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     }).join('') : '<span class="muted">No requirements selected</span>';
 
     document.getElementById('statusEditorBody').innerHTML =
-      '<div class="field full"><label>Status Name <span style="color:var(--bad)">*</span></label>'+
+      '<div class="field full"><label for="statusNameInput">Status Name <span style="color:var(--bad)">*</span></label>'+
         '<input class="text" id="statusNameInput" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
         '<span class="short-meta"><span class="help">Display name only. Existing transitions remain connected when renamed.</span></span>'+
       '</div>'+
-      '<div class="field full" style="margin-top:14px"><label>Description</label><textarea class="textarea">'+s.desc+'</textarea></div>'+
+      '<div class="field full" style="margin-top:14px"><label for="statusDescInput">Description</label><textarea class="textarea" id="statusDescInput" onchange="updateStatusDesc(this.value)">'+s.desc+'</textarea></div>'+
       '<div class="flags">'+
         '<label><input type="radio" name="start"'+(s.start?' checked':'')+' onchange="setStarting()"> Starting Status</label>'+
         '<label><input type="radio" name="complete"'+(s.complete?' checked':'')+' onchange="setCompleting()"> Completion Status</label>'+
@@ -820,13 +1094,16 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
         '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Timer and Alert</span></label></h4>'+
         '<p>Alert the team when a patient remains in this status longer than expected.</p>'+
         '<div class="form-grid">'+
-          '<div class="field"><label>Duration</label><input class="text" type="text" value="'+s.timerValue+'" placeholder="e.g. 30"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerValue(this.value)"></div>'+
-          '<div class="field"><label>Unit</label><select class="control"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
-          '<div class="field"><label>Alert Message</label><input class="text" type="text" value="'+s.alert+'" placeholder="Alert message"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertMessage(this.value)"></div>'+
+          '<div class="field"><label for="timerDurationInput">Duration</label><input class="text" id="timerDurationInput" type="text" value="'+s.timerValue+'" placeholder="e.g. 30"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerValue(this.value)"></div>'+
+          '<div class="field"><label for="timerUnitSelect">Unit</label><select class="control" id="timerUnitSelect"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
+          '<div class="field"><label for="timerAlertInput">Alert Message</label><input class="text" id="timerAlertInput" type="text" value="'+s.alert+'" placeholder="Alert message"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertMessage(this.value)"></div>'+
         '</div>'+
       '</div>';
+    renderFlowMap();
+    updateReadiness();
   }
 
+  initDashboardFilters();
   renderDashboard();
   renderStatusList();
   renderStatusEditor();
