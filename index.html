@@ -35,9 +35,6 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
    only widened to 70vw per request and given a light (non-navy) quick-nav
    so it reads correctly on the drawer's white background. */
 .drawer{ width:70vw; }
-.drawer-nav{ display:flex; overflow-x:auto; background:#f8fafb; border-bottom:1px solid var(--line); }
-.drawer-nav a{ padding:11px 18px; font-size:12.5px; font-weight:700; color:#245f96; text-decoration:none; white-space:nowrap; border-right:1px solid var(--line); }
-.drawer-nav a:hover{ background:var(--blue-soft); }
 .check-grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
 .check-option.locked{ opacity:.6; }
 .widget-card{ padding:11px 12px; background:#fafbfc; border:1px solid #e2e7eb; border-top:1px solid #e2e7eb; }
@@ -84,12 +81,12 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .tag-remove{ margin-left:2px; border:0; background:transparent; color:inherit; cursor:pointer; font-size:13px; line-height:1; padding:0; }
 .field .control{ width:100%; }
 .flow-node.next{ border-color:var(--ok); box-shadow:inset 0 0 0 1px var(--ok); }
-#facilitySelect{ height:auto; min-height:88px; }
+.card-toggle{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; padding:0; margin-right:2px; background:transparent; border:0; color:var(--muted); cursor:pointer; vertical-align:middle; }
+.card-chevron{ display:inline-block; transition:transform .15s; }
+.card.collapsed .card-chevron{ transform:rotate(-90deg); }
+.card.collapsed .card-body{ display:none; }
 .tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:11px; border:1px solid #c4ced8; border-radius:2px; background:#fff; }
 .check-option:has(input[type="checkbox"]:not(:checked)) .tier-select{ display:none; }
-.add-status-btn{ width:100%; text-align:left; display:flex; align-items:center; gap:8px; padding:10px 14px; background:transparent; border:0; color:var(--muted); font:inherit; font-size:14px; cursor:pointer; border-radius:6px; transition:background-color .15s ease, color .15s ease; }
-.add-status-btn:hover{ background:#f1f5f9; color:var(--ink); }
-.add-status-btn svg{ width:16px; height:16px; display:block; }
 @media(max-width:1280px){ .drawer{ width:88vw; } }
 @media(max-width:980px){ .drawer{ width:100vw; } }
 </style>
@@ -116,7 +113,6 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
         </div>
       </div>
       <div class="toolbar-right">
-        <span class="summary" id="dashboardSummary">3 trackerboards</span>
         <button class="btn primary" type="button" onclick="openDrawer()">+ Create New Trackerboard</button>
       </div>
     </section>
@@ -147,28 +143,19 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 <div class="backdrop" id="backdrop" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Create New Trackerboard">
   <div class="drawer-head">
-    <div><h2 class="drawer-title">Create New Trackerboard</h2><p class="drawer-sub">Define statuses, widgets, and columns for this board</p></div>
+    <div><h2 class="drawer-title">Create New Trackerboard</h2></div>
     <div class="drawer-actions">
       <button class="icon-btn" type="button" onclick="closeDrawer()" aria-label="Close">&#10005;</button>
     </div>
   </div>
 
-  <nav class="drawer-nav">
-    <a href="#sec-basic">1. Basic Information</a>
-    <a href="#sec-caresetting">2. Care Setting</a>
-    <a href="#sec-workflow">3. Statuses &amp; Workflow</a>
-    <a href="#sec-widgets">4. Widgets</a>
-    <a href="#sec-table">5. Patient Table</a>
-  </nav>
-
   <div class="drawer-body">
 
     <div class="card" id="sec-basic">
       <div class="card-head">
-        <div><h2 class="card-title">1. Basic Information</h2><p class="card-desc">Core identity of this trackerboard.</p></div>
-        <span class="muted">Step 1 of 5</span>
+        <div><h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="true" aria-controls="sec-basic-body" aria-label="Toggle Basic Information section"><span class="card-chevron">&#9662;</span></button> Basic Information</h2><p class="card-desc">Core identity of this trackerboard.</p></div>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="sec-basic-body">
         <div class="form-grid">
           <div class="field"><label for="trackerboardNameInput">Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"></div>
           <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"></div>
@@ -178,12 +165,11 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
     </div>
 
-    <div class="card" id="sec-caresetting">
+    <div class="card collapsed" id="sec-caresetting">
       <div class="card-head">
-        <div><h2 class="card-title">2. Care Setting</h2><p class="card-desc">Connects this board to a Care Setting and Facility.</p></div>
-        <span class="muted">Step 2 of 5</span>
+        <div><h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-caresetting-body" aria-label="Toggle Care Setting section"><span class="card-chevron">&#9662;</span></button> Care Setting</h2><p class="card-desc">Connects this board to a Care Setting and Facility.</p></div>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="sec-caresetting-body">
         <div class="form-grid">
           <div class="field"><label for="careSettingSelect">Care Setting</label>
             <select class="control" id="careSettingSelect" onchange="onCareSettingChange(this.value)">
@@ -194,41 +180,36 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
               <option>Outpatient Clinic</option>
             </select>
           </div>
-          <div class="field"><label for="facilitySelect">Deploy to Facilities</label>
-            <select class="control" id="facilitySelect" multiple onchange="onFacilityChange(Array.prototype.map.call(this.selectedOptions, function(o){ return o.value; }))"></select>
-            <span class="short-meta"><span class="help">Select one or more facilities. List depends on the Care Setting selected above</span></span>
+          <div class="field"><label for="facilitySelect">Facility</label>
+            <select class="control" id="facilitySelect" onchange="onFacilityChange(this.value)"><option>Select Facility...</option></select>
           </div>
         </div>
-        <div class="derived-scope" id="careSettingInfo">
+        <div class="derived-scope" id="careSettingInfo" style="display:none">
           <div class="derived-scope-head">
             <strong>Care Setting Information</strong>
-            <span class="muted">(read-only, from Care Setting Configuration)</span>
           </div>
-          <div class="info-grid" id="careSettingInfoGrid">
-            <div class="info-item full"><span class="info-value muted">Select a Care Setting to view its configuration</span></div>
-          </div>
+          <div class="info-grid" id="careSettingInfoGrid"></div>
         </div>
       </div>
     </div>
 
-    <div class="card" id="sec-workflow">
+    <div class="card collapsed" id="sec-workflow">
       <div class="card-head">
-        <div><h2 class="card-title">3. Statuses &amp; Workflow</h2><p class="card-desc">Defines how patients move through this trackerboard.</p></div>
-        <span class="muted">Step 3 of 5</span>
+        <div><h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle Statuses & Workflow section"><span class="card-chevron">&#9662;</span></button> Statuses &amp; Workflow</h2><p class="card-desc">Defines how patients move through this trackerboard.</p></div>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="sec-workflow-body">
 
-        <div class="flow-shell">
+        <div class="flow-shell" id="flowShell">
           <div class="flow-head"><strong>Workflow Overview</strong><span class="muted">Green = reachable from the selected status</span></div>
           <div class="flow-map" id="flowMap"></div>
         </div>
         <div class="workflow">
           <div class="status-list">
-            <div class="panel-head"><strong>Statuses</strong><span class="muted" id="statusCountLabel"></span></div>
+            <div class="panel-head"><strong>Statuses</strong><div style="display:flex;align-items:center;gap:10px;"><span class="muted" id="statusCountLabel"></span><button class="btn small" type="button" onclick="insertStatus(STATUSES.length)">+ Add New</button></div></div>
             <div class="status-list-body" id="statusListBody"></div>
           </div>
           <div class="status-editor">
-            <div class="panel-head"><strong id="statusEditorTitle"></strong><span class="muted">Internal identifiers are hidden</span></div>
+            <div class="panel-head"><strong id="statusEditorTitle"></strong></div>
             <div class="status-editor-body" id="statusEditorBody"></div>
           </div>
         </div>
@@ -244,12 +225,11 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
     </div>
 
-    <div class="card" id="sec-widgets">
+    <div class="card collapsed" id="sec-widgets">
       <div class="card-head">
-        <div><h2>4. Widgets</h2><p class="card-desc">Quick-overview components shown on the trackerboard.</p></div>
-        <span class="muted">Step 4 of 5</span>
+        <div><h2><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle Widgets section"><span class="card-chevron">&#9662;</span></button> Widgets</h2><p class="card-desc">Quick-overview components shown on the trackerboard.</p></div>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="sec-widgets-body">
 
         <div class="subsection widget-card" style="margin-top:0;">
           <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Total Patients</span></label></h4>
@@ -304,12 +284,11 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
     </div>
 
-    <div class="card" id="sec-table">
+    <div class="card collapsed" id="sec-table">
       <div class="card-head">
-        <div><h2>5. Patient Table</h2><p class="card-desc">Columns and expanded-row fields shown per patient.</p></div>
-        <span class="muted">Step 5 of 5</span>
+        <div><h2><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-table-body" aria-label="Toggle Patient Table section"><span class="card-chevron">&#9662;</span></button> Patient Table</h2><p class="card-desc">Columns and expanded-row fields shown per patient.</p></div>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="sec-table-body">
 
         <div class="subsection widget-card" style="margin-top:0;padding-top:0;border-top:0;">
           <h4><label class="switch-heading"><input type="checkbox" id="rowExpandToggle" checked onchange="toggleRowExpand(this.checked)"><span class="switch-track"></span><span class="switch-label">Allow rows to be expanded</span></label></h4>
@@ -416,8 +395,8 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       indicator.textContent = 'Ready to publish';
       indicator.className = 'validation-strip success';
     } else {
-      indicator.textContent = issues.length + (issues.length===1 ? ' blocking issue' : ' blocking issues') + ': missing ' + issues.join(', ');
-      indicator.className = 'validation-strip error';
+      indicator.textContent = (issues.length===1 ? '1 step left' : issues.length + ' steps left') + ' to publish: add ' + issues.join(', ');
+      indicator.className = 'validation-strip warning';
     }
   }
 
@@ -544,14 +523,13 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
         '</div></td>'+
       '</tr>';
     }).join('');
-    document.getElementById('dashboardSummary').textContent = TRACKERBOARDS.length + ' trackerboards';
     document.getElementById('dashboardFooterSummary').textContent = 'Showing ' + filtered.length + ' of ' + TRACKERBOARDS.length + ' trackerboards';
   }
   var CARE_SETTINGS = {
-    'Emergency Department': { visit:'Outpatient', los:'4–6 hours (avg)', form:'ED Intake Form v2', facilities:['Central City Health','Riverside Clinic'] },
-    'Inpatient': { visit:'Inpatient Admission', los:'3–5 days (avg)', form:'IP Admission Form v1', facilities:['Central City Health','Lakeside Medical Center'] },
-    'Operating Room': { visit:'Same-day Surgical', los:'2–4 hours (avg)', form:'Pre-Surgical Intake Form', facilities:['Central City Health','Riverside Clinic'] },
-    'Outpatient Clinic': { visit:'Scheduled Outpatient', los:'30–45 minutes (avg)', form:'Outpatient Visit Form v1', facilities:['Riverside Clinic','Lakeside Medical Center'] }
+    'Emergency Department': { visit:'Outpatient', durationValue:5, durationUnit:'hours', form:'ED Intake Form v2', facilities:['Central City Health','Riverside Clinic'] },
+    'Inpatient': { visit:'Inpatient Admission', durationValue:96, durationUnit:'hours', form:'IP Admission Form v1', facilities:['Central City Health','Lakeside Medical Center'] },
+    'Operating Room': { visit:'Same-day Surgical', durationValue:3, durationUnit:'hours', form:'Pre-Surgical Intake Form', facilities:['Central City Health','Riverside Clinic'] },
+    'Outpatient Clinic': { visit:'Scheduled Outpatient', durationValue:38, durationUnit:'minutes', form:'Outpatient Visit Form v1', facilities:['Riverside Clinic','Lakeside Medical Center'] }
   };
 
   var FACILITY_RESOURCES = {
@@ -677,21 +655,21 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   }
 
   function renderCareSettingInfo(cfg, facility){
-    var grid = document.getElementById('careSettingInfoGrid');
-    if(!cfg){
-      grid.innerHTML = '<div class="info-item full"><span class="info-value muted">Select a Care Setting to view its configuration</span></div>';
+    var wrap = document.getElementById('careSettingInfo');
+    if(!cfg || !facility || facility === 'Select Facility...'){
+      wrap.style.display = 'none';
       return;
     }
+    wrap.style.display = '';
+    var grid = document.getElementById('careSettingInfoGrid');
     var items = [
       { label:'Default Visit Category', value:cfg.visit },
-      { label:'Expected Length of Stay', value:cfg.los }
+      { label:'Duration', value:cfg.durationValue+' '+cfg.durationUnit }
     ];
     if(cfg.form) items.push({ label:'Chief Complaint Form', value:cfg.form, link:true });
     var resourceSummary = formatFacilityResources(facility);
     if(resourceSummary){
       items.push({ label:'Facility Resources', value:resourceSummary });
-    } else {
-      items.push({ label:'Other Config Detail', value:'[ placeholder ]', link:true });
     }
     grid.innerHTML = items.map(function(it){
       return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
@@ -721,13 +699,13 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     var cfg = CARE_SETTINGS[value];
     currentCareSetting = value;
     if(!cfg){
-      facilitySelect.innerHTML = '';
+      facilitySelect.innerHTML = '<option>Select Facility...</option>';
       renderCareSettingInfo(null);
       renderPatientFieldsGrid();
       updateReadiness();
       return;
     }
-    facilitySelect.innerHTML = cfg.facilities.map(function(f){ return '<option>'+f+'</option>'; }).join('');
+    facilitySelect.innerHTML = '<option>Select Facility...</option>' + cfg.facilities.map(function(f){ return '<option>'+f+'</option>'; }).join('');
     renderCareSettingInfo(cfg, '');
     applyStatusPreset(value);
     renderPatientFieldsGrid();
@@ -735,9 +713,9 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     updateReadiness();
   }
 
-  function onFacilityChange(values){
+  function onFacilityChange(value){
     var cfg = CARE_SETTINGS[document.getElementById('careSettingSelect').value];
-    renderCareSettingInfo(cfg, values[0] || '');
+    renderCareSettingInfo(cfg, value);
     updateReadiness();
   }
 
@@ -754,6 +732,12 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
       return '<label class="check-option"><input type="checkbox"'+checked+'> '+cs+'</label>';
     }).join('');
+  }
+
+  function toggleCardSection(btn){
+    var card = btn.closest('.card');
+    var collapsed = card.classList.toggle('collapsed');
+    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
   }
 
   function toggleWidgetBody(checkbox){
@@ -915,7 +899,6 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   var STATUSES = [];
   var selectedIndex = 0;
 
-  var ICON_ADD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>';
   var ICON_UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
   var ICON_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
   var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>';
@@ -943,7 +926,6 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
             '<button class="action-btn" type="button" onclick="event.stopPropagation();deleteStatus('+i+')" aria-label="Delete">'+ICON_CLOSE+'</button>'+
           '</div>'+
         '</div>'+
-        '<button class="add-status-btn" type="button" onclick="insertStatus('+(i+1)+')">'+ICON_ADD+' Add status</button>'+
       '</div>';
     });
     body.innerHTML = html;
@@ -960,8 +942,14 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   function renderFlowMap(){
     var container = document.getElementById('flowMap');
+    var shell = document.getElementById('flowShell');
     if(!container) return;
-    if(!STATUSES.length){ container.innerHTML = ''; return; }
+    if(!STATUSES.length){
+      container.innerHTML = '';
+      if(shell) shell.style.display = 'none';
+      return;
+    }
+    if(shell) shell.style.display = '';
     var s = STATUSES[selectedIndex];
     var reachable = {};
     STATUSES.forEach(function(st){ st.allowedNext.forEach(function(id){ reachable[id] = true; }); });
