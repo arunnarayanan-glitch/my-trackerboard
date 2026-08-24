@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trackerboard Configuration — High-Fidelity Mockup</title>
+<title>Trackerboard Configuration</title>
 <style>
 /* Dependency-free prototype. Reusable primitives: .btn, .field, .card, .pill,
    .table, .drawer, .modal, .facility-option, .status-item, .flow-node. */
@@ -17,15 +17,15 @@
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.35 var(--font)}
 button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #8eb6db;outline-offset:2px}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
-.app{display:grid;grid-template-rows:42px minmax(0,1fr) 25px;width:100vw;height:100vh;min-width:760px}.main{display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0}
+.app{display:grid;grid-template-rows:42px minmax(0,1fr);width:100vw;height:100vh;min-width:760px}.main{display:grid;grid-template-rows:auto auto minmax(0,1fr);min-height:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--navy);color:#fff}.topgroup,.toolbar-left,.toolbar-right,.filters{display:flex;align-items:center;gap:9px;min-width:0}.brand{font-weight:700}.sq{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#2671a6;color:#fff;border:1px solid #ffffff2b;border-radius:2px;cursor:pointer}.search{position:relative;width:clamp(280px,34vw,540px)}.search input{width:100%;height:28px;padding:0 34px 0 10px;border:0;border-radius:2px}.search button{position:absolute;right:0;top:0;width:30px;height:28px;background:transparent;color:var(--navy);cursor:pointer}.avatar{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:#dceaf4;color:var(--navy);font-size:11px;font-weight:700}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:17px}.summary,.muted,.help{color:var(--muted);font-size:12px}.filters{flex-wrap:wrap}.control{height:30px;padding:0 9px;background:#fff;border:1px solid #c4ced8;border-radius:2px}.control.compact{width:auto;min-width:125px;height:29px;font-size:12px}.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4d5d6a;white-space:nowrap}.toggle input{width:15px;height:15px;margin:0}
-.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:2px}.btn{min-height:30px;padding:0 13px;background:#fff;border:1px solid #c4ced8}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:#eef2f5}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.primary:hover:not(:disabled){background:var(--navy2)}.btn.small{min-height:26px;padding:0 9px;font-size:12px}.btn.danger{color:var(--bad);border-color:#e6bbb5}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:29px;height:29px;padding:0;background:#fff;border:1px solid #c4ced8}.link-btn{padding:0;background:transparent;color:#245f96;font-weight:700}.link-btn:hover{text-decoration:underline}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:17px}.filter-bar{padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.summary,.muted,.help{color:var(--muted);font-size:12px}.filters{flex-wrap:wrap}.control{height:30px;padding:0 9px;background:#fff;border:1px solid #c4ced8;border-radius:2px}.control.compact{width:auto;min-width:125px;height:29px;font-size:12px}.filter-select-btn{width:170px;height:32px;padding:0 26px 0 10px;background:#fff;border:1px solid #c4ced8;border-radius:2px;font-size:12.5px;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filter-select-btn::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #687681;transform:translateY(-50%);pointer-events:none}.filter-select-btn[aria-expanded="true"]::after{border-top-color:var(--navy)}.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#4d5d6a;white-space:nowrap}.toggle input{width:15px;height:15px;margin:0}
+.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:2px}.btn{min-height:30px;padding:0 13px;background:#fff;border:1px solid #c4ced8}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:#eef2f5}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.primary:hover:not(:disabled){background:var(--navy2)}.btn.small{min-height:26px;padding:0 9px;font-size:12px}.btn.danger{color:var(--bad);border-color:#e6bbb5}.btn.tertiary{background:transparent;border-color:transparent;color:#4d5d6a}.btn.tertiary:hover:not(:disabled){background:#eef2f5;border-color:#c4ced8}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:29px;height:29px;padding:0;background:#fff;border:1px solid #c4ced8}.link-btn{padding:0;background:transparent;color:#245f96;font-weight:700}.link-btn:hover{text-decoration:underline}
 .content{min-height:0;overflow:auto;padding:14px 18px 20px}.table-shell{min-width:930px;background:#fff;border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:9px 10px;text-align:left;vertical-align:middle;border-bottom:1px solid #e7ebef}.table th{background:#f7f9fb;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.table tbody tr:hover{background:#f7fbfe}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:700;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:700}.cell-meta{margin-top:2px;color:var(--muted);font-size:11.5px}.tags{display:flex;flex-wrap:wrap;gap:5px}.tag,.pill{display:inline-flex;align-items:center;gap:4px;min-height:21px;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}.tag{background:var(--neutral);color:#4d5d6a}.pill.active{background:var(--ok-bg);color:var(--ok)}.pill.draft{background:#dbe8f4;color:var(--navy2)}.pill.inactive{background:var(--warn-bg);color:var(--warn)}.pill.retired,.pill.superseded{background:var(--neutral);color:#596673}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:#245f96;font-size:12px;font-weight:700;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.actions{text-align:right!important}.menu-wrap{position:relative;display:inline-flex}.menu{position:absolute;z-index:40;top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:#fff;border:1px solid #c4ced8;box-shadow:0 8px 22px #001f3d29}.menu.open{display:block}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:#fafbfc;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.pager{display:flex;align-items:center;gap:6px}
-.backdrop{position:fixed;z-index:90;inset:0;display:none;background:#00224438}.backdrop.open{display:block}.drawer{position:fixed;z-index:100;top:0;right:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;width:min(1120px,78vw);height:100vh;background:#fff;box-shadow:-8px 0 24px #00264d2e;transform:translateX(105%);transition:.18s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:17px}.drawer-sub{margin-top:3px;color:var(--muted);font-size:12px}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:#fff;border-bottom:1px solid var(--line);color:#4d5d6a;font-size:12px}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:#9aa7b2;flex:0 0 auto}.validation-strip.error{background:#fff;color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:#fff;color:var(--warn)}.validation-strip.warning .validation-dot{background:#d09a21}.validation-strip.success{background:#fff;color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #dbe8f4;font-size:12px}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:#f7f9fb}.drawer-foot{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:12px}
+.backdrop{position:fixed;z-index:90;inset:0;display:none;background:#00224438}.backdrop.open{display:block}.drawer{position:fixed;z-index:100;top:0;right:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;width:min(1120px,78vw);height:100vh;background:#fff;box-shadow:-8px 0 24px #00264d2e;transform:translateX(105%);transition:.18s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:17px}.drawer-sub{margin-top:3px;color:var(--muted);font-size:12px}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:#fff;border-bottom:1px solid var(--line);color:#4d5d6a;font-size:12px}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:#9aa7b2;flex:0 0 auto}.validation-strip.error{background:#fff;color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:#fff;color:var(--warn)}.validation-strip.warning .validation-dot{background:#d09a21}.validation-strip.success{background:#fff;color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #dbe8f4;font-size:12px}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:#f7f9fb}.drawer-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:12px}
 .card{margin-bottom:14px;background:#fff;border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 11px;border-bottom:1px solid #e8edf1}.card-title{margin:0;font-size:15px}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:12px}.section-state{flex:0 0 auto;padding:2px 7px;border-radius:10px;background:var(--neutral);color:#4d5d6a;font-size:11px;font-weight:700}.section-state.ok{background:var(--ok-bg);color:var(--ok)}.section-state.bad{background:var(--bad-bg);color:var(--bad)}.card-body{padding:15px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:#4d5d6a;font-size:12px;font-weight:700}.text,.textarea{width:100%;background:#fff;border:1px solid #c4ced8;border-radius:2px}.text{height:30px;padding:0 9px}.textarea{min-height:78px;padding:8px 9px;resize:vertical}.field-error{display:none;margin-top:5px;color:var(--bad);font-size:12px}.field.error .text,.field.error .textarea{border-color:#d9988f;background:#fffafa}.field.error .field-error{display:block}.short-meta{display:flex;align-items:center;justify-content:space-between;min-height:23px;margin-top:4px;color:var(--muted);font-size:11px}
-.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:#f5f8fb;border:1px solid #dce5ed}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:2px 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:220px;overflow:auto;background:#fff;border:1px solid #c4ced8;box-shadow:0 8px 20px #001f3d24}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:8px 10px;text-align:left;background:transparent;cursor:pointer}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f8fafb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:11px}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#245f96;font-weight:700;text-decoration:none}.manage:hover{text-decoration:underline}
-.flow-shell{margin-bottom:14px;padding:11px;background:var(--blue-soft);border:1px solid #dbe8f4}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:#fff;border:1px solid #c4ced8;cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.flow-node.bad{border-color:#d9988f;background:#fffafa}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:#7f8b95;font-size:18px}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:#f8fafb;border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;min-height:53px;padding:7px 8px;border:1px solid transparent}.status-item:hover{background:var(--blue-soft)}.status-item.selected{background:var(--blue-soft);border-color:#8db0d0}.status-item.bad{border-left:3px solid var(--bad)}.status-main{min-width:0;padding:0;text-align:left;background:transparent;cursor:pointer}.status-main strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:11px}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:#f1f4f7;border:1px solid #e1e6ea}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid #e4e9ed}.subsection h4{margin:0 0 4px;font-size:13px}.subsection p{margin:0 0 9px;color:var(--muted);font-size:11.5px}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}.check-option{min-height:30px;padding:5px 7px;background:#fafbfc;border:1px solid #e2e7eb;font-size:12px}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:12px}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:#f6f7f8;border-left:3px solid #aeb8c1;color:#4d5d6a;font-size:12px}
+.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:#f5f8fb;border:1px solid #dce5ed}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:2px 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:#fff;border:1px solid #c4ced8;border-radius:2px;box-shadow:0 8px 20px #001f3d24;padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:2px;text-align:left;background:transparent;cursor:pointer;font-size:13px}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f8fafb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:11px}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#245f96;font-weight:700;text-decoration:none}.manage:hover{text-decoration:underline}
+.flow-shell{margin-bottom:14px;padding:11px;background:var(--blue-soft);border:1px solid #dbe8f4}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:#fff;border:1px solid #c4ced8;cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.flow-node.bad{border-color:#d9988f;background:#fffafa}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:#7f8b95;font-size:18px}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:#f8fafb;border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:11px}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:#f1f4f7;border:1px solid #e1e6ea}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid #e4e9ed}.subsection h4{margin:0 0 4px;font-size:13px}.subsection p{margin:0 0 9px;color:var(--muted);font-size:11.5px}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px}.check-option{min-height:30px;padding:5px 7px;background:#fafbfc;border:1px solid #e2e7eb;font-size:12px}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:12px}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:#f6f7f8;border-left:3px solid #aeb8c1;color:#4d5d6a;font-size:12px}
 .modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:16px}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #e8edf1}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f1f4f7;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:12px}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:11px}
 @media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
 </style>
@@ -39,6 +39,16 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .check-option.locked{ opacity:.6; }
 .widget-card{ padding:11px 12px; background:#fafbfc; border:1px solid #e2e7eb; border-top:1px solid #e2e7eb; }
 .widget-card .widget-body{ margin-top:9px; }
+.widget-head{ display:flex; align-items:center; gap:9px; }
+.widget-head h4{ flex:1; min-width:0; margin:0; }
+.widget-position{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:var(--neutral); color:#4d5d6a; font-size:11px; font-weight:700; }
+.widget-move{ display:flex; gap:2px; flex:0 0 auto; }
+.widget-move .icon-btn{ width:24px; height:24px; font-size:11px; }
+.btn.primary.danger{ background:var(--bad); border-color:var(--bad); color:#fff; }
+.btn.primary.danger:hover:not(:disabled){ background:#8a2f23; border-color:#8a2f23; }
+.desc-info{ position:relative; display:inline-flex; vertical-align:middle; margin-left:5px; color:var(--muted); cursor:help; }
+.desc-info:hover .desc-popover, .desc-info:focus .desc-popover{ display:block; }
+.desc-popover{ display:none; position:absolute; z-index:60; top:130%; left:0; width:max-content; max-width:260px; padding:8px 10px; background:#263746; color:#fff; border-radius:2px; box-shadow:0 8px 20px #001f3d33; font-size:11.5px; font-weight:400; line-height:1.4; text-transform:none; letter-spacing:normal; white-space:normal; }
 .disclosure-toggle{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:0; background:transparent; border:0; text-align:left; cursor:pointer; }
 .disclosure-title{ font-weight:700; font-size:13px; flex:0 0 auto; }
 .disclosure-summary{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:right; }
@@ -62,10 +72,32 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 #careSettingInfo .info-value{ display:block; color:var(--ink); font-size:13px; font-weight:600; }
 #careSettingInfo .info-value.link{ color:var(--navy2); }
 #careSettingInfo .info-value.muted{ color:var(--muted); font-weight:400; }
+.inherit-badge{ display:inline-flex; align-items:center; gap:3px; margin-left:6px; color:var(--muted); font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; vertical-align:middle; }
+.cap-tag{ display:inline-flex; align-items:center; gap:3px; margin-left:6px; padding:1px 6px; border-radius:9px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; vertical-align:middle; white-space:nowrap; }
+.cap-tag.standard{ background:var(--neutral); color:#4d5d6a; }
+.cap-tag.inherited{ background:var(--blue-soft); color:var(--navy2); }
+.cap-tag.facility{ background:var(--warn-bg); color:var(--warn); }
+.cap-tag.board{ background:var(--ok-bg); color:var(--ok); }
+.layer-tag{ flex:0 0 auto; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+.layer-tag.definition{ background:#eef2f6; color:#4d5d6a; }
+.layer-tag.deployment{ background:var(--blue-soft); color:var(--navy2); }
+.pill.pending{ background:var(--warn-bg); color:var(--warn); }
+.stepper{ display:flex; align-items:stretch; gap:0; margin:12px 0; }
+.stepper-stage{ flex:1; min-width:0; padding:10px 12px; background:#fafbfc; border:1px solid #e2e7eb; border-left:0; }
+.stepper-stage:first-child{ border-left:1px solid #e2e7eb; }
+.stepper-stage strong{ display:block; font-size:12.5px; margin-bottom:3px; }
+.stepper-stage p{ margin:0; color:var(--muted); font-size:11.5px; }
+.stepper-stage.overlap{ background:var(--blue-soft); }
+.stepper-arrow{ flex:0 0 auto; align-self:center; padding:0 4px; color:#9aa7b2; font-size:14px; }
+.placeholder-block{ padding:11px 12px; background:#f6f7f8; border:1px dashed #c9d2da; color:var(--muted); font-size:12px; }
+.sort-th{ display:inline-flex; align-items:center; gap:4px; background:transparent; border:0; padding:0; font:inherit; color:inherit; text-transform:inherit; letter-spacing:inherit; font-weight:700; cursor:pointer; }
+.sort-th .sort-glyph{ font-size:9px; opacity:.4; }
+th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ opacity:1; color:var(--navy2); }
 .check-option.heading{ border:0; background:none; padding:0; font-weight:700; font-size:13px; }
 .status-list-body{ display:flex; flex-direction:column; gap:4px; }
 .status-item-wrapper{ display:flex; flex-direction:column; }
 .status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:8px; border:1px solid transparent; background-color:transparent; cursor:pointer; transition:background-color .15s ease, border-color .15s ease; }
+.status-card.bad{ border-color:#d9988f; background-color:#fffafa; }
 .status-card:hover{ background-color:#f8fafc; }
 .status-card.selected{ background-color:#f0f6ff; border-color:#bfdbfe; }
 .status-info{ display:flex; flex-direction:column; gap:3px; flex-grow:1; min-width:0; }
@@ -87,6 +119,55 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .card.collapsed .card-body{ display:none; }
 .tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:11px; border:1px solid #c4ced8; border-radius:2px; background:#fff; }
 .check-option:has(input[type="checkbox"]:not(:checked)) .tier-select{ display:none; }
+.widget-placement-group{ margin-bottom:22px; }
+.widget-placement-group:last-child{ margin-bottom:0; }
+.widget-placement-title{ margin:0 0 2px; font-size:13px; }
+.action-cat-group{ margin-bottom:14px; }
+.action-cat-group:last-child{ margin-bottom:0; }
+.action-cat-group h5{ margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); }
+.col-builder-controls{ display:flex; align-items:center; gap:8px; margin-top:10px; flex-wrap:wrap; }
+.col-builder-controls .text{ max-width:260px; }
+.col-unified-list{ margin-top:10px; border:1px solid var(--line); max-height:420px; overflow:auto; }
+.col-row{ display:flex; align-items:center; gap:8px; min-height:36px; padding:6px 10px; border-bottom:1px solid #eef1f4; }
+.col-row:last-child{ border-bottom:0; }
+.col-row.locked{ background:#f8fafb; color:var(--muted); }
+.col-row .col-order{ flex:0 0 20px; font-size:11px; color:var(--muted); text-align:right; }
+.col-row .col-name{ flex:1 1 auto; min-width:0; }
+.col-row .col-cat{ flex:0 0 auto; }
+.col-row .col-move{ display:flex; gap:2px; flex:0 0 auto; }
+.col-row .col-move .icon-btn{ width:22px; height:22px; font-size:10px; }
+@media(max-width:900px){ .col-builder{ grid-template-columns:1fr; } }
+.info-popover-wrap{ position:relative; display:inline-flex; vertical-align:middle; margin-left:4px; }
+.info-popover-trigger{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; padding:0; background:transparent; border:0; border-radius:50%; color:var(--muted); cursor:pointer; }
+.info-popover-trigger:hover{ color:var(--navy2); background:var(--blue-soft); }
+.info-popover{ display:none; position:absolute; z-index:60; top:130%; left:0; width:max-content; min-width:200px; max-width:280px; padding:10px 12px; background:#fff; border:1px solid #c4ced8; box-shadow:0 8px 20px #001f3d24; font-size:12px; font-weight:400; text-align:left; }
+.info-popover-wrap.open .info-popover{ display:block; }
+.info-popover .ip-title{ margin:0 0 6px; font-weight:700; font-size:13px; }
+.info-popover .ip-row{ display:flex; align-items:baseline; gap:5px; padding:3px 0; }
+.info-popover .ip-label{ flex:0 0 auto; color:var(--muted); }
+.info-popover .ip-value{ flex:0 1 auto; word-break:break-word; }
+.list-trigger{ padding:0; background:transparent; border:0; color:#245f96; font-weight:700; font-size:inherit; cursor:pointer; }
+.list-trigger:hover{ text-decoration:underline; }
+.section-nav{ display:flex; align-items:stretch; gap:2px; overflow-x:auto; padding:0 13px; background:#fff; border-bottom:1px solid var(--line); }
+.section-nav-item{ display:flex; align-items:center; gap:8px; flex:0 0 auto; padding:11px 14px; background:transparent; border:0; border-bottom:2px solid transparent; font:inherit; font-size:13px; font-weight:700; color:var(--muted); white-space:nowrap; cursor:pointer; }
+.section-nav-item:hover{ color:var(--ink); }
+.section-nav-item.active{ color:var(--navy); border-bottom-color:var(--navy); }
+.section-nav-item .section-state{ font-weight:700; }
+.section-state.warn{ background:var(--warn-bg); color:var(--warn); }
+.drawer-foot-zone{ display:flex; align-items:center; gap:8px; }
+.readiness-link{ background:transparent; border:0; padding:4px 8px; font:inherit; font-size:12.5px; font-weight:700; color:var(--muted); cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+.readiness-link.ok{ color:var(--ok); }
+.readiness-link.warn{ color:var(--warn); }
+.readiness-link.bad{ color:var(--bad); }
+.segmented{ display:inline-flex; border:1px solid #c4ced8; border-radius:2px; overflow:hidden; }
+.segmented label{ display:flex; align-items:center; gap:6px; padding:7px 16px; font-size:12.5px; font-weight:700; color:#4d5d6a; cursor:pointer; border-right:1px solid #c4ced8; background:#fff; }
+.segmented label:last-child{ border-right:0; }
+.segmented input{ position:absolute; opacity:0; width:1px; height:1px; }
+.segmented label:has(input:checked){ background:var(--blue); color:#fff; }
+.status-warn{ color:var(--bad); font-weight:700; }
+.exceptional-exits{ margin-top:10px; padding-top:10px; border-top:1px solid #dbe8f4; font-size:12px; color:#4d5d6a; }
+.exceptional-exits strong{ display:block; margin-bottom:4px; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); }
+.exceptional-exits ul{ margin:0; padding-left:18px; }
 @media(max-width:1280px){ .drawer{ width:88vw; } }
 @media(max-width:980px){ .drawer{ width:100vw; } }
 </style>
@@ -95,10 +176,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
 <div class="app">
   <header class="topbar">
-    <div class="topgroup">
-      <button class="sq" type="button" aria-label="Menu">&#9776;</button>
-      <span class="brand">Trackerboard Admin</span>
-    </div>
+    <div class="topgroup"></div>
     <div class="topgroup">
       <span class="avatar">AR</span><span>Arun</span>
     </div>
@@ -106,24 +184,29 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   <main class="main">
     <section class="toolbar" aria-label="Trackerboard list controls">
       <div class="toolbar-left">
-        <h1>Trackerboard Configuration</h1>
-        <div class="filters">
-          <select class="control compact" id="facilityFilter" onchange="renderDashboard()"><option value="">Facility: All</option></select>
-          <select class="control compact" id="careSettingFilter" onchange="renderDashboard()"><option value="">Care Setting: All</option></select>
-        </div>
+        <h1>Trackerboards</h1>
       </div>
       <div class="toolbar-right">
-        <button class="btn primary" type="button" onclick="openDrawer()">+ Create New Trackerboard</button>
+        <button class="btn primary" type="button" onclick="openDrawer()">New trackerboard</button>
+      </div>
+    </section>
+    <section class="filter-bar" aria-label="Search and filters">
+      <div class="filters">
+        <div class="picker" style="max-width:340px;flex:1 1 220px;"><label for="dashboardSearchInput" class="visually-hidden">Search boards</label><input type="text" class="text" id="dashboardSearchInput" placeholder="Search boards…" oninput="onDashboardSearchInput(this.value)"></div>
+        <div class="picker" style="max-width:170px;"><button type="button" class="filter-select-btn" id="facilityFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('facility')">Facility: All</button><div class="picker-menu" id="facilityFilterMenu"></div></div>
+        <div class="picker" style="max-width:170px;"><button type="button" class="filter-select-btn" id="careSettingFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('careSetting')">Care Setting: All</button><div class="picker-menu" id="careSettingFilterMenu"></div></div>
+        <div class="picker" style="max-width:170px;"><button type="button" class="filter-select-btn" id="programFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('program')">Program: All</button><div class="picker-menu" id="programFilterMenu"></div></div>
+        <div class="picker" style="max-width:170px;"><button type="button" class="filter-select-btn" id="statusFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('status')">Status: All</button><div class="picker-menu" id="statusFilterMenu"></div></div>
+        <label class="toggle"><input type="checkbox" id="showInactiveToggle" onchange="toggleShowInactive(this.checked)"> Show inactive</label>
+        <button type="button" class="link-btn" id="clearFiltersBtn" style="display:none;" onclick="clearAllFilters()">Clear all</button>
       </div>
     </section>
 
     <section class="content">
       <div class="table-shell">
         <table class="table" aria-label="Trackerboards">
-          <colgroup><col style="width:20%"><col style="width:12%"><col style="width:14%"><col style="width:16%"><col style="width:13%"><col style="width:11%"><col style="width:14%"></colgroup>
-          <thead><tr>
-            <th>Board Name</th><th>Unique ID</th><th>Care Setting</th><th>Facility</th><th>Updated Date</th><th>Status</th><th class="actions">Actions</th>
-          </tr></thead>
+          <colgroup><col style="width:26%"><col style="width:14%"><col style="width:16%"><col style="width:14%"><col style="width:12%"><col style="width:9%"><col style="width:12%"></colgroup>
+          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph">▲</span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph">▲</span></button></th><th data-key-th="facilities"><button type="button" class="sort-th" onclick="setDashboardSort('facilities')">Facilities<span class="sort-glyph">▲</span></button></th><th data-key-th="program"><button type="button" class="sort-th" onclick="setDashboardSort('program')">Programs<span class="sort-glyph">▲</span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated Date<span class="sort-glyph">▲</span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph">▲</span></button></th><th class="actions">Actions</th></tr></thead>
           <tbody id="dashboardBody"></tbody>
         </table>
         <div class="table-footer">
@@ -143,46 +226,53 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 <div class="backdrop" id="backdrop" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Create New Trackerboard">
   <div class="drawer-head">
-    <div><h2 class="drawer-title">Create New Trackerboard</h2></div>
+    <div><h2 class="drawer-title">Create trackerboard</h2><div class="drawer-sub" id="drawerLifecycleState">Draft · ID generated when saved</div></div>
     <div class="drawer-actions">
       <button class="icon-btn" type="button" onclick="closeDrawer()" aria-label="Close">&#10005;</button>
     </div>
   </div>
 
+  <div class="section-nav" id="sectionNav" role="tablist" aria-label="Trackerboard configuration sections" onkeydown="handleSectionNavKeydown(event)">
+    <button type="button" class="section-nav-item" data-section="basic" role="tab" aria-selected="true" tabindex="0" aria-controls="sec-basic" onclick="goToSection('basic')">Basic Information</button>
+    <button type="button" class="section-nav-item" data-section="caresetting" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-caresetting" onclick="goToSection('caresetting')">Scope &amp; Access</button>
+    <button type="button" class="section-nav-item" data-section="workflow" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-workflow" onclick="goToSection('workflow')">Status &amp; Workflow</button>
+    <button type="button" class="section-nav-item" data-section="widgets" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-widgets" onclick="goToSection('widgets')">Widgets</button>
+    <button type="button" class="section-nav-item" data-section="table" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-table" onclick="goToSection('table')">Patient Table</button>
+  </div>
+
   <div class="drawer-body">
 
-    <div class="card" id="sec-basic">
+    <div class="card" id="sec-basic" data-section-key="basic">
       <div class="card-head">
-        <div><h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="true" aria-controls="sec-basic-body" aria-label="Toggle Basic Information section"><span class="card-chevron">&#9662;</span></button> Basic Information</h2><p class="card-desc">Core identity of this trackerboard.</p></div>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="true" aria-controls="sec-basic-body" aria-label="Toggle Basic Information section"><span class="card-chevron">&#9662;</span></button> Basic Information</h2>
+        <span class="section-state" id="cardState-basic"></span>
       </div>
       <div class="card-body" id="sec-basic-body">
         <div class="form-grid">
           <div class="field"><label for="trackerboardNameInput">Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"></div>
           <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"></div>
-          <div class="field"><label for="uniqueIdInput">Unique ID</label><input class="text" type="text" id="uniqueIdInput" placeholder="e.g. EDT001" readonly style="background:#f5f7f9;color:var(--muted);cursor:not-allowed"></div>
-          <div class="field full"><label for="trackerboardDescInput">Description</label><textarea class="textarea" id="trackerboardDescInput" placeholder="Short description of what this trackerboard is used for"></textarea></div>
+          <div class="field full"><label for="trackerboardDescInput">Description</label><textarea class="textarea" id="trackerboardDescInput" placeholder="What is this trackerboard used for?"></textarea></div>
         </div>
       </div>
     </div>
 
-    <div class="card collapsed" id="sec-caresetting">
+    <div class="card collapsed" id="sec-caresetting" data-section-key="caresetting">
       <div class="card-head">
-        <div><h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-caresetting-body" aria-label="Toggle Care Setting section"><span class="card-chevron">&#9662;</span></button> Care Setting</h2><p class="card-desc">Connects this board to a Care Setting and Facility.</p></div>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-caresetting-body" aria-label="Toggle Scope &amp; Access section"><span class="card-chevron">&#9662;</span></button> Scope &amp; Access</h2>
+        <span class="section-state" id="cardState-caresetting"></span>
       </div>
       <div class="card-body" id="sec-caresetting-body">
         <div class="form-grid">
           <div class="field"><label for="careSettingSelect">Care Setting</label>
             <select class="control" id="careSettingSelect" onchange="onCareSettingChange(this.value)">
-              <option>Select Care Setting...</option>
+              <option value="" disabled selected>Select Care Setting...</option>
               <option>Emergency Department</option>
               <option>Inpatient</option>
               <option>Operating Room</option>
               <option>Outpatient Clinic</option>
             </select>
           </div>
-          <div class="field"><label for="facilitySelect">Facility</label>
-            <select class="control" id="facilitySelect" onchange="onFacilityChange(this.value)"><option>Select Facility...</option></select>
-          </div>
+          <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility...</button></div><div class="picker-menu" id="connFacilityMenu"></div></div></div><div class="field"><label for="programAccessBtn">Programs</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Program...</button></div><div class="picker-menu" id="programAccessMenu"></div></div></div><div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles...</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles...</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div></div><p class="help" id="accessBroaderWarning" style="grid-column:1/-1;display:none;color:var(--warn);">Configuration access includes groups without Board access.</p>
         </div>
         <div class="derived-scope" id="careSettingInfo" style="display:none">
           <div class="derived-scope-head">
@@ -193,15 +283,17 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
     </div>
 
-    <div class="card collapsed" id="sec-workflow">
+    <div class="card collapsed" id="sec-workflow" data-section-key="workflow">
       <div class="card-head">
-        <div><h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle Statuses & Workflow section"><span class="card-chevron">&#9662;</span></button> Statuses &amp; Workflow</h2><p class="card-desc">Defines how patients move through this trackerboard.</p></div>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle Status & Workflow section"><span class="card-chevron">&#9662;</span></button> Status &amp; Workflow <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Order controls how statuses are presented. Patient movement follows the configured Next statuses.</span></span></h2>
+        <span class="section-state" id="cardState-workflow"></span>
       </div>
       <div class="card-body" id="sec-workflow-body">
 
         <div class="flow-shell" id="flowShell">
-          <div class="flow-head"><strong>Workflow Overview</strong><span class="muted">Green = reachable from the selected status</span></div>
+          <div class="flow-head"><strong>How patients flow through this board</strong><span class="muted">Green statuses can be reached from the one you've selected</span></div>
           <div class="flow-map" id="flowMap"></div>
+          <div class="exceptional-exits" id="exceptionalExits" style="display:none;"></div>
         </div>
         <div class="workflow">
           <div class="status-list">
@@ -215,9 +307,10 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
         </div>
 
         <div class="subsection">
-          <h4><label class="switch-heading"><input type="checkbox" id="transferEnabled" onchange="toggleTransferEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Enable transfer to another Care Setting</span></label></h4>
+          <h4><label class="switch-heading"><input type="checkbox" id="transferEnabled" onchange="toggleTransferEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Allow transfer to another Care Setting</span></label></h4>
+          <p class="muted" id="transferDisabledNote" style="display:none;margin:6px 0 0;">Set a Care Setting first to enable transfers.</p>
           <div class="widget-body" id="transferBody" style="display:none;">
-            <p>Lets the user move a patient from this board directly into a different Care Setting.</p>
+            <p class="field-label" style="margin-bottom:6px;">Eligible Care Settings <span style="color:var(--bad)">*</span></p>
             <div class="check-grid cols-3" id="transferDestinations"></div>
           </div>
         </div>
@@ -225,102 +318,77 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       </div>
     </div>
 
-    <div class="card collapsed" id="sec-widgets">
+    <div class="card collapsed" id="sec-widgets" data-section-key="widgets">
       <div class="card-head">
-        <div><h2><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle Widgets section"><span class="card-chevron">&#9662;</span></button> Widgets</h2><p class="card-desc">Quick-overview components shown on the trackerboard.</p></div>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle Widgets section"><span class="card-chevron">&#9662;</span></button> Widgets</h2>
+        <span class="section-state" id="cardState-widgets"></span>
       </div>
       <div class="card-body" id="sec-widgets-body">
 
-        <div class="subsection widget-card" style="margin-top:0;">
-          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Total Patients</span></label></h4>
-          <div class="widget-body">
-            <p>Optional breakdown grouping (Care Setting dependent)</p>
-            <div class="check-grid cols-3">
-              <label class="check-option"><input type="checkbox"> Group by Triage (High / Medium / Low)</label>
-              <label class="check-option"><input type="checkbox"> Group by Unit (ICU / General / Other)</label>
-              <label class="check-option"><input type="checkbox"> Group by Workflow Status (Pre-OR / In OR / Post-OR)</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="subsection widget-card">
-          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Resource Availability</span></label></h4>
-          <div class="widget-body">
-            <div class="check-grid cols-3">
-              <label class="check-option"><input type="checkbox" checked> Beds</label>
-              <label class="check-option"><input type="checkbox"> Rooms</label>
-              <label class="check-option"><input type="checkbox"> Chairs</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="subsection widget-card">
-          <h4><label class="switch-heading"><input type="checkbox" onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Code Team</span></label></h4>
-          <div class="widget-body" style="display:none;">
-            <p>Displays Name, Role. Roster managed at runtime, not part of this configuration.</p>
-          </div>
-        </div>
-
-        <div class="subsection widget-card">
-          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Doctors on Duty</span></label></h4>
-          <div class="widget-body">
-            <p>Displays Doctor Name, Role/Specialty. Roster managed at runtime, not part of this configuration.</p>
-          </div>
-        </div>
-
-        <div class="subsection widget-card">
-          <h4><label class="switch-heading"><input type="checkbox" checked onchange="toggleWidgetBody(this)"><span class="switch-track"></span><span class="switch-label">Cardex Panel</span></label></h4>
-          <div class="widget-body">
-            <div class="check-grid cols-3">
-              <label class="check-option"><input type="checkbox" checked> Awaiting Approvals</label>
-              <label class="check-option"><input type="checkbox" checked> MAR</label>
-              <label class="check-option"><input type="checkbox" checked> Medications</label>
-              <label class="check-option"><input type="checkbox"> Lab / Radiology</label>
-              <label class="check-option"><input type="checkbox"> Rejected Medication List</label>
-            </div>
-          </div>
-        </div>
+        <p class="help" style="margin-top:0;">Every widget below can be reordered the same way, whether it's on by default or one you've turned on.</p>
+        <div id="widgetLibraryList"></div>
 
       </div>
     </div>
 
-    <div class="card collapsed" id="sec-table">
+    <div class="card collapsed" id="sec-table" data-section-key="table">
       <div class="card-head">
-        <div><h2><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-table-body" aria-label="Toggle Patient Table section"><span class="card-chevron">&#9662;</span></button> Patient Table</h2><p class="card-desc">Columns and expanded-row fields shown per patient.</p></div>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-table-body" aria-label="Toggle Patient Table section"><span class="card-chevron">&#9662;</span></button> Patient Table</h2>
+        <span class="section-state" id="cardState-table"></span>
       </div>
       <div class="card-body" id="sec-table-body">
 
-        <div class="subsection widget-card" style="margin-top:0;padding-top:0;border-top:0;">
-          <h4><label class="switch-heading"><input type="checkbox" id="rowExpandToggle" checked onchange="toggleRowExpand(this.checked)"><span class="switch-track"></span><span class="switch-label">Allow rows to be expanded</span></label></h4>
-          <p>When enabled, each selected field below can be set to Level 1 (always shown) or Level 2 (shown only when a row is expanded).</p>
+        <div class="subsection" style="margin-top:0;padding-top:0;border-top:0;">
+          <h4>Columns <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About column reordering" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Checked columns get reorder arrows, in the order they'll appear on the board. Patient Name and PID are always included and pinned first.</span></span></h4>
+          <div class="col-builder-controls">
+            <input class="text" type="text" id="columnSearchInput" placeholder="Search columns..." oninput="renderColumnLibrary()">
+            <select class="control compact" id="columnCategoryFilter" onchange="renderColumnLibrary()"><option value="">All categories</option></select>
+            <span style="flex:1 1 auto;"></span>
+            <span id="columnSelectedCount" class="muted" style="white-space:nowrap;"></span>
+            <button class="link-btn" type="button" onclick="resetColumnsToRecommended()">Reset to recommended</button>
+          </div>
+          <div id="columnLibraryList" class="col-unified-list"></div>
+          <p class="help" id="columnCountWarning" style="display:none;color:var(--warn);"></p>
         </div>
 
         <div class="subsection">
-          <h4>Patient Row Fields</h4>
-          <p>Choose which data appears for each patient on this board, and which level it appears at.</p>
-          <div class="check-grid cols-3" id="patientFieldsGrid"></div>
+          <h4>Live preview</h4>
+          <p>See what this configuration looks like with synthetic sample data &mdash; never real patient data.</p>
+          <button class="btn" type="button" onclick="openPatientPreviewModal()">Preview table</button>
         </div>
 
-        <div class="subsection disclosure">
-          <button type="button" class="disclosure-toggle" onclick="toggleDisclosure(this)">
-            <span class="disclosure-title">Patient Actions</span>
-            <span class="muted disclosure-summary"></span>
-            <span class="disclosure-chevron">&#9662;</span>
-          </button>
-          <div class="disclosure-body" style="display:none;">
-            <div class="check-grid cols-3" onchange="updateDisclosureSummary(this)">
-              <label class="check-option"><input type="checkbox" checked> Status Change</label>
-              <label class="check-option"><input type="checkbox" checked> Encounter Note</label>
-              <label class="check-option"><input type="checkbox"> Referral</label>
-              <label class="check-option"><input type="checkbox"> Intake Form</label>
-              <label class="check-option"><input type="checkbox" checked> Documents</label>
-              <label class="check-option"><input type="checkbox" checked> Cardex Alerts</label>
-              <label class="check-option"><input type="checkbox"> Payment</label>
-              <label class="check-option"><input type="checkbox"> Past Visits</label>
-              <label class="check-option"><input type="checkbox"> Specimen Collection</label>
-              <label class="check-option"><input type="checkbox" checked> Patient Demographics</label>
-            </div>
+        <div class="subsection">
+          <h4>Signals</h4>
+          <p>Alerts and reminders that show up on a patient row &mdash; separate from the row actions below.</p>
+          <div class="check-grid cols-3" id="signalsGrid">
+            <label class="check-option"><input type="checkbox" checked> Clinical &amp; Safety Alerts</label>
+            <label class="check-option"><input type="checkbox" checked> Visitor / Confidentiality Restriction</label>
+            <label class="check-option"><input type="checkbox" checked> Assessment required</label>
+            <label class="check-option"><input type="checkbox" checked> Documentation incomplete</label>
+            <label class="check-option"><input type="checkbox" checked> Order pending</label>
+            <label class="check-option"><input type="checkbox"> Specimen pending</label>
+            <label class="check-option"><input type="checkbox"> Discharge task pending</label>
+            <label class="check-option"><input type="checkbox"> Transfer preparation incomplete</label>
+            <label class="check-option"><input type="checkbox"> Required form missing</label>
           </div>
+        </div>
+
+        <div class="subsection">
+          <h4>Operational comments</h4>
+          <p>Short, non-clinical coordination updates. Not part of the clinical record.</p>
+          <div class="form-grid">
+            <div class="field"><label class="check-option" style="font-weight:700;"><input type="checkbox" id="predefinedCommentsEnabled" checked> Enable predefined comments</label></div>
+            <div class="field"><label class="check-option" style="font-weight:700;"><input type="checkbox" id="freeTextCommentsEnabled" checked> Enable free-text entry</label></div>
+            <div class="field"><label for="commentCharLimit">Maximum character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">Default 140, adjustable 20&ndash;280.</span></span></div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h4>Patient actions</h4>
+          <p>Toggle which actions launch from a patient row. The first <input class="text" type="number" id="inlineActionLimit" value="3" min="1" max="10" style="width:52px;height:24px;padding:0 5px;display:inline-block;" onchange="renderActionLibrary()"> selected actions appear inline; the rest overflow to a menu.</p>
+          <div id="actionLibraryList"></div>
+          <p class="help" id="actionOverflowPreview" style="margin-top:8px;"></p>
+          <p class="field-error" id="statusChangeSafetyWarning" style="display:none;"><span aria-hidden="true">&#9888;</span> No status-change action is enabled. Patients have no way to move through the workflow.</p>
         </div>
 
       </div>
@@ -328,11 +396,52 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   </div>
 
-  <div class="validation-strip neutral" id="readinessIndicator">Not reviewed</div>
+  <div class="recovery" id="pendingDraftBanner"><span>This board is already live. Your changes are saved as a draft and won't affect the live board until you publish them.</span></div>
+  <div class="recovery" id="draftRecoveryBanner"><span>We found unsaved changes from a previous session.</span><span style="display:flex;gap:8px;"><button class="btn small" type="button" onclick="discardRecoverySnapshot()">Discard</button><button class="btn small primary" type="button" onclick="restoreRecoverySnapshot()">Restore</button></span></div>
   <div class="drawer-foot">
-    <button class="btn" type="button" onclick="closeDrawer()">Cancel</button>
-    <button class="btn" type="button">Save as Draft</button>
-    <button class="btn primary" type="button" id="activateBtn">Activate</button>
+    <div class="drawer-foot-zone drawer-foot-left">
+      <button type="button" class="readiness-link" id="readinessIndicator" onclick="openReadinessPanel()">Not reviewed</button>
+    </div>
+    <div class="drawer-foot-zone drawer-foot-right" id="drawerFootRight">
+      <button type="button" class="btn tertiary" onclick="closeDrawer()">Cancel</button>
+      <button class="btn" type="button" id="saveDraftBtn" onclick="saveTrackerboard('Draft')">Save as Draft</button>
+      <button class="btn primary" type="button" id="activateBtn" onclick="saveTrackerboard('Active')">Activate</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="readinessPanelBackdrop">
+  <div class="modal" id="readinessPanel" role="dialog" aria-modal="true" aria-label="Activation requirements">
+    <div class="modal-head"><h2>Activation requirements</h2><button class="icon-btn" type="button" onclick="closeReadinessPanel()" aria-label="Close">&times;</button></div>
+    <div class="modal-body" id="readinessPanelBody"></div>
+    <div class="modal-foot"><button class="btn" type="button" onclick="closeReadinessPanel()">Close</button></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="unsavedModalBackdrop">
+  <div class="modal" id="unsavedModal" role="alertdialog" aria-label="Unsaved changes" style="width:min(420px,94vw);">
+    <div class="modal-head"><h2>You have unsaved changes</h2></div>
+    <div class="modal-foot" style="justify-content:space-between;">
+      <button class="btn" type="button" onclick="closeUnsavedModal()">Continue editing</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn danger" type="button" onclick="confirmDiscardChanges()">Discard changes</button>
+        <button class="btn primary" type="button" id="unsavedSaveDraftBtn" onclick="confirmSaveAsDraftFromUnsaved()">Save as Draft</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="deleteModalBackdrop">
+  <div class="modal" id="deleteModal" role="alertdialog" aria-label="Delete trackerboard">
+    <div class="modal-head"><h2>Delete "<span id="deleteConfirmName"></span>"?</h2></div>
+    <div class="modal-body">
+      <p>This draft will be permanently deleted.</p>
+      <div class="field full"><label for="deleteConfirmInput">Type the Board Name to confirm</label><input class="text" type="text" id="deleteConfirmInput" oninput="checkDeleteConfirmInput(this.value)"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" type="button" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn primary danger" type="button" id="deleteConfirmBtn" disabled onclick="confirmDeleteTrackerboard()">Delete permanently</button>
+    </div>
   </div>
 </div>
 
@@ -341,29 +450,153 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     <div class="modal-head"><h2 id="confirmModalTitle"></h2></div>
     <div class="modal-body"><p id="confirmModalBody"></p></div>
     <div class="modal-foot">
-      <button class="btn" type="button" onclick="closeConfirmModal(false)">Cancel</button>
-      <button class="btn primary" type="button" onclick="closeConfirmModal(true)">Continue</button>
+      <button class="btn" type="button" id="confirmModalCancelBtn" onclick="closeConfirmModal(false)">Cancel</button>
+      <button class="btn primary" type="button" id="confirmModalConfirmBtn" onclick="closeConfirmModal(true)">Continue</button>
     </div>
   </div>
 </div>
 
 <script>
   var drawerTriggerEl = null;
-  function openDrawer(){
+  var modalZCounter = 300;
+  function showModalBackdrop(id){
+    // Enforces single-modal-at-a-time: closes any other open modal-backdrop before
+    // showing this one, and assigns each an incrementing z-index as a defensive
+    // second layer. See DADR P0 "Overlapping Modal Z-Index With No Stacking Order".
+    document.querySelectorAll('.modal-backdrop.open').forEach(function(el){
+      if(el.id !== id) el.classList.remove('open');
+    });
+    var el = document.getElementById(id);
+    if(!el) return;
+    modalZCounter += 1;
+    el.style.zIndex = modalZCounter;
+    el.classList.add('open');
+  }
+  var editingId = null;
+  var pendingUniqueId = '';
+  function openDrawer(id){
+    editingId = id || null;
     formDirty = false;
     drawerTriggerEl = document.activeElement;
+    var t = id ? TRACKERBOARDS.find(function(x){ return x.id === id; }) : null;
+    var data = t ? (t.pendingDraft || t) : null;
+    document.getElementById('trackerboardNameInput').value = data ? data.name : '';
+    document.getElementById('shortNameInput').value = data ? (data.shortName || '') : '';
+    pendingUniqueId = data ? data.id : '';
+    document.getElementById('trackerboardDescInput').value = data ? (data.desc || '') : '';
+    shortNameEdited = !!data;
+    var cs = data ? data.careSetting : '';
+    document.getElementById('careSettingSelect').value = cs;
+    currentCareSetting = cs;
+    selectedFacilities = data ? (data.facilities || []).slice() : [];
+    renderConnFacilityMenu();
+    selectedPrograms = data ? (data.programs || []).slice() : [];
+    renderProgramMenu();
+    selectedConfigAccess = data ? (data.configAccess || []).slice() : [];
+    selectedRuntimeAccess = data ? (data.runtimeAccess || []).slice() : [];
+    renderAccessMenu('config');
+    renderAccessMenu('runtime');
+    updateAccessWarning();
+    renderCareSettingInfo(CARE_SETTINGS[cs], selectedFacilities);
+    STATUSES = (data && data.statuses) ? JSON.parse(JSON.stringify(data.statuses)) : (STATUS_PRESETS[cs] ? clonePreset(STATUS_PRESETS[cs]) : []);
+    selectedIndex = 0;
+    renderStatusList();
+    renderStatusEditor();
+    selectedColumns = data && data.columns ? data.columns.slice() : recommendedColumnKeys();
+    document.getElementById('columnSearchInput').value = '';
+    var catFilter = document.getElementById('columnCategoryFilter');
+    if(catFilter) catFilter.value = '';
+    renderColumnLibrary();
+    renderPatientPreview();
+    actionLibraryState = data && data.actions ? Object.assign({}, actionLibraryState, data.actions) : Object.assign({}, DEFAULT_ACTION_STATE);
+    document.getElementById('inlineActionLimit').value = data && data.inlineActionLimit ? data.inlineActionLimit : 3;
+    renderActionLibrary();
+    var savedWidgets = data && data.widgets;
+    widgetOrder = savedWidgets && savedWidgets.order ? savedWidgets.order.slice() : defaultWidgetOrder();
+    // Guard against a saved order missing keys added since (e.g. new library widgets) — append any missing.
+    defaultWidgetOrder().forEach(function(k){ if(widgetOrder.indexOf(k) === -1) widgetOrder.push(k); });
+    widgetEnabled = savedWidgets && savedWidgets.enabled ? Object.assign({}, savedWidgets.enabled) : Object.assign({}, DEFAULT_WIDGET_ENABLED);
+    widgetSettings = savedWidgets && savedWidgets.settings ? JSON.parse(JSON.stringify(savedWidgets.settings)) : defaultWidgetSettings();
+    renderWidgetLibrary();
+    var transferOn = data ? !!data.transferEnabled : false;
+    document.getElementById('transferEnabled').checked = transferOn;
+    toggleTransferEnabled(transferOn);
+    var pendingBanner = document.getElementById('pendingDraftBanner');
+    if(pendingBanner) pendingBanner.classList.toggle('open', !!(t && t.status === 'Active'));
+    updateDrawerHeaderAndFooter(t);
     document.getElementById('backdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
+    SECTION_ORDER.forEach(function(sec){
+      var sCard = document.getElementById('sec-'+sec.key);
+      if(!sCard) return;
+      var sToggleBtn = sCard.querySelector('.card-toggle');
+      var sOpen = sec.key === 'basic';
+      sCard.classList.toggle('collapsed', !sOpen);
+      if(sToggleBtn) sToggleBtn.setAttribute('aria-expanded', sOpen ? 'true' : 'false');
+    });
     updateReadiness();
+    checkForRecoverySnapshot();
     var closeBtn = document.querySelector('#drawer .drawer-actions .icon-btn');
     if(closeBtn) closeBtn.focus();
   }
+
+  function updateDrawerHeaderAndFooter(t){
+    var titleEl = document.querySelector('#drawer .drawer-title');
+    var subEl = document.getElementById('drawerLifecycleState');
+    var saveBtn = document.getElementById('saveDraftBtn');
+    var activateBtn = document.getElementById('activateBtn');
+    if(!t){
+      titleEl.textContent = 'Create trackerboard';
+      if(subEl) subEl.textContent = 'Draft · ID generated when saved';
+      saveBtn.style.display = '';
+      saveBtn.textContent = 'Save as Draft';
+      activateBtn.textContent = 'Activate';
+      activateBtn.setAttribute('onclick', "saveTrackerboard('Active')");
+      return;
+    }
+    titleEl.textContent = t.name;
+    if(t.status === 'Draft'){
+      if(subEl) subEl.textContent = 'Draft · ID ' + t.id;
+      saveBtn.style.display = '';
+      saveBtn.textContent = 'Save Draft';
+      activateBtn.textContent = 'Activate Trackerboard';
+      activateBtn.setAttribute('onclick', "saveTrackerboard('Active')");
+    } else if(t.status === 'Inactive'){
+      if(subEl) subEl.textContent = 'Inactive · ID ' + t.id;
+      saveBtn.style.display = '';
+      saveBtn.textContent = 'Save Changes';
+      activateBtn.textContent = 'Reactivate Trackerboard';
+      activateBtn.setAttribute('onclick', "saveTrackerboard('Active')");
+    } else {
+      if(subEl) subEl.textContent = 'Active · ID ' + t.id;
+      saveBtn.style.display = '';
+      saveBtn.textContent = 'Save Draft Changes';
+      activateBtn.textContent = 'Publish Changes';
+      activateBtn.setAttribute('onclick', "saveTrackerboard('Active')");
+    }
+  }
   function closeDrawer(){
     if(formDirty){
-      openConfirmModal('Discard changes?', 'You have unsaved changes in this trackerboard configuration. Closing now will discard them.', function(){ formDirty = false; hideDrawer(); });
+      var name = document.getElementById('trackerboardNameInput').value.trim();
+      var saveBtn = document.getElementById('unsavedSaveDraftBtn');
+      if(saveBtn) saveBtn.disabled = !name;
+      showModalBackdrop('unsavedModalBackdrop');
       return;
     }
     hideDrawer();
+  }
+  function closeUnsavedModal(){
+    document.getElementById('unsavedModalBackdrop').classList.remove('open');
+  }
+  function confirmDiscardChanges(){
+    document.getElementById('unsavedModalBackdrop').classList.remove('open');
+    formDirty = false;
+    try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+    hideDrawer();
+  }
+  function confirmSaveAsDraftFromUnsaved(){
+    document.getElementById('unsavedModalBackdrop').classList.remove('open');
+    saveTrackerboard('Draft');
   }
 
   function hideDrawer(){
@@ -372,37 +605,211 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     if(drawerTriggerEl && drawerTriggerEl.focus) drawerTriggerEl.focus();
   }
 
-  function computeReadiness(){
+  function computeReadinessForRecord(t){
     var issues = [];
-    if(!document.getElementById('trackerboardNameInput').value.trim()) issues.push('trackerboard name');
-    if(!CARE_SETTINGS[document.getElementById('careSettingSelect').value]) issues.push('Care Setting');
-    if(!document.getElementById('facilitySelect').value) issues.push('Facility');
-    if(!STATUSES.some(function(s){ return s.start; })) issues.push('an entry status');
-    if(!STATUSES.some(function(s){ return s.complete; })) issues.push('a terminal outcome');
-    var reachable = {};
-    STATUSES.forEach(function(st){ st.allowedNext.forEach(function(id){ reachable[id] = true; }); });
-    if(STATUSES.some(function(st){ return !st.start && !reachable[st.id]; })) issues.push('an unreachable status');
+    if(!t.name || !t.name.trim()) issues.push('a Board Name');
+    if(!t.shortName || !t.shortName.trim()) issues.push('a Short Name');
+    if(!t.careSetting) issues.push('a Care Setting');
+    if(!t.facilities || !t.facilities.length) issues.push('at least one Facility');
+    if(!t.runtimeAccess || !t.runtimeAccess.length) issues.push('at least one Board access role');
+    if(t.statuses){
+      if(t.statuses.length < 2) issues.push('at least two statuses');
+      if(!t.statuses.some(function(s){ return s.start; })) issues.push('a Starting status');
+      if(!t.statuses.some(function(s){ return s.complete; })) issues.push('a Completion status');
+      var reachable = {};
+      t.statuses.forEach(function(st){ (st.allowedNext||[]).forEach(function(id){ reachable[id] = true; }); });
+      if(t.statuses.some(function(st){ return !st.start && !reachable[st.id]; })) issues.push('a reachable path for every status');
+    }
+    if(t.actions && !t.actions.statusChange) issues.push('an enabled status-change action');
     return issues;
   }
 
+  function collectTrackerboardFromForm(){
+    return {
+      name: document.getElementById('trackerboardNameInput').value.trim(),
+      shortName: document.getElementById('shortNameInput').value.trim(),
+      id: (pendingUniqueId || '').trim(),
+      desc: document.getElementById('trackerboardDescInput').value,
+      careSetting: document.getElementById('careSettingSelect').value,
+      facilities: selectedFacilities.slice(),
+      programs: selectedPrograms.slice(),
+      configAccess: selectedConfigAccess.slice(),
+      runtimeAccess: selectedRuntimeAccess.slice(),
+      statuses: JSON.parse(JSON.stringify(STATUSES)),
+      widgets: { order: widgetOrder.slice(), enabled: Object.assign({}, widgetEnabled), settings: JSON.parse(JSON.stringify(widgetSettings)) },
+      columns: selectedColumns.slice(),
+      actions: Object.assign({}, actionLibraryState),
+      inlineActionLimit: parseInt((document.getElementById('inlineActionLimit')||{}).value, 10) || 3,
+      transferEnabled: document.getElementById('transferEnabled').checked,
+      updated: 'Just now'
+    };
+  }
+
+  function saveTrackerboard(targetStatus){
+    var record = collectTrackerboardFromForm();
+    var existing = editingId ? TRACKERBOARDS.find(function(x){ return x.id === editingId; }) : null;
+
+    // Active board editing is versioned: Save Draft Changes -> Review Impact (readiness link) -> Publish Changes. See §43.3.
+    if(existing && existing.status === 'Active'){
+      var draftRecord = Object.assign({}, record, { status: 'Active' });
+      if(targetStatus === 'Active'){
+        var pubReadiness = computeReadinessSummary();
+        if(pubReadiness.blocking.length){
+          openReadinessPanel();
+          showToast('This board still has '+pubReadiness.blocking.length+(pubReadiness.blocking.length===1?' item':' items')+' that need attention before publishing.');
+          return;
+        }
+        openConfirmModal('Publish these changes?', 'This will make these changes live on "'+existing.name+'" right away, for everyone using this board.', function(){
+          Object.assign(existing, draftRecord, { status: 'Active', everActivated: true });
+          existing.pendingDraft = null;
+          try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+          formDirty = false;
+          hideDrawer();
+          renderDashboard();
+        }, { confirmLabel: 'Publish changes' });
+        return;
+      }
+      existing.pendingDraft = draftRecord;
+      try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+      formDirty = false;
+      hideDrawer();
+      renderDashboard();
+      return;
+    }
+
+    if(targetStatus === 'Active'){
+      var readiness = computeReadinessSummary();
+      if(readiness.blocking.length){
+        openReadinessPanel();
+        showToast('This board still has '+readiness.blocking.length+(readiness.blocking.length===1?' item':' items')+' that need attention before it can be activated.');
+        return;
+      }
+      openConfirmModal('Activate "'+record.name+'"?',
+        'Care Setting: '+(record.careSetting||'—')+'. Facilities: '+(record.facilities.join(', ')||'—')+'. Board access: '+(record.runtimeAccess.join(', ')||'—')+'. Workflow: '+record.statuses.length+' statuses. The board will become available to permitted users immediately.',
+        function(){
+          record.status = 'Active';
+          record.everActivated = true;
+          if(existing){ Object.assign(existing, record); } else { TRACKERBOARDS.push(record); }
+          try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+          formDirty = false;
+          hideDrawer();
+          renderDashboard();
+        }, { confirmLabel: 'Activate trackerboard' });
+      return;
+    }
+
+    record.status = targetStatus;
+    if(existing){ Object.assign(existing, record); } else { TRACKERBOARDS.push(record); }
+    try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+    formDirty = false;
+    hideDrawer();
+    renderDashboard();
+  }
+
+  function computeReadinessSummary(){
+    var blocking = [], warnings = [];
+    SECTION_ORDER.forEach(function(sec){
+      var info = computeSectionState(sec.key);
+      if(info.state === 'incomplete') blocking = blocking.concat(info.issues);
+      else if(info.state === 'warning') warnings = warnings.concat(info.issues);
+    });
+    return { blocking:blocking, warnings:warnings };
+  }
+
   function updateReadiness(){
-    var indicator = document.getElementById('readinessIndicator');
+    renderSectionNav();
+    var link = document.getElementById('readinessIndicator');
     var activateBtn = document.getElementById('activateBtn');
-    if(!indicator || !activateBtn) return;
-    var issues = computeReadiness();
-    activateBtn.disabled = issues.length > 0;
-    if(!issues.length){
-      indicator.textContent = 'Ready to publish';
-      indicator.className = 'validation-strip success';
+    if(!link || !activateBtn) return;
+    link.classList.remove('ok','warn','bad');
+    var nameEntered = (document.getElementById('trackerboardNameInput').value || '').trim().length > 0;
+    if(!editingId && !formDirty && !nameEntered){
+      // A brand-new, untouched form isn't "broken" yet — it just hasn't been started.
+      // Showing a red blocking count before anyone has typed anything reads as alarming, not helpful.
+      link.textContent = 'Get started below';
+      activateBtn.disabled = true;
+      return;
+    }
+    var summary = computeReadinessSummary();
+    activateBtn.disabled = summary.blocking.length > 0;
+    if(summary.blocking.length){
+      link.textContent = (summary.blocking.length === 1 ? '1 item needs attention' : summary.blocking.length + ' items need attention') + ' · Review';
+      link.classList.add('bad');
+    } else if(summary.warnings.length){
+      link.textContent = 'Ready to activate · ' + (summary.warnings.length === 1 ? '1 warning' : summary.warnings.length + ' warnings') + ' · Review';
+      link.classList.add('warn');
     } else {
-      indicator.textContent = (issues.length===1 ? '1 step left' : issues.length + ' steps left') + ' to publish: add ' + issues.join(', ');
-      indicator.className = 'validation-strip warning';
+      link.textContent = 'Ready to activate';
+      link.classList.add('ok');
     }
   }
 
+  function openReadinessPanel(){
+    var body = document.getElementById('readinessPanelBody');
+    var html = '';
+    SECTION_ORDER.forEach(function(sec){
+      var info = computeSectionState(sec.key);
+      if(!info.issues.length) return;
+      html += '<div class="issue-group"><h4>'+sec.label+'</h4>';
+      info.issues.forEach(function(issue){
+        html += '<div class="issue-row"><span>'+(info.state==='warning'?'&#9888;':'&#9679;')+'</span><span>'+issue+'</span><button class="link-btn" type="button" onclick="closeReadinessPanel();goToSection(\''+sec.key+'\')">Review</button></div>';
+      });
+      html += '</div>';
+    });
+    if(!html) html = '<p class="muted">No outstanding items. This board is ready to activate.</p>';
+    body.innerHTML = html;
+    showModalBackdrop('readinessPanelBackdrop');
+  }
+
+  function closeReadinessPanel(){
+    document.getElementById('readinessPanelBackdrop').classList.remove('open');
+  }
+
   var formDirty = false;
-  document.getElementById('drawer').addEventListener('input', function(){ formDirty = true; updateReadiness(); });
-  document.getElementById('drawer').addEventListener('change', function(){ formDirty = true; updateReadiness(); });
+  function recoveryKey(){ return 'tb_recovery_' + (editingId || 'new'); }
+  function writeRecoverySnapshot(){
+    var name = document.getElementById('trackerboardNameInput').value.trim();
+    if(!name) return; // snapshot only starts once a Board Name is entered, per §15.1a
+    try{
+      var snapshot = collectTrackerboardFromForm();
+      snapshot.savedAt = Date.now();
+      localStorage.setItem(recoveryKey(), JSON.stringify(snapshot));
+    }catch(e){ /* storage unavailable; recovery is best-effort, not required */ }
+  }
+  function checkForRecoverySnapshot(){
+    var banner = document.getElementById('draftRecoveryBanner');
+    if(!banner) return;
+    banner.classList.remove('open');
+    try{
+      var raw = localStorage.getItem(recoveryKey());
+      if(!raw) return;
+      var snap = JSON.parse(raw);
+      var lastSavedAt = editingId ? 0 : 0; // this prototype has no separate "last explicit save" timestamp per record; treat any snapshot as newer
+      pendingRecoverySnapshot = snap;
+      banner.classList.add('open');
+    }catch(e){ /* ignore corrupt snapshot */ }
+  }
+  var pendingRecoverySnapshot = null;
+  function restoreRecoverySnapshot(){
+    var snap = pendingRecoverySnapshot;
+    if(!snap) return;
+    document.getElementById('trackerboardNameInput').value = snap.name || '';
+    document.getElementById('shortNameInput').value = snap.shortName || '';
+    shortNameEdited = true;
+    document.getElementById('trackerboardDescInput').value = snap.desc || '';
+    document.getElementById('careSettingSelect').value = snap.careSetting || '';
+    onCareSettingChange(snap.careSetting || '');
+    document.getElementById('draftRecoveryBanner').classList.remove('open');
+    formDirty = true;
+    updateReadiness();
+  }
+  function discardRecoverySnapshot(){
+    try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+    pendingRecoverySnapshot = null;
+    document.getElementById('draftRecoveryBanner').classList.remove('open');
+  }
+  document.getElementById('drawer').addEventListener('input', function(){ formDirty = true; updateReadiness(); writeRecoverySnapshot(); });
+  document.getElementById('drawer').addEventListener('change', function(){ formDirty = true; updateReadiness(); writeRecoverySnapshot(); });
   document.getElementById('drawer').addEventListener('keydown', function(e){
     if(e.key === 'Escape'){
       e.stopPropagation();
@@ -419,11 +826,15 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   });
 
   var confirmModalCallback = null;
-  function openConfirmModal(title, message, onConfirm){
-    document.getElementById('confirmModalTitle').textContent = title;
-    document.getElementById('confirmModalBody').textContent = message;
+  function openConfirmModal(title, message, onConfirm, opts){
+    opts = opts || {};
+    document.getElementById('confirmModalTitle').innerHTML = title;
+    document.getElementById('confirmModalBody').innerHTML = message;
+    document.getElementById('confirmModalCancelBtn').textContent = opts.cancelLabel || 'Cancel';
+    document.getElementById('confirmModalConfirmBtn').textContent = opts.confirmLabel || 'Continue';
+    document.getElementById('confirmModalConfirmBtn').className = 'btn primary' + (opts.danger ? ' danger' : '');
     confirmModalCallback = onConfirm;
-    document.getElementById('confirmModalBackdrop').classList.add('open');
+    showModalBackdrop('confirmModalBackdrop');
   }
   function closeConfirmModal(confirmed){
     document.getElementById('confirmModalBackdrop').classList.remove('open');
@@ -452,11 +863,11 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     if(!shortNameEdited){
       document.getElementById('shortNameInput').value = generateShortName(value);
     }
-    document.getElementById('uniqueIdInput').value = generateUniqueId(document.getElementById('shortNameInput').value);
+    if(!editingId) pendingUniqueId = generateUniqueId(document.getElementById('shortNameInput').value);
   }
   function onShortNameInput(value){
     shortNameEdited = true;
-    document.getElementById('uniqueIdInput').value = generateUniqueId(value);
+    if(!editingId) pendingUniqueId = generateUniqueId(value);
   }
 
   function toggleMenu(btn){
@@ -467,64 +878,463 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   document.addEventListener('click', function(e){
     if(!e.target.closest('.menu-wrap')) document.querySelectorAll('.menu.open').forEach(function(m){ m.classList.remove('open'); });
     if(!e.target.closest('.picker')) document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(!e.target.closest('.info-popover-wrap')) document.querySelectorAll('.info-popover-wrap.open').forEach(function(w){ w.classList.remove('open'); });
   });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') document.querySelectorAll('.info-popover-wrap.open').forEach(function(w){ w.classList.remove('open'); });
+  });
+  var SEED_MIN_STATUSES = [
+    { id:'seed_a', name:'Waiting', desc:'', start:true, complete:false, allowLWOT:true, allowedNext:['seed_b'], requirements:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'', visibleAsTab:true, countsAsActive:true, canBeReversed:false, requiresReason:false, reasons:[], alertRecipient:'', alertSeverity:'passive', highlightRow:false },
+    { id:'seed_b', name:'Completed', desc:'', start:false, complete:true, allowLWOT:false, allowedNext:[], requirements:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'', visibleAsTab:true, countsAsActive:false, canBeReversed:false, requiresReason:false, reasons:[], alertRecipient:'', alertSeverity:'passive', highlightRow:false }
+  ];
+  var SEED_ACTIONS = { statusChange:true, addViewOrders:true, encounterNote:true, documents:true, viewCardexAlerts:true, patientDemographics:true };
+
   var TRACKERBOARDS = [
-    { name:'Emergency Department Trackerboard', id:'EDT001', careSetting:'Emergency Department', facility:'Central City Health', updated:'07 Aug 2026', status:'Active' },
-    { name:'ED Overflow Trackerboard', id:'EDT003', careSetting:'Emergency Department', facility:'Riverside Clinic', updated:'26 Jul 2026', status:'Active' },
-    { name:'Inpatient Trackerboard', id:'IPT004', careSetting:'Inpatient', facility:'Lakeside Medical Center', updated:'05 Aug 2026', status:'Draft' },
-    { name:'ICU Trackerboard', id:'IPT005', careSetting:'Inpatient', facility:'Central City Health', updated:'22 Jul 2026', status:'Active' },
-    { name:'Operating Room Trackerboard', id:'ORT002', careSetting:'Operating Room', facility:'Riverside Clinic', updated:'28 Jul 2026', status:'Inactive' },
-    { name:'Same-Day Surgery Trackerboard', id:'ORT006', careSetting:'Operating Room', facility:'Central City Health', updated:'19 Jul 2026', status:'Draft' },
-    { name:'Post-Op Recovery Trackerboard', id:'ORT008', careSetting:'Operating Room', facility:'Lakeside Medical Center', updated:'02 Jul 2026', status:'Inactive' },
-    { name:'Outpatient Clinic Trackerboard', id:'OPC007', careSetting:'Outpatient Clinic', facility:'Riverside Clinic', updated:'14 Jul 2026', status:'Active' }
+    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSetting:'Emergency Department', facilities:['Central City Health','Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07 Aug 2026', status:'Active', activePatients:6, dependents:1 },
+    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSetting:'Emergency Department', facilities:['Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'26 Jul 2026', status:'Active', activePatients:4, dependents:1 },
+    { name:'Inpatient Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSetting:'Inpatient', facilities:['Lakeside Medical Center'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'05 Aug 2026', status:'Draft', activePatients:0, dependents:0 },
+    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSetting:'Inpatient', facilities:['Central City Health'], programs:['Critical Care Management','General Medicine'], runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'11 Aug 2026', status:'Active', activePatients:9, dependents:2 },
+    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSetting:'Operating Room', facilities:['Riverside Clinic'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'28 Jul 2026', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSetting:'Operating Room', facilities:['Central City Health'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'30 Jul 2026', status:'Draft', activePatients:0, dependents:0 },
+    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSetting:'Operating Room', facilities:['Lakeside Medical Center'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'02 Aug 2026', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Outpatient Clinic Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks scheduled clinic visits from check-in to check-out.',careSetting:'Outpatient Clinic', facilities:['Riverside Clinic','Lakeside Medical Center'], programs:['Ambulatory Care Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'14 Aug 2026', status:'Active', activePatients:3, dependents:0 }
   ];
 
-  function initDashboardFilters(){
-    var facilities = Array.from(new Set(TRACKERBOARDS.map(function(t){ return t.facility; }))).sort();
-    document.getElementById('facilityFilter').innerHTML = '<option value="">Facility: All</option>' + facilities.map(function(f){ return '<option value="'+f+'">'+f+'</option>'; }).join('');
-    var careSettings = Array.from(new Set(TRACKERBOARDS.map(function(t){ return t.careSetting; }))).sort();
-    document.getElementById('careSettingFilter').innerHTML = '<option value="">Care Setting: All</option>' + careSettings.map(function(cs){ return '<option value="'+cs+'">'+cs+'</option>'; }).join('');
+  function allFacilities(){
+    var set = {};
+    TRACKERBOARDS.forEach(function(t){ t.facilities.forEach(function(f){ set[f] = true; }); });
+    return Object.keys(set).sort();
+  }
+  function allCareSettingsUsed(){
+    return Array.from(new Set(TRACKERBOARDS.map(function(t){ return t.careSetting; }))).sort();
+  }
+  function allProgramsUsed(){
+    var set = {};
+    TRACKERBOARDS.forEach(function(t){ (t.programs||[]).forEach(function(p){ set[p] = true; }); });
+    return Object.keys(set).sort();
   }
 
+  var dashboardFilters = { facility: [], careSetting: [], program: [], status: [], showInactive: false, search: '' };
+  var dashboardSort = { key: 'name', dir: 1 };
+
+  function filterOptionsFor(type){
+    if(type === 'facility') return allFacilities();
+    if(type === 'program') return allProgramsUsed().concat(['No Program']);
+    if(type === 'status') return ['Draft','Active','Inactive'];
+    return allCareSettingsUsed();
+  }
+
+  function initDashboardFilters(){
+    renderFilterMenu('facility');
+    renderFilterMenu('careSetting');
+    renderFilterMenu('program');
+    renderFilterMenu('status');
+  }
+
+  function onDashboardSearchInput(value){
+    dashboardFilters.search = value;
+    updateClearFiltersVisibility();
+    renderDashboard();
+  }
+
+  function filtersActive(){
+    return !!(dashboardFilters.search || dashboardFilters.facility.length || dashboardFilters.careSetting.length ||
+      dashboardFilters.program.length || dashboardFilters.status.length || dashboardFilters.showInactive);
+  }
+
+  function updateClearFiltersVisibility(){
+    var btn = document.getElementById('clearFiltersBtn');
+    if(btn) btn.style.display = filtersActive() ? '' : 'none';
+  }
+
+  function clearAllFilters(){
+    dashboardFilters = { facility: [], careSetting: [], program: [], status: [], showInactive: false, search: '' };
+    document.getElementById('dashboardSearchInput').value = '';
+    document.getElementById('showInactiveToggle').checked = false;
+    renderFilterMenu('facility');
+    renderFilterMenu('careSetting');
+    renderFilterMenu('program');
+    renderFilterMenu('status');
+    updateClearFiltersVisibility();
+    renderDashboard();
+  }
+
+  function renderFilterMenu(type){
+    var options = filterOptionsFor(type);
+    var selected = dashboardFilters[type];
+    var menu = document.getElementById(type + 'FilterMenu');
+    if(!menu) return;
+    menu.innerHTML = options.length ? options.map(function(opt){
+      var checked = selected.indexOf(opt) > -1 ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+opt+'"'+checked+' onchange="toggleDashboardFilter(\''+type+'\', \''+opt.replace(/'/g,"\\'")+'\', this.checked)"> '+opt+'</label>';
+    }).join('') : '<div class="picker-option" style="cursor:default;color:var(--muted)">No options</div>';
+    updateFilterButtonLabel(type);
+  }
+
+  function updateFilterButtonLabel(type){
+    var btn = document.getElementById(type + 'FilterBtn');
+    if(!btn) return;
+    var label = type === 'facility' ? 'Facility' : type === 'program' ? 'Program' : (type === 'status' ? 'Status' : 'Care Setting');
+    var count = dashboardFilters[type].length;
+    btn.textContent = label + ': ' + (count ? count + ' selected' : 'All');
+  }
+
+  function toggleDashboardFilter(type, value, checked){
+    var arr = dashboardFilters[type];
+    var pos = arr.indexOf(value);
+    if(checked && pos===-1) arr.push(value);
+    if(!checked && pos>-1) arr.splice(pos,1);
+    updateFilterButtonLabel(type);
+    updateClearFiltersVisibility();
+    renderDashboard();
+  }
+
+  function toggleFilterPicker(type){
+    var menu = document.getElementById(type + 'FilterMenu');
+    var btn = document.getElementById(type + 'FilterBtn');
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+
+  function toggleShowInactive(checked){
+    dashboardFilters.showInactive = checked;
+    updateClearFiltersVisibility();
+    renderDashboard();
+  }
+
+  function setDashboardSort(key){
+    if(dashboardSort.key === key) dashboardSort.dir *= -1;
+    else { dashboardSort.key = key; dashboardSort.dir = 1; }
+    renderDashboard();
+  }
+
+  function canDeleteTrackerboard(t){
+    return t.status === 'Draft' && !t.everActivated && (t.dependents||0) === 0;
+  }
+
+  var deleteTargetId = null;
   function deleteTrackerboard(id){
     var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
-    if(!t) return;
-    if(!confirm('Delete "'+t.name+'"? This cannot be undone.')) return;
-    TRACKERBOARDS = TRACKERBOARDS.filter(function(x){ return x.id !== id; });
+    if(!t || !canDeleteTrackerboard(t)) return;
+    deleteTargetId = id;
+    document.getElementById('deleteConfirmName').textContent = t.name;
+    document.getElementById('deleteConfirmInput').value = '';
+    document.getElementById('deleteConfirmBtn').disabled = true;
+    showModalBackdrop('deleteModalBackdrop');
+    document.getElementById('deleteConfirmInput').focus();
+  }
+  function checkDeleteConfirmInput(value){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === deleteTargetId; });
+    document.getElementById('deleteConfirmBtn').disabled = !t || value !== t.name;
+  }
+  function closeDeleteModal(){
+    document.getElementById('deleteModalBackdrop').classList.remove('open');
+    deleteTargetId = null;
+  }
+  function confirmDeleteTrackerboard(){
+    // Re-validate eligibility at the instant of the destructive click, not only when the dialog opened.
+    var t = TRACKERBOARDS.find(function(x){ return x.id === deleteTargetId; });
+    if(!t || !canDeleteTrackerboard(t)){
+      closeDeleteModal();
+      showToast('This board is no longer an eligible draft, so it was not deleted.');
+      renderDashboard();
+      return;
+    }
+    TRACKERBOARDS = TRACKERBOARDS.filter(function(x){ return x.id !== t.id; });
+    closeDeleteModal();
     renderDashboard();
   }
 
-  function toggleTrackerboardStatus(id){
+  function duplicateTrackerboard(id){
     var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
     if(!t) return;
-    t.status = t.status === 'Active' ? 'Inactive' : 'Active';
+    var copy = JSON.parse(JSON.stringify(t));
+    copy.name = 'Copy of ' + t.name;
+    var shortName = generateShortName(copy.name);
+    copy.shortName = shortName;
+    copy.id = generateUniqueId(shortName) || (t.id + '-COPY');
+    copy.status = 'Draft';
+    copy.everActivated = false;
+    copy.activePatients = 0;
+    copy.dependents = 0;
+    copy.updated = 'Just now';
+    copy.duplicatedFrom = t.name;
+    TRACKERBOARDS.push(copy);
     renderDashboard();
+    openDrawer(copy.id);
+  }
+
+  function reviewPendingDraft(id){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
+    if(!t || !t.pendingDraft) return;
+    openConfirmModal('Publish these changes?', 'This will make these changes live on "'+t.name+'" right away, for everyone using this board.', function(){
+      Object.assign(t, t.pendingDraft, { status: 'Active' });
+      t.pendingDraft = null;
+      renderDashboard();
+    }, { confirmLabel: 'Publish changes' });
+  }
+
+  function deactivateTrackerboard(id){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
+    if(!t || t.status !== 'Active') return;
+    if((t.activePatients||0) > 0){
+      openConfirmModal('Can\'t deactivate "'+t.name+'"', t.activePatients + (t.activePatients===1?' active patient is':' active patients are')+' still on this board. Deactivation is blocked while any active patient remains — move or discharge them first.', function(){}, { cancelLabel:'Close', confirmLabel:'Review board' });
+      return;
+    }
+    openConfirmModal('Deactivate "'+t.name+'"?', 'New patients can no longer be placed on this board. History is preserved. Active patients: 0. Dependent schedules or integrations: '+(t.dependents||0)+'.', function(){
+      // Re-check at the instant of confirmation, not only when the dialog opened.
+      var live = TRACKERBOARDS.find(function(x){ return x.id === id; });
+      if(!live || live.status !== 'Active' || (live.activePatients||0) > 0){
+        showToast('This board changed since the dialog opened, so it was not deactivated. Please try again.');
+        renderDashboard();
+        return;
+      }
+      live.status = 'Inactive';
+      renderDashboard();
+    }, { confirmLabel: 'Deactivate' });
+  }
+
+  function reactivateTrackerboard(id){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
+    if(!t || t.status !== 'Inactive') return;
+    var issues = computeReadinessForRecord(t);
+    if(issues.length){
+      openReadinessBlockedModal(t, issues);
+      return;
+    }
+    openConfirmModal('Reactivate "'+t.name+'"?', 'This re-checks activation requirements.', function(){
+      var live = TRACKERBOARDS.find(function(x){ return x.id === id; });
+      var liveIssues = live ? computeReadinessForRecord(live) : ['board no longer available'];
+      if(!live || liveIssues.length){
+        showToast('"'+(live?live.name:t.name)+'" no longer meets activation requirements, so it was not reactivated.');
+        renderDashboard();
+        return;
+      }
+      live.status = 'Active';
+      renderDashboard();
+    }, { confirmLabel: 'Reactivate' });
+  }
+
+  function openReadinessBlockedModal(t, issues){
+    openConfirmModal('Reactivate "'+t.name+'"?', 'This board still needs: ' + issues.join(', ') + '. Open it to finish setting it up before reactivating.', function(){ openDrawer(t.id); }, { cancelLabel:'Close', confirmLabel:'Open board' });
+  }
+
+  function statusPillClass(status){
+    if(status === 'Active') return 'active';
+    if(status === 'Draft') return 'draft';
+    return 'inactive';
+  }
+
+  function popoverList(title, items){
+    if(!items.length) return '';
+    return '<div class="ip-title">'+title+'</div>' + items.map(function(i){ return '<div class="ip-row"><span>'+i+'</span></div>'; }).join('');
   }
 
   function renderDashboard(){
-    var facilityFilter = document.getElementById('facilityFilter') ? document.getElementById('facilityFilter').value : '';
-    var careSettingFilter = document.getElementById('careSettingFilter') ? document.getElementById('careSettingFilter').value : '';
+    var q = (dashboardFilters.search||'').trim().toLowerCase();
     var filtered = TRACKERBOARDS.filter(function(t){
-      return (!facilityFilter || t.facility === facilityFilter) && (!careSettingFilter || t.careSetting === careSettingFilter);
+      var searchOk = !q || t.name.toLowerCase().indexOf(q)>-1 || (t.shortName||'').toLowerCase().indexOf(q)>-1 || t.id.toLowerCase().indexOf(q)>-1;
+      var facilityOk = !dashboardFilters.facility.length || t.facilities.some(function(f){ return dashboardFilters.facility.indexOf(f) > -1; });
+      var careOk = !dashboardFilters.careSetting.length || dashboardFilters.careSetting.indexOf(t.careSetting) > -1;
+      var programOk = !dashboardFilters.program.length || dashboardFilters.program.some(function(p){
+        return p === 'No Program' ? !(t.programs&&t.programs.length) : (t.programs||[]).indexOf(p) > -1;
+      });
+      var inactiveOk = dashboardFilters.showInactive || t.status !== 'Inactive';
+      var statusOk = !dashboardFilters.status.length || dashboardFilters.status.indexOf(t.status) > -1;
+      return searchOk && facilityOk && careOk && programOk && statusOk && inactiveOk;
+    });
+    var key = dashboardSort.key, dir = dashboardSort.dir;
+    filtered.sort(function(a,b){
+      var av = key === 'facilities' ? a.facilities.join(', ') : key === 'program' ? (a.programs||[]).join(', ') : a[key];
+      var bv = key === 'facilities' ? b.facilities.join(', ') : key === 'program' ? (b.programs||[]).join(', ') : b[key];
+      return av < bv ? -1*dir : av > bv ? 1*dir : 0;
+    });
+    document.querySelectorAll('.table th[data-key-th]').forEach(function(th){
+      th.setAttribute('aria-sort', th.dataset.keyTh === key ? (dir===1?'ascending':'descending') : 'none');
     });
     var body = document.getElementById('dashboardBody');
-    body.innerHTML = filtered.map(function(t){
-      var statusClass = t.status.toLowerCase();
-      return '<tr>'+
-        '<td><span class="cell-title">'+t.name+'</span></td>'+
-        '<td>'+t.id+'</td>'+
-        '<td>'+t.careSetting+'</td>'+
-        '<td>'+t.facility+'</td>'+
-        '<td>'+t.updated+'</td>'+
-        '<td><span class="pill '+statusClass+'">'+t.status+'</span></td>'+
-        '<td class="actions"><div class="menu-wrap">'+
-          '<button class="icon-btn" type="button" onclick="toggleMenu(this)" aria-label="Row actions">&#8942;</button>'+
-          '<div class="menu"><button type="button" onclick="openDrawer()">Edit</button><button type="button" onclick="toggleTrackerboardStatus(\''+t.id+'\')">'+(t.status==='Active'?'Deactivate':'Activate')+'</button><button type="button">Duplicate</button><button type="button" onclick="deleteTrackerboard(\''+t.id+'\')">Delete</button><button type="button">History Log</button></div>'+
-        '</div></td>'+
-      '</tr>';
-    }).join('');
+    if(!TRACKERBOARDS.length){
+      body.innerHTML = '<tr><td colspan="7"><div class="empty"><strong>No Trackerboards have been created yet.</strong><div style="margin-top:10px;"><button class="btn primary" type="button" onclick="openDrawer()">New trackerboard</button></div></div></td></tr>';
+    } else if(!filtered.length){
+      body.innerHTML = '<tr><td colspan="7"><div class="empty"><strong>No Trackerboards match the current search and filters.</strong><div style="margin-top:10px;"><button class="btn" type="button" onclick="clearAllFilters()">Clear filters</button></div></div></td></tr>';
+    } else {
+      body.innerHTML = filtered.map(function(t){
+        var statusClass = statusPillClass(t.status);
+        var facilityChips = t.facilities.length ? t.facilities[0] + (t.facilities.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(t.facilities.length-1)+' more</button><span class="info-popover">'+popoverList('Facilities', t.facilities)+'</span></span>' : '') : '—';
+        var programList = t.programs||[];
+        var programChips = programList.length ? programList[0] + (programList.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(programList.length-1)+' more</button><span class="info-popover">'+popoverList('Programs', programList)+'</span></span>' : '') : '—';
+        var infoPopoverBody = '<div class="ip-title">'+t.name+'</div>'+
+          '<div class="ip-row"><span class="ip-label">ID:</span><span class="ip-value">'+t.id+'</span><button type="button" class="link-btn" style="font-size:11px;margin-left:auto;" onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText(\''+t.id+'\')">Copy</button></div>'+
+          '<div class="ip-row"><span class="ip-label">Short name:</span><span class="ip-value">'+(t.shortName||'—')+'</span></div>'+
+          '<div class="ip-row"><span class="ip-label">Description:</span><span class="ip-value">'+(t.desc ? t.desc : '—')+'</span></div>';
+        var boardInfo = ' <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="Board information for '+t.name+'" onclick="event.stopPropagation();toggleInfoPopover(this)">&#9432;</button><span class="info-popover">'+infoPopoverBody+'</span></span>';
+        var unavailableFacility = t.facilityUnavailable ? ' <span class="tag" style="color:var(--bad);">Unavailable</span>' : '';
+        return '<tr>'+
+          '<td><span class="cell-title">'+t.name+'</span>'+boardInfo+'</td>'+
+          '<td>'+t.careSetting+'</td>'+
+          '<td>'+facilityChips+unavailableFacility+'</td>'+
+          '<td>'+programChips+'</td>'+
+          '<td>'+t.updated+'</td>'+
+          '<td><span class="pill '+statusClass+'">'+t.status+'</span>'+(t.pendingDraft?' <span class="pill pending">Pending changes</span>':'')+'</td>'+
+          '<td class="actions"><div class="menu-wrap">'+
+            '<button class="icon-btn" type="button" onclick="toggleMenu(this)" aria-label="Row actions for '+t.name+'">&#8942;</button>'+
+            '<div class="menu">'+
+              '<button type="button" onclick="openDrawer(\''+t.id+'\')">Edit</button>'+
+              (t.pendingDraft ? '<button type="button" onclick="reviewPendingDraft(\''+t.id+'\')">Review &amp; publish changes</button>' : '')+
+              '<button type="button" onclick="duplicateTrackerboard(\''+t.id+'\')">Duplicate</button>'+
+              (t.status==='Active' ? '<button type="button" onclick="deactivateTrackerboard(\''+t.id+'\')">Deactivate</button>' : '')+
+              (t.status==='Inactive' ? '<button type="button" onclick="reactivateTrackerboard(\''+t.id+'\')">Reactivate</button>' : '')+
+              (canDeleteTrackerboard(t) ? '<button class="danger" type="button" onclick="deleteTrackerboard(\''+t.id+'\')">Delete</button>' : '')+
+              '<button type="button" onclick="openAuditHistory(\''+t.id+'\')">View activity log</button>'+
+            '</div>'+
+          '</div></td>'+
+        '</tr>';
+      }).join('');
+    }
     document.getElementById('dashboardFooterSummary').textContent = 'Showing ' + filtered.length + ' of ' + TRACKERBOARDS.length + ' trackerboards';
   }
+
+  function toggleInfoPopover(btn){
+    var wrap = btn.closest('.info-popover-wrap') || btn.parentElement;
+    var willOpen = !wrap.classList.contains('open');
+    document.querySelectorAll('.info-popover-wrap.open').forEach(function(w){ w.classList.remove('open'); });
+    if(willOpen) wrap.classList.add('open');
+  }
+  var WIDGET_LIBRARY = [
+    { key:'totalPatients', label:'Total Patients', settings:[], placement:'strip' },
+    { key:'resourceAvailability', label:'Resource Availability', settings:[], placement:'strip' },
+    { key:'codeTeam', label:'Code Team', settings:[], placement:'strip' },
+    { key:'doctorsOnDuty', label:'Doctors on Duty', settings:[], placement:'strip' },
+    { key:'cardexPanel', label:'Cardex Panel', settings:[], placement:'panel' },
+    { key:'losDelay', label:'Length of Stay & Delay', desc:'Patients approaching or exceeding total-stay or status-duration thresholds.', settings:['Emergency Department','Inpatient','Operating Room'], placement:'strip' },
+    { key:'pendingWork', label:'Pending Work Summary', desc:'Counts of pending orders, results, medications, assessments, documentation, or approvals.', settings:['Emergency Department','Inpatient','Operating Room','Outpatient Clinic'], placement:'strip' },
+    { key:'transferReadiness', label:'Transfer & Discharge Readiness', desc:'Pending transfers, expected discharges, blockers, and patients ready for the next destination.', settings:['Emergency Department','Inpatient'], placement:'panel' },
+    { key:'expectedArrivals', label:'Expected Arrivals / Waitlist', desc:'Scheduled arrivals, pre-arrivals, and waiting patients within a defined time window.', settings:['Emergency Department','Outpatient Clinic','Operating Room'], placement:'panel' },
+    { key:'acuityMix', label:'Acuity / Triage Mix', desc:'Patient count by triage or acuity category.', settings:['Emergency Department'], placement:'strip' },
+    { key:'resourceTurnover', label:'Resource Turnover', desc:'Available, occupied, blocked, cleaning, or pending resources.', settings:['Emergency Department','Inpatient','Operating Room'], placement:'strip' },
+    { key:'careTeamWorkload', label:'Care Team Workload', desc:'Patient count assigned to each provider or nurse; may highlight unassigned patients.', settings:[], placement:'panel' },
+    { key:'isolationSummary', label:'Isolation / Precaution Summary', desc:'Count of patients requiring isolation or special precautions.', settings:['Emergency Department','Inpatient','Operating Room'], placement:'strip' },
+    { key:'documentationGaps', label:'Documentation Gaps', desc:'Patients with missing required forms, assessments, notes, or signatures.', settings:[], placement:'panel' }
+  ];
+  var WIDGET_PLACEMENTS = [
+    { key:'strip', label:'Top Strip Widgets', desc:'Compact count/status tiles across the top of the board. Limited real estate — the live board today ships with 4.', capacity:5 },
+    { key:'panel', label:'Side Panel Widgets', desc:'Fuller panels docked to the side of the board, like Cardex. More room than the strip, but still finite.', capacity:3 }
+  ];
+  var DEFAULT_WIDGET_ENABLED = { totalPatients:true, resourceAvailability:true, codeTeam:false, doctorsOnDuty:true, cardexPanel:true };
+  var widgetOrder = [];
+  var widgetEnabled = {};
+  var widgetSettings = {};
+
+  function defaultWidgetOrder(){ return WIDGET_LIBRARY.map(function(w){ return w.key; }); }
+  function defaultWidgetSettings(){
+    return { totalPatients:{ groupBy:'workflowStatus' }, resourceAvailability:{ types:['beds'] }, cardexPanel:{ items:['awaitingApprovals','mar','medications'] } };
+  }
+  function widgetByKey(key){ return WIDGET_LIBRARY.find(function(w){ return w.key === key; }); }
+  function widgetsForCareSetting(){
+    var cs = document.getElementById('careSettingSelect').value;
+    return WIDGET_LIBRARY.filter(function(w){ return !w.settings || !w.settings.length || !cs || w.settings.indexOf(cs) > -1; });
+  }
+  function orderedVisibleWidgetsByPlacement(placement){
+    var visibleKeys = widgetsForCareSetting().filter(function(w){ return w.placement === placement; }).map(function(w){ return w.key; });
+    return widgetOrder.filter(function(k){ return visibleKeys.indexOf(k) > -1; });
+  }
+
+  function toggleWidgetEnabled(key, checked){
+    widgetEnabled[key] = checked;
+    renderWidgetLibrary();
+    updateReadiness();
+  }
+
+  function moveWidgetInOrder(key, dir){
+    var def = widgetByKey(key);
+    var groupKeys = orderedVisibleWidgetsByPlacement(def.placement);
+    var atVisible = groupKeys.indexOf(key);
+    var swapAtVisible = atVisible + dir;
+    if(atVisible < 0 || swapAtVisible < 0 || swapAtVisible >= groupKeys.length) return;
+    var otherKey = groupKeys[swapAtVisible];
+    var a = widgetOrder.indexOf(key), b = widgetOrder.indexOf(otherKey);
+    var tmp = widgetOrder[a]; widgetOrder[a] = widgetOrder[b]; widgetOrder[b] = tmp;
+    renderWidgetLibrary();
+  }
+
+  function setTotalPatientsGroupBy(v){ widgetSettings.totalPatients.groupBy = v; }
+  function toggleResourceType(type, checked){
+    var arr = widgetSettings.resourceAvailability.types;
+    var pos = arr.indexOf(type);
+    if(checked && pos===-1) arr.push(type);
+    if(!checked && pos>-1) arr.splice(pos,1);
+  }
+  function toggleCardexItem(item, checked){
+    var arr = widgetSettings.cardexPanel.items;
+    var pos = arr.indexOf(item);
+    if(checked && pos===-1) arr.push(item);
+    if(!checked && pos>-1) arr.splice(pos,1);
+  }
+
+  function widgetBodyHtml(key){
+    if(key === 'totalPatients'){
+      var cs = document.getElementById('careSettingSelect').value;
+      var s = widgetSettings.totalPatients;
+      var options = [{ v:'workflowStatus', label:'Group by Workflow Status' }];
+      if(cs === 'Emergency Department') options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
+      if(cs === 'Inpatient' || cs === 'Operating Room') options.push({ v:'unit', label:'Group by Unit' });
+      return '<p>Choose one grouping for this count. Defaults to Workflow Status; the Care-Setting-specific option appears alongside it once a Care Setting is selected.</p><div class="check-grid cols-3">'+
+        options.map(function(o){
+          return '<label class="check-option"><input type="radio" name="totalPatientsGroupBy" value="'+o.v+'"'+(s.groupBy===o.v?' checked':'')+' onchange="setTotalPatientsGroupBy(\''+o.v+'\')"> '+o.label+'</label>';
+        }).join('') + '</div>';
+    }
+    if(key === 'resourceAvailability'){
+      var rs = widgetSettings.resourceAvailability;
+      var opts = [['beds','Beds'],['rooms','Rooms'],['chairs','Chairs']];
+      return '<div class="check-grid cols-3">'+opts.map(function(o){
+        var checked = rs.types.indexOf(o[0]) > -1;
+        return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleResourceType(\''+o[0]+'\', this.checked)"> '+o[1]+'</label>';
+      }).join('')+'</div>';
+    }
+    if(key === 'codeTeam') return '<p>Team membership is maintained on the live board.</p>';
+    if(key === 'doctorsOnDuty') return '<p>The on-duty list is maintained on the live board.</p>';
+    if(key === 'cardexPanel'){
+      var cx = widgetSettings.cardexPanel;
+      var items = [['awaitingApprovals','Awaiting Approvals'],['mar','MAR'],['medications','Medications'],['labRadiology','Lab / Radiology'],['rejectedMeds','Rejected Medication List']];
+      return '<div class="check-grid cols-3">'+items.map(function(it){
+        var checked = cx.items.indexOf(it[0]) > -1;
+        return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleCardexItem(\''+it[0]+'\', this.checked)"> '+it[1]+'</label>';
+      }).join('')+'</div>';
+    }
+    var def = widgetByKey(key);
+    return def && def.desc ? '<p>'+def.desc+'</p>' : '';
+  }
+
+  function renderWidgetLibrary(){
+    var container = document.getElementById('widgetLibraryList');
+    if(!container) return;
+    container.innerHTML = WIDGET_PLACEMENTS.map(function(group){
+      var ordered = orderedVisibleWidgetsByPlacement(group.key);
+      var enabledCount = ordered.filter(function(k){ return widgetEnabled[k]; }).length;
+      var overCapacity = enabledCount > group.capacity;
+      var cardsHtml = ordered.map(function(key, i){
+        var def = widgetByKey(key);
+        var enabled = !!widgetEnabled[key];
+        return '<div class="subsection widget-card"'+(i===0?' style="margin-top:0;"':'')+'>'+
+          '<div class="widget-head">'+
+            '<span class="widget-position">'+(i+1)+'</span>'+
+            '<h4><label class="switch-heading"><input type="checkbox"'+(enabled?' checked':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label></h4>'+
+            '<div class="widget-move"><button class="icon-btn" type="button" onclick="moveWidgetInOrder(\''+key+'\',-1)" aria-label="Move '+def.label+' up">&#9650;</button><button class="icon-btn" type="button" onclick="moveWidgetInOrder(\''+key+'\',1)" aria-label="Move '+def.label+' down">&#9660;</button></div>'+
+          '</div>'+
+          '<div class="widget-body"'+(enabled?'':' style="display:none;"')+'>'+widgetBodyHtml(key)+'</div>'+
+        '</div>';
+      }).join('');
+      return '<div class="widget-placement-group">'+
+        '<h4 class="widget-placement-title">'+group.label+' <span class="muted" style="font-weight:400;">&mdash; '+enabledCount+' of '+group.capacity+' enabled</span></h4>'+
+        '<p class="help" style="margin-top:0;">'+group.desc+'</p>'+
+        (overCapacity ? '<p class="help" style="color:var(--warn);"><span aria-hidden="true">&#9888;</span> '+enabledCount+' enabled here — more than '+group.capacity+' may not fit and could get cut off or overlap on the live board.</p>' : '')+
+        cardsHtml +
+      '</div>';
+    }).join('');
+  }
+
   var CARE_SETTINGS = {
     'Emergency Department': { visit:'Outpatient', durationValue:5, durationUnit:'hours', form:'ED Intake Form v2', facilities:['Central City Health','Riverside Clinic'] },
     'Inpatient': { visit:'Inpatient Admission', durationValue:96, durationUnit:'hours', form:'IP Admission Form v1', facilities:['Central City Health','Lakeside Medical Center'] },
@@ -547,75 +1357,219 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     return parts.join(', ');
   }
 
-  var CARE_SETTING_COLUMNS = {
-    'Emergency Department': [
-      { key:'chiefComplaint', label:'Chief Complaint', tag:'ED', checked:true, tier:'primary' },
-      { key:'triageLevel', label:'Triage Level', tag:'ED', checked:true, tier:'primary' }
-    ],
-    'Operating Room': [
-      { key:'scheduledTime', label:'Scheduled Time', tag:'OR', checked:false, tier:'primary' },
-      { key:'surgeryType', label:'Surgery Type', tag:'OR', checked:false, tier:'primary' }
-    ],
-    'Inpatient': [
-      { key:'diagnosis', label:'Diagnosis', tag:'IP', checked:false, tier:'primary' }
-    ]
-  };
-
-  var COMMON_FIELDS = [
-    { key:'patientName', label:'Patient Name', locked:true, checked:true, tier:'primary' },
-    { key:'pid', label:'PID', locked:true, checked:true, tier:'primary' },
-    { key:'age', label:'Age', checked:true, tier:'primary' },
-    { key:'bed', label:'Assigned Bed', checked:true, tier:'primary' },
-    { key:'vitals', label:'Vitals', checked:true, tier:'primary' },
-    { key:'careSetting', label:'Care Setting', checked:true, tier:'primary' },
-    { key:'provider', label:'Provider', checked:true, tier:'secondary' },
-    { key:'nurse', label:'Nurse', checked:true, tier:'secondary' },
-    { key:'patientType', label:'Patient Type', checked:false, tier:'secondary' },
-    { key:'medicalConditions', label:'Medical Conditions', checked:true, tier:'secondary' },
-    { key:'isolationInfo', label:'Isolation Information', checked:false, tier:'secondary' },
-    { key:'allergies', label:'Allergies', checked:true, tier:'secondary' }
+  var PATIENT_COLUMNS = [
+    { key:'patientName', label:'Patient Name', category:'Identity', locked:true },
+    { key:'pid', label:'PID', category:'Identity', locked:true },
+    { key:'currentStatus', label:'Current Status', category:'Workflow' },
+    { key:'timeInStatus', label:'Time in Status', category:'Workflow' },
+    { key:'arrivalTime', label:'Arrival / Admission / Appointment Time', category:'Workflow' },
+    { key:'lengthOfStay', label:'Total Length of Stay / Waiting Time', category:'Workflow', settings:['Emergency Department','Inpatient','Operating Room'] },
+    { key:'pendingWork', label:'Pending Work Indicators', category:'Workflow' },
+    { key:'disposition', label:'Disposition / Next Destination', category:'Workflow', settings:['Emergency Department','Inpatient'] },
+    { key:'dischargeBlockers', label:'Discharge / Transfer Blockers', category:'Workflow', settings:['Emergency Department','Inpatient'] },
+    { key:'expectedDischarge', label:'Expected Discharge Date / Time', category:'Workflow', settings:['Inpatient'] },
+    { key:'age', label:'Age', category:'Demographics', recommended:true },
+    { key:'patientType', label:'Patient Type', category:'Demographics', recommended:true },
+    { key:'bed', label:'Assigned Bed', category:'Resource', recommended:true },
+    { key:'careSetting', label:'Care Setting', category:'Identity', recommended:true },
+    { key:'provider', label:'Provider', category:'Care Team', recommended:true },
+    { key:'nurse', label:'Nurse', category:'Care Team', recommended:true },
+    { key:'vitals', label:'Vitals', category:'Clinical', recommended:true },
+    { key:'medicalConditions', label:'Medical Conditions', category:'Clinical' },
+    { key:'allergies', label:'Allergies', category:'Clinical' },
+    { key:'isolation', label:'Isolation / Precautions', category:'Clinical', settings:['Emergency Department','Inpatient','Operating Room'] },
+    { key:'triageAcuity', label:'Triage / Acuity', category:'Emergency Department', settings:['Emergency Department'] },
+    { key:'chiefComplaint', label:'Chief Complaint / Reason for Visit', category:'Emergency Department', settings:['Emergency Department','Outpatient Clinic'] },
+    { key:'scheduledProcedure', label:'Scheduled Procedure / Appointment Time', category:'Operating Room', settings:['Operating Room','Outpatient Clinic'] },
+    { key:'preProcedureReadiness', label:'Pre-procedure Readiness', category:'Operating Room', settings:['Operating Room'] },
+    { key:'alerts', label:'Alerts', category:'Signals' }
   ];
 
-  var rowExpandEnabled = true;
+  var selectedColumns = []; // ordered array of non-locked column keys
+  var LOCKED_COLUMN_KEYS = ['patientName','pid'];
 
-  function toggleRowExpand(checked){
-    rowExpandEnabled = checked;
-    renderPatientFieldsGrid();
+  function columnByKey(key){ return PATIENT_COLUMNS.find(function(c){ return c.key === key; }); }
+
+  function columnsForCareSetting(){
+    var cs = document.getElementById('careSettingSelect').value;
+    return PATIENT_COLUMNS.filter(function(c){ return !c.settings || !cs || c.settings.indexOf(cs) > -1; });
   }
 
-  function findPatientField(key){
-    var careSetting = document.getElementById('careSettingSelect').value;
-    var careCols = CARE_SETTING_COLUMNS[careSetting] || [];
-    return COMMON_FIELDS.concat(careCols).find(function(f){ return f.key === key; });
+  function recommendedColumnKeys(){
+    return columnsForCareSetting().filter(function(c){ return c.recommended && !c.locked; }).map(function(c){ return c.key; });
   }
 
-  function toggleFieldChecked(key, checked){
-    var f = findPatientField(key);
-    if(f) f.checked = checked;
-    renderPatientFieldsGrid();
+  function resetColumnsToRecommended(){
+    selectedColumns = recommendedColumnKeys();
+    renderColumnLibrary();
+    renderPatientPreview();
+    updateReadiness();
   }
 
-  function setFieldTier(key, tier){
-    var f = findPatientField(key);
-    if(f) f.tier = tier;
+  function toggleColumnSelected(key, checked){
+    var pos = selectedColumns.indexOf(key);
+    if(checked && pos===-1) selectedColumns.push(key);
+    if(!checked && pos>-1) selectedColumns.splice(pos,1);
+    renderColumnLibrary();
+    renderPatientPreview();
+    updateReadiness();
   }
 
-  function renderPatientFieldRow(f){
-    if(f.locked){
-      return '<label class="check-option locked"><input type="checkbox" checked disabled> '+f.label+' <span class="tag">Always included</span></label>';
+  function moveSelectedColumn(key, dir){
+    var i = selectedColumns.indexOf(key);
+    var j = i + dir;
+    if(i<0 || j<0 || j>=selectedColumns.length) return;
+    var tmp = selectedColumns[i]; selectedColumns[i] = selectedColumns[j]; selectedColumns[j] = tmp;
+    renderColumnLibrary();
+    renderPatientPreview();
+  }
+
+  function renderColumnLibrary(){
+    var list = document.getElementById('columnLibraryList');
+    var catSelect = document.getElementById('columnCategoryFilter');
+    if(!list) return;
+    // Drop any selected keys no longer eligible for the current Care Setting.
+    var eligibleKeys = columnsForCareSetting().map(function(c){ return c.key; });
+    selectedColumns = selectedColumns.filter(function(k){ return eligibleKeys.indexOf(k) > -1; });
+
+    var available = columnsForCareSetting().filter(function(c){ return !c.locked; });
+    if(catSelect && !catSelect.dataset.built){
+      var cats = Array.from(new Set(available.map(function(c){ return c.category; }))).sort();
+      catSelect.innerHTML = '<option value="">All categories</option>' + cats.map(function(c){ return '<option value="'+c+'">'+c+'</option>'; }).join('');
+      catSelect.dataset.built = '1';
     }
-    var checkedAttr = f.checked ? ' checked' : '';
-    var tag = f.tag ? ' <span class="tag">'+f.tag+'</span>' : '';
-    var tierSelect = rowExpandEnabled ?
-      '<select class="tier-select" onchange="setFieldTier(\''+f.key+'\', this.value)"><option value="primary"'+(f.tier==='primary'?' selected':'')+'>Primary</option><option value="secondary"'+(f.tier==='secondary'?' selected':'')+'>Secondary</option></select>' : '';
-    return '<label class="check-option"><input type="checkbox"'+checkedAttr+' onchange="toggleFieldChecked(\''+f.key+'\', this.checked)"> '+f.label+tag+tierSelect+'</label>';
+    var query = (document.getElementById('columnSearchInput').value || '').toLowerCase();
+    var category = catSelect ? catSelect.value : '';
+    var filtered = available.filter(function(c){
+      var matchesQuery = !query || c.label.toLowerCase().indexOf(query) > -1;
+      var matchesCategory = !category || c.category === category;
+      return matchesQuery && matchesCategory;
+    });
+    // Checked-but-filtered-out columns still need their reorder row to stay visible,
+    // otherwise search/category filtering would hide a column you already turned on.
+    var filteredKeys = filtered.map(function(c){ return c.key; });
+    selectedColumns.forEach(function(k){ if(filteredKeys.indexOf(k) === -1){ var c = columnByKey(k); if(c) filtered.push(c); } });
+    filtered.sort(function(a,b){
+      var ai = selectedColumns.indexOf(a.key), bi = selectedColumns.indexOf(b.key);
+      if(ai>-1 && bi>-1) return ai-bi;
+      if(ai>-1) return -1;
+      if(bi>-1) return 1;
+      return a.label < b.label ? -1 : 1;
+    });
+
+    var lockedHtml = LOCKED_COLUMN_KEYS.map(function(k){
+      var c = columnByKey(k);
+      return '<div class="col-row locked"><span class="col-order"></span><span class="col-name">'+c.label+'</span><span class="tag">Always included</span></div>';
+    }).join('');
+
+    var rowsHtml = filtered.length ? filtered.map(function(c){
+      var pos = selectedColumns.indexOf(c.key);
+      var checked = pos > -1;
+      var orderLabel = checked ? (pos + LOCKED_COLUMN_KEYS.length + 1) : '';
+      var moveHtml = checked ? (
+        '<div class="col-move">'+
+          '<button class="icon-btn" type="button" onclick="moveSelectedColumn(\''+c.key+'\',-1)" aria-label="Move '+c.label+' up">&#9650;</button>'+
+          '<button class="icon-btn" type="button" onclick="moveSelectedColumn(\''+c.key+'\',1)" aria-label="Move '+c.label+' down">&#9660;</button>'+
+        '</div>'
+      ) : '';
+      return '<label class="col-row"><span class="col-order">'+orderLabel+'</span><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleColumnSelected(\''+c.key+'\', this.checked)"> <span class="col-name">'+c.label+'</span><span class="tag col-cat">'+c.category+'</span>'+moveHtml+'</label>';
+    }).join('') : '<p class="muted" style="padding:8px;">No matching columns</p>';
+
+    list.innerHTML = lockedHtml + rowsHtml;
+    var countEl = document.getElementById('columnSelectedCount');
+    if(countEl) countEl.textContent = (LOCKED_COLUMN_KEYS.length + selectedColumns.length) + ' of ' + (LOCKED_COLUMN_KEYS.length + columnsForCareSetting().filter(function(c){return !c.locked;}).length) + ' columns selected';
+    var warning = document.getElementById('columnCountWarning');
+    if(warning){
+      var total = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
+      if(total > 12){ warning.style.display=''; warning.textContent = total + ' columns selected — more than 12 may not fit a typical viewport.'; }
+      else warning.style.display = 'none';
+    }
   }
 
-  function renderPatientFieldsGrid(){
-    var careSetting = document.getElementById('careSettingSelect').value;
-    var careCols = CARE_SETTING_COLUMNS[careSetting] || [];
-    var all = COMMON_FIELDS.concat(careCols);
-    document.getElementById('patientFieldsGrid').innerHTML = all.map(renderPatientFieldRow).join('');
+  var PREVIEW_PATIENTS = [
+    { patientName:'Maya Thomas', pid:'P-10492', currentStatus:'Waiting for Provider', timeInStatus:'32m', arrivalTime:'08:14', lengthOfStay:'1h 40m', bed:'E12', provider:'Dr Rao', nurse:'N. Kim', age:'54', patientType:'Adult', vitals:'98.2°F · HR 88', medicalConditions:'Hypertension', allergies:'Penicillin', isolation:'—', triageAcuity:'ESI 3', chiefComplaint:'Abdominal pain', scheduledProcedure:'—', preProcedureReadiness:'—', careSetting:'Emergency Department', pendingWork:'Labs pending', disposition:'—', dischargeBlockers:'—', expectedDischarge:'—', alerts:'2' },
+    { patientName:'Liam Joseph', pid:'P-20716', currentStatus:'In Treatment', timeInStatus:'18m', arrivalTime:'07:40', lengthOfStay:'2h 05m', bed:'E08', provider:'Dr Chen', nurse:'S. Ali', age:'31', patientType:'Adult', vitals:'99.1°F · HR 76', medicalConditions:'—', allergies:'—', isolation:'Contact', triageAcuity:'ESI 2', chiefComplaint:'Chest pain', scheduledProcedure:'—', preProcedureReadiness:'—', careSetting:'Emergency Department', pendingWork:'—', disposition:'Admit', dischargeBlockers:'—', expectedDischarge:'—', alerts:'1' }
+  ];
+
+  function renderPatientPreview(){
+    var head = document.getElementById('patientPreviewHead');
+    var body = document.getElementById('patientPreviewBody');
+    if(!head || !body) return;
+    var cols = LOCKED_COLUMN_KEYS.concat(selectedColumns).map(columnByKey).filter(Boolean);
+    head.innerHTML = '<tr>' + cols.map(function(c){ return '<th>'+c.label+'</th>'; }).join('') + '<th class="actions">Actions</th></tr>';
+    body.innerHTML = PREVIEW_PATIENTS.map(function(p){
+      return '<tr>' + cols.map(function(c){ return '<td>'+(p[c.key] !== undefined ? p[c.key] : '—')+'</td>'; }).join('') + '<td class="actions">Change &#8942;</td></tr>';
+    }).join('');
+  }
+
+  /* ---------- Patient Actions library (§36-37) ---------- */
+  var ACTION_LIBRARY = [
+    { key:'statusChange', label:'Status Change', category:'Workflow' },
+    { key:'transferPatient', label:'Transfer Patient', category:'Workflow' },
+    { key:'dischargeComplete', label:'Discharge / Complete', category:'Workflow' },
+    { key:'createManageReminder', label:'Create / Manage Reminder', category:'Workflow' },
+    { key:'addViewOrders', label:'Add / View Orders', category:'Clinical' },
+    { key:'encounterNote', label:'Encounter Note', category:'Clinical' },
+    { key:'nursingNote', label:'Nursing Note', category:'Clinical' },
+    { key:'viewResults', label:'View Results', category:'Clinical' },
+    { key:'specimenCollection', label:'Specimen Collection', category:'Clinical' },
+    { key:'viewCardexAlerts', label:'View Cardex Alerts', category:'Clinical' },
+    { key:'referral', label:'Referral', category:'Coordination' },
+    { key:'assignCareTeam', label:'Assign / Reassign Care Team', category:'Coordination' },
+    { key:'assignMoveResource', label:'Assign / Move Resource', category:'Coordination' },
+    { key:'requestTransport', label:'Request Transport', category:'Coordination' },
+    { key:'requestCleaning', label:'Request Room / Resource Cleaning', category:'Coordination' },
+    { key:'secureMessage', label:'Secure Care-Team Message', category:'Coordination' },
+    { key:'intakeForm', label:'Intake Form', category:'Administrative' },
+    { key:'documents', label:'Documents', category:'Administrative' },
+    { key:'payment', label:'Payment', category:'Administrative' },
+    { key:'pastVisits', label:'Past Visits', category:'Administrative' },
+    { key:'patientDemographics', label:'Patient Demographics', category:'Administrative' },
+    { key:'openPatientChart', label:'Open Patient Chart', category:'Administrative' },
+    { key:'printWristband', label:'Print Wristband / Labels', category:'Administrative' }
+  ];
+  var ACTION_CATEGORY_ORDER = ['Workflow','Clinical','Coordination','Administrative'];
+  var DEFAULT_ACTION_STATE = { statusChange:true, encounterNote:true, referral:true, intakeForm:true, documents:true, viewCardexAlerts:true, payment:true, pastVisits:true, specimenCollection:true, patientDemographics:true };
+  var actionLibraryState = Object.assign({}, DEFAULT_ACTION_STATE);
+
+  function toggleActionEnabled(key, checked){
+    actionLibraryState[key] = checked;
+    renderActionLibrary();
+    updateReadiness();
+  }
+
+  function renderActionLibrary(){
+    var list = document.getElementById('actionLibraryList');
+    if(!list) return;
+    list.innerHTML = ACTION_CATEGORY_ORDER.map(function(cat){
+      var items = ACTION_LIBRARY.filter(function(a){ return a.category === cat; });
+      return '<div class="action-cat-group"><h5>'+cat+'</h5><div class="check-grid cols-3">'+
+        items.map(function(a){
+          var checked = !!actionLibraryState[a.key];
+          return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionEnabled(\''+a.key+'\', this.checked)"> '+a.label+'</label>';
+        }).join('') +
+      '</div></div>';
+    }).join('');
+    var limitInput = document.getElementById('inlineActionLimit');
+    var limit = limitInput ? parseInt(limitInput.value, 10) || 3 : 3;
+    var enabled = ACTION_LIBRARY.filter(function(a){ return actionLibraryState[a.key]; });
+    var inline = enabled.slice(0, limit);
+    var overflow = enabled.slice(limit);
+    var preview = document.getElementById('actionOverflowPreview');
+    if(preview){
+      preview.textContent = enabled.length ?
+        'Inline: ' + (inline.map(function(a){ return a.label; }).join(', ') || '—') + '. Overflow menu: ' + (overflow.length ? overflow.map(function(a){ return a.label; }).join(', ') : 'none') + '.' :
+        'No actions selected.';
+    }
+    var warning = document.getElementById('statusChangeSafetyWarning');
+    if(warning) warning.style.display = actionLibraryState.statusChange ? 'none' : '';
+  }
+
+  function clampCommentLimit(input){
+    var v = parseInt(input.value, 10);
+    if(isNaN(v)) v = 140;
+    v = Math.max(20, Math.min(280, v));
+    input.value = v;
   }
 
   var REQUIREMENT_CATALOG = {
@@ -654,74 +1608,207 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     renderStatusEditor();
   }
 
-  function renderCareSettingInfo(cfg, facility){
+  function renderCareSettingInfo(cfg, facilities){
     var wrap = document.getElementById('careSettingInfo');
-    if(!cfg || !facility || facility === 'Select Facility...'){
+    if(!cfg || !facilities || !facilities.length){
       wrap.style.display = 'none';
       return;
     }
     wrap.style.display = '';
     var grid = document.getElementById('careSettingInfoGrid');
+    var inheritBadge = ' <span class="cap-tag inherited" title="Inherited from Care Setting configuration"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M8 1a1 1 0 0 1 1 1v4.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42L7 6.59V2a1 1 0 0 1 1-1z" fill="currentColor"/></svg> Inherited</span>';
     var items = [
       { label:'Default Visit Category', value:cfg.visit },
       { label:'Duration', value:cfg.durationValue+' '+cfg.durationUnit }
     ];
     if(cfg.form) items.push({ label:'Chief Complaint Form', value:cfg.form, link:true });
-    var resourceSummary = formatFacilityResources(facility);
-    if(resourceSummary){
-      items.push({ label:'Facility Resources', value:resourceSummary });
-    }
-    grid.innerHTML = items.map(function(it){
-      return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
+    var html = items.map(function(it){
+      return '<div class="info-item"><span class="info-label">'+it.label+inheritBadge+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
     }).join('');
+    html += facilities.map(function(f){
+      var summary = formatFacilityResources(f);
+      return '<div class="info-item full"><span class="info-label">Facility Resources &mdash; '+f+inheritBadge+'</span><span class="info-value'+(summary?'':' muted')+'">'+(summary || 'No resource data configured for this facility')+'</span></div>';
+    }).join('');
+    grid.innerHTML = html;
   }
 
   var currentCareSetting = '';
+  var selectedFacilities = [];
+
   function statusesMatchPreset(careSetting){
     var preset = STATUS_PRESETS[careSetting];
     if(!preset) return true;
     return JSON.stringify(STATUSES) === JSON.stringify(preset);
   }
 
+  function computeCareSettingChangeImpact(newValue){
+    var items = [];
+    if(selectedFacilities.length) items.push(selectedFacilities.length + (selectedFacilities.length===1?' selected Facility':' selected Facilities'));
+    if(selectedPrograms.length) items.push(selectedPrograms.length + (selectedPrograms.length===1?' selected Program':' selected Programs'));
+    if(STATUS_PRESETS[currentCareSetting]) items.push('Workflow statuses (reset to the standard ' + newValue + ' setup)');
+    var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.indexOf(newValue) === -1; });
+    droppedColumns.forEach(function(c){ items.push(c.label + ' column'); });
+    if(document.getElementById('transferEnabled').checked){
+      var destCount = document.querySelectorAll('#transferDestinations input:checked').length;
+      if(destCount) items.push(destCount + (destCount===1?' transfer destination':' transfer destinations'));
+    }
+    return items;
+  }
+
   function onCareSettingChange(value){
     var cfg = CARE_SETTINGS[value];
-    if(cfg && currentCareSetting && !statusesMatchPreset(currentCareSetting)){
+    if(cfg && currentCareSetting && currentCareSetting !== value){
       var select = document.getElementById('careSettingSelect');
       select.value = currentCareSetting;
-      openConfirmModal('Change Care Setting?', 'Changing Care Setting will reset your configured statuses to the ' + value + ' default. Continue?', function(){ select.value = value; applyCareSettingChange(value); });
+      var impact = computeCareSettingChangeImpact(value);
+      var body = 'Changing ' + currentCareSetting + ' to ' + value + ' will remove or reset:' +
+        (impact.length ? '<ul style="margin:8px 0 0;padding-left:18px;">' + impact.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>' : '<p class="muted" style="margin:8px 0 0;">Nothing currently configured depends on this Care Setting.</p>');
+      openConfirmModal('Change Care Setting?', body, function(){ select.value = value; applyCareSettingChange(value); }, { confirmLabel: 'Change Care Setting' });
       return;
     }
     applyCareSettingChange(value);
   }
 
-  function applyCareSettingChange(value){
-    var facilitySelect = document.getElementById('facilitySelect');
-    var cfg = CARE_SETTINGS[value];
-    currentCareSetting = value;
-    if(!cfg){
-      facilitySelect.innerHTML = '<option>Select Facility...</option>';
-      renderCareSettingInfo(null);
-      renderPatientFieldsGrid();
-      updateReadiness();
-      return;
-    }
-    facilitySelect.innerHTML = '<option>Select Facility...</option>' + cfg.facilities.map(function(f){ return '<option>'+f+'</option>'; }).join('');
-    renderCareSettingInfo(cfg, '');
-    applyStatusPreset(value);
-    renderPatientFieldsGrid();
-    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+  var PROGRAM_OPTIONS = ['General Medicine Program', 'Behavioral Health Program', 'Surgical Services Program', 'Ambulatory Care Program', 'Critical Care Management', 'ED Surge'];
+  var selectedPrograms = [];
+  function updateProgramButton(){
+    var btn = document.getElementById('programAccessBtn');
+    if(!btn) return;
+    btn.textContent = selectedPrograms.length ? selectedPrograms.length + ' selected' : 'Select Program...';
+  }
+  function renderProgramMenu(){
+    var menu = document.getElementById('programAccessMenu');
+    if(!menu) return;
+    menu.innerHTML = PROGRAM_OPTIONS.map(function(p){
+      var checked = selectedPrograms.indexOf(p) > -1 ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+p+'"'+checked+' onchange="toggleProgramOption(\''+p.replace(/'/g,"\\'")+'\', this.checked)"> '+p+'</label>';
+    }).join('');
+    updateProgramButton();
+  }
+  function toggleProgramOption(value, checked){
+    var pos = selectedPrograms.indexOf(value);
+    if(checked && pos===-1) selectedPrograms.push(value);
+    if(!checked && pos>-1) selectedPrograms.splice(pos,1);
+    updateProgramButton();
+  }
+  function toggleProgramPicker(){
+    var menu = document.getElementById('programAccessMenu');
+    var btn = document.getElementById('programAccessBtn');
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+
+  var ACCESS_ROLES = ['Trackerboard Admin', 'Unit Charge Nurse', 'Care Manager', 'IT / Configuration Analyst', 'Read-only Viewer'];
+  var selectedConfigAccess = [];
+  var selectedRuntimeAccess = [];
+  function accessState(kind){ return kind === 'config' ? selectedConfigAccess : selectedRuntimeAccess; }
+  function updateAccessButton(kind){
+    var btn = document.getElementById(kind + 'AccessBtn');
+    if(!btn) return;
+    var arr = accessState(kind);
+    btn.textContent = arr.length ? arr.length + ' selected' : 'Select roles...';
+  }
+  function renderAccessMenu(kind){
+    var menu = document.getElementById(kind + 'AccessMenu');
+    if(!menu) return;
+    var arr = accessState(kind);
+    menu.innerHTML = ACCESS_ROLES.map(function(r){
+      var checked = arr.indexOf(r) > -1 ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+r+'"'+checked+' onchange="toggleAccessRole(\''+kind+'\', \''+r+'\', this.checked)"> '+r+'</label>';
+    }).join('');
+    updateAccessButton(kind);
+  }
+  function updateAccessWarning(){
+    var el = document.getElementById('accessBroaderWarning');
+    if(!el) return;
+    var broader = selectedConfigAccess.some(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
+    el.style.display = (selectedConfigAccess.length && broader) ? '' : 'none';
+  }
+  function toggleAccessRole(kind, role, checked){
+    var arr = accessState(kind);
+    var pos = arr.indexOf(role);
+    if(checked && pos===-1) arr.push(role);
+    if(!checked && pos>-1) arr.splice(pos,1);
+    updateAccessButton(kind);
+    updateAccessWarning();
+  }
+  function toggleAccessPicker(kind){
+    var menu = document.getElementById(kind + 'AccessMenu');
+    var btn = document.getElementById(kind + 'AccessBtn');
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+
+  function connFacilityOptions(){
+    var cfg = CARE_SETTINGS[currentCareSetting];
+    return cfg ? cfg.facilities : [];
+  }
+
+  function updateConnFacilityButton(){
+    var btn = document.getElementById('connFacilityBtn');
+    if(!btn) return;
+    btn.textContent = selectedFacilities.length ? selectedFacilities.length + ' ' + (selectedFacilities.length>1?'facilities':'facility') + ' selected' : 'Select Facility...';
+  }
+
+  function renderConnFacilityMenu(){
+    var options = connFacilityOptions();
+    var menu = document.getElementById('connFacilityMenu');
+    if(!menu) return;
+    menu.innerHTML = options.length ? options.map(function(f){
+      var checked = selectedFacilities.indexOf(f) > -1 ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+f+'"'+checked+' onchange="toggleConnFacility(\''+f.replace(/'/g,"\\'")+'\', this.checked)"> '+f+'</label>';
+    }).join('') : '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting first</div>';
+    updateConnFacilityButton();
+  }
+
+  function toggleConnFacility(value, checked){
+    var pos = selectedFacilities.indexOf(value);
+    if(checked && pos===-1) selectedFacilities.push(value);
+    if(!checked && pos>-1) selectedFacilities.splice(pos,1);
+    updateConnFacilityButton();
+    renderCareSettingInfo(CARE_SETTINGS[currentCareSetting], selectedFacilities);
     updateReadiness();
   }
 
-  function onFacilityChange(value){
-    var cfg = CARE_SETTINGS[document.getElementById('careSettingSelect').value];
-    renderCareSettingInfo(cfg, value);
+  function toggleConnFacilityPicker(){
+    var menu = document.getElementById('connFacilityMenu');
+    var btn = document.getElementById('connFacilityBtn');
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+
+  function applyCareSettingChange(value){
+    var cfg = CARE_SETTINGS[value];
+    currentCareSetting = value;
+    selectedFacilities = [];
+    renderConnFacilityMenu();
+    if(!cfg){
+      renderCareSettingInfo(null);
+      renderColumnLibrary();
+      renderPatientPreview();
+      renderWidgetLibrary();
+      updateReadiness();
+      return;
+    }
+    renderCareSettingInfo(cfg, selectedFacilities);
+    applyStatusPreset(value);
+    renderColumnLibrary();
+    renderPatientPreview();
+    renderWidgetLibrary();
+    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
     updateReadiness();
   }
 
   function toggleTransferEnabled(checked){
     document.getElementById('transferBody').style.display = checked ? '' : 'none';
     if(checked) renderTransferDestinations();
+    else if(typeof renderExceptionalExits === 'function') renderExceptionalExits();
   }
 
   function renderTransferDestinations(){
@@ -730,20 +1817,242 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     var options = Object.keys(CARE_SETTINGS).filter(function(cs){ return cs !== current; });
     document.getElementById('transferDestinations').innerHTML = options.map(function(cs){
       var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
-      return '<label class="check-option"><input type="checkbox"'+checked+'> '+cs+'</label>';
+      return '<label class="check-option"><input type="checkbox"'+checked+' onchange="renderExceptionalExits()"> '+cs+'</label>';
     }).join('');
+    renderExceptionalExits();
   }
+
+  var SECTION_ORDER = [
+    { key:'basic', label:'Basic Information' },
+    { key:'caresetting', label:'Scope & Access' },
+    { key:'workflow', label:'Status & Workflow' },
+    { key:'widgets', label:'Widgets' },
+    { key:'table', label:'Patient Table' }
+  ];
 
   function toggleCardSection(btn){
     var card = btn.closest('.card');
-    var collapsed = card.classList.toggle('collapsed');
-    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    var key = card.getAttribute('data-section-key');
+    if(card.classList.contains('collapsed')) goToSection(key);
   }
 
-  function toggleWidgetBody(checkbox){
-    var card = checkbox.closest('.subsection');
-    var body = card ? card.querySelector('.widget-body') : null;
-    if(body) body.style.display = checkbox.checked ? '' : 'none';
+  function currentOpenSection(){
+    for(var i=0;i<SECTION_ORDER.length;i++){
+      var card = document.getElementById('sec-'+SECTION_ORDER[i].key);
+      if(card && !card.classList.contains('collapsed')) return SECTION_ORDER[i].key;
+    }
+    return null;
+  }
+
+  function goToSection(key){
+    SECTION_ORDER.forEach(function(sec){
+      var card = document.getElementById('sec-'+sec.key);
+      if(!card) return;
+      var toggleBtn = card.querySelector('.card-toggle');
+      var open = sec.key === key;
+      card.classList.toggle('collapsed', !open);
+      if(toggleBtn) toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    renderSectionNav();
+    var target = document.getElementById('sec-'+key);
+    if(target && typeof target.scrollIntoView === 'function') target.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function otherTrackerboards(){
+    return TRACKERBOARDS.filter(function(t){ return t.id !== editingId; });
+  }
+
+  function computeStatusDiagnostics(){
+    // True reachability from Starting via graph traversal (not just "referenced by someone"),
+    // plus whether every reachable non-terminal status can ultimately reach Completion or a
+    // permitted exceptional exit (LWT/Transfer). Shared by the readiness checklist (computeSectionState)
+    // and the status list's own inline warning icons, so both surfaces agree — see DADR P0 item 1.
+    var byId = {};
+    STATUSES.forEach(function(st){ byId[st.id] = st; });
+    var startStatuses = STATUSES.filter(function(s){ return s.start; });
+    var completeStatuses = STATUSES.filter(function(s){ return s.complete; });
+    var unreachable = {};
+    var reachableFromStart = {};
+    if(startStatuses.length){
+      var queue = startStatuses.map(function(s){ return s.id; });
+      queue.forEach(function(id){ reachableFromStart[id] = true; });
+      while(queue.length){
+        var current = byId[queue.shift()];
+        if(!current) continue;
+        (current.allowedNext||[]).forEach(function(nextId){
+          if(!reachableFromStart[nextId]){ reachableFromStart[nextId] = true; queue.push(nextId); }
+        });
+      }
+      STATUSES.forEach(function(st){ if(!reachableFromStart[st.id]) unreachable[st.id] = true; });
+    }
+    var noExit = {};
+    if(completeStatuses.length === 1){
+      var completionId = completeStatuses[0].id;
+      var canReachCompletion = {};
+      var q2 = [completionId];
+      canReachCompletion[completionId] = true;
+      var incoming = {};
+      STATUSES.forEach(function(st){ (st.allowedNext||[]).forEach(function(nid){ (incoming[nid]=incoming[nid]||[]).push(st.id); }); });
+      while(q2.length){
+        var cur = q2.shift();
+        (incoming[cur]||[]).forEach(function(prevId){
+          if(!canReachCompletion[prevId]){ canReachCompletion[prevId] = true; q2.push(prevId); }
+        });
+      }
+      var transferOn = document.getElementById('transferEnabled') && document.getElementById('transferEnabled').checked;
+      STATUSES.forEach(function(st){
+        if(st.complete) return;
+        if(unreachable[st.id]) return; // already flagged as unreachable, don't double-flag
+        var hasExit = canReachCompletion[st.id] || st.allowLWOT || transferOn;
+        if(!hasExit) noExit[st.id] = true;
+      });
+    }
+    return { unreachable: unreachable, noExit: noExit };
+  }
+
+  function computeSectionState(key){
+    if(key === 'basic'){
+      var name = document.getElementById('trackerboardNameInput').value.trim();
+      var shortName = document.getElementById('shortNameInput').value.trim();
+      var basicBlocking = [];
+      if(!name) basicBlocking.push('Board Name is required');
+      else if(otherTrackerboards().some(function(t){ return t.name.toLowerCase() === name.toLowerCase(); })) basicBlocking.push('Board Name "'+name+'" is already in use');
+      // Short Name is only required for first draft save; it becomes blocking before activation (§42.1).
+      if(!shortName) basicBlocking.push('Short Name is required before activation');
+      else if(otherTrackerboards().some(function(t){ return (t.shortName||'').toLowerCase() === shortName.toLowerCase(); })) basicBlocking.push('Short Name "'+shortName+'" is already in use');
+      if(basicBlocking.length) return { state:'incomplete', issues:basicBlocking };
+      return { state:'complete', issues:[] };
+    }
+    if(key === 'caresetting'){
+      var hasCareSetting = !!CARE_SETTINGS[document.getElementById('careSettingSelect').value];
+      var hasFacility = selectedFacilities.length > 0;
+      var hasBoardAccess = selectedRuntimeAccess.length > 0;
+      var hasConfigAccess = selectedConfigAccess.length > 0;
+      var caresettingBlocking = [];
+      if(!hasCareSetting) caresettingBlocking.push('Select a Care Setting');
+      if(!hasFacility) caresettingBlocking.push('Select at least one Facility');
+      if(!hasBoardAccess) caresettingBlocking.push('Select at least one Board access role');
+      if(caresettingBlocking.length) return { state:'incomplete', issues:caresettingBlocking };
+      if(!hasConfigAccess) return { state:'warning', issues:['No Configuration access role selected'] };
+      return { state:'complete', issues:[] };
+    }
+    if(key === 'workflow'){
+      var workflowBlocking = [];
+      if(STATUSES.length < 2) workflowBlocking.push('At least two statuses are required');
+
+      // Every Status Name present and unique.
+      var namesSeen = {};
+      STATUSES.forEach(function(st){
+        var n = (st.name||'').trim();
+        if(!n){ workflowBlocking.push('A status is missing a Status Name'); return; }
+        if(namesSeen[n.toLowerCase()]) workflowBlocking.push('"'+n+'" is used by more than one status &mdash; Status Names must be unique');
+        namesSeen[n.toLowerCase()] = true;
+      });
+
+      var startStatuses = STATUSES.filter(function(s){ return s.start; });
+      var completeStatuses = STATUSES.filter(function(s){ return s.complete; });
+      if(startStatuses.length === 0) workflowBlocking.push('Mark one status as Starting');
+      else if(startStatuses.length > 1) workflowBlocking.push('More than one status is marked Starting');
+      if(completeStatuses.length === 0) workflowBlocking.push('Mark one status as Completion');
+      else if(completeStatuses.length > 1) workflowBlocking.push('More than one status is marked Completion');
+
+      // Completion has no normal outgoing Next status.
+      completeStatuses.forEach(function(st){
+        if(st.allowedNext && st.allowedNext.length) workflowBlocking.push('"'+st.name+'" is a Completion status but still has Next statuses configured');
+      });
+
+      var diagnostics = computeStatusDiagnostics();
+      STATUSES.forEach(function(st){
+        if(diagnostics.unreachable[st.id]) workflowBlocking.push('"'+st.name+'" cannot be reached from the Starting status');
+        else if(diagnostics.noExit[st.id]) workflowBlocking.push('"'+st.name+'" cannot reach a Completion or permitted exit');
+      });
+
+      // Every enabled longer-stay alert has a valid duration and recipient.
+      STATUSES.forEach(function(st){
+        if(!st.enableTimer) return;
+        var v = parseFloat(st.timerValue);
+        if(!v || v <= 0) workflowBlocking.push('"'+st.name+'" has a longer-stay alert enabled without a valid duration');
+        if(!st.alertRecipient) workflowBlocking.push('"'+st.name+'" has a longer-stay alert enabled without a Recipient');
+      });
+
+      if(workflowBlocking.length) return { state:'incomplete', issues:workflowBlocking };
+      return { state:'complete', issues:[] };
+    }
+    if(key === 'widgets'){
+      var enabledCount = Object.keys(widgetEnabled).filter(function(k){ return widgetEnabled[k]; }).length;
+      if(!enabledCount) return { state:'warning', issues:['No widgets are enabled for this board'] };
+      var widgetWarnings = [];
+      WIDGET_PLACEMENTS.forEach(function(group){
+        var groupEnabled = orderedVisibleWidgetsByPlacement(group.key).filter(function(k){ return widgetEnabled[k]; }).length;
+        if(groupEnabled > group.capacity) widgetWarnings.push(groupEnabled + ' ' + group.label.toLowerCase() + ' enabled — more than ' + group.capacity + ' may not fit on the live board');
+      });
+      if(widgetWarnings.length) return { state:'warning', issues:widgetWarnings };
+      return { state:'complete', issues:[] };
+    }
+    if(key === 'table'){
+      // §42.1 lists "at least one valid status-change path" as a blocking Patient Table requirement.
+      if(!actionLibraryState.statusChange) return { state:'incomplete', issues:['No status-change action is enabled. Patients have no way to move through the workflow.'] };
+      var total = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
+      if(total > 12) return { state:'warning', issues:[total + ' columns selected — more than 12 may not fit a typical viewport.'] };
+      return { state:'complete', issues:[] };
+    }
+    return { state:'incomplete', issues:[] };
+  }
+
+  function sectionStateLabel(info){
+    if(info.state === 'complete') return 'Complete';
+    if(info.state === 'warning') return info.issues.length > 1 ? info.issues.length + ' warnings' : '1 warning';
+    return info.issues.length > 1 ? info.issues.length + ' issues' : (info.issues.length === 1 ? '1 issue' : 'Incomplete');
+  }
+
+  function renderSectionNav(){
+    var nav = document.getElementById('sectionNav');
+    if(!nav) return;
+    var current = currentOpenSection();
+    SECTION_ORDER.forEach(function(sec){
+      var info = computeSectionState(sec.key);
+      var stateClass = 'section-state' + (info.state === 'complete' ? ' ok' : info.state === 'warning' ? ' warn' : '');
+      var stateLabel = sectionStateLabel(info);
+
+      var cardState = document.getElementById('cardState-'+sec.key);
+      if(cardState){ cardState.className = stateClass; cardState.textContent = stateLabel; }
+
+      var btn = nav.querySelector('[data-section="'+sec.key+'"]');
+      if(!btn) return;
+      var active = sec.key === current;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      btn.setAttribute('tabindex', active ? '0' : '-1');
+      var navStateEl = btn.querySelector('.section-state');
+      if(active){
+        if(navStateEl) navStateEl.remove();
+        return;
+      }
+      if(!navStateEl){
+        navStateEl = document.createElement('span');
+        btn.appendChild(navStateEl);
+      }
+      navStateEl.className = stateClass;
+      navStateEl.textContent = stateLabel;
+    });
+  }
+
+  function handleSectionNavKeydown(e){
+    var navKeys = ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'];
+    if(navKeys.indexOf(e.key) === -1) return;
+    e.preventDefault();
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('#sectionNav .section-nav-item'));
+    var idx = buttons.indexOf(document.activeElement);
+    if(idx === -1) idx = buttons.findIndex(function(b){ return b.classList.contains('active'); });
+    if(idx === -1) idx = 0;
+    var nextIdx = idx;
+    if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') nextIdx = (idx - 1 + buttons.length) % buttons.length;
+    else if(e.key === 'ArrowRight' || e.key === 'ArrowDown') nextIdx = (idx + 1) % buttons.length;
+    else if(e.key === 'Home') nextIdx = 0;
+    else if(e.key === 'End') nextIdx = buttons.length - 1;
+    var target = buttons[nextIdx];
+    goToSection(target.getAttribute('data-section'));
+    target.focus();
   }
 
   function toggleDisclosure(btn){
@@ -751,27 +2060,6 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     var body = wrap.querySelector('.disclosure-body');
     var open = wrap.classList.toggle('open');
     body.style.display = open ? '' : 'none';
-  }
-
-  function updateDisclosureSummary(grid){
-    var wrap = grid.closest('.disclosure');
-    var summaryEl = wrap.querySelector('.disclosure-summary');
-    var labels = Array.prototype.slice.call(grid.querySelectorAll('.check-option')).filter(function(label){
-      return label.querySelector('input').checked;
-    }).map(function(label){
-      return label.querySelector('input').nextSibling.textContent.trim();
-    });
-    if(!labels.length){ summaryEl.textContent = 'None selected'; return; }
-    var shown = labels.slice(0, 3).join(', ');
-    var rest = labels.length - 3;
-    summaryEl.textContent = labels.length + ' selected: ' + shown + (rest > 0 ? ' +' + rest + ' more' : '');
-  }
-
-  function initDisclosureSummaries(){
-    document.querySelectorAll('.disclosure').forEach(function(wrap){
-      var grid = wrap.querySelector('.check-grid');
-      if(grid) updateDisclosureSummary(grid);
-    });
   }
 
   /* ---------- Statuses & Workflow ---------- */
@@ -875,14 +2163,32 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
   var statusIdCounter = 0;
   function nextStatusId(){ return 'st_' + (statusIdCounter++); }
 
+  function normalizeStatusDefaults(s){
+    if(s.visibleAsTab === undefined) s.visibleAsTab = true;
+    if(s.countsAsActive === undefined) s.countsAsActive = !s.complete;
+    if(s.canBeReversed === undefined) s.canBeReversed = !s.start;
+    if(!s.reversibleTo) s.reversibleTo = [];
+    if(s.requiresReason === undefined) s.requiresReason = false;
+    if(!s.reasons) s.reasons = [];
+    if(s.alertRecipient === undefined) s.alertRecipient = '';
+    if(s.alertSeverity === undefined) s.alertSeverity = 'passive';
+    if(s.highlightRow === undefined) s.highlightRow = false;
+    return s;
+  }
+
   function clonePreset(preset){
     var cloned = preset.map(function(s){
       var copy = JSON.parse(JSON.stringify(s));
       copy.id = nextStatusId();
-      return copy;
+      return normalizeStatusDefaults(copy);
     });
     cloned.forEach(function(s, i){
       s.allowedNext = preset[i].allowedNext.map(function(idx){ return cloned[idx].id; });
+    });
+    cloned.forEach(function(s){
+      if(s.canBeReversed && !s.reversibleTo.length){
+        s.reversibleTo = cloned.filter(function(other){ return other.id !== s.id && !other.complete; }).map(function(other){ return other.id; });
+      }
     });
     return cloned;
   }
@@ -910,15 +2216,18 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
       body.innerHTML = '<p class="muted" style="padding:14px;">Select a Care Setting above to define statuses.</p>';
       return;
     }
+    var diagnostics = computeStatusDiagnostics();
     var html = '';
     STATUSES.forEach(function(s,i){
-      var tagText = s.start ? 'Starting' : s.complete ? 'Completion' : '';
+      var tagText = s.start ? 'Starting' : s.complete ? 'Completing' : (!s.visibleAsTab ? 'Hidden' : '');
       var selected = i === selectedIndex;
+      var warningText = diagnostics.unreachable[s.id] ? 'Unreachable' : (diagnostics.noExit[s.id] ? 'No exit' : '');
+      var warningHtml = warningText ? '<div class="status-subtitle status-warn"><span aria-hidden="true">&#9888;</span> '+warningText+'</div>' : '';
       html += '<div class="status-item-wrapper">'+
-        '<div class="status-card'+(selected?' selected':'')+'" onclick="if(event.target.tagName!==\'INPUT\' && !event.target.closest(\'.action-btn\')) selectStatus('+i+')">'+
+        '<div class="status-card'+(selected?' selected':'')+(warningText?' bad':'')+'" onclick="if(event.target.tagName!==\'INPUT\' && !event.target.closest(\'.action-btn\')) selectStatus('+i+')">'+
           '<div class="status-info">'+
             '<input class="status-title" value="'+s.name+'" placeholder="Status title..." oninput="updateStatusName('+i+', this.value)" onfocus="selectStatus('+i+')">'+
-            (tagText ? '<div class="status-subtitle">'+tagText+'</div>' : '')+
+            (warningHtml || (tagText ? '<div class="status-subtitle">'+tagText+'</div>' : ''))+
           '</div>'+
           '<div class="status-actions">'+
             '<button class="action-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',-1)" aria-label="Move up">'+ICON_UP+'</button>'+
@@ -951,42 +2260,72 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     }
     if(shell) shell.style.display = '';
     var s = STATUSES[selectedIndex];
-    var reachable = {};
-    STATUSES.forEach(function(st){ st.allowedNext.forEach(function(id){ reachable[id] = true; }); });
+    var diagnostics = computeStatusDiagnostics();
     container.innerHTML = STATUSES.map(function(st, i){
-      var unreachable = !st.start && !reachable[st.id];
-      var deadEnd = !st.complete && st.allowedNext.length === 0;
+      var unreachable = diagnostics.unreachable[st.id];
+      var noExit = diagnostics.noExit[st.id];
       var cls = 'flow-node';
       if(i === selectedIndex) cls += ' selected';
       else if(s.allowedNext.indexOf(st.id) > -1) cls += ' next';
-      if(unreachable || deadEnd) cls += ' bad';
-      var tag = st.start ? 'Starting' : (st.complete ? 'Completion' : (unreachable ? 'Unreachable' : (deadEnd ? 'Dead end' : '')));
+      if(unreachable || noExit) cls += ' bad';
+      var tag = st.start ? 'Starting' : (st.complete ? 'Completing' : (unreachable ? 'Unreachable' : (noExit ? 'No exit' : '')));
       return '<button type="button" class="'+cls+'" onclick="selectStatus('+i+')"><strong>'+st.name+'</strong>'+(tag?'<small>'+tag+'</small>':'')+'</button>';
     }).join('<span class="flow-arrow">&#8594;</span>');
+    renderExceptionalExits();
+  }
+
+  function renderExceptionalExits(){
+    var el = document.getElementById('exceptionalExits');
+    if(!el) return;
+    var lines = [];
+    STATUSES.forEach(function(st){
+      if(st.allowLWOT) lines.push(st.name + ' &mdash; LWT');
+    });
+    var transferOn = document.getElementById('transferEnabled') && document.getElementById('transferEnabled').checked;
+    if(transferOn){
+      var destinations = Array.prototype.slice.call(document.querySelectorAll('#transferDestinations input:checked')).map(function(cb){ return cb.closest('label').textContent.trim(); });
+      var s = STATUSES[selectedIndex];
+      if(s && destinations.length) lines.push(s.name + ' &mdash; Transfer to ' + destinations[0]);
+    }
+    if(!lines.length){ el.style.display = 'none'; el.innerHTML = ''; return; }
+    el.style.display = '';
+    el.innerHTML = '<strong>Exceptional exits</strong><ul>' + lines.map(function(l){ return '<li>'+l+'</li>'; }).join('') + '</ul>';
   }
 
   function insertStatus(atIndex){
-    STATUSES.splice(atIndex, 0, { id:nextStatusId(), name:'New Status', desc:'', start:false, complete:false, allowLWOT:false,
-      allowedNext:[], requirements:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' });
+    STATUSES.splice(atIndex, 0, normalizeStatusDefaults({ id:nextStatusId(), name:'New Status', desc:'', start:false, complete:false, allowLWOT:false,
+      allowedNext:[], requirements:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }));
     selectedIndex = atIndex;
     renderStatusList();
     renderStatusEditor();
+    var nameInput = document.getElementById('statusNameInput');
+    if(nameInput) nameInput.focus();
   }
 
   function deleteStatus(i){
     if(STATUSES.length<=1) return;
-    if(!confirm('Delete "'+STATUSES[i].name+'"? This cannot be undone.')) return;
-    var removedId = STATUSES[i].id;
-    STATUSES.splice(i,1);
-    STATUSES.forEach(function(s){
-      s.allowedNext = s.allowedNext.filter(function(id){ return id!==removedId; });
-    });
-    if(selectedIndex>=STATUSES.length) selectedIndex = STATUSES.length-1;
-    else if(selectedIndex>i) selectedIndex--;
-    renderStatusList();
-    renderStatusEditor();
+    var target = STATUSES[i];
+    var referencedBy = STATUSES.filter(function(st, idx){ return idx !== i && st.allowedNext.indexOf(target.id) > -1; });
+    if(referencedBy.length){
+      openConfirmModal(
+        "&quot;"+target.name+"&quot; cannot be deleted yet",
+        "It is referenced as a Next status by " + referencedBy.map(function(st){ return "&quot;"+st.name+"&quot;"; }).join(", ") + ". Remove that reference before deleting this status.",
+        function(){ selectStatus(STATUSES.indexOf(referencedBy[0])); },
+        { cancelLabel: "Close", confirmLabel: "Review reference" }
+      );
+      return;
+    }
+    openConfirmModal("Delete &quot;"+target.name+"&quot;?", "This cannot be undone.", function(){
+      var removedId = target.id;
+      var idx = STATUSES.indexOf(target);
+      STATUSES.splice(idx,1);
+      STATUSES.forEach(function(s){ s.allowedNext = s.allowedNext.filter(function(id){ return id!==removedId; }); });
+      if(selectedIndex>=STATUSES.length) selectedIndex = STATUSES.length-1;
+      else if(selectedIndex>idx) selectedIndex--;
+      renderStatusList();
+      renderStatusEditor();
+    }, { confirmLabel:"Delete", danger:true });
   }
-
   function moveStatus(i, dir){
     var j = i+dir;
     if(j<0 || j>=STATUSES.length) return;
@@ -1014,18 +2353,57 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     document.getElementById('statusEditorTitle').textContent = value;
   }
 
-  function setStarting(){
-    STATUSES.forEach(function(s,idx){ s.start = (idx === selectedIndex); });
-    STATUSES[selectedIndex].complete = false;
-    renderStatusList();
-    renderStatusEditor();
-  }
-
-  function setCompleting(){
-    STATUSES.forEach(function(s,idx){ s.complete = (idx === selectedIndex); });
-    STATUSES[selectedIndex].start = false;
-    renderStatusList();
-    renderStatusEditor();
+  function setStatusRole(role){
+    var s = STATUSES[selectedIndex];
+    function applyChange(){
+      STATUSES.forEach(function(st, idx){
+        if(idx === selectedIndex){
+          st.start = role === 'starting';
+          st.complete = role === 'completion';
+        } else {
+          if(role === 'starting') st.start = false;
+          if(role === 'completion') st.complete = false;
+        }
+      });
+      if(role === 'starting'){ s.countsAsActive = true; s.canBeReversed = false; s.reversibleTo = []; }
+      else if(role === 'completion'){
+        s.countsAsActive = false;
+        s.canBeReversed = true;
+        s.reversibleTo = STATUSES.filter(function(st){ return st.id !== s.id && !st.complete; }).map(function(st){ return st.id; });
+        s.allowedNext = [];
+      }
+      renderStatusList();
+      renderStatusEditor();
+    }
+    if(role === 'starting'){
+      var currentStart = STATUSES.find(function(st){ return st.start; });
+      if(currentStart && currentStart !== s){
+        renderStatusEditor();
+        openConfirmModal('Move the Starting status?', '"'+currentStart.name+'" is currently the Starting status.', applyChange, { confirmLabel: 'Make "'+s.name+'" the Starting status' });
+        return;
+      }
+    } else if(role === 'completion'){
+      var currentComplete = STATUSES.find(function(st){ return st.complete; });
+      if(currentComplete && currentComplete !== s){
+        renderStatusEditor();
+        openConfirmModal('Move the Completion status?', '"'+currentComplete.name+'" is currently the Completion status.', applyChange, { confirmLabel: 'Make "'+s.name+'" the Completion status' });
+        return;
+      }
+    } else if(role === 'normal'){
+      var wasOnlyStart = s.start && STATUSES.filter(function(st){ return st.start; }).length === 1;
+      var wasOnlyComplete = s.complete && STATUSES.filter(function(st){ return st.complete; }).length === 1;
+      if(wasOnlyStart){
+        renderStatusEditor();
+        openConfirmModal('Remove the Starting status?', 'No other status is marked Starting. This workflow will have no entry point until another status is assigned this role.', applyChange, { confirmLabel: 'Remove anyway', danger: true });
+        return;
+      }
+      if(wasOnlyComplete){
+        renderStatusEditor();
+        openConfirmModal('Remove the Completion status?', 'No other status is marked Completion. This workflow will have no exit point until another status is assigned this role.', applyChange, { confirmLabel: 'Remove anyway', danger: true });
+        return;
+      }
+    }
+    applyChange();
   }
 
   function toggleLWOT(checked){ STATUSES[selectedIndex].allowLWOT = checked; }
@@ -1042,15 +2420,47 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 
   function updateStatusDesc(value){ STATUSES[selectedIndex].desc = value; }
 
+  function updateAlertRecipient(value){ STATUSES[selectedIndex].alertRecipient = value; }
+  function updateAlertSeverity(value){ STATUSES[selectedIndex].alertSeverity = value; }
+  function updateHighlightRow(checked){ STATUSES[selectedIndex].highlightRow = checked; }
   function toggleTimerEnabled(checked){ STATUSES[selectedIndex].enableTimer = checked; renderStatusEditor(); }
   function updateTimerValue(v){ STATUSES[selectedIndex].timerValue = v; }
   function updateTimerUnit(v){ STATUSES[selectedIndex].timerUnit = v; }
   function updateAlertMessage(v){ STATUSES[selectedIndex].alert = v; }
 
+  var REASON_CATALOG = ['Clinical necessity','Patient request','Resource unavailable','Scheduling conflict','Left against medical advice','Administrative correction'];
+
+  function toggleVisibleAsTab(checked){ STATUSES[selectedIndex].visibleAsTab = checked; renderStatusList(); renderFlowMap(); }
+  function toggleCountsAsActive(checked){ STATUSES[selectedIndex].countsAsActive = checked; }
+  function toggleCanBeReversed(checked){
+    var s = STATUSES[selectedIndex];
+    s.canBeReversed = checked;
+    if(checked && (!s.reversibleTo || !s.reversibleTo.length)){
+      // Default to every other non-completion status so a Completion status defaults to
+      // reversible-to-anywhere rather than silently landing on nothing selected.
+      s.reversibleTo = STATUSES.filter(function(st){ return st.id !== s.id && !st.complete; }).map(function(st){ return st.id; });
+    }
+    renderStatusEditor();
+  }
+  function toggleReversibleTarget(targetId, checked){
+    var s = STATUSES[selectedIndex];
+    if(!s.reversibleTo) s.reversibleTo = [];
+    var pos = s.reversibleTo.indexOf(targetId);
+    if(checked && pos===-1) s.reversibleTo.push(targetId);
+    if(!checked && pos>-1) s.reversibleTo.splice(pos,1);
+  }
+  function toggleRequiresReason(checked){ STATUSES[selectedIndex].requiresReason = checked; renderStatusEditor(); }
+  function toggleReasonChip(idx){
+    var s = STATUSES[selectedIndex];
+    var reason = REASON_CATALOG[idx];
+    var pos = s.reasons.indexOf(reason);
+    if(pos>-1) s.reasons.splice(pos,1); else s.reasons.push(reason);
+  }
+
   function renderStatusEditor(){
     if(!STATUSES.length){
       document.getElementById('statusEditorTitle').textContent = '';
-      document.getElementById('statusEditorBody').innerHTML = '<p class="muted" style="padding:13px;">No status selected. Select a Care Setting to get started.</p>';
+      document.getElementById('statusEditorBody').innerHTML = '<p class="muted" style="padding:13px;">Select a status to edit it.</p>';
       renderFlowMap();
       updateReadiness();
       return;
@@ -1059,11 +2469,10 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     document.getElementById('statusEditorTitle').textContent = s.name;
 
     var lwotBlock = '';
-    if(s.start){
+    if(!s.complete){
       lwotBlock =
         '<div class="subsection">'+
-          '<h4>Left Without Treatment</h4>'+
-          '<p>This exit is exclusive to the Starting status.</p>'+
+          '<h4>Left Without Treatment <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About Left Without Treatment eligibility" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Can be turned on for any status that isn\'t a completing status, not just the starting one.</span></span></h4>'+
           '<label class="check-option"><input type="checkbox"'+(s.allowLWOT?' checked':'')+' onchange="toggleLWOT(this.checked)"> Allow patients to exit as &quot;Left Without Treatment&quot; from this status</label>'+
         '</div>';
     }
@@ -1075,28 +2484,59 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
     }).join('');
 
     var requirementsHtml = s.requirements.length ? s.requirements.map(function(r, idx){
-      return '<span class="tag">'+r.label+'<button type="button" class="tag-remove" onclick="removeRequirement('+idx+')" aria-label="Remove">&times;</button></span>';
-    }).join('') : '<span class="muted">No requirements selected</span>';
+      return '<span class="tag">'+r.label+' <button type="button" class="tag-remove" onclick="removeRequirement('+idx+')" aria-label="Remove">&times;</button></span>';
+    }).join('') : '<span class="muted">No requirements added</span>';
+
+    var currentRole = s.start ? 'starting' : (s.complete ? 'completion' : 'normal');
+    var reasonChipsHtml = REASON_CATALOG.map(function(r, idx){
+      var checked = s.reasons.indexOf(r) > -1;
+      return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleReasonChip('+idx+')"> '+r+'</label>';
+    }).join('');
+    var reversibleTargetsHtml = STATUSES.filter(function(other){ return other.id !== s.id; }).map(function(other){
+      var checked = (s.reversibleTo||[]).indexOf(other.id) > -1;
+      return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleReversibleTarget(\''+other.id+'\', this.checked)"> '+other.name+'</label>';
+    }).join('');
 
     document.getElementById('statusEditorBody').innerHTML =
       '<div class="field full"><label for="statusNameInput">Status Name <span style="color:var(--bad)">*</span></label>'+
         '<input class="text" id="statusNameInput" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
-        '<span class="short-meta"><span class="help">Display name only. Existing transitions remain connected when renamed.</span></span>'+
+        '<span class="short-meta"><span class="help">Renaming this status will not break any transitions already set up for it.</span></span>'+
       '</div>'+
       '<div class="field full" style="margin-top:14px"><label for="statusDescInput">Description</label><textarea class="textarea" id="statusDescInput" onchange="updateStatusDesc(this.value)">'+s.desc+'</textarea></div>'+
-      '<div class="flags">'+
-        '<label><input type="radio" name="start"'+(s.start?' checked':'')+' onchange="setStarting()"> Starting Status</label>'+
-        '<label><input type="radio" name="complete"'+(s.complete?' checked':'')+' onchange="setCompleting()"> Completion Status</label>'+
+      '<div class="field full" style="margin-top:14px"><label>Status role</label>'+
+        '<div class="segmented" role="radiogroup" aria-label="Status role">'+
+          '<label><input type="radio" name="statusRole"'+(currentRole==='normal'?' checked':'')+' onchange="setStatusRole(\'normal\')"> Normal</label>'+
+          '<label><input type="radio" name="statusRole"'+(currentRole==='starting'?' checked':'')+' onchange="setStatusRole(\'starting\')"> Starting</label>'+
+          '<label><input type="radio" name="statusRole"'+(currentRole==='completion'?' checked':'')+' onchange="setStatusRole(\'completion\')"> Completion</label>'+
+        '</div>'+
       '</div>'+
       lwotBlock+
-      '<div class="subsection">'+
-        '<h4>Allowed next statuses</h4>'+
-        '<p>Choose where a patient can move from this status.</p>'+
-        '<div class="check-grid">'+allowedNextHtml+'</div>'+
+      '<div class="subsection disclosure">'+
+        '<button type="button" class="disclosure-toggle" onclick="toggleDisclosure(this)">'+
+          '<span class="disclosure-title">More Settings</span>'+
+          '<span class="muted disclosure-summary">Tab visibility, census, reversal, and reason settings</span>'+
+          '<span class="disclosure-chevron">&#9662;</span>'+
+        '</button>'+
+        '<div class="disclosure-body" style="display:none;">'+
+          '<div class="check-grid">'+
+            '<label class="check-option"><input type="checkbox"'+(s.visibleAsTab?' checked':'')+' onchange="toggleVisibleAsTab(this.checked)"> Visible as a tab on the board</label>'+
+            '<label class="check-option"><input type="checkbox"'+(s.countsAsActive?' checked':'')+' onchange="toggleCountsAsActive(this.checked)"> Counts as an active patient on this board</label>'+
+            '<label class="check-option"><input type="checkbox"'+(s.canBeReversed?' checked':'')+' onchange="toggleCanBeReversed(this.checked)"> Can be reversed to an earlier status</label>'+
+            '<label class="check-option"><input type="checkbox"'+(s.requiresReason?' checked':'')+' onchange="toggleRequiresReason(this.checked)"> Requires a reason when entered</label>'+
+          '</div>'+
+          (s.requiresReason ? ('<div class="short-meta" style="margin-top:10px;display:block;">Approved reasons for this status</div><div class="check-grid" style="margin-top:6px;">'+reasonChipsHtml+'</div>') : '')+
+          (s.canBeReversed ? ('<div class="short-meta" style="margin-top:10px;display:block;">Reversible to <span style="color:var(--bad)">*</span></div><div class="check-grid" style="margin-top:6px;">'+(reversibleTargetsHtml || '<span class="muted">No other statuses exist yet</span>')+'</div><div class="short-meta" style="margin-top:10px;display:block;">Reversing this status is logged with a required reason and a visible audit entry.</div>') : '')+
+        '</div>'+
       '</div>'+
+      (s.complete ? '' :
       '<div class="subsection">'+
-        '<h4>Requirements before leaving this status</h4>'+
-        '<p>Checks that must be complete before the status changes (illustrative only in this mockup).</p>'+
+        '<h4>Next Statuses</h4>'+
+        '<p>Pick which statuses a patient can move to from here.</p>'+
+        '<div class="check-grid">'+allowedNextHtml+'</div>'+
+      '</div>')+
+      '<div class="subsection">'+
+        '<h4>Prerequisites <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About prerequisites" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">These are notes for your team, not an enforced gate. This tool doesn\'t block a status change if a prerequisite is unchecked &mdash; enforce that on your live board if you need it.</span></span></h4>'+
+        '<p>Reference notes on what\'s expected before or during this status.</p>'+
         '<div class="tags" style="margin-bottom:10px;">'+requirementsHtml+'</div>'+
         '<div class="picker" id="requirementPicker">'+
           '<div class="picker-input">'+
@@ -1107,24 +2547,92 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
         '</div>'+
       '</div>'+
       '<div class="subsection">'+
-        '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Timer and Alert</span></label></h4>'+
-        '<p>Alert the team when a patient remains in this status longer than expected.</p>'+
+        '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Long Stay Alert</span></label></h4>'+
+        '<p>Get notified if a patient stays in this status longer than expected.</p>'+
         '<div class="form-grid">'+
           '<div class="field"><label for="timerDurationInput">Duration</label><input class="text" id="timerDurationInput" type="text" value="'+s.timerValue+'" placeholder="e.g. 30"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerValue(this.value)"></div>'+
           '<div class="field"><label for="timerUnitSelect">Unit</label><select class="control" id="timerUnitSelect"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
+          '<div class="field"><label for="timerHighlightInput">Highlight patient row</label><label class="check-option"'+(s.enableTimer?'':' style="opacity:.5"')+'><input type="checkbox" id="timerHighlightInput"'+(s.highlightRow?' checked':'')+(s.enableTimer?'':' disabled')+' onchange="updateHighlightRow(this.checked)"> Adds a highlight to the row after the threshold is breached</label></div>'+
           '<div class="field"><label for="timerAlertInput">Alert Message</label><input class="text" id="timerAlertInput" type="text" value="'+s.alert+'" placeholder="Alert message"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertMessage(this.value)"></div>'+
+          '<div class="field"><label for="timerRecipientSelect">Recipient</label><select class="control" id="timerRecipientSelect"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertRecipient(this.value)"><option value=""'+(s.alertRecipient===''?' selected':'')+'>Select recipient...</option><option'+(s.alertRecipient==='On-duty Nurse'?' selected':'')+'>On-duty Nurse</option><option'+(s.alertRecipient==='Charge Nurse'?' selected':'')+'>Charge Nurse</option><option'+(s.alertRecipient==='Assigned Provider'?' selected':'')+'>Assigned Provider</option><option'+(s.alertRecipient==='Unit Group'?' selected':'')+'>Unit Group</option></select></div>'+
+          '<div class="field"><label for="timerSeveritySelect">How Urgent</label><select class="control" id="timerSeveritySelect"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertSeverity(this.value)"><option value="passive"'+(s.alertSeverity==='passive'?' selected':'')+'>Just highlight the row</option><option value="actionable"'+(s.alertSeverity==='actionable'?' selected':'')+'>Send a notification</option></select></div>'+
         '</div>'+
       '</div>';
     renderFlowMap();
     updateReadiness();
   }
 
+  function showToast(message){
+    var region = document.getElementById('toastRegion');
+    if(!region) return;
+    var el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = message;
+    region.appendChild(el);
+    setTimeout(function(){ el.remove(); }, 4500);
+  }
+
+  function openAuditHistory(id){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
+    if(!t) return;
+    document.getElementById('auditModalBoardName').textContent = t.name;
+    var events = [
+      { date: '\u2014', event: 'Created', by: 'Arun' },
+      { date: t.updated, event: t.status === 'Active' ? 'Activated' : (t.status === 'Inactive' ? 'Deactivated' : 'Saved as Draft'), by: 'Arun' }
+    ];
+    if(t.pendingDraft) events.unshift({ date: 'Just now', event: 'Pending changes saved \u2014 not yet published', by: 'Arun' });
+    document.getElementById('auditHistoryBody').innerHTML = events.map(function(e){
+      return '<tr><td>'+e.date+'</td><td>'+e.event+'</td><td>'+e.by+'</td></tr>';
+    }).join('');
+    showModalBackdrop('auditModalBackdrop');
+  }
+  function closeAuditHistory(){
+    document.getElementById('auditModalBackdrop').classList.remove('open');
+  }
+
+  function openPatientPreviewModal(){
+    renderPatientPreview();
+    showModalBackdrop('patientPreviewModalBackdrop');
+  }
+  function closePatientPreviewModal(){
+    document.getElementById('patientPreviewModalBackdrop').classList.remove('open');
+  }
+
   initDashboardFilters();
   renderDashboard();
   renderStatusList();
   renderStatusEditor();
-  renderPatientFieldsGrid();
-  initDisclosureSummaries();
+  renderColumnLibrary();
+  renderPatientPreview();
+  renderActionLibrary();
+  renderSectionNav();
 </script>
+<div class="toast-region" id="toastRegion" role="status" aria-live="assertive" aria-atomic="true"></div>
+<div class="modal-backdrop" id="auditModalBackdrop">
+  <div class="modal" id="auditModal" role="dialog" aria-modal="true" aria-label="Audit history">
+    <div class="modal-head"><h2>Activity log &mdash; <span id="auditModalBoardName"></span></h2><button class="icon-btn" type="button" onclick="closeAuditHistory()" aria-label="Close">&times;</button></div>
+    <div class="modal-body">
+      <div class="filters" style="margin-bottom:10px;">
+        <input class="text" type="text" placeholder="Search activity" style="max-width:220px;">
+        <select class="control compact"><option>Action type: All</option></select>
+        <select class="control compact"><option>Date range: All time</option></select>
+      </div>
+      <table class="history"><thead><tr><th>Date</th><th>Event</th><th>By</th></tr></thead><tbody id="auditHistoryBody"></tbody></table>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" onclick="closeAuditHistory()">Close</button></div>
+  </div>
+</div>
+<div class="modal-backdrop" id="patientPreviewModalBackdrop">
+  <div class="modal" id="patientPreviewModal" role="dialog" aria-modal="true" aria-label="Patient table preview" style="width:min(1000px,94vw);">
+    <div class="modal-head"><h2>Live preview</h2><button class="icon-btn" type="button" onclick="closePatientPreviewModal()" aria-label="Close">&times;</button></div>
+    <div class="modal-body">
+      <p class="muted" style="margin-top:0;">Synthetic sample data only &mdash; never real patient data.</p>
+      <div class="table-shell" style="min-width:0;overflow-x:auto;">
+        <table class="table" id="patientPreviewTable"><thead id="patientPreviewHead"></thead><tbody id="patientPreviewBody"></tbody></table>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" onclick="closePatientPreviewModal()">Close</button></div>
+  </div>
+</div>
 </body>
 </html>
