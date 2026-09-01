@@ -416,7 +416,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   </div>
 
   <div class="recovery" id="pendingDraftBanner"><span>This board is already live. Your changes are saved as a draft and won't affect the live board until you publish them.</span></div>
-  <div class="recovery" id="draftRecoveryBanner"><span>We found unsaved changes from a previous session.</span><span style="display:flex;gap:8px;"><button class="btn small" type="button" onclick="discardRecoverySnapshot()">Discard</button><button class="btn small primary" type="button" onclick="restoreRecoverySnapshot()">Restore</button></span></div>
+  <div class="recovery" id="draftRecoveryBanner"><span id="draftRecoveryBannerText">We found unsaved changes from a previous session.</span><span style="display:flex;gap:8px;"><button class="btn small" type="button" onclick="discardRecoverySnapshot()">Discard</button><button class="btn small primary" type="button" onclick="restoreRecoverySnapshot()">Restore</button></span></div>
   <div class="drawer-foot">
     <div class="drawer-foot-zone drawer-foot-left">
       <button type="button" class="readiness-link" id="readinessIndicator" onclick="openReadinessPanel()">Not reviewed</button>
@@ -645,6 +645,15 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function hideDrawer(){
+    // New-board recovery snapshots share one key across every unsaved "new" attempt. If a
+    // snapshot was surfaced this session but never explicitly restored or discarded, closing
+    // now — without resolving it — is the moment it would otherwise go on to leak into a
+    // completely unrelated new board later. Clear it here so that can only ever happen once,
+    // and only ever with the draft's name shown first (see checkForRecoverySnapshot).
+    if(!editingId && pendingRecoverySnapshot){
+      try{ localStorage.removeItem(recoveryKey()); }catch(e){}
+      pendingRecoverySnapshot = null;
+    }
     document.getElementById('backdrop').classList.remove('open');
     document.getElementById('drawer').classList.remove('open');
     if(drawerTriggerEl && drawerTriggerEl.focus) drawerTriggerEl.focus();
@@ -899,6 +908,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var snap = JSON.parse(raw);
       var lastSavedAt = editingId ? 0 : 0; // this prototype has no separate "last explicit save" timestamp per record; treat any snapshot as newer
       pendingRecoverySnapshot = snap;
+      // Name the recovered draft explicitly — for a brand-new board this snapshot could belong
+      // to a different, earlier attempt than the one the user is about to start, and a generic
+      // "unsaved changes" message would let that swap happen silently.
+      var textEl = document.getElementById('draftRecoveryBannerText');
+      if(textEl) textEl.textContent = 'We found unsaved changes ("' + (snap.name || 'Untitled board') + '") from a previous session.';
       banner.classList.add('open');
     }catch(e){ /* ignore corrupt snapshot */ }
   }
@@ -1358,6 +1372,13 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function toggleWidgetEnabled(key, checked){
+    if(checked){
+      var def = widgetByKey(key);
+      var groupEnabled = orderedVisibleWidgetsByPlacement(def.placement).filter(function(k){ return widgetEnabled[k]; }).length;
+      // Defensive re-check, same reasoning as the disabled checkbox: don't trust only the UI
+      // state to keep this under the cap.
+      if(!widgetEnabled[key] && groupEnabled >= widgetGroupCapacity(def.placement)) return;
+    }
     widgetEnabled[key] = checked;
     renderWidgetLibrary();
     updateReadiness();
@@ -1426,6 +1447,13 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function renderWidgetLibrary(){
     var container = document.getElementById('widgetLibraryList');
     if(!container) return;
+    // Turn off any enabled widget no longer eligible for the current Care Setting — mirrors
+    // how renderColumnLibrary already drops ineligible columns, so enabled state never
+    // silently disagrees with what's actually rendered on the live board.
+    var eligibleWidgetKeys = widgetsForCareSetting().map(function(w){ return w.key; });
+    Object.keys(widgetEnabled).forEach(function(k){
+      if(widgetEnabled[k] && eligibleWidgetKeys.indexOf(k) === -1) widgetEnabled[k] = false;
+    });
     container.innerHTML = WIDGET_PLACEMENTS.map(function(group){
       var ordered = orderedVisibleWidgetsByPlacement(group.key);
       var enabledCount = ordered.filter(function(k){ return widgetEnabled[k]; }).length;
@@ -1434,10 +1462,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var cardsHtml = ordered.map(function(key, i){
         var def = widgetByKey(key);
         var enabled = !!widgetEnabled[key];
+        // Hard cap: once a group is at capacity, the remaining not-yet-enabled widgets in it
+        // are disabled rather than just warned about — governed capacity should actually be
+        // governed, not just flagged after the fact.
+        var atCapacity = !enabled && enabledCount >= capacity;
         return '<div class="subsection widget-card"'+(i===0?' style="margin-top:0;"':'')+'>'+
           '<div class="widget-head">'+
             '<span class="widget-position">'+(i+1)+'</span>'+
-            '<h4><label class="switch-heading"><input type="checkbox"'+(enabled?' checked':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label></h4>'+
+            '<h4><label class="switch-heading"'+(atCapacity?' title="'+group.label+' is full — turn another one off first to enable this."':'')+'><input type="checkbox"'+(enabled?' checked':'')+(atCapacity?' disabled':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label></h4>'+
             '<div class="widget-move"><button class="icon-btn" type="button" onclick="moveWidgetInOrder(\''+key+'\',-1)" aria-label="Move '+def.label+' up">&#9650;</button><button class="icon-btn" type="button" onclick="moveWidgetInOrder(\''+key+'\',1)" aria-label="Move '+def.label+' down">&#9660;</button></div>'+
           '</div>'+
           '<div class="widget-body"'+(enabled?'':' style="display:none;"')+'>'+widgetBodyHtml(key)+'</div>'+
@@ -1526,9 +1558,13 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   function onResourceInput(facility, type, value){
     var capacity = resourceCapacity(facility, type);
+    // Clamp to what's actually left after other boards' claims, not just the facility's raw
+    // total — otherwise this field alone can create a fresh over-allocation.
+    var others = resourceAllocatedByOthers(facility, type);
+    var remaining = Math.max(0, capacity - others);
     var n = parseInt(value, 10);
     if(isNaN(n) || n < 0) n = 0;
-    if(n > capacity) n = capacity;
+    if(n > remaining) n = remaining;
     if(!boardResources[facility]) boardResources[facility] = { beds:0, chairs:0, rooms:0 };
     boardResources[facility][type] = n;
     renderResourceAllocation();
@@ -1828,6 +1864,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(STATUS_PRESETS[currentCareSetting]) items.push('Workflow statuses (reset to the standard ' + newValue + ' setup)');
     var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.indexOf(newValue) === -1; });
     droppedColumns.forEach(function(c){ items.push(c.label + ' column'); });
+    var droppedWidgets = WIDGET_LIBRARY.filter(function(w){ return widgetEnabled[w.key] && w.settings && w.settings.length && w.settings.indexOf(newValue) === -1; });
+    droppedWidgets.forEach(function(w){ items.push(w.label + ' widget'); });
     if(document.getElementById('transferEnabled').checked){
       var destCount = document.querySelectorAll('#transferDestinations input:checked').length;
       if(destCount) items.push(destCount + (destCount===1?' transfer destination':' transfer destinations'));
@@ -1966,7 +2004,12 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function toggleConnFacility(value, checked){
     var pos = selectedFacilities.indexOf(value);
     if(checked && pos===-1) selectedFacilities.push(value);
-    if(!checked && pos>-1) selectedFacilities.splice(pos,1);
+    if(!checked && pos>-1){
+      selectedFacilities.splice(pos,1);
+      // Drop the resource claim along with the facility — otherwise it sits orphaned in
+      // memory and silently reappears if the same facility is re-added this session.
+      delete boardResources[value];
+    }
     updateConnFacilityButton();
     renderCareSettingInfo(CARE_SETTINGS[currentCareSetting], selectedFacilities);
     renderResourceAllocation();
@@ -2167,18 +2210,20 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       if(!hasCareSetting) caresettingBlocking.push('Select a Care Setting');
       if(!hasFacility) caresettingBlocking.push('Select at least one Facility');
       if(!hasBoardAccess) caresettingBlocking.push('Select at least one Board access role');
-      if(caresettingBlocking.length) return { state:'incomplete', issues:caresettingBlocking };
-      var caresettingWarnings = [];
-      if(!hasConfigAccess) caresettingWarnings.push('No Configuration access role selected');
+      // Over-allocated resources are blocking, not just a warning — a board can sit in Draft
+      // over capacity while someone is mid-edit, but it can't be Activated that way.
       selectedFacilities.forEach(function(facility){
         RESOURCE_TYPES.forEach(function(rt){
           var type = rt[0], label = rt[1];
           var capacity = resourceCapacity(facility, type);
           if(!capacity) return;
           var totalClaimed = resourceAllocatedByOthers(facility, type) + ((boardResources[facility]||{})[type]||0);
-          if(totalClaimed > capacity) caresettingWarnings.push(label + ' at ' + facility + ' are over-allocated across boards: ' + totalClaimed + ' claimed of ' + capacity + ' available');
+          if(totalClaimed > capacity) caresettingBlocking.push(label + ' at ' + facility + ' are over-allocated across boards: ' + totalClaimed + ' claimed of ' + capacity + ' available');
         });
       });
+      if(caresettingBlocking.length) return { state:'incomplete', issues:caresettingBlocking };
+      var caresettingWarnings = [];
+      if(!hasConfigAccess) caresettingWarnings.push('No Configuration access role selected');
       if(caresettingWarnings.length) return { state:'warning', issues:caresettingWarnings };
       return { state:'complete', issues:[] };
     }
