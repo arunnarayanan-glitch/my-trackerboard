@@ -12,7 +12,7 @@
   --ink:#18242f;--muted:#687681;--line:#d6dee6;--bg:#f5f7f9;--white:#fff;
   --ok:#1d7046;--ok-bg:#e7f5ed;--warn:#806116;--warn-bg:#fff6d9;
   --bad:#a23a2c;--bad-bg:#fdecea;--neutral:#e9edf1;
-  --font:"Arial Narrow","Roboto Condensed",Arial,sans-serif;
+  --font:"Segoe UI","Helvetica Neue",Arial,sans-serif;
   --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;
   --field-gap:8px 14px;--chip-radius:10px;
 }
@@ -65,6 +65,12 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .switch-heading input:checked ~ .switch-track::after{ transform:translateX(15px); }
 .switch-heading input:focus-visible ~ .switch-track{ outline:2px solid #8eb6db; outline-offset:2px; }
 .switch-label{ font-size:13px; font-weight:700; }
+/* .field label sets justify-content:space-between for regular field labels (label text + a
+   helper icon on the right). Checkbox labels like .check-option that happen to sit inside a
+   .field div were inheriting that and getting stretched — checkbox pinned left, text pushed to
+   the far right with a dead gap between them. Scoped override restores the intended tight
+   inline-flex alignment for any .check-option regardless of what wraps it. */
+.field .check-option, .field-label.check-option{ justify-content:flex-start; }
 #careSettingInfo{ display:block; padding:11px 13px; margin-top:10px; }
 #careSettingInfo .derived-scope-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:11px; }
 #careSettingInfo .derived-scope-head strong{ font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
@@ -278,7 +284,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         <div class="subsection">
           <h4>Access</h4>
           <div class="form-grid">
-            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;"><span aria-hidden="true">&#9888;</span> Select at least one Board access role.</p></div><p class="help" id="accessBroaderWarning" style="grid-column:1/-1;display:none;color:var(--warn);">Configuration access includes groups without Board access.</p>
+            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;"><span aria-hidden="true">&#9888;</span> Select at least one Board access role.</p></div><p class="field-error" id="accessBroaderWarning" style="grid-column:1/-1;display:none;"><span aria-hidden="true">&#9888;</span> Configuration access includes groups without Board access.</p>
           </div>
         </div>
         <div class="derived-scope" id="careSettingInfo" style="display:none">
@@ -369,40 +375,36 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         </div>
 
         <div class="subsection">
-          <h4>Live preview</h4>
-          <p>See what this configuration looks like with synthetic sample data &mdash; never real patient data.</p>
-          <button class="btn" type="button" onclick="openPatientPreviewModal()">Preview table</button>
-        </div>
-
-        <div class="subsection">
-          <h4>Signals <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About signals" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Alerts and reminders that show up on a patient row &mdash; separate from the row actions below.</span></span></h4>
-          <div class="check-grid cols-3" id="signalsGrid">
-            <label class="check-option"><input type="checkbox" checked> Clinical &amp; safety alerts</label>
-            <label class="check-option"><input type="checkbox" checked> Visitor / confidentiality restriction</label>
-            <label class="check-option"><input type="checkbox" checked> Assessment required</label>
-            <label class="check-option"><input type="checkbox" checked> Documentation incomplete</label>
-            <label class="check-option"><input type="checkbox" checked> Order pending</label>
-            <label class="check-option"><input type="checkbox"> Specimen pending</label>
-            <label class="check-option"><input type="checkbox"> Discharge task pending</label>
-            <label class="check-option"><input type="checkbox"> Transfer preparation incomplete</label>
-            <label class="check-option"><input type="checkbox"> Required form missing</label>
+          <h4><label class="switch-heading"><input type="checkbox" id="signalsSectionEnabled" onchange="toggleSignalsSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Signals</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About signals" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Alerts and reminders that show up on a patient row &mdash; separate from the row actions below.</span></span></h4>
+          <div class="widget-body" id="signalsBody" style="display:none;">
+            <p class="help" style="margin:-4px 0 8px;">Severity controls how a signal presents on the board &mdash; Critical highlights the row, Caution shows a badge, Informational is icon-only.</p>
+            <div class="col-unified-list" id="signalsGrid"></div>
           </div>
         </div>
 
         <div class="subsection">
-          <h4>Operational comments</h4>
-          <p>Short, non-clinical coordination updates. Not part of the clinical record.</p>
-          <div class="form-grid">
-            <div class="field"><label class="check-option" style="font-weight:700;"><input type="checkbox" id="predefinedCommentsEnabled" checked> Enable predefined comments</label></div>
-            <div class="field"><label class="check-option" style="font-weight:700;"><input type="checkbox" id="freeTextCommentsEnabled" checked> Enable free-text entry</label></div>
-            <div class="field"><label for="commentCharLimit">Maximum character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">Default 140, adjustable 20&ndash;280.</span></span></div>
+          <h4><label class="switch-heading"><input type="checkbox" id="commentsSectionEnabled" onchange="toggleCommentsSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Operational comments</span></label></h4>
+          <div class="widget-body" id="commentsBody" style="display:none;">
+            <p>Short, non-clinical coordination updates. Not part of the clinical record.</p>
+            <div class="form-grid">
+              <div class="field"><label class="check-option" style="font-weight:700;"><input type="checkbox" id="predefinedCommentsEnabled" checked> Enable predefined comments</label></div>
+              <div class="field"><label class="check-option" style="font-weight:700;"><input type="checkbox" id="freeTextCommentsEnabled" checked> Enable free-text entry</label></div>
+              <div class="field"><label for="commentCharLimit">Maximum character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">Default 140, adjustable 20&ndash;280.</span></span></div>
+            </div>
           </div>
         </div>
 
         <div class="subsection">
           <h4>Patient actions</h4>
-          <p>Toggle which actions launch from a patient row. The first <input class="text" type="number" id="inlineActionLimit" value="3" min="1" max="10" style="width:52px;height:24px;padding:0 5px;display:inline-block;" onchange="renderActionLibrary()"> selected actions appear inline; the rest overflow to a menu.</p>
-          <div id="actionLibraryList"></div>
+          <p>Toggle which actions launch from a patient row, and use the arrows to set the order. The first <input class="text" type="number" id="inlineActionLimit" value="3" min="1" max="10" style="width:52px;height:24px;padding:0 5px;display:inline-block;" onchange="renderActionLibrary();"> selected actions appear inline in that order; the rest overflow to a menu.</p>
+          <div class="col-builder-controls">
+            <input class="text" type="text" id="actionSearchInput" placeholder="Search actions…" oninput="renderActionLibrary()">
+            <select class="control compact" id="actionCategoryFilter" onchange="renderActionLibrary()"><option value="">All categories</option></select>
+            <span style="flex:1 1 auto;"></span>
+            <span id="actionSelectedCount" class="muted" style="white-space:nowrap;"></span>
+            <button class="link-btn" type="button" onclick="resetActionsToDefault()">Reset to default</button>
+          </div>
+          <div id="actionLibraryList" class="col-unified-list"></div>
           <p class="help" id="actionOverflowPreview" style="margin-top:8px;"></p>
           <p class="field-error" id="statusChangeSafetyWarning" style="display:none;"><span aria-hidden="true">&#9888;</span> No status-change action is enabled. Patients have no way to move through the workflow.</p>
         </div>
@@ -452,10 +454,10 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
 <div class="modal-backdrop" id="deleteModalBackdrop">
   <div class="modal" id="deleteModal" role="alertdialog" aria-label="Delete trackerboard">
-    <div class="modal-head"><h2>Delete "<span id="deleteConfirmName"></span>"?</h2></div>
+    <div class="modal-head"><h2 id="deleteConfirmTitle">Delete this trackerboard?</h2></div>
     <div class="modal-body">
       <p>This draft will be permanently deleted.</p>
-      <div class="field full"><label for="deleteConfirmInput">Type the Board Name to confirm</label><input class="text" type="text" id="deleteConfirmInput" oninput="checkDeleteConfirmInput(this.value)"></div>
+      <div class="field full"><label for="deleteConfirmInput" id="deleteConfirmLabel">Type the Board Name to confirm</label><input class="text" type="text" id="deleteConfirmInput" oninput="checkDeleteConfirmInput(this.value)"></div>
     </div>
     <div class="modal-foot">
       <button class="btn" type="button" onclick="closeDeleteModal()">Cancel</button>
@@ -528,10 +530,22 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var catFilter = document.getElementById('columnCategoryFilter');
     if(catFilter) catFilter.value = '';
     renderColumnLibrary();
-    renderPatientPreview();
-    actionLibraryState = data && data.actions ? Object.assign({}, actionLibraryState, data.actions) : Object.assign({}, DEFAULT_ACTION_STATE);
+    if(data && data.actions){
+      var enabledActionKeys = Object.keys(data.actions).filter(function(k){ return data.actions[k]; });
+      // Prefer the saved order; fall back to library order for keys an older record (saved
+      // before ordering existed) doesn't have position data for.
+      selectedActions = (data.actionOrder || ACTION_LIBRARY.map(function(a){ return a.key; })).filter(function(k){ return enabledActionKeys.indexOf(k) > -1; });
+      enabledActionKeys.forEach(function(k){ if(selectedActions.indexOf(k) === -1) selectedActions.push(k); });
+    } else {
+      selectedActions = ACTION_LIBRARY.filter(function(a){ return DEFAULT_ACTION_STATE[a.key]; }).map(function(a){ return a.key; });
+    }
+    syncActionLibraryState();
     document.getElementById('inlineActionLimit').value = data && data.inlineActionLimit ? data.inlineActionLimit : 3;
     renderActionLibrary();
+    signalState = data && data.signals ? Object.assign(defaultSignalState(), JSON.parse(JSON.stringify(data.signals))) : defaultSignalState();
+    renderSignalsGrid();
+    syncSignalsSectionToggle();
+    resetCommentsSectionToDefaults();
     var savedWidgets = data && data.widgets;
     widgetOrder = savedWidgets && savedWidgets.order ? savedWidgets.order.slice() : defaultWidgetOrder();
     // Guard against a saved order missing keys added since (e.g. new library widgets) — append any missing.
@@ -693,15 +707,48 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       widgets: { order: widgetOrder.slice(), enabled: Object.assign({}, widgetEnabled), settings: JSON.parse(JSON.stringify(widgetSettings)) },
       columns: selectedColumns.slice(),
       actions: Object.assign({}, actionLibraryState),
+      actionOrder: selectedActions.slice(),
+      signals: JSON.parse(JSON.stringify(signalState)),
       inlineActionLimit: parseInt((document.getElementById('inlineActionLimit')||{}).value, 10) || 3,
       transferEnabled: document.getElementById('transferEnabled').checked,
       updated: 'Just now'
     };
   }
 
+  // Real, timestamped event log per board, replacing the two hardcoded lines the Activity Log
+  // modal used to show for every board regardless of what actually happened to it. This is
+  // still in-memory only (no backend/session persistence) and "by" is a placeholder — there's
+  // no auth model in this prototype to attribute events to a real signed-in user. Once there's
+  // a backend, this is the shape (id -> ordered event list) it should write through to.
+  var AUDIT_LOG = {};
+  var CURRENT_USER = 'Arun';
+  function logAuditEvent(id, event, detail){
+    if(!id) return;
+    if(!AUDIT_LOG[id]) AUDIT_LOG[id] = [];
+    AUDIT_LOG[id].unshift({
+      date: new Date().toLocaleString(undefined, { month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' }),
+      event: event,
+      detail: detail || '',
+      by: CURRENT_USER
+    });
+  }
+
   function saveTrackerboard(targetStatus){
     var record = collectTrackerboardFromForm();
     var existing = editingId ? TRACKERBOARDS.find(function(x){ return x.id === editingId; }) : null;
+
+    // Board Name is required even for a Draft save — everything else can be filled in later,
+    // but a nameless board can't be identified, sorted, searched, or safely deleted (the
+    // delete-confirmation modal asks you to type the Board Name back). Block it here rather
+    // than only at Activation, which used to let a completely blank board get saved.
+    if(!record.name){
+      dirtySections['basic'] = true;
+      updateFieldErrors();
+      goToSection('basic');
+      showToast('Board Name is required before saving, even as a draft.');
+      document.getElementById('trackerboardNameInput').focus();
+      return;
+    }
 
     // Uniqueness is enforced on every save (Draft or Active), not just at Activation,
     // so two boards can never share a Board Name or Short Name even briefly.
@@ -728,6 +775,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           existing.pendingDraft = null;
           try{ localStorage.removeItem(recoveryKey()); }catch(e){}
           formDirty = false; dirtySections = {};
+          logAuditEvent(existing.id, 'Published changes');
           hideDrawer();
           renderDashboard();
         }, { confirmLabel: 'Publish changes' });
@@ -736,6 +784,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       existing.pendingDraft = draftRecord;
       try{ localStorage.removeItem(recoveryKey()); }catch(e){}
       formDirty = false; dirtySections = {};
+      logAuditEvent(existing.id, 'Saved draft changes to live board', 'Not yet published');
       hideDrawer();
       renderDashboard();
       return;
@@ -762,6 +811,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           if(existing){ Object.assign(existing, record); } else { TRACKERBOARDS.push(record); }
           try{ localStorage.removeItem(recoveryKey()); }catch(e){}
           formDirty = false; dirtySections = {};
+          logAuditEvent(record.id, existing ? 'Activated' : 'Created and activated');
           hideDrawer();
           renderDashboard();
         }, { confirmLabel: 'Activate trackerboard' });
@@ -769,9 +819,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     }
 
     record.status = targetStatus;
+    var isNew = !existing;
     if(existing){ Object.assign(existing, record); } else { TRACKERBOARDS.push(record); }
     try{ localStorage.removeItem(recoveryKey()); }catch(e){}
     formDirty = false; dirtySections = {};
+    logAuditEvent(record.id, isNew ? 'Created as Draft' : 'Saved as Draft');
     hideDrawer();
     renderDashboard();
   }
@@ -885,6 +937,10 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     updateReadiness();
     writeRecoverySnapshot();
   }
+  // Recovery is scoped to this browser only (see recoveryKey/localStorage below) — a user who
+  // loses their session on one machine and picks it up on another gets nothing. True per-account
+  // recovery would need this snapshot written to a backend keyed by user id, not localStorage
+  // keyed by board id. Flagging as an explicit backend requirement rather than solving it here.
   function recoveryKey(){ return 'tb_recovery_' + (editingId || 'new'); }
   function writeRecoverySnapshot(){
     var name = document.getElementById('trackerboardNameInput').value.trim();
@@ -909,7 +965,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       // to a different, earlier attempt than the one the user is about to start, and a generic
       // "unsaved changes" message would let that swap happen silently.
       var textEl = document.getElementById('draftRecoveryBannerText');
-      if(textEl) textEl.textContent = 'We found unsaved changes ("' + (snap.name || 'Untitled board') + '") from a previous session.';
+      if(textEl) textEl.textContent = 'We found unsaved changes ("' + (snap.name || 'Untitled board') + '") from a previous session on this device.';
       banner.classList.add('open');
     }catch(e){ /* ignore corrupt snapshot */ }
   }
@@ -917,12 +973,60 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function restoreRecoverySnapshot(){
     var snap = pendingRecoverySnapshot;
     if(!snap) return;
+    // Full restore, mirroring the same field population openDrawer() does when loading a saved
+    // record, using the snapshot as the data source. This previously restored only 4 fields
+    // (name/shortName/desc/careSetting) even though writeRecoverySnapshot captures the whole
+    // form via collectTrackerboardFromForm() — meaning Facilities, Programs, Access, Statuses,
+    // Columns, Actions, Signals, and Widgets were silently dropped on "Restore" every time.
     document.getElementById('trackerboardNameInput').value = snap.name || '';
     document.getElementById('shortNameInput').value = snap.shortName || '';
+    pendingUniqueId = snap.id || '';
     shortNameEdited = true;
     document.getElementById('trackerboardDescInput').value = snap.desc || '';
-    document.getElementById('careSettingSelect').value = snap.careSetting || '';
-    onCareSettingChange(snap.careSetting || '');
+    var cs = snap.careSetting || '';
+    document.getElementById('careSettingSelect').value = cs;
+    currentCareSetting = cs;
+    selectedFacilities = (snap.facilities || []).slice();
+    renderConnFacilityMenu();
+    boardResources = snap.resources ? JSON.parse(JSON.stringify(snap.resources)) : {};
+    renderResourceAllocation();
+    selectedPrograms = (snap.programs || []).slice();
+    renderProgramMenu();
+    selectedConfigAccess = (snap.configAccess || []).slice();
+    selectedRuntimeAccess = (snap.runtimeAccess || []).slice();
+    renderAccessMenu('config');
+    renderAccessMenu('runtime');
+    updateAccessWarning();
+    renderCareSettingInfo(CARE_SETTINGS[cs], selectedFacilities);
+    STATUSES = snap.statuses ? JSON.parse(JSON.stringify(snap.statuses)) : (STATUS_PRESETS[cs] ? clonePreset(STATUS_PRESETS[cs]) : []);
+    selectedIndex = 0;
+    renderStatusList();
+    renderStatusEditor();
+    selectedColumns = snap.columns ? snap.columns.slice() : recommendedColumnKeys();
+    renderColumnLibrary();
+    if(snap.actions){
+      var enabledActionKeys = Object.keys(snap.actions).filter(function(k){ return snap.actions[k]; });
+      selectedActions = (snap.actionOrder || ACTION_LIBRARY.map(function(a){ return a.key; })).filter(function(k){ return enabledActionKeys.indexOf(k) > -1; });
+      enabledActionKeys.forEach(function(k){ if(selectedActions.indexOf(k) === -1) selectedActions.push(k); });
+    } else {
+      selectedActions = ACTION_LIBRARY.filter(function(a){ return DEFAULT_ACTION_STATE[a.key]; }).map(function(a){ return a.key; });
+    }
+    syncActionLibraryState();
+    document.getElementById('inlineActionLimit').value = snap.inlineActionLimit || 3;
+    renderActionLibrary();
+    signalState = snap.signals ? Object.assign(defaultSignalState(), JSON.parse(JSON.stringify(snap.signals))) : defaultSignalState();
+    renderSignalsGrid();
+    syncSignalsSectionToggle();
+    resetCommentsSectionToDefaults();
+    var savedWidgets = snap.widgets;
+    widgetOrder = savedWidgets && savedWidgets.order ? savedWidgets.order.slice() : defaultWidgetOrder();
+    defaultWidgetOrder().forEach(function(k){ if(widgetOrder.indexOf(k) === -1) widgetOrder.push(k); });
+    widgetEnabled = savedWidgets && savedWidgets.enabled ? Object.assign({}, savedWidgets.enabled) : Object.assign({}, DEFAULT_WIDGET_ENABLED);
+    widgetSettings = savedWidgets && savedWidgets.settings ? JSON.parse(JSON.stringify(savedWidgets.settings)) : defaultWidgetSettings();
+    renderWidgetLibrary();
+    var transferOn = !!snap.transferEnabled;
+    document.getElementById('transferEnabled').checked = transferOn;
+    toggleTransferEnabled(transferOn);
     document.getElementById('draftRecoveryBanner').classList.remove('open');
     formDirty = true;
     updateReadiness();
@@ -1139,11 +1243,18 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   var deleteTargetId = null;
+  var DELETE_FALLBACK_PHRASE = 'DELETE';
   function deleteTrackerboard(id){
     var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
     if(!t || !canDeleteTrackerboard(t)) return;
     deleteTargetId = id;
-    document.getElementById('deleteConfirmName').textContent = t.name;
+    // A board can reach here with a blank name (shouldn't happen going forward now that Save
+    // as Draft requires a name, but this stays defensive rather than assuming that guarantee
+    // holds everywhere forever). Typing back an empty name is impossible, so fall back to a
+    // fixed phrase instead of silently making deletion undiscoverable.
+    var hasName = !!(t.name && t.name.trim());
+    document.getElementById('deleteConfirmTitle').textContent = hasName ? 'Delete "'+t.name+'"?' : 'Delete this untitled draft?';
+    document.getElementById('deleteConfirmLabel').textContent = hasName ? 'Type the Board Name to confirm' : 'Type ' + DELETE_FALLBACK_PHRASE + ' to confirm';
     document.getElementById('deleteConfirmInput').value = '';
     document.getElementById('deleteConfirmBtn').disabled = true;
     showModalBackdrop('deleteModalBackdrop');
@@ -1151,7 +1262,10 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
   function checkDeleteConfirmInput(value){
     var t = TRACKERBOARDS.find(function(x){ return x.id === deleteTargetId; });
-    document.getElementById('deleteConfirmBtn').disabled = !t || value !== t.name;
+    if(!t){ document.getElementById('deleteConfirmBtn').disabled = true; return; }
+    var hasName = !!(t.name && t.name.trim());
+    var expected = hasName ? t.name : DELETE_FALLBACK_PHRASE;
+    document.getElementById('deleteConfirmBtn').disabled = value !== expected;
   }
   function closeDeleteModal(){
     document.getElementById('deleteModalBackdrop').classList.remove('open');
@@ -1190,6 +1304,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       }
       Object.assign(live, live.pendingDraft, { status: 'Active' });
       live.pendingDraft = null;
+      logAuditEvent(live.id, 'Published pending draft changes');
       renderDashboard();
     }, { confirmLabel: 'Publish changes' });
   }
@@ -1211,6 +1326,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         return;
       }
       live.status = 'Inactive';
+      logAuditEvent(live.id, 'Deactivated');
       renderDashboard();
     }, { confirmLabel: 'Deactivate' });
   }
@@ -1232,6 +1348,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         return;
       }
       live.status = 'Active';
+      logAuditEvent(live.id, 'Reactivated');
       renderDashboard();
     }, { confirmLabel: 'Reactivate' });
   }
@@ -1610,6 +1727,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   var selectedColumns = []; // ordered array of non-locked column keys
   var LOCKED_COLUMN_KEYS = ['patientName','pid'];
+  // Placeholder threshold, not derived from real measurement. Assumes a ~1366px laptop
+  // viewport and columns averaging ~90-110px once padding/typography are accounted for —
+  // roughly 12-14 columns before horizontal scroll kicks in on the live board, and this errs
+  // toward the low end of that range. This needs actual usability testing against target
+  // clinician hardware (some HDOs still run smaller kiosk displays) before being trusted as
+  // more than a rough guardrail — treat this constant as the one thing to change once that
+  // data exists, not as a validated number today.
+  var COLUMN_COUNT_SOFT_LIMIT = 12;
 
   function columnByKey(key){ return PATIENT_COLUMNS.find(function(c){ return c.key === key; }); }
 
@@ -1625,7 +1750,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function resetColumnsToRecommended(){
     selectedColumns = recommendedColumnKeys();
     renderColumnLibrary();
-    renderPatientPreview();
     updateReadiness();
   }
 
@@ -1634,7 +1758,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(checked && pos===-1) selectedColumns.push(key);
     if(!checked && pos>-1) selectedColumns.splice(pos,1);
     renderColumnLibrary();
-    renderPatientPreview();
     updateReadiness();
   }
 
@@ -1644,7 +1767,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(i<0 || j<0 || j>=selectedColumns.length) return;
     var tmp = selectedColumns[i]; selectedColumns[i] = selectedColumns[j]; selectedColumns[j] = tmp;
     renderColumnLibrary();
-    renderPatientPreview();
   }
 
   function renderColumnLibrary(){
@@ -1704,25 +1826,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var warning = document.getElementById('columnCountWarning');
     if(warning){
       var total = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
-      if(total > 12){ warning.style.display=''; warning.textContent = total + ' columns selected — more than 12 may not fit a typical viewport.'; }
+      if(total > COLUMN_COUNT_SOFT_LIMIT){ warning.style.display=''; warning.textContent = total + ' columns selected — more than ' + COLUMN_COUNT_SOFT_LIMIT + ' may not fit a typical viewport without horizontal scrolling.'; }
       else warning.style.display = 'none';
     }
-  }
-
-  var PREVIEW_PATIENTS = [
-    { patientName:'Maya Thomas', pid:'P-10492', currentStatus:'Waiting for Provider', timeInStatus:'32m', arrivalTime:'08:14', lengthOfStay:'1h 40m', bed:'E12', provider:'Dr Rao', nurse:'N. Kim', age:'54', patientType:'Adult', vitals:'98.2°F · HR 88', medicalConditions:'Hypertension', allergies:'Penicillin', isolation:'—', triageAcuity:'ESI 3', chiefComplaint:'Abdominal pain', scheduledProcedure:'—', preProcedureReadiness:'—', careSetting:'Emergency Department', pendingWork:'Labs pending', disposition:'—', dischargeBlockers:'—', expectedDischarge:'—', alerts:'2' },
-    { patientName:'Liam Joseph', pid:'P-20716', currentStatus:'In Treatment', timeInStatus:'18m', arrivalTime:'07:40', lengthOfStay:'2h 05m', bed:'E08', provider:'Dr Chen', nurse:'S. Ali', age:'31', patientType:'Adult', vitals:'99.1°F · HR 76', medicalConditions:'—', allergies:'—', isolation:'Contact', triageAcuity:'ESI 2', chiefComplaint:'Chest pain', scheduledProcedure:'—', preProcedureReadiness:'—', careSetting:'Emergency Department', pendingWork:'—', disposition:'Admit', dischargeBlockers:'—', expectedDischarge:'—', alerts:'1' }
-  ];
-
-  function renderPatientPreview(){
-    var head = document.getElementById('patientPreviewHead');
-    var body = document.getElementById('patientPreviewBody');
-    if(!head || !body) return;
-    var cols = LOCKED_COLUMN_KEYS.concat(selectedColumns).map(columnByKey).filter(Boolean);
-    head.innerHTML = '<tr>' + cols.map(function(c){ return '<th>'+c.label+'</th>'; }).join('') + '<th class="actions">Actions</th></tr>';
-    body.innerHTML = PREVIEW_PATIENTS.map(function(p){
-      return '<tr>' + cols.map(function(c){ return '<td>'+(p[c.key] !== undefined ? p[c.key] : '—')+'</td>'; }).join('') + '<td class="actions">Change &#8942;</td></tr>';
-    }).join('');
   }
 
   /* ---------- Patient Actions library (§36-37) ---------- */
@@ -1753,34 +1859,97 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   ];
   var ACTION_CATEGORY_ORDER = ['Workflow','Clinical','Coordination','Administrative'];
   var DEFAULT_ACTION_STATE = { statusChange:true, encounterNote:true, referral:true, intakeForm:true, documents:true, viewCardexAlerts:true, payment:true, pastVisits:true, specimenCollection:true, patientDemographics:true };
+  function actionByKey(key){ return ACTION_LIBRARY.find(function(a){ return a.key === key; }); }
+  // selectedActions is the ordered source of truth (same pattern as selectedColumns): position
+  // in this array IS the inline/overflow order. Previously that order was just a byproduct of
+  // ACTION_LIBRARY's fixed array position, so an informaticist had no way to promote a
+  // clinically critical action ahead of one that merely appeared earlier in the library list.
+  var selectedActions = ACTION_LIBRARY.filter(function(a){ return DEFAULT_ACTION_STATE[a.key]; }).map(function(a){ return a.key; });
+  // actionLibraryState is kept as a derived boolean map — other code (readiness checks, record
+  // save/load) reads it as {key: true/false}, unchanged from before.
   var actionLibraryState = Object.assign({}, DEFAULT_ACTION_STATE);
+  function syncActionLibraryState(){
+    actionLibraryState = {};
+    selectedActions.forEach(function(key){ actionLibraryState[key] = true; });
+  }
 
-  function toggleActionEnabled(key, checked){
-    actionLibraryState[key] = checked;
+  function toggleActionSelected(key, checked){
+    var pos = selectedActions.indexOf(key);
+    if(checked && pos===-1) selectedActions.push(key);
+    if(!checked && pos>-1) selectedActions.splice(pos,1);
+    syncActionLibraryState();
+    renderActionLibrary();
+    updateReadiness();
+  }
+
+  function moveSelectedAction(key, dir){
+    var i = selectedActions.indexOf(key);
+    var j = i + dir;
+    if(i<0 || j<0 || j>=selectedActions.length) return;
+    var tmp = selectedActions[i]; selectedActions[i] = selectedActions[j]; selectedActions[j] = tmp;
+    renderActionLibrary();
+  }
+
+  function resetActionsToDefault(){
+    selectedActions = ACTION_LIBRARY.filter(function(a){ return DEFAULT_ACTION_STATE[a.key]; }).map(function(a){ return a.key; });
+    syncActionLibraryState();
+    var limitInput = document.getElementById('inlineActionLimit');
+    if(limitInput) limitInput.value = 3;
     renderActionLibrary();
     updateReadiness();
   }
 
   function renderActionLibrary(){
     var list = document.getElementById('actionLibraryList');
+    var catSelect = document.getElementById('actionCategoryFilter');
     if(!list) return;
-    list.innerHTML = ACTION_CATEGORY_ORDER.map(function(cat){
-      var items = ACTION_LIBRARY.filter(function(a){ return a.category === cat; });
-      return '<div class="action-cat-group"><h5>'+cat+'</h5><div class="check-grid cols-3">'+
-        items.map(function(a){
-          var checked = !!actionLibraryState[a.key];
-          return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionEnabled(\''+a.key+'\', this.checked)"> '+a.label+'</label>';
-        }).join('') +
-      '</div></div>';
-    }).join('');
+    if(catSelect && !catSelect.dataset.built){
+      catSelect.innerHTML = '<option value="">All categories</option>' + ACTION_CATEGORY_ORDER.map(function(c){ return '<option value="'+c+'">'+c+'</option>'; }).join('');
+      catSelect.dataset.built = '1';
+    }
+    var searchInput = document.getElementById('actionSearchInput');
+    var query = ((searchInput ? searchInput.value : '') || '').toLowerCase();
+    var category = catSelect ? catSelect.value : '';
+    var filtered = ACTION_LIBRARY.filter(function(a){
+      var matchesQuery = !query || a.label.toLowerCase().indexOf(query) > -1;
+      var matchesCategory = !category || a.category === category;
+      return matchesQuery && matchesCategory;
+    });
+    // Checked-but-filtered-out actions stay visible with their order/move controls — otherwise
+    // search/category filtering could hide an action you already selected, same as Columns.
+    var filteredKeys = filtered.map(function(a){ return a.key; });
+    selectedActions.forEach(function(k){ if(filteredKeys.indexOf(k) === -1){ var a = actionByKey(k); if(a) filtered.push(a); } });
+
+    // Selected actions first (in configured order, with order number + move arrows), then
+    // everything else grouped by category the way it always was.
+    var sorted = filtered.sort(function(a,b){
+      var ai = selectedActions.indexOf(a.key), bi = selectedActions.indexOf(b.key);
+      if(ai>-1 && bi>-1) return ai-bi;
+      if(ai>-1) return -1;
+      if(bi>-1) return 1;
+      return ACTION_CATEGORY_ORDER.indexOf(a.category) - ACTION_CATEGORY_ORDER.indexOf(b.category) || (a.label < b.label ? -1 : 1);
+    });
+    list.innerHTML = sorted.length ? sorted.map(function(a){
+      var pos = selectedActions.indexOf(a.key);
+      var checked = pos > -1;
+      var orderLabel = checked ? (pos + 1) : '';
+      var moveHtml = checked ? (
+        '<div class="col-move">'+
+          '<button class="icon-btn" type="button" onclick="moveSelectedAction(\''+a.key+'\',-1)" aria-label="Move '+a.label+' up">&#9650;</button>'+
+          '<button class="icon-btn" type="button" onclick="moveSelectedAction(\''+a.key+'\',1)" aria-label="Move '+a.label+' down">&#9660;</button>'+
+        '</div>'
+      ) : '';
+      return '<label class="col-row"><span class="col-order">'+orderLabel+'</span><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> <span class="col-name">'+a.label+'</span><span class="tag col-cat">'+a.category+'</span>'+moveHtml+'</label>';
+    }).join('') : '<p class="muted" style="padding:8px;">No matching actions</p>';
+    var countEl = document.getElementById('actionSelectedCount');
+    if(countEl) countEl.textContent = selectedActions.length + ' of ' + ACTION_LIBRARY.length + ' actions selected';
     var limitInput = document.getElementById('inlineActionLimit');
     var limit = limitInput ? parseInt(limitInput.value, 10) || 3 : 3;
-    var enabled = ACTION_LIBRARY.filter(function(a){ return actionLibraryState[a.key]; });
-    var inline = enabled.slice(0, limit);
-    var overflow = enabled.slice(limit);
+    var inline = selectedActions.slice(0, limit).map(actionByKey).filter(Boolean);
+    var overflow = selectedActions.slice(limit).map(actionByKey).filter(Boolean);
     var preview = document.getElementById('actionOverflowPreview');
     if(preview){
-      preview.textContent = enabled.length ?
+      preview.textContent = selectedActions.length ?
         'Inline: ' + (inline.map(function(a){ return a.label; }).join(', ') || '—') + '. Overflow menu: ' + (overflow.length ? overflow.map(function(a){ return a.label; }).join(', ') : 'none') + '.' :
         'No actions selected.';
     }
@@ -1788,11 +1957,133 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(warning) warning.style.display = actionLibraryState.statusChange ? 'none' : '';
   }
 
+  // Signals were previously nine static, unwired checkboxes with no severity and no save/load
+  // path at all — every board effectively used the same flat treatment for "Order pending" as
+  // for "Clinical & safety alerts". This gives each signal an actual enabled state plus a
+  // severity that maps to how it presents on the live board.
+  var SIGNAL_LIBRARY = [
+    { key:'clinicalSafety', label:'Clinical & safety alerts', defaultEnabled:true, defaultSeverity:'critical' },
+    { key:'visitorRestriction', label:'Visitor / confidentiality restriction', defaultEnabled:true, defaultSeverity:'critical' },
+    { key:'assessmentRequired', label:'Assessment required', defaultEnabled:true, defaultSeverity:'caution' },
+    { key:'documentationIncomplete', label:'Documentation incomplete', defaultEnabled:true, defaultSeverity:'caution' },
+    { key:'orderPending', label:'Order pending', defaultEnabled:true, defaultSeverity:'caution' },
+    { key:'specimenPending', label:'Specimen pending', defaultEnabled:false, defaultSeverity:'caution' },
+    { key:'dischargeTaskPending', label:'Discharge task pending', defaultEnabled:false, defaultSeverity:'informational' },
+    { key:'transferPrepIncomplete', label:'Transfer preparation incomplete', defaultEnabled:false, defaultSeverity:'informational' },
+    { key:'requiredFormMissing', label:'Required form missing', defaultEnabled:false, defaultSeverity:'informational' }
+  ];
+  var SIGNAL_SEVERITIES = [
+    { value:'critical', label:'Critical — highlights the row' },
+    { value:'caution', label:'Caution — badge on the row' },
+    { value:'informational', label:'Informational — icon only' }
+  ];
+  function defaultSignalState(){
+    var out = {};
+    SIGNAL_LIBRARY.forEach(function(s){ out[s.key] = { enabled: s.defaultEnabled, severity: s.defaultSeverity }; });
+    return out;
+  }
+  var signalState = defaultSignalState();
+  function toggleSignalEnabled(key, checked){
+    if(!signalState[key]) signalState[key] = { enabled:false, severity: (SIGNAL_LIBRARY.find(function(s){return s.key===key;})||{}).defaultSeverity || 'informational' };
+    signalState[key].enabled = checked;
+    renderSignalsGrid();
+  }
+  function updateSignalSeverity(key, value){
+    if(!signalState[key]) return;
+    signalState[key].severity = value;
+  }
+  function renderSignalsGrid(){
+    var grid = document.getElementById('signalsGrid');
+    if(!grid) return;
+    grid.innerHTML = SIGNAL_LIBRARY.map(function(s){
+      var st = signalState[s.key] || { enabled:false, severity:s.defaultSeverity };
+      var severityOptions = SIGNAL_SEVERITIES.map(function(sev){
+        return '<option value="'+sev.value+'"'+(st.severity===sev.value?' selected':'')+'>'+sev.label+'</option>';
+      }).join('');
+      return '<label class="col-row"><input type="checkbox"'+(st.enabled?' checked':'')+' onchange="toggleSignalEnabled(\''+s.key+'\', this.checked)"> <span class="col-name">'+s.label+'</span>' +
+        '<select class="control compact" style="min-width:200px;" aria-label="Severity for '+s.label+'"'+(st.enabled?'':' disabled') +
+        ' onchange="updateSignalSeverity(\''+s.key+'\', this.value)">'+severityOptions+'</select></label>';
+    }).join('');
+  }
+
+  // Master switch for the whole Signals subsection. This is a real functional switch, not a
+  // display convenience: turning it off clears every configured signal outright, and turning
+  // it back on starts from a blank slate — nothing is remembered across the off/on cycle. A
+  // confirm guards the destructive direction only; turning back on has nothing to lose.
+  function toggleSignalsSection(checked){
+    var body = document.getElementById('signalsBody');
+    if(!checked){
+      var hasConfig = SIGNAL_LIBRARY.some(function(s){ return signalState[s.key] && signalState[s.key].enabled; });
+      if(hasConfig){
+        document.getElementById('signalsSectionEnabled').checked = true; // revert until confirmed
+        openConfirmModal('Turn off Signals?', 'This clears every signal configured for this board. If you turn Signals back on, you\'ll start from scratch \u2014 nothing will be pre-selected.', function(){
+          signalState = defaultSignalState();
+          SIGNAL_LIBRARY.forEach(function(s){ signalState[s.key].enabled = false; });
+          document.getElementById('signalsSectionEnabled').checked = false;
+          if(body) body.style.display = 'none';
+          renderSignalsGrid();
+        }, { confirmLabel: 'Turn off and clear', danger: true });
+        return;
+      }
+    }
+    if(body) body.style.display = checked ? '' : 'none';
+  }
+  // Syncs the master switch + body visibility to whatever signalState was just loaded — called
+  // after openDrawer/restoreRecoverySnapshot set signalState, so the toggle reflects reality
+  // instead of always defaulting to one position regardless of what's actually configured.
+  function syncSignalsSectionToggle(){
+    var anyOn = SIGNAL_LIBRARY.some(function(s){ return signalState[s.key] && signalState[s.key].enabled; });
+    var cb = document.getElementById('signalsSectionEnabled');
+    var body = document.getElementById('signalsBody');
+    if(cb) cb.checked = anyOn;
+    if(body) body.style.display = anyOn ? '' : 'none';
+  }
+
   function clampCommentLimit(input){
     var v = parseInt(input.value, 10);
     if(isNaN(v)) v = 140;
     v = Math.max(20, Math.min(280, v));
     input.value = v;
+  }
+
+  // Same functional-switch, clear-on-off behavior as Signals: off wipes the comment settings
+  // back to their defaults (not just hides them), on reveals that same clean default state.
+  function toggleCommentsSection(checked){
+    var body = document.getElementById('commentsBody');
+    if(!checked){
+      var predefined = document.getElementById('predefinedCommentsEnabled');
+      var freeText = document.getElementById('freeTextCommentsEnabled');
+      var limit = document.getElementById('commentCharLimit');
+      var hasNonDefaultConfig = (predefined && !predefined.checked) || (freeText && !freeText.checked) || (limit && limit.value !== '140');
+      if(hasNonDefaultConfig){
+        document.getElementById('commentsSectionEnabled').checked = true; // revert until confirmed
+        openConfirmModal('Turn off Operational comments?', 'This resets predefined comments, free-text entry, and the character limit back to their defaults. If you turn this back on, your current settings won\'t be restored.', function(){
+          if(predefined) predefined.checked = true;
+          if(freeText) freeText.checked = true;
+          if(limit) limit.value = '140';
+          document.getElementById('commentsSectionEnabled').checked = false;
+          if(body) body.style.display = 'none';
+        }, { confirmLabel: 'Turn off and reset', danger: true });
+        return;
+      }
+    }
+    if(body) body.style.display = checked ? '' : 'none';
+  }
+
+  // These fields aren't currently persisted with the record (pre-existing gap, unrelated to
+  // this change), so there's nothing to "load" — every drawer open resets Comments to its
+  // known-good default (on, with both options enabled and a 140-char limit).
+  function resetCommentsSectionToDefaults(){
+    var predefined = document.getElementById('predefinedCommentsEnabled');
+    var freeText = document.getElementById('freeTextCommentsEnabled');
+    var limit = document.getElementById('commentCharLimit');
+    if(predefined) predefined.checked = true;
+    if(freeText) freeText.checked = true;
+    if(limit) limit.value = '140';
+    var cb = document.getElementById('commentsSectionEnabled');
+    var body = document.getElementById('commentsBody');
+    if(cb) cb.checked = true;
+    if(body) body.style.display = '';
   }
 
   var REQUIREMENT_CATALOG = {
@@ -1968,8 +2259,15 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function updateAccessWarning(){
     var el = document.getElementById('accessBroaderWarning');
     if(!el) return;
-    var broader = selectedConfigAccess.some(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
-    el.style.display = (selectedConfigAccess.length && broader) ? '' : 'none';
+    var broader = selectedConfigAccess.filter(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
+    if(broader.length){
+      el.innerHTML = '<span aria-hidden="true">&#9888;</span> Configuration access includes ' + broader.join(', ') + ' without Board access — this blocks activation until resolved.';
+      el.style.display = '';
+    } else {
+      el.style.display = 'none';
+    }
+    var field = el.closest('.field');
+    if(field) field.classList.toggle('error', broader.length > 0);
   }
   function toggleAccessRole(kind, role, checked){
     var arr = accessState(kind);
@@ -2045,7 +2343,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(!cfg){
       renderCareSettingInfo(null);
       renderColumnLibrary();
-      renderPatientPreview();
       renderWidgetLibrary();
       updateReadiness();
       return;
@@ -2053,7 +2350,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     renderCareSettingInfo(cfg, selectedFacilities);
     applyStatusPreset(value);
     renderColumnLibrary();
-    renderPatientPreview();
     renderWidgetLibrary();
     if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
     updateReadiness();
@@ -2219,6 +2515,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       if(!hasCareSetting) caresettingBlocking.push('Select a Care Setting');
       if(!hasFacility) caresettingBlocking.push('Select at least one Facility');
       if(!hasBoardAccess) caresettingBlocking.push('Select at least one Board access role');
+      // A Configuration Access role that isn't also a Board Access role is an RBAC gap, not
+      // just a note — it means someone can reconfigure the board without being covered by the
+      // same access review as the people who actually work it. Blocking, not warning.
+      var configBroaderThanBoard = selectedConfigAccess.filter(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
+      if(configBroaderThanBoard.length) caresettingBlocking.push('Configuration access includes ' + configBroaderThanBoard.join(', ') + ' without Board access — add ' + (configBroaderThanBoard.length===1?'it':'them') + ' to Board access or remove ' + (configBroaderThanBoard.length===1?'it':'them') + ' from Configuration access');
       // Over-allocated resources are blocking, not just a warning — a board can sit in Draft
       // over capacity while someone is mid-edit, but it can't be Activated that way.
       selectedFacilities.forEach(function(facility){
@@ -2927,30 +3228,36 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     setTimeout(function(){ el.remove(); }, 4500);
   }
 
+  var auditModalBoardId = null;
   function openAuditHistory(id){
     var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
     if(!t) return;
+    auditModalBoardId = id;
     document.getElementById('auditModalBoardName').textContent = t.name;
-    var events = [
-      { date: '\u2014', event: 'Created', by: 'Arun' },
-      { date: t.updated, event: t.status === 'Active' ? 'Activated' : (t.status === 'Inactive' ? 'Deactivated' : 'Saved as Draft'), by: 'Arun' }
-    ];
-    if(t.pendingDraft) events.unshift({ date: 'Just now', event: 'Pending changes saved \u2014 not yet published', by: 'Arun' });
-    document.getElementById('auditHistoryBody').innerHTML = events.map(function(e){
-      return '<tr><td>'+e.date+'</td><td>'+e.event+'</td><td>'+e.by+'</td></tr>';
-    }).join('');
+    document.getElementById('auditSearchInput').value = '';
+    renderAuditHistory();
     showModalBackdrop('auditModalBackdrop');
+  }
+  function renderAuditHistory(){
+    var t = TRACKERBOARDS.find(function(x){ return x.id === auditModalBoardId; });
+    if(!t) return;
+    // Real events logged as they happened this session (see logAuditEvent). Boards seeded at
+    // load time never went through that path, so backfill a single synthetic "Created" row for
+    // them using what we know (t.updated) rather than showing an empty log for existing boards.
+    var events = (AUDIT_LOG[t.id] || []).slice();
+    if(!AUDIT_LOG[t.id] || !AUDIT_LOG[t.id].length){
+      events.push({ date: t.updated || '\u2014', event: t.status === 'Active' ? 'Activated' : (t.status === 'Inactive' ? 'Deactivated' : 'Saved as Draft'), detail: '', by: CURRENT_USER });
+    }
+    if(t.pendingDraft) events = [{ date:'Just now', event:'Pending changes saved — not yet published', detail:'', by:CURRENT_USER }].concat(events);
+    var query = (document.getElementById('auditSearchInput').value || '').toLowerCase();
+    var filtered = query ? events.filter(function(e){ return (e.event+' '+e.detail+' '+e.by).toLowerCase().indexOf(query) > -1; }) : events;
+    document.getElementById('auditHistoryBody').innerHTML = filtered.length ? filtered.map(function(e){
+      return '<tr><td>'+e.date+'</td><td>'+e.event+(e.detail?' <span class="muted">— '+e.detail+'</span>':'')+'</td><td>'+e.by+'</td></tr>';
+    }).join('') : '<tr><td colspan="3" class="muted">No activity matches "'+query+'"</td></tr>';
   }
   function closeAuditHistory(){
     document.getElementById('auditModalBackdrop').classList.remove('open');
-  }
-
-  function openPatientPreviewModal(){
-    renderPatientPreview();
-    showModalBackdrop('patientPreviewModalBackdrop');
-  }
-  function closePatientPreviewModal(){
-    document.getElementById('patientPreviewModalBackdrop').classList.remove('open');
+    auditModalBoardId = null;
   }
 
   initDashboardFilters();
@@ -2958,35 +3265,20 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   renderStatusList();
   renderStatusEditor();
   renderColumnLibrary();
-  renderPatientPreview();
   renderActionLibrary();
   renderSectionNav();
 </script>
-<div class="toast-region" id="toastRegion" role="status" aria-live="assertive" aria-atomic="true"></div>
+<div class="toast-region" id="toastRegion" role="status" aria-live="polite" aria-atomic="true"></div>
 <div class="modal-backdrop" id="auditModalBackdrop">
   <div class="modal" id="auditModal" role="dialog" aria-modal="true" aria-label="Audit history">
     <div class="modal-head"><h2>Activity log &mdash; <span id="auditModalBoardName"></span></h2><button class="icon-btn" type="button" onclick="closeAuditHistory()" aria-label="Close">&times;</button></div>
     <div class="modal-body">
       <div class="filters" style="margin-bottom:10px;">
-        <input class="text" type="text" placeholder="Search activity" style="max-width:220px;">
-        <select class="control compact"><option>Action type: All</option></select>
-        <select class="control compact"><option>Date range: All time</option></select>
+        <input class="text" type="text" id="auditSearchInput" placeholder="Search activity" style="max-width:260px;" oninput="renderAuditHistory()">
       </div>
       <table class="history"><thead><tr><th>Date</th><th>Event</th><th>By</th></tr></thead><tbody id="auditHistoryBody"></tbody></table>
     </div>
     <div class="modal-foot"><button class="btn" type="button" onclick="closeAuditHistory()">Close</button></div>
-  </div>
-</div>
-<div class="modal-backdrop" id="patientPreviewModalBackdrop">
-  <div class="modal" id="patientPreviewModal" role="dialog" aria-modal="true" aria-label="Patient table preview" style="width:min(1000px,94vw);">
-    <div class="modal-head"><h2>Live preview</h2><button class="icon-btn" type="button" onclick="closePatientPreviewModal()" aria-label="Close">&times;</button></div>
-    <div class="modal-body">
-      <p class="muted" style="margin-top:0;">Synthetic sample data only &mdash; never real patient data.</p>
-      <div class="table-shell" style="min-width:0;overflow-x:auto;">
-        <table class="table" id="patientPreviewTable"><thead id="patientPreviewHead"></thead><tbody id="patientPreviewBody"></tbody></table>
-      </div>
-    </div>
-    <div class="modal-foot"><button class="btn" type="button" onclick="closePatientPreviewModal()">Close</button></div>
   </div>
 </div>
 </body>
