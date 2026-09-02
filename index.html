@@ -288,8 +288,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           <div class="info-grid" id="careSettingInfoGrid"></div>
         </div>
         <div class="subsection" id="resourceAllocationSection" style="display:none">
-          <h4>Resource Allocation</h4>
-          <p class="muted" style="margin:0 0 9px;">How many beds, chairs, and rooms this board claims at each selected Facility. Allocation is per Facility &mdash; a board covering multiple Facilities gets a separate claim at each one. Other boards on the same Facility are accounted for below.</p>
+          <h4>Resource Allocation <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About resource allocation" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">How many beds, chairs, and rooms this board claims at each selected Facility. Allocation is per Facility &mdash; a board covering multiple Facilities gets a separate claim at each one. Other boards on the same Facility are accounted for below.</span></span></h4>
           <div id="resourceAllocationGrid"></div>
         </div>
       </div>
@@ -339,12 +338,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
     <div class="card collapsed" id="sec-widgets" data-section-key="widgets">
       <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle Widgets section"><span class="card-chevron">&#9662;</span></button> Widgets</h2>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle Widgets section"><span class="card-chevron">&#9662;</span></button> Widgets <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About widget reordering" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Every widget can be reordered, whether it's on by default or one you've enabled.</span></span></h2>
         <span class="section-state" id="cardState-widgets"></span>
       </div>
       <div class="card-body" id="sec-widgets-body">
 
-        <p class="help" style="margin-top:0;">Every widget can be reordered, whether it's on by default or one you've enabled.</p>
         <div id="widgetLibraryList"></div>
 
       </div>
@@ -377,8 +375,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         </div>
 
         <div class="subsection">
-          <h4>Signals</h4>
-          <p>Alerts and reminders that show up on a patient row &mdash; separate from the row actions below.</p>
+          <h4>Signals <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About signals" onclick="toggleInfoPopover(this)">&#9432;</button><span class="info-popover">Alerts and reminders that show up on a patient row &mdash; separate from the row actions below.</span></span></h4>
           <div class="check-grid cols-3" id="signalsGrid">
             <label class="check-option"><input type="checkbox" checked> Clinical &amp; safety alerts</label>
             <label class="check-option"><input type="checkbox" checked> Visitor / confidentiality restriction</label>
@@ -688,7 +685,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       desc: document.getElementById('trackerboardDescInput').value,
       careSetting: document.getElementById('careSettingSelect').value,
       facilities: selectedFacilities.slice(),
-      resources: selectedFacilities.reduce(function(acc, f){ acc[f] = Object.assign({ beds:0, chairs:0, rooms:0 }, boardResources[f]); return acc; }, {}),
+      resources: selectedFacilities.reduce(function(acc, f){ acc[f] = Object.assign(emptyResourceAllocation(f), boardResources[f]); return acc; }, {}),
       programs: selectedPrograms.slice(),
       configAccess: selectedConfigAccess.slice(),
       runtimeAccess: selectedRuntimeAccess.slice(),
@@ -1359,7 +1356,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   function defaultWidgetOrder(){ return WIDGET_LIBRARY.map(function(w){ return w.key; }); }
   function defaultWidgetSettings(){
-    return { totalPatients:{ groupBy:'workflowStatus' }, resourceAvailability:{ types:['beds'] }, cardexPanel:{ items:['awaitingApprovals','mar','medications'] } };
+    return { totalPatients:{ groupBy:'workflowStatus' }, cardexPanel:{ items:['awaitingApprovals','mar','medications'] } };
   }
   function widgetByKey(key){ return WIDGET_LIBRARY.find(function(w){ return w.key === key; }); }
   function widgetsForCareSetting(){
@@ -1397,12 +1394,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function setTotalPatientsGroupBy(v){ widgetSettings.totalPatients.groupBy = v; }
-  function toggleResourceType(type, checked){
-    var arr = widgetSettings.resourceAvailability.types;
-    var pos = arr.indexOf(type);
-    if(checked && pos===-1) arr.push(type);
-    if(!checked && pos>-1) arr.splice(pos,1);
-  }
   function toggleCardexItem(item, checked){
     var arr = widgetSettings.cardexPanel.items;
     var pos = arr.indexOf(item);
@@ -1423,12 +1414,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         }).join('') + '</div>';
     }
     if(key === 'resourceAvailability'){
-      var rs = widgetSettings.resourceAvailability;
-      var opts = [['beds','Beds'],['rooms','Rooms'],['chairs','Chairs']];
-      return '<div class="check-grid cols-3">'+opts.map(function(o){
-        var checked = rs.types.indexOf(o[0]) > -1;
-        return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleResourceType(\''+o[0]+'\', this.checked)"> '+o[1]+'</label>';
-      }).join('')+'</div>';
+      return '<p>Shows whatever this board has claimed per Facility in Resource Allocation above — each Facility\'s live board only shows the resource types that Facility actually has. Nothing to configure here.</p>';
     }
     if(key === 'codeTeam') return '<p>Team membership is maintained on the live board.</p>';
     if(key === 'doctorsOnDuty') return '<p>The on-duty list is maintained on the live board.</p>';
@@ -1492,22 +1478,41 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   };
 
   var FACILITY_RESOURCES = {
-    'Central City Health': { beds:10, rooms:4, chairs:6 },
-    'Riverside Clinic': { beds:6, rooms:2, chairs:3 },
+    // Each Facility declares only the resource types it actually has — no fixed shape shared
+    // across every Facility. Riverside has 7; Central City Health has 2. Both are represented
+    // exactly as-is, instead of both being forced into the same fixed list.
+    'Riverside Clinic': { beds:6, chairs:3, rooms:2, lobbies:4, gurneys:2, isolationBays:1, prepBays:3 },
+    'Central City Health': { rooms:4, chairs:6 },
     'Lakeside Medical Center': { beds:8, rooms:3, chairs:4 }
   };
+  // Open vocabulary of resource type names, shared across Facilities so the same kind of
+  // resource is always labeled the same way (e.g. every Facility's "Lobbies" reads as
+  // "Lobbies", not a locally-invented label) — but a Facility is never required to have all
+  // of them, and this list can grow without limit as new resource kinds come up.
+  var RESOURCE_TYPE_CATALOG = {
+    beds:'Beds', chairs:'Chairs', rooms:'Rooms', lobbies:'Lobbies',
+    gurneys:'Gurneys', isolationBays:'Isolation Bays', prepBays:'Prep Bays'
+  };
+  function resourceTypeLabel(type){ return RESOURCE_TYPE_CATALOG[type] || type; }
+  // The types available for a given Facility are simply whatever that Facility declared in
+  // FACILITY_RESOURCES — not a global fixed list applied to every Facility uniformly.
+  function resourceTypesForFacility(facility){
+    return Object.keys(FACILITY_RESOURCES[facility] || {});
+  }
+  function emptyResourceAllocation(facility){
+    var out = {};
+    resourceTypesForFacility(facility).forEach(function(type){ out[type] = 0; });
+    return out;
+  }
   function formatFacilityResources(facility){
     var r = FACILITY_RESOURCES[facility];
     if(!r) return null;
-    var parts = [];
-    if(r.beds) parts.push(r.beds + ' beds');
-    if(r.rooms) parts.push(r.rooms + ' rooms');
-    if(r.chairs) parts.push(r.chairs + ' chairs');
-    return parts.join(', ');
+    return resourceTypesForFacility(facility).map(function(type){
+      return r[type] + ' ' + resourceTypeLabel(type).toLowerCase();
+    }).join(', ');
   }
 
-  var RESOURCE_TYPES = [['beds','Beds'],['chairs','Chairs'],['rooms','Rooms']];
-  var boardResources = {}; // { [facilityName]: { beds, chairs, rooms } } — one allocation per Facility, never pooled.
+  var boardResources = {}; // { [facilityName]: { [resourceType]: count } } — one allocation per Facility, never pooled; keys vary per Facility.
 
   function resourceCapacity(facility, type){
     var r = FACILITY_RESOURCES[facility];
@@ -1534,25 +1539,29 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     }
     section.style.display = '';
     grid.innerHTML = selectedFacilities.map(function(facility){
-      if(!boardResources[facility]) boardResources[facility] = { beds:0, chairs:0, rooms:0 };
+      if(!boardResources[facility]) boardResources[facility] = emptyResourceAllocation(facility);
       var fRes = boardResources[facility];
-      var fields = RESOURCE_TYPES.map(function(rt){
-        var type = rt[0], label = rt[1];
+      var rows = resourceTypesForFacility(facility).map(function(type){
+        var label = resourceTypeLabel(type);
         var capacity = resourceCapacity(facility, type);
         if(fRes[type] > capacity) fRes[type] = capacity;
         var others = resourceAllocatedByOthers(facility, type);
-        var remaining = capacity - others - fRes[type];
-        var helpText = capacity
-          ? others + ' of ' + capacity + ' claimed by other boards on ' + facility + ' &middot; ' + (remaining < 0 ? '<span style="color:var(--bad);">' + Math.abs(remaining) + ' over capacity</span>' : remaining + ' remaining')
-          : 'No ' + label.toLowerCase() + ' configured for ' + facility;
+        // "Available" is what's left for THIS board to claim — the facility's total minus
+        // other boards' claims — not reduced further by this board's own entry, since that
+        // entry has its own column right next to it.
+        var available = capacity - others;
+        var stale = fRes[type] > available; // this board's saved value no longer fits (e.g. another board claimed more since)
+        var availableCell = '<span'+(stale?' style="color:var(--bad);font-weight:700;"':'')+'>'+Math.max(available,0)+' of '+capacity+'</span>' +
+          (stale ? '<div class="short-meta" style="color:var(--bad);">Exceeds what\'s now available &mdash; update this board\'s allocation.</div>' : '');
         var inputId = 'resource-'+facilityIdPart(facility)+'-'+type;
-        return '<div class="field"><label for="'+inputId+'">'+label+'</label>' +
-          '<input class="text" type="number" id="'+inputId+'" min="0" max="'+capacity+'" value="'+fRes[type]+'" '+(capacity?'':'disabled') +
-          ' oninput="onResourceInput(\''+facility.replace(/'/g,"\\'")+'\', \''+type+'\', this.value)">' +
-          '<div class="short-meta">'+helpText+'</div></div>';
+        return '<tr><td>'+label+'</td><td>'+availableCell+'</td><td>' +
+          '<input class="text" type="number" id="'+inputId+'" min="0" max="'+Math.max(available,0)+'" value="'+fRes[type]+'" '+(capacity?'':'disabled') +
+          ' aria-label="'+label+' allocated to this board" oninput="onResourceInput(\''+facility.replace(/'/g,"\\'")+'\', \''+type+'\', this.value)"></td></tr>';
       }).join('');
       return '<div class="field full" style="margin-bottom:2px;"><label style="font-size:11.5px;color:var(--muted);text-transform:none;font-weight:700;">'+facility+'</label></div>' +
-        '<div class="check-grid cols-3" style="grid-column:1/-1;margin-bottom:10px;">'+fields+'</div>';
+        '<div style="grid-column:1/-1;margin-bottom:14px;border:1px solid var(--line);">' +
+        '<table class="table" style="table-layout:auto;"><thead><tr><th>Resource Type</th><th>Available</th><th>This Board\'s Allocation</th></tr></thead>' +
+        '<tbody>'+rows+'</tbody></table></div>';
     }).join('');
   }
 
@@ -1565,7 +1574,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var n = parseInt(value, 10);
     if(isNaN(n) || n < 0) n = 0;
     if(n > remaining) n = remaining;
-    if(!boardResources[facility]) boardResources[facility] = { beds:0, chairs:0, rooms:0 };
+    if(!boardResources[facility]) boardResources[facility] = emptyResourceAllocation(facility);
     boardResources[facility][type] = n;
     renderResourceAllocation();
     updateReadiness();
@@ -2213,8 +2222,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       // Over-allocated resources are blocking, not just a warning — a board can sit in Draft
       // over capacity while someone is mid-edit, but it can't be Activated that way.
       selectedFacilities.forEach(function(facility){
-        RESOURCE_TYPES.forEach(function(rt){
-          var type = rt[0], label = rt[1];
+        resourceTypesForFacility(facility).forEach(function(type){
+          var label = resourceTypeLabel(type);
           var capacity = resourceCapacity(facility, type);
           if(!capacity) return;
           var totalClaimed = resourceAllocatedByOthers(facility, type) + ((boardResources[facility]||{})[type]||0);
