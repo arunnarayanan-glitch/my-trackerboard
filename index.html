@@ -326,21 +326,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       </div>
       <div class="card-body" id="sec-caresetting-body">
         <div class="form-grid">
-          <div class="field"><label for="careSettingSelect">Care Setting</label>
-            <select class="control" id="careSettingSelect" onchange="onCareSettingChange(this.value)">
-              <option value="" disabled selected>Select Care Setting…</option>
-              <option>Emergency Department</option>
-              <option>Inpatient</option>
-              <option>Operating Room</option>
-              <option>Outpatient Clinic</option>
-              <option>Behavioral Health Inpatient</option>
-              <option>Skilled Nursing / Rehab</option>
-              <option>Labor &amp; Delivery</option>
-              <option>Same-Day Surgery</option>
-              <option>Urgent Care</option>
-              <option>Infusion Center</option>
-            </select>
-            <p class="field-error" id="careSettingFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select a Care Setting.</p>
+          <div class="field"><label for="careSettingBtn">Care Setting</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="careSettingBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleCareSettingPicker()">Select Care Setting…</button></div><div class="picker-menu" id="careSettingMenu"></div></div>
+            <p class="field-error" id="careSettingFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Care Setting.</p>
           </div>
           <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility…</button></div><div class="picker-menu" id="connFacilityMenu"></div></div><p class="field-error" id="facilityFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Facility.</p></div><div class="field"><label for="programAccessBtn">Programs</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Programs…</button></div><div class="picker-menu" id="programAccessMenu"></div></div></div>
         </div>
@@ -607,9 +594,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     pendingUniqueId = data ? data.id : '';
     document.getElementById('trackerboardDescInput').value = data ? (data.desc || '') : '';
     shortNameEdited = !!data;
-    var cs = data ? data.careSetting : '';
-    document.getElementById('careSettingSelect').value = cs;
-    currentCareSetting = cs;
+    selectedCareSettings = data ? (data.careSettings || (data.careSetting ? [data.careSetting] : [])).slice() : [];
+    updateCareSettingButton();
     selectedFacilities = data ? (data.facilities || []).slice() : [];
     renderConnFacilityMenu();
     boardResources = data && data.resources ? JSON.parse(JSON.stringify(data.resources)) : {};
@@ -621,8 +607,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     renderAccessMenu('config');
     renderAccessMenu('runtime');
     updateAccessWarning();
-    renderCareSettingInfo(CARE_SETTINGS[cs], selectedFacilities);
-    STATUSES = (data && data.statuses) ? JSON.parse(JSON.stringify(data.statuses)) : (STATUS_PRESETS[cs] ? clonePreset(STATUS_PRESETS[cs]) : []);
+    renderCareSettingInfo();
+    STATUSES = (data && data.statuses) ? JSON.parse(JSON.stringify(data.statuses)) : (selectedCareSettings.length === 1 && STATUS_PRESETS[selectedCareSettings[0]] ? clonePreset(STATUS_PRESETS[selectedCareSettings[0]]) : []);
     selectedIndex = 0;
     renderStatusList();
     renderStatusEditor();
@@ -773,7 +759,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var issues = [];
     if(!t.name || !t.name.trim()) issues.push('a Board Name');
     if(!t.shortName || !t.shortName.trim()) issues.push('a Short Name');
-    if(!t.careSetting) issues.push('a Care Setting');
+    if(!t.careSettings || !t.careSettings.length) issues.push('at least one Care Setting');
     if(!t.facilities || !t.facilities.length) issues.push('at least one Facility');
     if(!t.runtimeAccess || !t.runtimeAccess.length) issues.push('at least one Board access role');
     if(t.statuses){
@@ -794,7 +780,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       shortName: document.getElementById('shortNameInput').value.trim(),
       id: (pendingUniqueId || '').trim(),
       desc: document.getElementById('trackerboardDescInput').value,
-      careSetting: document.getElementById('careSettingSelect').value,
+      careSettings: selectedCareSettings.slice(),
       facilities: selectedFacilities.slice(),
       resources: selectedFacilities.reduce(function(acc, f){ acc[f] = Object.assign(emptyResourceAllocation(f), boardResources[f]); return acc; }, {}),
       programs: selectedPrograms.slice(),
@@ -896,7 +882,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       }
       openConfirmModal('Activate "'+record.name+'"?',
         '<ul style="margin:0 0 8px;padding-left:18px;">'+
-          '<li>Care Setting: '+(record.careSetting||'—')+'</li>'+
+          '<li>Care Setting: '+((record.careSettings||[]).join(', ')||'—')+'</li>'+
           '<li>Facilities: '+(record.facilities.join(', ')||'—')+'</li>'+
           '<li>Board access: '+(record.runtimeAccess.join(', ')||'—')+'</li>'+
           '<li>Workflow: '+record.statuses.length+' statuses</li>'+
@@ -948,7 +934,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     setFieldError('shortNameFieldError', basicTouched && !document.getElementById('shortNameInput').value.trim());
 
     var scopeTouched = sectionTouched('caresetting');
-    setFieldError('careSettingFieldError', scopeTouched && !document.getElementById('careSettingSelect').value);
+    setFieldError('careSettingFieldError', scopeTouched && !selectedCareSettings.length);
     setFieldError('facilityFieldError', scopeTouched && selectedFacilities.length === 0);
     setFieldError('boardAccessFieldError', scopeTouched && selectedRuntimeAccess.length === 0);
   }
@@ -1080,9 +1066,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     pendingUniqueId = snap.id || '';
     shortNameEdited = true;
     document.getElementById('trackerboardDescInput').value = snap.desc || '';
-    var cs = snap.careSetting || '';
-    document.getElementById('careSettingSelect').value = cs;
-    currentCareSetting = cs;
+    selectedCareSettings = (snap.careSettings || (snap.careSetting ? [snap.careSetting] : [])).slice();
+    updateCareSettingButton();
     selectedFacilities = (snap.facilities || []).slice();
     renderConnFacilityMenu();
     boardResources = snap.resources ? JSON.parse(JSON.stringify(snap.resources)) : {};
@@ -1094,8 +1079,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     renderAccessMenu('config');
     renderAccessMenu('runtime');
     updateAccessWarning();
-    renderCareSettingInfo(CARE_SETTINGS[cs], selectedFacilities);
-    STATUSES = snap.statuses ? JSON.parse(JSON.stringify(snap.statuses)) : (STATUS_PRESETS[cs] ? clonePreset(STATUS_PRESETS[cs]) : []);
+    renderCareSettingInfo();
+    STATUSES = snap.statuses ? JSON.parse(JSON.stringify(snap.statuses)) : (selectedCareSettings.length === 1 && STATUS_PRESETS[selectedCareSettings[0]] ? clonePreset(STATUS_PRESETS[selectedCareSettings[0]]) : []);
     selectedIndex = 0;
     renderStatusList();
     renderStatusEditor();
@@ -1215,14 +1200,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   var SEED_ACTIONS = { statusChange:true, addViewOrders:true, encounterNote:true, documents:true, viewCardexAlerts:true, patientDemographics:true };
 
   var TRACKERBOARDS = [
-    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSetting:'Emergency Department', facilities:['Central City Health','Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07 Aug 2026', status:'Active', activePatients:6, dependents:1 },
-    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSetting:'Emergency Department', facilities:['Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'26 Jul 2026', status:'Active', activePatients:4, dependents:1 },
-    { name:'Inpatient Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSetting:'Inpatient', facilities:['Lakeside Medical Center'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'05 Aug 2026', status:'Draft', activePatients:0, dependents:0 },
-    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSetting:'Inpatient', facilities:['Central City Health'], programs:['Critical Care Management','General Medicine'], runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'11 Aug 2026', status:'Active', activePatients:9, dependents:2 },
-    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSetting:'Operating Room', facilities:['Riverside Clinic'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'28 Jul 2026', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSetting:'Operating Room', facilities:['Central City Health'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'30 Jul 2026', status:'Draft', activePatients:0, dependents:0 },
-    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSetting:'Operating Room', facilities:['Lakeside Medical Center'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'02 Aug 2026', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Outpatient Clinic Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks scheduled clinic visits from check-in to check-out.',careSetting:'Outpatient Clinic', facilities:['Riverside Clinic','Lakeside Medical Center'], programs:['Ambulatory Care Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'14 Aug 2026', status:'Active', activePatients:3, dependents:0 }
+    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['Emergency Department'], facilities:['Central City Health','Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07 Aug 2026', status:'Active', activePatients:6, dependents:1 },
+    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['Emergency Department'], facilities:['Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'26 Jul 2026', status:'Active', activePatients:4, dependents:1 },
+    { name:'Inpatient Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['Inpatient'], facilities:['Lakeside Medical Center'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'05 Aug 2026', status:'Draft', activePatients:0, dependents:0 },
+    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['Inpatient'], facilities:['Central City Health'], programs:['Critical Care Management','General Medicine'], runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'11 Aug 2026', status:'Active', activePatients:9, dependents:2 },
+    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['Operating Room'], facilities:['Riverside Clinic'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'28 Jul 2026', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['Operating Room'], facilities:['Central City Health'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'30 Jul 2026', status:'Draft', activePatients:0, dependents:0 },
+    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['Operating Room'], facilities:['Lakeside Medical Center'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'02 Aug 2026', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Outpatient Clinic Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks scheduled clinic visits from check-in to check-out.',careSettings:['Outpatient Clinic'], facilities:['Riverside Clinic','Lakeside Medical Center'], programs:['Ambulatory Care Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'14 Aug 2026', status:'Active', activePatients:3, dependents:0 }
   ];
 
   function allFacilities(){
@@ -1231,7 +1216,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     return Object.keys(set).sort();
   }
   function allCareSettingsUsed(){
-    return Array.from(new Set(TRACKERBOARDS.map(function(t){ return t.careSetting; }))).sort();
+    var set = {};
+    TRACKERBOARDS.forEach(function(t){ (t.careSettings||[]).forEach(function(cs){ set[cs] = true; }); });
+    return Object.keys(set).sort();
   }
   function allProgramsUsed(){
     var set = {};
@@ -1471,7 +1458,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var filtered = TRACKERBOARDS.filter(function(t){
       var searchOk = !q || t.name.toLowerCase().indexOf(q)>-1 || (t.shortName||'').toLowerCase().indexOf(q)>-1 || t.id.toLowerCase().indexOf(q)>-1;
       var facilityOk = !dashboardFilters.facility.length || t.facilities.some(function(f){ return dashboardFilters.facility.indexOf(f) > -1; });
-      var careOk = !dashboardFilters.careSetting.length || dashboardFilters.careSetting.indexOf(t.careSetting) > -1;
+      var careOk = !dashboardFilters.careSetting.length || (t.careSettings||[]).some(function(cs){ return dashboardFilters.careSetting.indexOf(cs) > -1; });
       var programOk = !dashboardFilters.program.length || dashboardFilters.program.some(function(p){
         return p === 'No Program' ? !(t.programs&&t.programs.length) : (t.programs||[]).indexOf(p) > -1;
       });
@@ -1480,8 +1467,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     });
     var key = dashboardSort.key, dir = dashboardSort.dir;
     filtered.sort(function(a,b){
-      var av = key === 'facilities' ? a.facilities.join(', ') : key === 'program' ? (a.programs||[]).join(', ') : a[key];
-      var bv = key === 'facilities' ? b.facilities.join(', ') : key === 'program' ? (b.programs||[]).join(', ') : b[key];
+      var av = key === 'facilities' ? a.facilities.join(', ') : key === 'program' ? (a.programs||[]).join(', ') : key === 'careSetting' ? (a.careSettings||[]).join(', ') : a[key];
+      var bv = key === 'facilities' ? b.facilities.join(', ') : key === 'program' ? (b.programs||[]).join(', ') : key === 'careSetting' ? (b.careSettings||[]).join(', ') : b[key];
       return av < bv ? -1*dir : av > bv ? 1*dir : 0;
     });
     document.querySelectorAll('.table th[data-key-th]').forEach(function(th){
@@ -1495,6 +1482,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     } else {
       body.innerHTML = filtered.map(function(t){
         var statusClass = statusPillClass(t.status);
+        var careSettingList = t.careSettings || [];
+        var careSettingChips = careSettingList.length ? careSettingList[0] + (careSettingList.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(careSettingList.length-1)+' more</button><span class="info-popover">'+popoverList('Care Settings', careSettingList)+'</span></span>' : '') : '—';
         var facilityChips = t.facilities.length ? t.facilities[0] + (t.facilities.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(t.facilities.length-1)+' more</button><span class="info-popover">'+popoverList('Facilities', t.facilities)+'</span></span>' : '') : '—';
         var programList = t.programs||[];
         var programChips = programList.length ? programList[0] + (programList.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(programList.length-1)+' more</button><span class="info-popover">'+popoverList('Programs', programList)+'</span></span>' : '') : '—';
@@ -1506,7 +1495,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         var unavailableFacility = t.facilityUnavailable ? ' <span class="tag" style="color:var(--bad);">Unavailable</span>' : '';
         return '<tr>'+
           '<td><span class="cell-title">'+t.name+'</span>'+boardInfo+'</td>'+
-          '<td>'+t.careSetting+'</td>'+
+          '<td>'+careSettingChips+'</td>'+
           '<td>'+facilityChips+unavailableFacility+'</td>'+
           '<td>'+programChips+'</td>'+
           '<td>'+t.updated+'</td>'+
@@ -1574,8 +1563,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
   function widgetByKey(key){ return WIDGET_LIBRARY.find(function(w){ return w.key === key; }); }
   function widgetsForCareSetting(){
-    var cs = document.getElementById('careSettingSelect').value;
-    return WIDGET_LIBRARY.filter(function(w){ return !w.settings || !w.settings.length || !cs || w.settings.indexOf(cs) > -1; });
+    return WIDGET_LIBRARY.filter(function(w){ return settingsStillCovered(w.settings); });
   }
   function orderedVisibleWidgetsByPlacement(placement){
     var visibleKeys = widgetsForCareSetting().filter(function(w){ return w.placement === placement; }).map(function(w){ return w.key; });
@@ -1617,11 +1605,10 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   function widgetBodyHtml(key){
     if(key === 'totalPatients'){
-      var cs = document.getElementById('careSettingSelect').value;
       var s = widgetSettings.totalPatients;
       var options = [{ v:'workflowStatus', label:'Group by Workflow Status' }];
-      if(cs === 'Emergency Department') options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
-      if(cs === 'Inpatient' || cs === 'Operating Room') options.push({ v:'unit', label:'Group by Unit' });
+      if(selectedCareSettings.indexOf('Emergency Department') > -1) options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
+      if(selectedCareSettings.indexOf('Inpatient') > -1 || selectedCareSettings.indexOf('Operating Room') > -1) options.push({ v:'unit', label:'Group by Unit' });
       return '<p>Choose one grouping for this count. Defaults to Workflow Status; the Care-Setting-specific option appears alongside it once a Care Setting is selected.</p><div class="check-grid cols-3">'+
         options.map(function(o){
           return '<label class="check-option"><input type="radio" name="totalPatientsGroupBy" value="'+o.v+'"'+(s.groupBy===o.v?' checked':'')+' onchange="setTotalPatientsGroupBy(\''+o.v+'\')"> '+o.label+'</label>';
@@ -2037,8 +2024,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function columnByKey(key){ return PATIENT_COLUMNS.find(function(c){ return c.key === key; }); }
 
   function columnsForCareSetting(){
-    var cs = document.getElementById('careSettingSelect').value;
-    return PATIENT_COLUMNS.filter(function(c){ return !c.settings || !cs || c.settings.indexOf(cs) > -1; });
+    return PATIENT_COLUMNS.filter(function(c){ return settingsStillCovered(c.settings); });
   }
 
   function recommendedColumnKeys(){
@@ -2537,30 +2523,38 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     updateCommentsBothOffWarning();
   }
 
-  function renderCareSettingInfo(cfg, facilities){
+  function renderCareSettingInfo(){
     var wrap = document.getElementById('careSettingInfo');
-    if(!cfg || !facilities || !facilities.length){
+    if(!selectedCareSettings.length || !selectedFacilities.length){
       wrap.style.display = 'none';
       return;
     }
     wrap.style.display = '';
     var grid = document.getElementById('careSettingInfoGrid');
-    var items = [
-      { label:'Default Visit Category', value:cfg.visit },
-      { label:'Duration', value:cfg.durationValue+' '+cfg.durationUnit }
-    ];
-    if(cfg.form) items.push({ label:'Chief Complaint Form', value:cfg.form, link:true });
-    var html = items.map(function(it){
-      return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
+    // Each selected Care Setting gets its own Visit/Duration/Form row, the same way each
+    // selected Facility already gets its own Resources row below — a board covering more than
+    // one Care Setting is genuinely subject to more than one set of these values, so showing
+    // only one (and which one?) would just be wrong.
+    var html = selectedCareSettings.map(function(cs){
+      var cfg = CARE_SETTINGS[cs];
+      if(!cfg) return '';
+      var items = [
+        { label:cs+' — Default Visit Category', value:cfg.visit },
+        { label:cs+' — Duration', value:cfg.durationValue+' '+cfg.durationUnit }
+      ];
+      if(cfg.form) items.push({ label:cs+' — Chief Complaint Form', value:cfg.form, link:true });
+      return items.map(function(it){
+        return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
+      }).join('');
     }).join('');
-    html += facilities.map(function(f){
+    html += selectedFacilities.map(function(f){
       var summary = formatFacilityResources(f);
       return '<div class="info-item full"><span class="info-label">Facility Resources &mdash; '+f+'</span><span class="info-value'+(summary?'':' muted')+'">'+(summary || 'No resource data configured for this facility')+'</span></div>';
     }).join('');
     grid.innerHTML = html;
   }
 
-  var currentCareSetting = '';
+  var selectedCareSettings = [];
   var selectedFacilities = [];
 
   function statusesMatchPreset(careSetting){
@@ -2569,34 +2563,141 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     return JSON.stringify(STATUSES) === JSON.stringify(preset);
   }
 
-  function computeCareSettingChangeImpact(newValue){
+  function updateCareSettingButton(){
+    var btn = document.getElementById('careSettingBtn');
+    if(!btn) return;
+    btn.textContent = selectedCareSettings.length ? selectedCareSettings.join(', ') : 'Select Care Setting…';
+  }
+  function renderCareSettingMenu(){
+    var menu = document.getElementById('careSettingMenu');
+    if(!menu) return;
+    menu.innerHTML = Object.keys(CARE_SETTINGS).map(function(cs){
+      var checked = selectedCareSettings.indexOf(cs) > -1 ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+cs+'"'+checked+' onchange="toggleCareSetting(this, \''+cs.replace(/'/g,"\\'")+'\')"> '+cs+'</label>';
+    }).join('');
+    updateCareSettingButton();
+  }
+  function toggleCareSettingPicker(){
+    var menu = document.getElementById('careSettingMenu');
+    var btn = document.getElementById('careSettingBtn');
+    if(!menu) return;
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ renderCareSettingMenu(); menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+
+  // Union across every selected Care Setting: a Facility, Program, Column, or Widget is
+  // available if it applies to ANY of them, not only if it applies to all — a board covering
+  // both ED and Inpatient should still offer everything either one would offer on its own.
+  function unionFacilitiesForSelected(){
+    var set = [];
+    selectedCareSettings.forEach(function(cs){
+      var cfg = CARE_SETTINGS[cs];
+      if(!cfg) return;
+      cfg.facilities.forEach(function(f){ if(set.indexOf(f) === -1) set.push(f); });
+    });
+    return set;
+  }
+  function programSettingsFor(name){
+    var direct = PROGRAM_OPTIONS.find(function(p){ return p.name === name; });
+    if(direct) return direct.settings || [];
+    var parent = PROGRAM_OPTIONS.find(function(p){ return (p.subPrograms||[]).indexOf(name) > -1; });
+    return parent ? (parent.settings || []) : [];
+  }
+  function settingsStillCovered(settings){
+    return !settings || !settings.length || settings.some(function(s){ return selectedCareSettings.indexOf(s) > -1; });
+  }
+
+  // Adding a Care Setting only ever grows what's available — nothing currently configured can
+  // become invalid, so it never needs confirmation. Removing one can shrink the eligible pool
+  // out from under a Facility/Program/Column/Widget that's currently selected; that's the only
+  // direction that needs a heads-up, mirroring how changing the single Care Setting used to warn
+  // before this was multi-select.
+  function computeCareSettingRemovalImpact(removedValue){
+    var remaining = selectedCareSettings.filter(function(cs){ return cs !== removedValue; });
+    var remainingFacilities = [];
+    remaining.forEach(function(cs){
+      var cfg = CARE_SETTINGS[cs];
+      if(!cfg) return;
+      cfg.facilities.forEach(function(f){ if(remainingFacilities.indexOf(f) === -1) remainingFacilities.push(f); });
+    });
     var items = [];
-    if(selectedFacilities.length) items.push(selectedFacilities.length + (selectedFacilities.length===1?' selected Facility':' selected Facilities'));
-    if(selectedPrograms.length) items.push(selectedPrograms.length + (selectedPrograms.length===1?' selected Program':' selected Programs'));
-    if(STATUS_PRESETS[currentCareSetting]) items.push('Workflow statuses (reset to the standard ' + newValue + ' setup)');
-    var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.indexOf(newValue) === -1; });
+    var droppedFacilities = selectedFacilities.filter(function(f){ return remainingFacilities.indexOf(f) === -1; });
+    if(droppedFacilities.length) items.push(droppedFacilities.length + (droppedFacilities.length===1?' selected Facility':' selected Facilities') + ' (' + droppedFacilities.join(', ') + ')');
+    var droppedPrograms = selectedPrograms.filter(function(name){
+      var settings = programSettingsFor(name);
+      return settings.length && !settings.some(function(s){ return remaining.indexOf(s) > -1; });
+    });
+    if(droppedPrograms.length) items.push(droppedPrograms.length + (droppedPrograms.length===1?' selected Program':' selected Programs') + ' (' + droppedPrograms.join(', ') + ')');
+    var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.length && !c.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedColumns.forEach(function(c){ items.push(c.label + ' column'); });
-    var droppedWidgets = WIDGET_LIBRARY.filter(function(w){ return widgetEnabled[w.key] && w.settings && w.settings.length && w.settings.indexOf(newValue) === -1; });
+    var droppedWidgets = WIDGET_LIBRARY.filter(function(w){ return widgetEnabled[w.key] && w.settings && w.settings.length && !w.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedWidgets.forEach(function(w){ items.push(w.label + ' widget'); });
-    if(document.getElementById('transferEnabled').checked){
-      var destCount = document.querySelectorAll('#transferDestinations input:checked').length;
-      if(destCount) items.push(destCount + (destCount===1?' transfer destination':' transfer destinations'));
-    }
     return items;
   }
 
-  function onCareSettingChange(value){
-    var cfg = CARE_SETTINGS[value];
-    if(cfg && currentCareSetting && currentCareSetting !== value){
-      var select = document.getElementById('careSettingSelect');
-      select.value = currentCareSetting;
-      var impact = computeCareSettingChangeImpact(value);
-      var body = 'Changing the Care Setting from ' + currentCareSetting + ' to ' + value + ' will remove or reset:' +
-        (impact.length ? '<ul style="margin:8px 0 0;padding-left:18px;">' + impact.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>' : '<p class="muted" style="margin:8px 0 0;">Nothing currently configured depends on this Care Setting.</p>');
-      openConfirmModal('Change Care Setting?', body, function(){ select.value = value; applyCareSettingChange(value); }, { confirmLabel: 'Change Care Setting' });
+  function toggleCareSetting(checkboxEl, value){
+    if(checkboxEl.checked){
+      if(selectedCareSettings.indexOf(value) === -1) selectedCareSettings.push(value);
+      applyCareSettingAdd(value);
       return;
     }
-    applyCareSettingChange(value);
+    var impact = computeCareSettingRemovalImpact(value);
+    if(impact.length){
+      checkboxEl.checked = true; // revert until confirmed
+      var body = 'Removing ' + value + ' will remove or reset:' +
+        '<ul style="margin:8px 0 0;padding-left:18px;">' + impact.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>';
+      openConfirmModal('Remove ' + value + '?', body, function(){
+        checkboxEl.checked = false;
+        var pos = selectedCareSettings.indexOf(value);
+        if(pos>-1) selectedCareSettings.splice(pos,1);
+        applyCareSettingRemove();
+      }, { confirmLabel: 'Remove', danger: true });
+      return;
+    }
+    var pos = selectedCareSettings.indexOf(value);
+    if(pos>-1) selectedCareSettings.splice(pos,1);
+    applyCareSettingRemove();
+  }
+
+  function applyCareSettingAdd(value){
+    updateCareSettingButton();
+    renderConnFacilityMenu();
+    renderProgramMenu();
+    renderColumnLibrary();
+    renderWidgetLibrary();
+    renderCareSettingInfo();
+    // First-ever pick loads that Care Setting's standard workflow as a starting point, same
+    // convenience the single-select version had — but only when nothing's been built yet, so
+    // adding a second (or third) Care Setting later never clobbers real work in progress.
+    if(selectedCareSettings.length === 1 && !STATUSES.length) applyStatusPreset(value);
+    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+    updateReadiness();
+  }
+
+  function applyCareSettingRemove(){
+    updateCareSettingButton();
+    var eligibleFacilities = unionFacilitiesForSelected();
+    selectedFacilities = selectedFacilities.filter(function(f){
+      if(eligibleFacilities.indexOf(f) > -1) return true;
+      delete boardResources[f];
+      return false;
+    });
+    renderConnFacilityMenu();
+    selectedPrograms = selectedPrograms.filter(function(name){ return settingsStillCovered(programSettingsFor(name)); });
+    renderProgramMenu();
+    selectedColumns = selectedColumns.filter(function(k){ var c = columnByKey(k); return !c || settingsStillCovered(c.settings); });
+    renderColumnLibrary();
+    Object.keys(widgetEnabled).forEach(function(k){
+      var w = WIDGET_LIBRARY.find(function(x){ return x.key === k; });
+      if(w && widgetEnabled[k] && !settingsStillCovered(w.settings)) widgetEnabled[k] = false;
+    });
+    renderWidgetLibrary();
+    renderResourceAllocation();
+    renderCareSettingInfo();
+    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+    updateReadiness();
   }
 
   // Each program is scoped to the Care Settings it's clinically relevant to, mirroring how
@@ -2626,8 +2727,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   ];
   var selectedPrograms = [];
   function programsForCareSetting(){
-    var cs = document.getElementById('careSettingSelect').value;
-    return PROGRAM_OPTIONS.filter(function(p){ return !p.settings || !p.settings.length || !cs || p.settings.indexOf(cs) > -1; });
+    return PROGRAM_OPTIONS.filter(function(p){ return settingsStillCovered(p.settings); });
   }
   function updateProgramButton(){
     var btn = document.getElementById('programAccessBtn');
@@ -2763,8 +2863,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function connFacilityOptions(){
-    var cfg = CARE_SETTINGS[currentCareSetting];
-    return cfg ? cfg.facilities : [];
+    return unionFacilitiesForSelected();
   }
 
   function updateConnFacilityButton(){
@@ -2794,7 +2893,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       delete boardResources[value];
     }
     updateConnFacilityButton();
-    renderCareSettingInfo(CARE_SETTINGS[currentCareSetting], selectedFacilities);
+    renderCareSettingInfo();
     renderResourceAllocation();
     updateReadiness();
   }
@@ -2808,29 +2907,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     else { btn.setAttribute('aria-expanded','false'); }
   }
 
-  function applyCareSettingChange(value){
-    var cfg = CARE_SETTINGS[value];
-    currentCareSetting = value;
-    selectedFacilities = [];
-    renderConnFacilityMenu();
-    boardResources = {};
-    renderResourceAllocation();
-    renderProgramMenu();
-    if(!cfg){
-      renderCareSettingInfo(null);
-      renderColumnLibrary();
-      renderWidgetLibrary();
-      updateReadiness();
-      return;
-    }
-    renderCareSettingInfo(cfg, selectedFacilities);
-    applyStatusPreset(value);
-    renderColumnLibrary();
-    renderWidgetLibrary();
-    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
-    updateReadiness();
-  }
-
   function toggleTransferEnabled(checked){
     document.getElementById('transferBody').style.display = checked ? '' : 'none';
     if(checked) renderTransferDestinations();
@@ -2838,9 +2914,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function renderTransferDestinations(){
-    var current = document.getElementById('careSettingSelect').value;
     var defaults = ['Operating Room','Inpatient'];
-    var options = Object.keys(CARE_SETTINGS).filter(function(cs){ return cs !== current; });
+    var options = Object.keys(CARE_SETTINGS).filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
     document.getElementById('transferDestinations').innerHTML = options.map(function(cs){
       var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
       return '<label class="check-option"><input type="checkbox"'+checked+' onchange="renderExceptionalExits()"> '+cs+'</label>';
@@ -2960,12 +3035,12 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       return { state:'complete', issues:[] };
     }
     if(key === 'caresetting'){
-      var hasCareSetting = !!CARE_SETTINGS[document.getElementById('careSettingSelect').value];
+      var hasCareSetting = selectedCareSettings.length > 0;
       var hasFacility = selectedFacilities.length > 0;
       var hasBoardAccess = selectedRuntimeAccess.length > 0;
       var hasConfigAccess = selectedConfigAccess.length > 0;
       var caresettingBlocking = [];
-      if(!hasCareSetting) caresettingBlocking.push('Select a Care Setting');
+      if(!hasCareSetting) caresettingBlocking.push('Select at least one Care Setting');
       if(!hasFacility) caresettingBlocking.push('Select at least one Facility');
       if(!hasBoardAccess) caresettingBlocking.push('Select at least one Board access role');
       // A Configuration Access role that isn't also a Board Access role is an RBAC gap, not
