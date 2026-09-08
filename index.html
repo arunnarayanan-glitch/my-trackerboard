@@ -330,13 +330,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           <div class="field"><label for="careSettingBtn">Care Setting</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="careSettingBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleCareSettingPicker()">Select Care Setting…</button></div><div class="picker-menu" id="careSettingMenu"></div></div>
             <p class="field-error" id="careSettingFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Care Setting.</p>
           </div>
-          <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility…</button></div><div class="picker-menu" id="connFacilityMenu"></div></div><p class="field-error" id="facilityFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Facility.</p></div><div class="field"><label for="programAccessBtn">Programs</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Programs…</button></div><div class="picker-menu" id="programAccessMenu"></div></div></div>
-        </div>
-        <div class="subsection">
-          <h4>Access</h4>
-          <div class="form-grid">
-            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Board access role.</p></div><p class="field-error" id="accessBroaderWarning" style="grid-column:1/-1;display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Configuration access includes groups without Board access.</p>
-          </div>
         </div>
         <div class="derived-scope" id="careSettingInfo" style="display:none">
           <div class="derived-scope-head">
@@ -344,11 +337,23 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           </div>
           <div class="info-grid" id="careSettingInfoGrid"></div>
         </div>
+        <div class="form-grid">
+          <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility…</button></div><div class="picker-menu" id="connFacilityMenu"></div></div><p class="field-error" id="facilityFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Facility.</p></div>
+        </div>
         <div class="subsection" id="unitAllocationSection" style="display:none">
           <h4>Units <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About Units" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Units and their resources are configured in Care Settings Configuration, not here. Select which Units this board tracks — a Unit already claimed by another Trackerboard won't appear. Resource counts shown are a live read of that Unit's current allocation.</span></span></h4>
           <div class="col-unified-list">
-            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="unitFacilitySearch" placeholder="Search facilities…" oninput="renderUnitAllocation()"><button type="button" class="pill-toggle" id="unitUnselectedToggle" aria-pressed="false" onclick="toggleUnitUnselectedOnly()">Unselected only</button></div>
+            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="unitFacilitySearch" placeholder="Search facilities…" oninput="renderUnitAllocation()"></div>
             <div id="unitAllocationGrid" class="resource-facility-list"></div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label for="programAccessBtn">Programs <span class="muted" style="font-weight:400;">(optional)</span></label><div class="picker"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Programs…</button></div><div class="picker-menu" id="programAccessMenu"></div></div></div>
+        </div>
+        <div class="subsection">
+          <h4>Access</h4>
+          <div class="form-grid">
+            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Board access role.</p></div><p class="field-error" id="accessBroaderWarning" style="grid-column:1/-1;display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Configuration access includes groups without Board access.</p>
           </div>
         </div>
       </div>
@@ -1911,17 +1916,37 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var pos = list.findIndex(function(c){ return c.csName === csName && c.unitId === unitId; });
     if(checked && pos === -1) list.push({ csName:csName, unitId:unitId });
     else if(!checked && pos > -1) list.splice(pos, 1);
-    renderUnitAllocation();
+    // Patch in place rather than a full renderUnitAllocation() rebuild — a full rebuild would
+    // destroy and recreate the open picker-menu, closing it after every single checkbox click.
+    // That breaks the exact scenario this design exists for: picking many Units in one sitting.
+    var id = facilityIdPart(facilityName);
+    var summaryEl = document.querySelector('.resource-facility-row[data-facility="'+facilityName.replace(/"/g,'\\"')+'"] .resource-facility-summary');
+    var newCount = list.filter(function(sel){ return findUnitCandidate(facilityName, sel.csName, sel.unitId); }).length;
+    if(summaryEl) summaryEl.textContent = newCount ? newCount+' Unit'+(newCount===1?'':'s')+' selected' : 'No Units selected';
+    if(document.getElementById('unitPickerList-'+id)) renderUnitPickerList(facilityName);
+    if(unitFacilityExpanded[facilityName]) renderSelectedUnitsList(facilityName);
     updateReadiness();
   }
 
 
-  // Phase 2 items 7–8 — replaces the old editable Resource Allocation accordion. Trackerboard no
-  // longer authors resource numbers; it only selects which already-configured Units (from Care
-  // Settings Configuration) this board tracks. One card per selected Facility; within a card,
-  // Units are listed from every selected Care Setting that has that Facility enabled — if more
-  // than one Care Setting is selected and both have Units at this Facility, each Unit is tagged
-  // with its owning Care Setting so identically-named Units (e.g. two "Unit 1"s) aren't ambiguous.
+  // Phase 2 items 7–8, revised for scale — replaces the old editable Resource Allocation
+  // accordion. Trackerboard no longer authors resource numbers; it only selects which
+  // already-configured Units (from Care Settings Configuration) this board tracks.
+  //
+  // Two independent scale problems, two independent fixes:
+  // 1. Many FACILITIES on one board — handled by the facility-name search below, and each
+  //    Facility collapses to a single header row (chevron left, name, fixed-position selected
+  //    count on the right) until expanded, so a board covering many Facilities doesn't turn into
+  //    a wall of open controls.
+  // 2. Many UNITS at one Facility (30, 100+) — a checkbox rendered per Unit doesn't work at that
+  //    count, so selecting happens through a search-and-select dropdown. It lives INSIDE the
+  //    expanded card body — not squeezed into the header, which is what made it too small to use
+  //    — so it can take the card's full width and a taller menu instead of a cramped ~180px box.
+  //    Reviewing what's already selected is a separate concern from selecting — each selected
+  //    Unit keeps its own resource breakdown visible (never summed across Units — a user needs
+  //    to know what Unit 1 has, not a total merged with Unit 2's) — inside a fixed-height,
+  //    internally-scrolling panel with its own search, so its footprint stays bounded whether
+  //    3 or 300 Units are selected.
   function unitCandidatesForFacility(facility){
     var out = [];
     selectedCareSettings.forEach(function(cs){
@@ -1930,20 +1955,96 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     });
     return out;
   }
-  // Collapsed by default, one Facility expanded at a time by the user — same reasoning as the
-  // editable accordion this replaced: a board covering many Facilities (a dozen, twenty) becomes
-  // an unusable wall of fully-open checklists if every card renders expanded. See conversation:
-  // "the strategy ... is very restrictive, think if they add 20 facilities at once."
-  var unitFacilityExpanded = {}; // { [facilityName]: true }
-  var unitUnselectedOnly = false;
+  // A Unit already claimed by a different Trackerboard is excluded outright (decision: disappear,
+  // not disable) — it never appears in the picker dropdown at all. Note: this does not yet
+  // special-case "claimed by this same Trackerboard while editing it" — parked pending
+  // confirmation (see the note above unitClaimedElsewhere) rather than assumed either way.
+  function selectableUnitsForFacility(facility){
+    return unitCandidatesForFacility(facility).filter(function(c){ return !unitClaimedElsewhere(c.csName, facility, c.unit.id); });
+  }
+  function findUnitCandidate(facility, csName, unitId){
+    return selectableUnitsForFacility(facility).find(function(c){ return c.csName === csName && c.unit.id === unitId; }) || null;
+  }
+
+  var unitFacilityExpanded = {}; // { [facilityName]: true } — whole-card collapse/expand state.
   function toggleUnitFacilityExpanded(facility){
     unitFacilityExpanded[facility] = !unitFacilityExpanded[facility];
     renderUnitAllocation();
   }
-  function toggleUnitUnselectedOnly(){
-    unitUnselectedOnly = !unitUnselectedOnly;
-    renderUnitAllocation();
+
+  // Opens the "Select Units" dropdown for one Facility. Only one instance can be open at a time —
+  // same convention as every other .picker-menu in this file. Sized larger than the default
+  // .picker-menu (taller, and full-width of the card body it now lives in) since a cramped
+  // header-sized dropdown was the original problem.
+  function toggleUnitPicker(facility){
+    var id = facilityIdPart(facility);
+    var menu = document.getElementById('unitPickerMenu-'+id);
+    var btn = document.getElementById('unitPickerBtn-'+id);
+    if(!menu) return;
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){
+      menu.innerHTML =
+        '<div style="padding:8px 8px 6px;"><input type="text" class="text" id="unitPickerSearch-'+id+'" placeholder="Search units…" style="height:32px;" oninput="renderUnitPickerList(\''+facility.replace(/'/g,"\\'")+'\')"></div>'+
+        '<div id="unitPickerList-'+id+'"></div>';
+      renderUnitPickerList(facility);
+      menu.classList.add('open');
+      if(btn) btn.setAttribute('aria-expanded','true');
+    } else if(btn){ btn.setAttribute('aria-expanded','false'); }
   }
+  // Renders only the checkbox list inside an already-open picker (not the search input itself),
+  // so typing doesn't destroy and recreate the input the user is actively focused in.
+  function renderUnitPickerList(facility){
+    var id = facilityIdPart(facility);
+    var list = document.getElementById('unitPickerList-'+id);
+    if(!list) return;
+    var searchEl = document.getElementById('unitPickerSearch-'+id);
+    var query = ((searchEl ? searchEl.value : '') || '').toLowerCase();
+    var multiCS = selectedCareSettings.length > 1;
+    var candidates = selectableUnitsForFacility(facility).filter(function(c){
+      return !query || c.unit.name.toLowerCase().indexOf(query) > -1;
+    });
+    if(!candidates.length){
+      list.innerHTML = '<div class="picker-option" style="cursor:default;color:var(--muted)">'+(query ? 'No matching Units.' : 'No Units available at this Facility for the selected Care Setting(s).')+'</div>';
+      return;
+    }
+    list.innerHTML = candidates.map(function(c){
+      var u = c.unit;
+      var checked = isUnitSelected(facility, c.csName, u.id);
+      var csTag = multiCS ? ' <span class="muted">(' + c.csName + ')</span>' : '';
+      return '<label class="picker-option" style="cursor:pointer;">'+
+        '<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+c.csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', this.checked)"> '+
+        u.name+csTag+' <span class="muted" style="font-size:11px;">&mdash; '+formatUnitResources(u)+'</span>'+
+      '</label>';
+    }).join('');
+  }
+
+  // Renders the reviewed-selection panel for one Facility — bounded height (scrolls internally),
+  // its own search, one row per selected Unit with that Unit's own resource breakdown (never
+  // summed across Units — see conversation: "I want to know what is Unit 1 and not in Unit 2").
+  function renderSelectedUnitsList(facility){
+    var id = facilityIdPart(facility);
+    var container = document.getElementById('unitSelectedList-'+id);
+    if(!container) return;
+    var multiCS = selectedCareSettings.length > 1;
+    var claims = (selectedUnits[facility] || []).map(function(sel){
+      return { sel:sel, candidate: findUnitCandidate(facility, sel.csName, sel.unitId) };
+    }).filter(function(x){ return x.candidate; });
+    if(!claims.length){
+      container.innerHTML = '<p class="muted" style="margin:0;padding:8px;">No Units selected yet.</p>';
+      return;
+    }
+    container.innerHTML = claims.map(function(x){
+      var u = x.candidate.unit, csName = x.sel.csName;
+      var csTag = multiCS ? ' <span class="muted" style="font-weight:400;">(' + csName + ')</span>' : '';
+      return '<div class="resource-type-row">'+
+        '<span class="rt-label">'+u.name+csTag+'</span>'+
+        '<span class="short-meta">'+formatUnitResources(u)+'</span>'+
+        '<button type="button" class="icon-btn mini mild-icon" aria-label="Remove '+u.name+'" onclick="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', false)">&times;</button>'+
+      '</div>';
+    }).join('');
+  }
+
   function renderUnitAllocation(){
     var section = document.getElementById('unitAllocationSection');
     var grid = document.getElementById('unitAllocationGrid');
@@ -1953,67 +2054,50 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
     var searchInput = document.getElementById('unitFacilitySearch');
     var query = ((searchInput ? searchInput.value : '') || '').toLowerCase();
-    var toggleBtn = document.getElementById('unitUnselectedToggle');
-    if(toggleBtn) toggleBtn.setAttribute('aria-pressed', String(unitUnselectedOnly));
-    var multiCS = selectedCareSettings.length > 1;
 
-    var rowsHtml = selectedFacilities.map(function(facility){
-      var candidates = unitCandidatesForFacility(facility);
-      // A Unit already claimed by a different Trackerboard is excluded outright (decision:
-      // disappear, not disable) — see unitClaimedElsewhere. Note: this does not yet special-case
-      // "claimed by this same Trackerboard while editing it" — that refinement is parked pending
-      // confirmation (see the note above unitClaimedElsewhere) rather than assumed either way.
-      var visible = candidates.filter(function(c){ return !unitClaimedElsewhere(c.csName, facility, c.unit.id); });
-      var selectedCount = (selectedUnits[facility] || []).filter(function(sel){
-        return visible.some(function(c){ return c.csName === sel.csName && c.unit.id === sel.unitId; });
-      }).length;
-      return { facility:facility, visible:visible, selectedCount:selectedCount };
-    }).filter(function(row){
-      if(query && row.facility.toLowerCase().indexOf(query) === -1) return false;
-      if(unitUnselectedOnly && row.selectedCount > 0) return false;
-      return true;
-    }).map(function(row){
-      var facility = row.facility, visible = row.visible, selectedCount = row.selectedCount;
+    var rowsHtml = selectedFacilities.filter(function(facility){
+      return !query || facility.toLowerCase().indexOf(query) > -1;
+    }).map(function(facility){
+      var selectedCount = (selectedUnits[facility] || []).filter(function(sel){ return findUnitCandidate(facility, sel.csName, sel.unitId); }).length;
+      var id = facilityIdPart(facility);
       var open = !!unitFacilityExpanded[facility];
+      var summaryLabel = selectedCount ? selectedCount+' Unit'+(selectedCount===1?'':'s')+' selected' : 'No Units selected';
 
-      var bodyHtml;
-      if(!visible.length){
-        // Same message whether nothing is configured yet or everything here is already claimed —
-        // decision: one unified empty state, not two different messages.
-        bodyHtml = '<p class="muted" style="margin:0;">No Units available at this Facility for the selected Care Setting(s) — either none are configured yet in Care Settings Configuration, or they are already assigned to other Trackerboards.</p>';
-      } else {
-        bodyHtml = visible.map(function(c){
-          var u = c.unit;
-          var checked = isUnitSelected(facility, c.csName, u.id);
-          var csTag = multiCS ? ' <span class="muted" style="font-weight:400;">(' + c.csName + ')</span>' : '';
-          var idAttr = 'unit-cb-' + facilityIdPart(facility) + '-' + facilityIdPart(c.csName) + '-' + facilityIdPart(String(u.id));
-          return '<div class="resource-type-row">' +
-            '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1 1 auto;">' +
-              '<input type="checkbox" id="'+idAttr+'"'+(checked?' checked':'')+' onchange="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+c.csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', this.checked)">' +
-              '<span class="rt-label">'+u.name+csTag+'</span>' +
-            '</label>' +
-            '<span class="short-meta">'+formatUnitResources(u)+'</span>' +
+      var bodyHtml = '';
+      if(open){
+        bodyHtml =
+          '<div class="resource-facility-body">'+
+            '<div class="picker" style="max-width:none;">'+
+              '<div class="picker-input"><button type="button" class="text" id="unitPickerBtn-'+id+'" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleUnitPicker(\''+facility.replace(/'/g,"\\'")+'\')">Select Units…</button></div>'+
+              '<div class="picker-menu" id="unitPickerMenu-'+id+'" style="max-height:340px;"></div>'+
+            '</div>'+
+            '<div id="unitSelectedList-'+id+'" style="max-height:260px;overflow:auto;border:1px solid var(--line);"></div>'+
           '</div>';
-        }).join('');
       }
-
-      var chip = selectedCount ? '<span class="resource-status-chip ok">'+selectedCount+' selected</span>' : '<span class="resource-status-chip">None selected</span>';
 
       return '<div class="resource-facility-row'+(open?' open':'')+'" data-facility="'+facility.replace(/"/g,'&quot;')+'">' +
         '<button type="button" class="resource-facility-header" aria-expanded="'+open+'" onclick="toggleUnitFacilityExpanded(\''+facility.replace(/'/g,"\\'")+'\')">' +
           '<svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>' +
           '<span class="resource-facility-name">'+facility+'</span>' +
-          '<span class="resource-facility-summary">'+visible.length+' Unit'+(visible.length===1?'':'s')+' available</span>' +
-          chip +
+          '<span style="flex:1 1 auto;"></span>' +
+          '<span class="resource-facility-summary" style="flex:0 0 auto;">'+summaryLabel+'</span>' +
         '</button>' +
-        '<div class="resource-facility-body" style="display:'+(open?'':'none')+';">'+bodyHtml+'</div>' +
+        bodyHtml +
       '</div>';
     }).join('');
 
-    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">'+(unitUnselectedOnly ? 'Every Facility has at least one Unit selected.' : 'No matching Facilities.')+'</p>';
+    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">No matching Facilities.</p>';
+
+    // Re-render any expanded panels in place after a full grid rebuild (e.g. a Facility was
+    // added/removed), so an in-progress search or scroll position isn't silently reset.
+    selectedFacilities.forEach(function(facility){
+      if(unitFacilityExpanded[facility]) renderSelectedUnitsList(facility);
+    });
   }
 
   function facilityIdPart(str){ return String(str).replace(/[^a-z0-9]/gi, ''); }
+
+
 
 
   var PATIENT_COLUMNS = [
@@ -2559,7 +2643,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   function renderCareSettingInfo(){
     var wrap = document.getElementById('careSettingInfo');
-    if(!selectedCareSettings.length || !selectedFacilities.length){
+    if(!selectedCareSettings.length){
       wrap.style.display = 'none';
       return;
     }
