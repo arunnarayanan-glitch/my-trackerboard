@@ -308,6 +308,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     <div class="card" id="sec-basic" data-section-key="basic">
       <div class="card-head">
         <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="true" aria-controls="sec-basic-body" aria-label="Toggle Basic Information section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Basic Information</h2>
+        <button type="button" class="btn small" style="margin-left:auto;" onclick="event.stopPropagation();openSamplePreview()">Preview sample board</button>
         <span class="section-state" id="cardState-basic"></span>
       </div>
       <div class="card-body" id="sec-basic-body">
@@ -343,13 +344,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           </div>
           <div class="info-grid" id="careSettingInfoGrid"></div>
         </div>
-        <div class="subsection" id="resourceAllocationSection" style="display:none">
-          <h4>Resource Allocation <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About resource allocation" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">How many beds, chairs, and rooms this board claims at each selected Facility. Allocation is per Facility &mdash; a board covering multiple Facilities gets a separate claim at each one. Expand a Facility to edit its numbers; other boards' claims on the same Facility are accounted for automatically.</span></span></h4>
-          <div class="col-builder-controls" id="resourceQuickApplyBar" style="display:none;"></div>
-          <p class="field-error" id="resourceIssueSummary" style="display:none;"></p>
+        <div class="subsection" id="unitAllocationSection" style="display:none">
+          <h4>Units <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About Units" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Units and their resources are configured in Care Settings Configuration, not here. Select which Units this board tracks — a Unit already claimed by another Trackerboard won't appear. Resource counts shown are a live read of that Unit's current allocation.</span></span></h4>
           <div class="col-unified-list">
-            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="resourceFacilitySearch" placeholder="Search facilities…" oninput="renderResourceAllocation()"><button type="button" class="pill-toggle" id="resourceAttentionToggle" aria-pressed="false" onclick="toggleResourceAttentionOnly()">Needs attention</button></div>
-            <div id="resourceAllocationGrid" class="resource-facility-list"></div>
+            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="unitFacilitySearch" placeholder="Search facilities…" oninput="renderUnitAllocation()"><button type="button" class="pill-toggle" id="unitUnselectedToggle" aria-pressed="false" onclick="toggleUnitUnselectedOnly()">Unselected only</button></div>
+            <div id="unitAllocationGrid" class="resource-facility-list"></div>
           </div>
         </div>
       </div>
@@ -565,9 +564,92 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   </div>
 </div>
 
+<!-- Static, generic wireframe — same every time regardless of what's configured in this drawer.
+     Purpose is orientation for a first-time board creator, not a render of their board. Structure
+     mirrors the real product layout so each block maps to a section they're about to configure:
+     the top strip = Widgets, the right stack = Signals, the tabs = Statuses, the table = Patient
+     Table columns. Deliberately plain (gray boxes, placeholder text) — a wireframe, not a mockup. -->
+<div class="modal-backdrop" id="samplePreviewBackdrop">
+  <div class="modal large" id="samplePreviewModal" role="dialog" aria-modal="true" aria-label="Sample trackerboard preview">
+    <div class="modal-head"><h2>Sample trackerboard preview</h2><button class="icon-btn" type="button" onclick="closeSamplePreview()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-2.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
+    <div class="modal-body" style="background:#f4f6f8;">
+      <p class="muted" style="margin:0 0 12px;">A generic example, not a preview of the board you're building — this shows roughly where things will sit once you configure Widgets, Statuses, and Table columns below.</p>
+
+      <!-- Top strip: maps to Widgets -->
+      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1.4fr 1.4fr;gap:8px;margin-bottom:8px;">
+        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
+          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
+          <div style="font-size:20px;font-weight:700;color:#c7ced4;">00</div>
+          <div class="muted" style="font-size:11px;">Total Patients</div>
+        </div>
+        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
+          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
+          <div style="color:#c7ced4;font-size:12px;">— / —</div>
+        </div>
+        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
+          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
+          <div style="color:#c7ced4;font-size:12px;">— / —</div>
+        </div>
+        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
+          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
+          <div style="color:#c7ced4;font-size:12px;">No entries</div>
+        </div>
+        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
+          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
+          <div style="color:#c7ced4;font-size:12px;">No entries</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 220px;gap:8px;">
+        <div>
+          <!-- Status tabs with counts -->
+          <div style="display:flex;align-items:center;border-bottom:1px solid var(--line);background:#fff;padding:0 4px;">
+            <div style="padding:9px 12px;border-bottom:2px solid var(--navy);font-size:12px;font-weight:700;">Status 1 <span class="muted">(0)</span></div>
+            <div style="padding:9px 12px;color:var(--muted);font-size:12px;">Status 2 <span class="muted">(0)</span></div>
+            <div style="padding:9px 12px;color:var(--muted);font-size:12px;">Status 3 <span class="muted">(0)</span></div>
+            <div style="padding:9px 12px;color:var(--muted);font-size:12px;">Status 4 <span class="muted">(0)</span></div>
+          </div>
+          <!-- Filter chips, matching Care Setting filter row -->
+          <div style="display:flex;align-items:center;gap:6px;background:#fff;padding:8px 10px;border-bottom:1px solid var(--line);">
+            <span class="tag">All</span><span class="tag">Filter 1</span><span class="tag">Filter 2</span><span class="tag">Filter 3</span>
+            <span style="flex:1 1 auto;"></span>
+            <span class="muted" style="font-size:11px;">Provider: Select ▾</span>
+          </div>
+          <!-- Patient table, matching Patient Table columns -->
+          <table class="history" style="width:100%;background:#fff;">
+            <thead><tr><th>Patient Name</th><th>Bed No</th><th>Vitals</th><th>Duration</th><th>Diagnosis</th><th>Care Setting</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#c7ced4;">• • •</td></tr>
+              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#c7ced4;">• • •</td></tr>
+              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#c7ced4;">• • •</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Side panel: maps to Signals -->
+        <div style="background:#fff;border:1px solid var(--line);">
+          <div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;"><span>Signal 1</span><span class="muted">0</span></div>
+          <div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;"><span>Signal 2</span><span class="muted">0</span></div>
+          <div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;"><span>Signal 3</span><span class="muted">0</span></div>
+          <div style="padding:9px 10px;font-size:12px;display:flex;justify-content:space-between;"><span>Signal 4</span><span class="muted">0</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn primary" type="button" onclick="closeSamplePreview()">Close</button></div>
+  </div>
+</div>
+
+
 <script>
   var drawerTriggerEl = null;
   var modalZCounter = 300;
+  // Static and generic on purpose — same content every time, regardless of what's selected in
+  // the drawer. Not wired to selectedCareSettings/STATUSES/etc.; see the note in the markup.
+  function openSamplePreview(){
+    showModalBackdrop('samplePreviewBackdrop');
+  }
+  function closeSamplePreview(){
+    document.getElementById('samplePreviewBackdrop').classList.remove('open');
+  }
   function showModalBackdrop(id){
     // Enforces single-modal-at-a-time: closes any other open modal-backdrop before
     // showing this one, and assigns each an incrementing z-index as a defensive
@@ -598,8 +680,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     updateCareSettingButton();
     selectedFacilities = data ? (data.facilities || []).slice() : [];
     renderConnFacilityMenu();
-    boardResources = data && data.resources ? JSON.parse(JSON.stringify(data.resources)) : {};
-    renderResourceAllocation();
+    selectedUnits = data && data.selectedUnits ? JSON.parse(JSON.stringify(data.selectedUnits)) : {};
+    renderUnitAllocation();
     selectedPrograms = data ? (data.programs || []).slice() : [];
     renderProgramMenu();
     selectedConfigAccess = data ? (data.configAccess || []).slice() : [];
@@ -782,7 +864,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       desc: document.getElementById('trackerboardDescInput').value,
       careSettings: selectedCareSettings.slice(),
       facilities: selectedFacilities.slice(),
-      resources: selectedFacilities.reduce(function(acc, f){ acc[f] = Object.assign(emptyResourceAllocation(f), boardResources[f]); return acc; }, {}),
+      selectedUnits: selectedFacilities.reduce(function(acc, f){ acc[f] = (selectedUnits[f] || []).slice(); return acc; }, {}),
       programs: selectedPrograms.slice(),
       configAccess: selectedConfigAccess.slice(),
       runtimeAccess: selectedRuntimeAccess.slice(),
@@ -1070,8 +1152,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     updateCareSettingButton();
     selectedFacilities = (snap.facilities || []).slice();
     renderConnFacilityMenu();
-    boardResources = snap.resources ? JSON.parse(JSON.stringify(snap.resources)) : {};
-    renderResourceAllocation();
+    selectedUnits = snap.selectedUnits ? JSON.parse(JSON.stringify(snap.selectedUnits)) : {};
+    renderUnitAllocation();
     selectedPrograms = (snap.programs || []).slice();
     renderProgramMenu();
     selectedConfigAccess = (snap.configAccess || []).slice();
@@ -1200,14 +1282,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   var SEED_ACTIONS = { statusChange:true, addViewOrders:true, encounterNote:true, documents:true, viewCardexAlerts:true, patientDemographics:true };
 
   var TRACKERBOARDS = [
-    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['Emergency Department'], facilities:['Central City Health','Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07 Aug 2026', status:'Active', activePatients:6, dependents:1 },
-    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['Emergency Department'], facilities:['Riverside Clinic'], programs:['ED Surge'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'26 Jul 2026', status:'Active', activePatients:4, dependents:1 },
-    { name:'Inpatient Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['Inpatient'], facilities:['Lakeside Medical Center'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'05 Aug 2026', status:'Draft', activePatients:0, dependents:0 },
-    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['Inpatient'], facilities:['Central City Health'], programs:['Critical Care Management','General Medicine'], runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'11 Aug 2026', status:'Active', activePatients:9, dependents:2 },
-    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['Operating Room'], facilities:['Riverside Clinic'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'28 Jul 2026', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['Operating Room'], facilities:['Central City Health'], programs:[], runtimeAccess:[], configAccess:[], everActivated:false, updated:'30 Jul 2026', status:'Draft', activePatients:0, dependents:0 },
-    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['Operating Room'], facilities:['Lakeside Medical Center'], programs:['Surgical Services Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'02 Aug 2026', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Outpatient Clinic Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks scheduled clinic visits from check-in to check-out.',careSettings:['Outpatient Clinic'], facilities:['Riverside Clinic','Lakeside Medical Center'], programs:['Ambulatory Care Program'], runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'14 Aug 2026', status:'Active', activePatients:3, dependents:0 }
+    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['ED'], facilities:['Main Hospital','North Campus'], programs:['ED Surge'], selectedUnits:{ 'Main Hospital':[{csName:'ED', unitId:'unit-ed-mh-1'}], 'North Campus':[{csName:'ED', unitId:'unit-ed-nc-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07 Aug 2026', status:'Active', activePatients:6, dependents:1 },
+    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['ED'], facilities:['Eastside Medical Center'], programs:['ED Surge'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'26 Jul 2026', status:'Active', activePatients:4, dependents:1 },
+    { name:'Hospitalization Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['Hospitalization'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'Hospitalization', unitId:'unit-hosp-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'05 Aug 2026', status:'Draft', activePatients:0, dependents:0 },
+    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['ICU'], facilities:['Main Hospital'], programs:['Critical Care Management','General Medicine Program'], selectedUnits:{ 'Main Hospital':[{csName:'ICU', unitId:'unit-icu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'11 Aug 2026', status:'Active', activePatients:9, dependents:2 },
+    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['OR'], facilities:['Main Hospital'], programs:['Surgical Services Program'], selectedUnits:{ 'Main Hospital':[{csName:'OR', unitId:'unit-or-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'28 Jul 2026', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['OR'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'OR', unitId:'unit-or-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'30 Jul 2026', status:'Draft', activePatients:0, dependents:0 },
+    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['OR'], facilities:['Eastside Medical Center'], programs:['Surgical Services Program'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'02 Aug 2026', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Neonatology Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks newborns admitted for specialty neonatal care.',careSettings:['Neonatology'], facilities:['Main Hospital'], programs:[], selectedUnits:{ 'Main Hospital':[{csName:'Neonatology', unitId:'unit-nicu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'14 Aug 2026', status:'Active', activePatients:3, dependents:0 }
   ];
 
   function allFacilities(){
@@ -1529,14 +1611,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     { key:'codeTeam', label:'Code Team', settings:[], placement:'strip' },
     { key:'doctorsOnDuty', label:'Doctors on Duty', settings:[], placement:'strip' },
     { key:'cardexPanel', label:'Cardex Panel', settings:[], placement:'panel' },
-    { key:'losDelay', label:'Length of Stay & Delay', desc:'Patients approaching or exceeding total-stay or status-duration thresholds.', settings:['Emergency Department','Inpatient','Operating Room'], placement:'strip' },
-    { key:'pendingWork', label:'Pending Work Summary', desc:'Counts of pending orders, results, medications, assessments, documentation, or approvals.', settings:['Emergency Department','Inpatient','Operating Room','Outpatient Clinic'], placement:'strip' },
-    { key:'transferReadiness', label:'Transfer & Discharge Readiness', desc:'Pending transfers, expected discharges, blockers, and patients ready for the next destination.', settings:['Emergency Department','Inpatient'], placement:'panel' },
-    { key:'expectedArrivals', label:'Expected Arrivals / Waitlist', desc:'Scheduled arrivals, pre-arrivals, and waiting patients within a defined time window.', settings:['Emergency Department','Outpatient Clinic','Operating Room'], placement:'panel' },
-    { key:'acuityMix', label:'Acuity / Triage Mix', desc:'Patient count by triage or acuity category.', settings:['Emergency Department'], placement:'strip' },
-    { key:'resourceTurnover', label:'Resource Turnover', desc:'Available, occupied, blocked, cleaning, or pending resources.', settings:['Emergency Department','Inpatient','Operating Room'], placement:'strip' },
+    { key:'losDelay', label:'Length of Stay & Delay', desc:'Patients approaching or exceeding total-stay or status-duration thresholds.', settings:['ED','Hospitalization','OR'], placement:'strip' },
+    { key:'pendingWork', label:'Pending Work Summary', desc:'Counts of pending orders, results, medications, assessments, documentation, or approvals.', settings:['ED','Hospitalization','OR','Outpatient Clinic'], placement:'strip' },
+    { key:'transferReadiness', label:'Transfer & Discharge Readiness', desc:'Pending transfers, expected discharges, blockers, and patients ready for the next destination.', settings:['ED','Hospitalization'], placement:'panel' },
+    { key:'expectedArrivals', label:'Expected Arrivals / Waitlist', desc:'Scheduled arrivals, pre-arrivals, and waiting patients within a defined time window.', settings:['ED','Outpatient Clinic','OR'], placement:'panel' },
+    { key:'acuityMix', label:'Acuity / Triage Mix', desc:'Patient count by triage or acuity category.', settings:['ED'], placement:'strip' },
+    { key:'resourceTurnover', label:'Resource Turnover', desc:'Available, occupied, blocked, cleaning, or pending resources.', settings:['ED','Hospitalization','OR'], placement:'strip' },
     { key:'careTeamWorkload', label:'Care Team Workload', desc:'Patient count assigned to each provider or nurse; may highlight unassigned patients.', settings:[], placement:'panel' },
-    { key:'isolationSummary', label:'Isolation / Precaution Summary', desc:'Count of patients requiring isolation or special precautions.', settings:['Emergency Department','Inpatient','Operating Room'], placement:'strip' },
+    { key:'isolationSummary', label:'Isolation / Precaution Summary', desc:'Count of patients requiring isolation or special precautions.', settings:['ED','Hospitalization','OR'], placement:'strip' },
     { key:'documentationGaps', label:'Documentation Gaps', desc:'Patients with missing required forms, assessments, notes, or signatures.', settings:[], placement:'panel' }
   ];
   var TOTAL_WIDGET_SLOTS = 5;
@@ -1607,8 +1689,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(key === 'totalPatients'){
       var s = widgetSettings.totalPatients;
       var options = [{ v:'workflowStatus', label:'Group by Workflow Status' }];
-      if(selectedCareSettings.indexOf('Emergency Department') > -1) options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
-      if(selectedCareSettings.indexOf('Inpatient') > -1 || selectedCareSettings.indexOf('Operating Room') > -1) options.push({ v:'unit', label:'Group by Unit' });
+      if(selectedCareSettings.indexOf('ED') > -1) options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
+      if(selectedCareSettings.indexOf('Hospitalization') > -1 || selectedCareSettings.indexOf('OR') > -1) options.push({ v:'unit', label:'Group by Unit' });
       return '<p>Choose one grouping for this count. Defaults to Workflow Status; the Care-Setting-specific option appears alongside it once a Care Setting is selected.</p><div class="check-grid cols-3">'+
         options.map(function(o){
           return '<label class="check-option"><input type="radio" name="totalPatientsGroupBy" value="'+o.v+'"'+(s.groupBy===o.v?' checked':'')+' onchange="setTotalPatientsGroupBy(\''+o.v+'\')"> '+o.label+'</label>';
@@ -1671,316 +1753,268 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     }).join('');
   }
 
-  var ALL_FACILITIES = [
-    'Central City Health', 'Riverside Clinic', 'Lakeside Medical Center', 'Northside Community Hospital',
-    'Eastgate Medical Pavilion', 'Summit Regional Medical Center', 'Harborview Health Campus',
-    'Cedar Valley Hospital', 'Parkside Ambulatory Center', 'Union Square Health Center',
-    'Foothill Medical Plaza', 'Bayview General Hospital', 'Maple Grove Health System'
-  ];
-  function facilitiesExcluding(names){
-    return ALL_FACILITIES.filter(function(f){ return names.indexOf(f) === -1; });
-  }
-  var CARE_SETTINGS = {
-    'Emergency Department': { visit:'Outpatient', durationValue:5, durationUnit:'hours', form:'ED Intake Form v2', facilities:facilitiesExcluding(['Parkside Ambulatory Center']) },
-    'Inpatient': { visit:'Inpatient Admission', durationValue:96, durationUnit:'hours', form:'IP Admission Form v1', facilities:facilitiesExcluding(['Parkside Ambulatory Center','Union Square Health Center']) },
-    'Operating Room': { visit:'Same-day Surgical', durationValue:3, durationUnit:'hours', form:'Pre-Surgical Intake Form', facilities:facilitiesExcluding(['Parkside Ambulatory Center','Union Square Health Center','Foothill Medical Plaza']) },
-    'Outpatient Clinic': { visit:'Scheduled Outpatient', durationValue:38, durationUnit:'minutes', form:'Outpatient Visit Form v1', facilities:ALL_FACILITIES.slice() },
-    'Behavioral Health Inpatient': { visit:'Inpatient Admission', durationValue:120, durationUnit:'hours', form:'Behavioral Health Admission Form', facilities:facilitiesExcluding(['Parkside Ambulatory Center','Union Square Health Center','Foothill Medical Plaza']) },
-    'Skilled Nursing / Rehab': { visit:'Inpatient Admission', durationValue:14, durationUnit:'hours', form:'SNF Admission Form v1', facilities:facilitiesExcluding(['Parkside Ambulatory Center','Foothill Medical Plaza','Union Square Health Center']) },
-    'Labor & Delivery': { visit:'Inpatient Admission', durationValue:24, durationUnit:'hours', form:'L&D Intake Form v1', facilities:facilitiesExcluding(['Parkside Ambulatory Center','Union Square Health Center','Foothill Medical Plaza']) },
-    'Same-Day Surgery': { visit:'Same-day Surgical', durationValue:6, durationUnit:'hours', form:'Same-Day Surgery Intake Form', facilities:facilitiesExcluding(['Cedar Valley Hospital','Union Square Health Center','Foothill Medical Plaza']) },
-    'Urgent Care': { visit:'Outpatient', durationValue:90, durationUnit:'minutes', form:'Urgent Care Intake Form', facilities:facilitiesExcluding(['Cedar Valley Hospital','Bayview General Hospital','Maple Grove Health System']) },
-    'Infusion Center': { visit:'Scheduled Outpatient', durationValue:150, durationUnit:'minutes', form:'Infusion Consent & Intake Form', facilities:facilitiesExcluding(['Foothill Medical Plaza','Cedar Valley Hospital','Bayview General Hospital']) }
-  };
+  /* =========================================================================================
+     PHASE 2 — replaces Trackerboard's previously independent Care Setting / Facility / Program /
+     Resource model with one that mirrors Care Settings Configuration's actual data shape and seed
+     data, instead of a disjoint hardcoded set. In a real implementation this block would be a set
+     of API calls into Care Settings Configuration (list active Care Settings, get a Care Setting's
+     Facility Assignments, get a Facility's eligible Programs, get a Facility's Units) rather than
+     a mirrored constant — the functions below (activeCareSettingNames, facilitiesEnabledFor,
+     programsEligibleFor, unitsFor) are written as the seam where that swap happens; nothing that
+     calls them needs to change when they become real fetches.
 
-  var FACILITY_RESOURCES = {
-    // Each Facility declares only the resource types it actually has — no fixed shape shared
-    // across every Facility. Some have 7 resource types; others have 2. Both are represented
-    // exactly as-is, instead of both being forced into the same fixed list.
-    'Riverside Clinic': { beds:6, chairs:3, rooms:2, lobbies:4, gurneys:2, isolationBays:1, prepBays:3 },
-    'Central City Health': { rooms:4, chairs:6 },
-    'Lakeside Medical Center': { beds:8, rooms:3, chairs:4 },
-    'Northside Community Hospital': { beds:10, rooms:5, chairs:8, gurneys:3 },
-    'Eastgate Medical Pavilion': { rooms:6, chairs:10, lobbies:2 },
-    'Summit Regional Medical Center': { beds:14, rooms:8, chairs:6, isolationBays:2, prepBays:4 },
-    'Harborview Health Campus': { beds:9, rooms:4, gurneys:4, lobbies:3 },
-    'Cedar Valley Hospital': { beds:12, rooms:6, chairs:5, isolationBays:1 },
-    'Parkside Ambulatory Center': { chairs:12, rooms:3 },
-    'Union Square Health Center': { rooms:5, chairs:9, lobbies:2 },
-    'Foothill Medical Plaza': { rooms:4, chairs:7 },
-    'Bayview General Hospital': { beds:11, rooms:7, chairs:5, gurneys:2, prepBays:3 },
-    'Maple Grove Health System': { beds:7, rooms:4, chairs:6, isolationBays:1 }
-  };
-  // Open vocabulary of resource type names, shared across Facilities so the same kind of
-  // resource is always labeled the same way (e.g. every Facility's "Lobbies" reads as
-  // "Lobbies", not a locally-invented label) — but a Facility is never required to have all
-  // of them, and this list can grow without limit as new resource kinds come up.
+     Facility and Care Setting names are also now the SAME names Care Settings Configuration uses
+     (Main Hospital, North Campus, etc. / ED, ICU, etc.) — the earlier prototypes used entirely
+     different seed data (Riverside Clinic, "Emergency Department", ...) which meant nothing could
+     actually connect between the two tools even once the wiring was built. That mismatch is fixed
+     here, not worked around.
+     ========================================================================================= */
+
   var RESOURCE_TYPE_CATALOG = {
-    beds:'Beds', chairs:'Chairs', rooms:'Rooms', lobbies:'Lobbies',
-    gurneys:'Gurneys', isolationBays:'Isolation Bays', prepBays:'Prep Bays'
+    beds:'Beds', chairs:'Chairs', rooms:'Rooms', lobbies:'Lobbies', equipment:'Equipment',
+    providers:'Providers', gurneys:'Gurneys', isolationBays:'Isolation Bays', prepBays:'Prep Bays'
   };
   function resourceTypeLabel(type){ return RESOURCE_TYPE_CATALOG[type] || type; }
-  // The types available for a given Facility are simply whatever that Facility declared in
-  // FACILITY_RESOURCES — not a global fixed list applied to every Facility uniformly.
-  function resourceTypesForFacility(facility){
-    return Object.keys(FACILITY_RESOURCES[facility] || {});
-  }
-  function emptyResourceAllocation(facility){
-    var out = {};
-    resourceTypesForFacility(facility).forEach(function(type){ out[type] = 0; });
-    return out;
-  }
-  function formatFacilityResources(facility){
-    var r = FACILITY_RESOURCES[facility];
-    if(!r) return null;
-    return resourceTypesForFacility(facility).map(function(type){
-      return r[type] + ' ' + resourceTypeLabel(type).toLowerCase();
-    }).join(', ');
-  }
 
-  var boardResources = {}; // { [facilityName]: { [resourceType]: count } } — one allocation per Facility, never pooled; keys vary per Facility.
+  // Programs are real entities with their own Facility eligibility, mirroring Care Settings
+  // Configuration's PROGRAMS array — Care Settings Configuration only ever assigns a Program to a
+  // Facility from within this eligibility list; it doesn't grant eligibility itself, and neither
+  // does Trackerboard.
+  var PROGRAMS_SOURCE = [
+    { id:'prog-gen-med', name:'General Medicine Program',
+      facilities:['Main Hospital','North Campus','California Branch','Texas Branch'] },
+    { id:'prog-behavioral', name:'Behavioral Health Program',
+      facilities:['Main Hospital','California Branch'],
+      subPrograms:[ { id:'sub-adolescent-bh', name:'Adolescent Behavioral Health' }, { id:'sub-substance-use', name:'Substance Use Program' } ] },
+    { id:'prog-surgical', name:'Surgical Services Program',
+      facilities:['Main Hospital','North Campus','Eastside Medical Center','California Branch','Texas Branch'] },
+    { id:'prog-ambulatory', name:'Ambulatory Care Program', facilities:['California Branch','Texas Branch'] },
+    { id:'prog-critical', name:'Critical Care Management', facilities:['Main Hospital','Eastside Medical Center','California Branch'] },
+    { id:'prog-ed-surge', name:'ED Surge', facilities:['Main Hospital','North Campus','Eastside Medical Center'] },
+    { id:'prog-endo-premium', name:'Endo Premium', facilities:['Texas Branch','New Jersey Branch','Main Hospital'] },
+    { id:'prog-endo-plus', name:'Endo Plus', facilities:['Ohio Branch','North Campus'] }
+  ];
+  function programById(id){ return PROGRAMS_SOURCE.find(function(p){ return p.id === id; }) || null; }
 
-  function resourceCapacity(facility, type){
-    var r = FACILITY_RESOURCES[facility];
-    return r && r[type] ? r[type] : 0;
+  // Mirrors Care Settings Configuration's CARE_SETTINGS records: status (only 'active' Care
+  // Settings are offered here — draft/inactive/retired are not selectable from Trackerboard, same
+  // as Care Settings Configuration itself would enforce), and per-Facility Assignments carrying
+  // `enabled`, the Program ids already assigned to that Facility by Care Settings Configuration,
+  // and named Units with their own resource rows. Units are scoped Care Setting + Facility + name
+  // (confirmed identity rule) and carry a stable id — the same shape Care Settings Configuration's
+  // generateUnitId() now produces (Phase 1) — so a Trackerboard can persist "this board = this
+  // Unit id" safely.
+  var CARE_SETTINGS_SOURCE = {
+    'ED': { status:'active', visitCategory:'Urgent', duration:{ value:60, unit:'minutes' }, chiefComplaintForm:'ED Triage Form', facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-ed-surge','prog-critical'],
+          units:[ { id:'unit-ed-mh-1', name:'Unit 1', resources:{ beds:8, chairs:4, rooms:4 } }, { id:'unit-ed-mh-2', name:'Unit 2', resources:{ beds:6, chairs:3 } } ] },
+        'North Campus': { enabled:true, programs:['prog-ed-surge'],
+          units:[ { id:'unit-ed-nc-1', name:'Unit 1', resources:{ beds:8, chairs:4 } }, { id:'unit-ed-nc-2', name:'Unit 2', resources:{ beds:5, chairs:2 } } ] },
+        'Eastside Medical Center': { enabled:true, programs:['prog-ed-surge'],
+          units:[ { id:'unit-ed-emc-1', name:'Unit 1', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-emc-2', name:'Unit 2', resources:{ beds:4, chairs:2 } } ] }
+      } },
+    'ICU': { status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form', facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-critical','prog-gen-med'],
+          units:[ { id:'unit-icu-mh-1', name:'Unit 1', resources:{ beds:16 } }, { id:'unit-icu-mh-2', name:'Unit 2', resources:{ beds:8 } } ] },
+        'Eastside Medical Center': { enabled:true, programs:['prog-critical'],
+          units:[ { id:'unit-icu-emc-1', name:'Unit 1', resources:{ beds:9 } }, { id:'unit-icu-emc-2', name:'Unit 2', resources:{ beds:6 } } ] }
+      } },
+    'Hospitalization': { status:'active', visitCategory:'Follow-up', duration:{ value:2, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form', facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-gen-med','prog-behavioral'],
+          units:[ { id:'unit-hosp-mh-1', name:'Unit 1', resources:{ beds:40, providers:22 } }, { id:'unit-hosp-mh-2', name:'Unit 2', resources:{ beds:18, providers:9 } } ] },
+        'North Campus': { enabled:true, programs:['prog-gen-med'],
+          units:[ { id:'unit-hosp-nc-1', name:'Unit 1', resources:{ beds:22 } }, { id:'unit-hosp-nc-2', name:'Unit 2', resources:{ beds:12 } } ] }
+      } },
+    'Neonatology': { status:'active', visitCategory:'New Patient', duration:{ value:1, unit:'hours' }, chiefComplaintForm:null, facilities:{
+        'Main Hospital': { enabled:true, programs:[],
+          units:[ { id:'unit-nicu-mh-1', name:'Unit 1', resources:{ beds:10 } }, { id:'unit-nicu-mh-2', name:'Unit 2', resources:{ beds:6 } } ] }
+      } },
+    'OR': { status:'active', visitCategory:'Procedure', duration:{ value:90, unit:'minutes' }, chiefComplaintForm:null, facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-surgical'],
+          units:[ { id:'unit-or-mh-1', name:'Unit 1', resources:{ rooms:6 } }, { id:'unit-or-mh-2', name:'Unit 2', resources:{ rooms:3 } } ] },
+        'North Campus': { enabled:true, programs:['prog-surgical'],
+          units:[ { id:'unit-or-nc-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-or-nc-2', name:'Unit 2', resources:{ rooms:2 } } ] },
+        'Eastside Medical Center': { enabled:true, programs:['prog-surgical'],
+          units:[ { id:'unit-or-emc-1', name:'Unit 1', resources:{ rooms:2 } }, { id:'unit-or-emc-2', name:'Unit 2', resources:{ rooms:2 } } ] }
+      } }
+    // Maternity (inactive), Endoscopy (draft), Cath Lab (retired) intentionally excluded — only
+    // 'active' Care Settings are offered to Trackerboard, matching Phase 2 item 4.
+    // Every Facility now carries at least 2 Units — the seed Trackerboards below already claim
+    // one Unit at nearly every combo, so a single-Unit Facility meant "create new board" almost
+    // always hit an empty, seemingly-broken picker. See conversation: "not every combo is working."
+  };
+
+
+  function activeCareSettingNames(){
+    return Object.keys(CARE_SETTINGS_SOURCE).filter(function(cs){ return CARE_SETTINGS_SOURCE[cs].status === 'active'; });
   }
-
-  // Sum of that resource type already claimed by other boards on the SAME facility.
-  function resourceAllocatedByOthers(facility, type){
-    return otherTrackerboards().reduce(function(sum, t){
-      if(!t.resources || !t.resources[facility] || (t.facilities||[]).indexOf(facility) === -1) return sum;
-      return sum + (t.resources[facility][type] || 0);
-    }, 0);
+  function careSettingRecord(csName){ return CARE_SETTINGS_SOURCE[csName] || null; }
+  // Facilities enabled for a Care Setting — this is what Trackerboard's Facility picker filters
+  // to once a Care Setting is chosen (Phase 2 item 5), instead of listing every facility.
+  function facilitiesEnabledFor(csName){
+    var cs = careSettingRecord(csName);
+    if(!cs) return [];
+    return Object.keys(cs.facilities).filter(function(f){ return cs.facilities[f].enabled; });
   }
-
-  function facilityIdPart(facility){ return facility.replace(/[^a-z0-9]/gi, ''); }
-
-  // A dense Facility-by-resource-type matrix compares well across many Facilities, but it has
-  // real costs: it needs to scroll in two directions once there are several resource types, a
-  // fully-configured row and an empty one look almost identical at a glance, and the edit
-  // fields are cramped into a grid cell. Editing is also usually a one-Facility-at-a-time task
-  // ("let me get this Facility's numbers right"), not a spreadsheet-style bulk pass — so that's
-  // the default here: a compact, collapsed row per Facility with a status chip and a rough
-  // utilization bar for scanning, expanding to a full-width editor for just that Facility. The
-  // "Apply to all" bar below covers the genuine bulk-edit case without forcing every Facility's
-  // detail into view to get there, and "Needs attention" jumps straight to the Facilities with
-  // a problem instead of reading every row.
-  var resourceExpanded = {}; // { [facilityName]: true } — which Facilities are expanded
-  var resourceAttentionOnly = false;
-
-  function toggleResourceFacility(facility){
-    resourceExpanded[facility] = !resourceExpanded[facility];
-    renderResourceAllocation();
+  function facilityLink(csName, facilityName){
+    var cs = careSettingRecord(csName);
+    return cs ? (cs.facilities[facilityName] || null) : null;
   }
-  function toggleResourceAttentionOnly(){
-    resourceAttentionOnly = !resourceAttentionOnly;
-    renderResourceAllocation();
+  // Programs already assigned to this Care Setting × Facility combination — mirrors
+  // getFacilityProgramIds() in Care Settings Configuration (Phase 2 item 6).
+  function programsEligibleFor(csName, facilityName){
+    var link = facilityLink(csName, facilityName);
+    return link ? (link.programs || []).map(programById).filter(Boolean) : [];
   }
+  // Units belonging to this Care Setting × Facility — Phase 2 item 7's picker reads from here.
+  function unitsFor(csName, facilityName){
+    var link = facilityLink(csName, facilityName);
+    return link ? (link.units || []) : [];
+  }
+  function unitByCompositeId(csName, facilityName, unitId){
+    return unitsFor(csName, facilityName).find(function(u){ return u.id === unitId; }) || null;
+  }
+  function formatUnitResources(unit){
+    var types = Object.keys(unit.resources || {});
+    if(!types.length) return 'No resources allocated to this Unit yet.';
+    return types.map(function(t){ return unit.resources[t] + ' ' + resourceTypeLabel(t).toLowerCase(); }).join(', ');
+  }
+  // ALL_FACILITIES kept for anywhere that still needs "every known facility name" independent of
+  // Care Setting eligibility (there should be none post-Phase-2, but retained defensively).
+  var ALL_FACILITIES = ['Main Hospital','North Campus','Eastside Medical Center','California Branch','Ohio Branch','New Jersey Branch','Texas Branch'];
 
-  // Per-Facility status: exact allocated/available/stale per resource type, plus a rough
-  // average-utilization percentage for the mini bar (an average of per-type ratios, not a sum
-  // of raw counts — beds and chairs aren't the same unit, so they're never added together).
-  function facilityResourceStatus(facility){
-    var types = resourceTypesForFacility(facility);
-    if(!boardResources[facility]) boardResources[facility] = emptyResourceAllocation(facility);
-    var fRes = boardResources[facility];
-    var hasIssue = false, utilSum = 0, utilCount = 0;
-    var parts = types.map(function(type){
-      var capacity = resourceCapacity(facility, type);
-      if(fRes[type] > capacity) fRes[type] = capacity;
-      var others = resourceAllocatedByOthers(facility, type);
-      var available = Math.max(capacity - others, 0);
-      var stale = fRes[type] > available;
-      if(stale) hasIssue = true;
-      if(capacity > 0){ utilSum += Math.min(fRes[type] / capacity, 1); utilCount++; }
-      return { type:type, label:resourceTypeLabel(type), allocated:fRes[type], capacity:capacity, available:available, stale:stale };
+  // selectedUnits: { [facilityName]: [ { csName, unitId } ] } — multi-select per Facility
+  // (decision: multi-select, not single). This REPLACES boardResources: Trackerboard no longer
+  // authors resource numbers, it only records which already-configured Units it claims. Resource
+  // counts are always read live from CARE_SETTINGS_SOURCE at display time (Option C — Unit's
+  // resource total is a live read, not a number Trackerboard owns).
+  var selectedUnits = {};
+
+  // A Unit is claimed elsewhere if any OTHER Trackerboard's selectedUnits already references it —
+  // it disappears from this board's list in that case (decision: disappear, not disable), except
+  // for Units this same Trackerboard already owns while being edited (see Phase 3 exclusion note —
+  // parked, not yet implemented: today this checks against otherTrackerboards() only, so a board
+  // editing its own prior selection is already safe; the open question was about a subtler replay
+  // case and remains for Phase 3).
+  function unitClaimedElsewhere(csName, facilityName, unitId){
+    return otherTrackerboards().some(function(t){
+      var claims = (t.selectedUnits && t.selectedUnits[facilityName]) || [];
+      return claims.some(function(c){ return c.csName === csName && c.unitId === unitId; });
     });
-    return { parts:parts, hasIssue:hasIssue, avgUtil: utilCount ? Math.round((utilSum / utilCount) * 100) : 0 };
   }
-
-  function unionResourceTypesForSelected(){
-    var order = Object.keys(RESOURCE_TYPE_CATALOG);
-    var set = [];
-    selectedFacilities.forEach(function(f){
-      resourceTypesForFacility(f).forEach(function(t){ if(set.indexOf(t) === -1) set.push(t); });
-    });
-    set.sort(function(a,b){ return order.indexOf(a) - order.indexOf(b); });
-    return set;
+  function isUnitSelected(facilityName, csName, unitId){
+    return ((selectedUnits[facilityName] || [])).some(function(c){ return c.csName === csName && c.unitId === unitId; });
   }
-
-  function renderResourceQuickApply(){
-    var bar = document.getElementById('resourceQuickApplyBar');
-    if(!bar) return;
-    var types = unionResourceTypesForSelected();
-    if(selectedFacilities.length < 4 || !types.length){ bar.innerHTML = ''; bar.style.display = 'none'; return; }
-    bar.style.display = '';
-    var typeOptions = types.map(function(t){ return '<option value="'+t+'">'+resourceTypeLabel(t)+'</option>'; }).join('');
-    bar.innerHTML =
-      '<span class="muted" style="white-space:nowrap;">'+selectedFacilities.length+' Facilities selected</span>'+
-      '<span style="flex:1 1 auto;"></span>'+
-      '<label class="visually-hidden" for="resourceBulkType">Resource type</label>'+
-      '<select class="control compact" id="resourceBulkType">'+typeOptions+'</select>'+
-      '<label class="visually-hidden" for="resourceBulkValue">Amount</label>'+
-      '<input class="text" type="number" id="resourceBulkValue" min="0" placeholder="Amount" style="width:80px;">'+
-      '<button class="btn small" type="button" onclick="applyResourceBulk()">Apply to all Facilities</button>';
-  }
-
-  function applyResourceBulk(){
-    var typeSel = document.getElementById('resourceBulkType');
-    var valInput = document.getElementById('resourceBulkValue');
-    if(!typeSel || !valInput) return;
-    var type = typeSel.value;
-    var n = parseInt(valInput.value, 10);
-    if(isNaN(n) || n < 0) n = 0;
-    selectedFacilities.forEach(function(facility){
-      if(resourceTypesForFacility(facility).indexOf(type) === -1) return; // this Facility doesn't offer that resource type
-      var capacity = resourceCapacity(facility, type);
-      var others = resourceAllocatedByOthers(facility, type);
-      var remaining = Math.max(0, capacity - others);
-      if(!boardResources[facility]) boardResources[facility] = emptyResourceAllocation(facility);
-      boardResources[facility][type] = Math.min(n, remaining);
-    });
-    renderResourceAllocation();
+  function toggleUnitSelection(facilityName, csName, unitId, checked){
+    if(!selectedUnits[facilityName]) selectedUnits[facilityName] = [];
+    var list = selectedUnits[facilityName];
+    var pos = list.findIndex(function(c){ return c.csName === csName && c.unitId === unitId; });
+    if(checked && pos === -1) list.push({ csName:csName, unitId:unitId });
+    else if(!checked && pos > -1) list.splice(pos, 1);
+    renderUnitAllocation();
     updateReadiness();
   }
 
-  function renderResourceAllocation(){
-    var section = document.getElementById('resourceAllocationSection');
-    var grid = document.getElementById('resourceAllocationGrid');
+
+  // Phase 2 items 7–8 — replaces the old editable Resource Allocation accordion. Trackerboard no
+  // longer authors resource numbers; it only selects which already-configured Units (from Care
+  // Settings Configuration) this board tracks. One card per selected Facility; within a card,
+  // Units are listed from every selected Care Setting that has that Facility enabled — if more
+  // than one Care Setting is selected and both have Units at this Facility, each Unit is tagged
+  // with its owning Care Setting so identically-named Units (e.g. two "Unit 1"s) aren't ambiguous.
+  function unitCandidatesForFacility(facility){
+    var out = [];
+    selectedCareSettings.forEach(function(cs){
+      if(!facilityLink(cs, facility)) return; // this Care Setting isn't enabled at this Facility
+      unitsFor(cs, facility).forEach(function(u){ out.push({ csName:cs, unit:u }); });
+    });
+    return out;
+  }
+  // Collapsed by default, one Facility expanded at a time by the user — same reasoning as the
+  // editable accordion this replaced: a board covering many Facilities (a dozen, twenty) becomes
+  // an unusable wall of fully-open checklists if every card renders expanded. See conversation:
+  // "the strategy ... is very restrictive, think if they add 20 facilities at once."
+  var unitFacilityExpanded = {}; // { [facilityName]: true }
+  var unitUnselectedOnly = false;
+  function toggleUnitFacilityExpanded(facility){
+    unitFacilityExpanded[facility] = !unitFacilityExpanded[facility];
+    renderUnitAllocation();
+  }
+  function toggleUnitUnselectedOnly(){
+    unitUnselectedOnly = !unitUnselectedOnly;
+    renderUnitAllocation();
+  }
+  function renderUnitAllocation(){
+    var section = document.getElementById('unitAllocationSection');
+    var grid = document.getElementById('unitAllocationGrid');
     if(!section || !grid) return;
-    if(!selectedFacilities.length){
-      section.style.display = 'none';
-      return;
-    }
+    if(!selectedFacilities.length){ section.style.display = 'none'; return; }
     section.style.display = '';
-    renderResourceQuickApply();
 
-    var searchInput = document.getElementById('resourceFacilitySearch');
+    var searchInput = document.getElementById('unitFacilitySearch');
     var query = ((searchInput ? searchInput.value : '') || '').toLowerCase();
-    var toggleBtn = document.getElementById('resourceAttentionToggle');
-    if(toggleBtn) toggleBtn.setAttribute('aria-pressed', String(resourceAttentionOnly));
+    var toggleBtn = document.getElementById('unitUnselectedToggle');
+    if(toggleBtn) toggleBtn.setAttribute('aria-pressed', String(unitUnselectedOnly));
+    var multiCS = selectedCareSettings.length > 1;
 
-    var totalIssueCount = 0;
     var rowsHtml = selectedFacilities.map(function(facility){
-      var status = facilityResourceStatus(facility);
-      var facilityIssueCount = status.parts.filter(function(p){ return p.stale; }).length;
-      totalIssueCount += facilityIssueCount;
-      return { facility:facility, status:status, issueCount:facilityIssueCount };
+      var candidates = unitCandidatesForFacility(facility);
+      // A Unit already claimed by a different Trackerboard is excluded outright (decision:
+      // disappear, not disable) — see unitClaimedElsewhere. Note: this does not yet special-case
+      // "claimed by this same Trackerboard while editing it" — that refinement is parked pending
+      // confirmation (see the note above unitClaimedElsewhere) rather than assumed either way.
+      var visible = candidates.filter(function(c){ return !unitClaimedElsewhere(c.csName, facility, c.unit.id); });
+      var selectedCount = (selectedUnits[facility] || []).filter(function(sel){
+        return visible.some(function(c){ return c.csName === sel.csName && c.unit.id === sel.unitId; });
+      }).length;
+      return { facility:facility, visible:visible, selectedCount:selectedCount };
     }).filter(function(row){
       if(query && row.facility.toLowerCase().indexOf(query) === -1) return false;
-      if(resourceAttentionOnly && !row.status.hasIssue) return false;
+      if(unitUnselectedOnly && row.selectedCount > 0) return false;
       return true;
     }).map(function(row){
-      var facility = row.facility, status = row.status;
-      var open = !!resourceExpanded[facility];
-      var summaryParts = status.parts.slice(0, 3).map(function(p){ return p.label+' '+p.allocated+'/'+p.capacity; });
-      var summaryText = status.parts.length ? summaryParts.join(' &middot; ') + (status.parts.length > 3 ? ' &middot; +'+(status.parts.length-3)+' more' : '') : 'No resource types configured for this Facility';
-      var chip = status.hasIssue ?
-        '<span class="resource-status-chip warn">Needs attention</span>' :
-        '<span class="resource-status-chip ok">OK</span>';
-      var utilBar = status.parts.length ?
-        '<span class="resource-util-bar" aria-hidden="true"><span class="resource-util-bar-fill'+(status.hasIssue?' warn':'')+'" style="width:'+status.avgUtil+'%;"></span></span>' : '';
-      var bodyRows = status.parts.map(function(p){
-        var inputId = 'resource-'+facilityIdPart(facility)+'-'+p.type;
-        return '<div class="resource-type-row">'+
-          '<span class="rt-label">'+p.label+'</span>'+
-          '<span class="rt-input-wrap">'+
-            '<input class="text resource-cell-input" type="number" id="'+inputId+'" min="0" max="'+p.available+'" value="'+p.allocated+'"'+(p.capacity?'':' disabled')+
-            (p.stale?' style="border-color:#d9988f;background:#fffafa;"':'') +
-            ' aria-label="'+p.label+' allocated at '+facility+'" oninput="onResourceInput(\''+facility.replace(/'/g,"\\'")+'\', \''+p.type+'\', this.value)">' +
-            '<span class="short-meta"'+(p.stale?' style="color:var(--bad);"':'')+'>of '+p.available+'</span>'+
-          '</span>'+
-        '</div>';
-      }).join('') || '<p class="muted" style="margin:0;">This Facility has no resource types configured.</p>';
-      return '<div class="resource-facility-row'+(open?' open':'')+'" data-facility="'+facility.replace(/"/g,'&quot;')+'">'+
-        '<button type="button" class="resource-facility-header" aria-expanded="'+open+'" onclick="toggleResourceFacility(\''+facility.replace(/'/g,"\\'")+'\')">'+
-          '<svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>'+
-          '<span class="resource-facility-name">'+facility+'</span>'+
-          utilBar+
-          '<span class="resource-facility-summary">'+summaryText+'</span>'+
-          chip+
-        '</button>'+
-        '<div class="resource-facility-body" style="display:'+(open?'':'none')+';">'+bodyRows+'</div>'+
+      var facility = row.facility, visible = row.visible, selectedCount = row.selectedCount;
+      var open = !!unitFacilityExpanded[facility];
+
+      var bodyHtml;
+      if(!visible.length){
+        // Same message whether nothing is configured yet or everything here is already claimed —
+        // decision: one unified empty state, not two different messages.
+        bodyHtml = '<p class="muted" style="margin:0;">No Units available at this Facility for the selected Care Setting(s) — either none are configured yet in Care Settings Configuration, or they are already assigned to other Trackerboards.</p>';
+      } else {
+        bodyHtml = visible.map(function(c){
+          var u = c.unit;
+          var checked = isUnitSelected(facility, c.csName, u.id);
+          var csTag = multiCS ? ' <span class="muted" style="font-weight:400;">(' + c.csName + ')</span>' : '';
+          var idAttr = 'unit-cb-' + facilityIdPart(facility) + '-' + facilityIdPart(c.csName) + '-' + facilityIdPart(String(u.id));
+          return '<div class="resource-type-row">' +
+            '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1 1 auto;">' +
+              '<input type="checkbox" id="'+idAttr+'"'+(checked?' checked':'')+' onchange="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+c.csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', this.checked)">' +
+              '<span class="rt-label">'+u.name+csTag+'</span>' +
+            '</label>' +
+            '<span class="short-meta">'+formatUnitResources(u)+'</span>' +
+          '</div>';
+        }).join('');
+      }
+
+      var chip = selectedCount ? '<span class="resource-status-chip ok">'+selectedCount+' selected</span>' : '<span class="resource-status-chip">None selected</span>';
+
+      return '<div class="resource-facility-row'+(open?' open':'')+'" data-facility="'+facility.replace(/"/g,'&quot;')+'">' +
+        '<button type="button" class="resource-facility-header" aria-expanded="'+open+'" onclick="toggleUnitFacilityExpanded(\''+facility.replace(/'/g,"\\'")+'\')">' +
+          '<svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>' +
+          '<span class="resource-facility-name">'+facility+'</span>' +
+          '<span class="resource-facility-summary">'+visible.length+' Unit'+(visible.length===1?'':'s')+' available</span>' +
+          chip +
+        '</button>' +
+        '<div class="resource-facility-body" style="display:'+(open?'':'none')+';">'+bodyHtml+'</div>' +
       '</div>';
     }).join('');
 
-    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">'+(resourceAttentionOnly ? 'No Facilities need attention.' : 'No matching Facilities.')+'</p>';
-
-    var summary = document.getElementById('resourceIssueSummary');
-    if(summary){
-      if(totalIssueCount){
-        summary.style.display = '';
-        summary.innerHTML = '<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> ' + totalIssueCount + (totalIssueCount===1?' allocation exceeds':' allocations exceed') + ' what\'s now available.';
-      } else {
-        summary.style.display = 'none';
-      }
-    }
+    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">'+(unitUnselectedOnly ? 'Every Facility has at least one Unit selected.' : 'No matching Facilities.')+'</p>';
   }
 
-  // Rebuilding the whole list on every keystroke would drop focus mid-edit — instead, apply the
-  // edit to the data, then patch just this one Facility's header (chip / bar / summary text and
-  // the "of N available" caption) directly in the DOM.
-  function patchResourceFacilityRow(facility){
-    var row = document.querySelector('.resource-facility-row[data-facility="'+facility.replace(/"/g,'\\"')+'"]');
-    if(!row) return;
-    var status = facilityResourceStatus(facility);
-    var chip = row.querySelector('.resource-status-chip');
-    if(chip){
-      chip.className = 'resource-status-chip ' + (status.hasIssue ? 'warn' : 'ok');
-      chip.textContent = status.hasIssue ? 'Needs attention' : 'OK';
-    }
-    var fill = row.querySelector('.resource-util-bar-fill');
-    if(fill){
-      fill.style.width = status.avgUtil + '%';
-      fill.className = 'resource-util-bar-fill' + (status.hasIssue ? ' warn' : '');
-    }
-    var summaryEl = row.querySelector('.resource-facility-summary');
-    if(summaryEl){
-      var summaryParts = status.parts.slice(0, 3).map(function(p){ return p.label+' '+p.allocated+'/'+p.capacity; });
-      summaryEl.innerHTML = status.parts.length ? summaryParts.join(' &middot; ') + (status.parts.length > 3 ? ' &middot; +'+(status.parts.length-3)+' more' : '') : 'No resource types configured for this Facility';
-    }
-    status.parts.forEach(function(p){
-      var meta = row.querySelector('#resource-'+facilityIdPart(facility)+'-'+p.type);
-      if(!meta) return;
-      meta.max = p.available;
-      var metaEl = meta.parentElement.querySelector('.short-meta');
-      if(metaEl){
-        metaEl.textContent = 'of '+p.available;
-        metaEl.style.color = p.stale ? 'var(--bad)' : '';
-      }
-      meta.style.borderColor = p.stale ? '#d9988f' : '';
-      meta.style.background = p.stale ? '#fffafa' : '';
-    });
-    // The top summary line aggregates every Facility, so it still needs a full recompute — but
-    // that's a cheap loop over already-rendered data, not a DOM rebuild.
-    var totalIssueCount = selectedFacilities.reduce(function(sum, f){
-      return sum + facilityResourceStatus(f).parts.filter(function(p){ return p.stale; }).length;
-    }, 0);
-    var summary = document.getElementById('resourceIssueSummary');
-    if(summary){
-      if(totalIssueCount){
-        summary.style.display = '';
-        summary.innerHTML = '<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> ' + totalIssueCount + (totalIssueCount===1?' allocation exceeds':' allocations exceed') + ' what\'s now available.';
-      } else {
-        summary.style.display = 'none';
-      }
-    }
-  }
+  function facilityIdPart(str){ return String(str).replace(/[^a-z0-9]/gi, ''); }
 
-  function onResourceInput(facility, type, value){
-    var capacity = resourceCapacity(facility, type);
-    // Clamp to what's actually left after other boards' claims, not just the facility's raw
-    // total — otherwise this field alone can create a fresh over-allocation.
-    var others = resourceAllocatedByOthers(facility, type);
-    var remaining = Math.max(0, capacity - others);
-    var n = parseInt(value, 10);
-    if(isNaN(n) || n < 0) n = 0;
-    if(n > remaining) n = remaining;
-    if(!boardResources[facility]) boardResources[facility] = emptyResourceAllocation(facility);
-    boardResources[facility][type] = n;
-    patchResourceFacilityRow(facility);
-    updateReadiness();
-  }
 
   var PATIENT_COLUMNS = [
     { key:'patientName', label:'Patient Name', category:'Identity', locked:true },
@@ -1988,11 +2022,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     { key:'currentStatus', label:'Current Status', category:'Workflow' },
     { key:'timeInStatus', label:'Time in Status', category:'Workflow' },
     { key:'arrivalTime', label:'Arrival / Admission / Appointment Time', category:'Workflow' },
-    { key:'lengthOfStay', label:'Total Length of Stay / Waiting Time', category:'Workflow', settings:['Emergency Department','Inpatient','Operating Room'] },
+    { key:'lengthOfStay', label:'Total Length of Stay / Waiting Time', category:'Workflow', settings:['ED','Hospitalization','OR'] },
     { key:'pendingWork', label:'Pending Work Indicators', category:'Workflow' },
-    { key:'disposition', label:'Disposition / Next Destination', category:'Workflow', settings:['Emergency Department','Inpatient'] },
-    { key:'dischargeBlockers', label:'Discharge / Transfer Blockers', category:'Workflow', settings:['Emergency Department','Inpatient'] },
-    { key:'expectedDischarge', label:'Expected Discharge Date / Time', category:'Workflow', settings:['Inpatient'] },
+    { key:'disposition', label:'Disposition / Next Destination', category:'Workflow', settings:['ED','Hospitalization'] },
+    { key:'dischargeBlockers', label:'Discharge / Transfer Blockers', category:'Workflow', settings:['ED','Hospitalization'] },
+    { key:'expectedDischarge', label:'Expected Discharge Date / Time', category:'Workflow', settings:['Hospitalization'] },
     { key:'age', label:'Age', category:'Demographics', recommended:true },
     { key:'patientType', label:'Patient Type', category:'Demographics', recommended:true },
     { key:'bed', label:'Assigned Bed', category:'Resource', recommended:true },
@@ -2002,11 +2036,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     { key:'vitals', label:'Vitals', category:'Clinical', recommended:true },
     { key:'medicalConditions', label:'Medical Conditions', category:'Clinical' },
     { key:'allergies', label:'Allergies', category:'Clinical' },
-    { key:'isolation', label:'Isolation / Precautions', category:'Clinical', settings:['Emergency Department','Inpatient','Operating Room'] },
-    { key:'triageAcuity', label:'Triage / Acuity', category:'Emergency Department', settings:['Emergency Department'] },
-    { key:'chiefComplaint', label:'Chief Complaint / Reason for Visit', category:'Emergency Department', settings:['Emergency Department','Outpatient Clinic'] },
-    { key:'scheduledProcedure', label:'Scheduled Procedure / Appointment Time', category:'Operating Room', settings:['Operating Room','Outpatient Clinic'] },
-    { key:'preProcedureReadiness', label:'Pre-procedure Readiness', category:'Operating Room', settings:['Operating Room'] },
+    { key:'isolation', label:'Isolation / Precautions', category:'Clinical', settings:['ED','Hospitalization','OR'] },
+    { key:'triageAcuity', label:'Triage / Acuity', category:'ED', settings:['ED'] },
+    { key:'chiefComplaint', label:'Chief Complaint / Reason for Visit', category:'ED', settings:['ED','Outpatient Clinic'] },
+    { key:'scheduledProcedure', label:'Scheduled Procedure / Appointment Time', category:'OR', settings:['OR','Outpatient Clinic'] },
+    { key:'preProcedureReadiness', label:'Pre-procedure Readiness', category:'OR', settings:['OR'] },
     { key:'alerts', label:'Alerts', category:'Signals' }
   ];
 
@@ -2531,25 +2565,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     }
     wrap.style.display = '';
     var grid = document.getElementById('careSettingInfoGrid');
-    // Each selected Care Setting gets its own Visit/Duration/Form row, the same way each
-    // selected Facility already gets its own Resources row below — a board covering more than
-    // one Care Setting is genuinely subject to more than one set of these values, so showing
-    // only one (and which one?) would just be wrong.
+    // Each selected Care Setting gets its own Visit/Duration/Form row — a board covering more
+    // than one Care Setting is genuinely subject to more than one set of these values. Values
+    // come straight from Care Settings Configuration's Clinical Defaults; Trackerboard doesn't
+    // maintain its own copy.
     var html = selectedCareSettings.map(function(cs){
-      var cfg = CARE_SETTINGS[cs];
+      var cfg = careSettingRecord(cs);
       if(!cfg) return '';
       var items = [
-        { label:cs+' — Default Visit Category', value:cfg.visit },
-        { label:cs+' — Duration', value:cfg.durationValue+' '+cfg.durationUnit }
+        { label:cs+' — Default Visit Category', value:cfg.visitCategory },
+        { label:cs+' — Duration', value:cfg.duration.value+' '+cfg.duration.unit }
       ];
-      if(cfg.form) items.push({ label:cs+' — Chief Complaint Form', value:cfg.form, link:true });
+      if(cfg.chiefComplaintForm) items.push({ label:cs+' — Chief Complaint Form', value:cfg.chiefComplaintForm, link:true });
       return items.map(function(it){
         return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
       }).join('');
-    }).join('');
-    html += selectedFacilities.map(function(f){
-      var summary = formatFacilityResources(f);
-      return '<div class="info-item full"><span class="info-label">Facility Resources &mdash; '+f+'</span><span class="info-value'+(summary?'':' muted')+'">'+(summary || 'No resource data configured for this facility')+'</span></div>';
     }).join('');
     grid.innerHTML = html;
   }
@@ -2571,7 +2601,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function renderCareSettingMenu(){
     var menu = document.getElementById('careSettingMenu');
     if(!menu) return;
-    menu.innerHTML = Object.keys(CARE_SETTINGS).map(function(cs){
+    menu.innerHTML = activeCareSettingNames().map(function(cs){
       var checked = selectedCareSettings.indexOf(cs) > -1 ? ' checked' : '';
       return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+cs+'"'+checked+' onchange="toggleCareSetting(this, \''+cs.replace(/'/g,"\\'")+'\')"> '+cs+'</label>';
     }).join('');
@@ -2593,17 +2623,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function unionFacilitiesForSelected(){
     var set = [];
     selectedCareSettings.forEach(function(cs){
-      var cfg = CARE_SETTINGS[cs];
-      if(!cfg) return;
-      cfg.facilities.forEach(function(f){ if(set.indexOf(f) === -1) set.push(f); });
+      facilitiesEnabledFor(cs).forEach(function(f){ if(set.indexOf(f) === -1) set.push(f); });
     });
     return set;
-  }
-  function programSettingsFor(name){
-    var direct = PROGRAM_OPTIONS.find(function(p){ return p.name === name; });
-    if(direct) return direct.settings || [];
-    var parent = PROGRAM_OPTIONS.find(function(p){ return (p.subPrograms||[]).indexOf(name) > -1; });
-    return parent ? (parent.settings || []) : [];
   }
   function settingsStillCovered(settings){
     return !settings || !settings.length || settings.some(function(s){ return selectedCareSettings.indexOf(s) > -1; });
@@ -2618,22 +2640,28 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var remaining = selectedCareSettings.filter(function(cs){ return cs !== removedValue; });
     var remainingFacilities = [];
     remaining.forEach(function(cs){
-      var cfg = CARE_SETTINGS[cs];
-      if(!cfg) return;
-      cfg.facilities.forEach(function(f){ if(remainingFacilities.indexOf(f) === -1) remainingFacilities.push(f); });
+      facilitiesEnabledFor(cs).forEach(function(f){ if(remainingFacilities.indexOf(f) === -1) remainingFacilities.push(f); });
     });
     var items = [];
     var droppedFacilities = selectedFacilities.filter(function(f){ return remainingFacilities.indexOf(f) === -1; });
     if(droppedFacilities.length) items.push(droppedFacilities.length + (droppedFacilities.length===1?' selected Facility':' selected Facilities') + ' (' + droppedFacilities.join(', ') + ')');
+    var keptFacilities = selectedFacilities.filter(function(f){ return remainingFacilities.indexOf(f) > -1; });
     var droppedPrograms = selectedPrograms.filter(function(name){
-      var settings = programSettingsFor(name);
-      return settings.length && !settings.some(function(s){ return remaining.indexOf(s) > -1; });
+      return !isProgramNameEligible(name, remaining, keptFacilities);
     });
     if(droppedPrograms.length) items.push(droppedPrograms.length + (droppedPrograms.length===1?' selected Program':' selected Programs') + ' (' + droppedPrograms.join(', ') + ')');
     var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.length && !c.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedColumns.forEach(function(c){ items.push(c.label + ' column'); });
     var droppedWidgets = WIDGET_LIBRARY.filter(function(w){ return widgetEnabled[w.key] && w.settings && w.settings.length && !w.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedWidgets.forEach(function(w){ items.push(w.label + ' widget'); });
+    // Units belonging to the removed Care Setting are dropped from selectedUnits too — surface
+    // that explicitly rather than silently discarding a Unit selection.
+    var droppedUnitFacilities = [];
+    Object.keys(selectedUnits).forEach(function(f){
+      var claims = selectedUnits[f].filter(function(c){ return c.csName === removedValue; });
+      if(claims.length) droppedUnitFacilities.push(f + ' (' + claims.length + ')');
+    });
+    if(droppedUnitFacilities.length) items.push('Unit selections at ' + droppedUnitFacilities.join(', '));
     return items;
   }
 
@@ -2668,6 +2696,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     renderColumnLibrary();
     renderWidgetLibrary();
     renderCareSettingInfo();
+    renderUnitAllocation();
     // First-ever pick loads that Care Setting's standard workflow as a starting point, same
     // convenience the single-select version had — but only when nothing's been built yet, so
     // adding a second (or third) Care Setting later never clobbers real work in progress.
@@ -2681,11 +2710,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var eligibleFacilities = unionFacilitiesForSelected();
     selectedFacilities = selectedFacilities.filter(function(f){
       if(eligibleFacilities.indexOf(f) > -1) return true;
-      delete boardResources[f];
+      delete selectedUnits[f];
       return false;
     });
     renderConnFacilityMenu();
-    selectedPrograms = selectedPrograms.filter(function(name){ return settingsStillCovered(programSettingsFor(name)); });
+    selectedPrograms = selectedPrograms.filter(function(name){ return isProgramNameEligible(name, selectedCareSettings, selectedFacilities); });
     renderProgramMenu();
     selectedColumns = selectedColumns.filter(function(k){ var c = columnByKey(k); return !c || settingsStillCovered(c.settings); });
     renderColumnLibrary();
@@ -2694,41 +2723,39 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       if(w && widgetEnabled[k] && !settingsStillCovered(w.settings)) widgetEnabled[k] = false;
     });
     renderWidgetLibrary();
-    renderResourceAllocation();
+    // A Unit selection belonging to a Care Setting that's no longer selected is no longer valid,
+    // even at a Facility that's still selected via a different Care Setting.
+    Object.keys(selectedUnits).forEach(function(f){
+      selectedUnits[f] = selectedUnits[f].filter(function(c){ return selectedCareSettings.indexOf(c.csName) > -1; });
+    });
+    renderUnitAllocation();
     renderCareSettingInfo();
     if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
     updateReadiness();
   }
 
-  // Each program is scoped to the Care Settings it's clinically relevant to, mirroring how
-  // PATIENT_COLUMNS/WIDGET_LIBRARY are scoped. A program with no `settings` would be available
-  // everywhere (no such case currently), matching that same convention.
-  // Subprograms are narrower programs nested under a parent (e.g. a Behavioral Health Program
-  // running a separate Adolescent track). They inherit the parent's Care Setting scope and are
-  // selected independently, so a board can be tied to just the subprogram without pulling in
-  // every patient under the parent.
-  var PROGRAM_OPTIONS = [
-    { name:'General Medicine Program', settings:[], subPrograms:['Hospitalist Program'] },
-    { name:'Behavioral Health Program', settings:[], subPrograms:['Adolescent Behavioral Health','Substance Use Program'] },
-    { name:'Surgical Services Program', settings:['Operating Room'] },
-    { name:'Ambulatory Care Program', settings:['Outpatient Clinic'] },
-    { name:'Critical Care Management', settings:[] },
-    { name:'ED Surge', settings:['Emergency Department'] },
-    { name:'Cardiology Program', settings:[], subPrograms:['Heart Failure Clinic','Electrophysiology Program'] },
-    { name:'Oncology Program', settings:[] },
-    { name:'Orthopedics Program', settings:['Operating Room','Outpatient Clinic','Inpatient'] },
-    { name:'Maternal & Newborn Program', settings:[], subPrograms:['NICU Program'] },
-    { name:'Rehabilitation Services Program', settings:[] },
-    { name:'Telehealth Program', settings:['Outpatient Clinic','Emergency Department'] },
-    { name:'Care Coordination Program', settings:[] },
-    { name:'Nephrology Program', settings:['Inpatient','Outpatient Clinic'] },
-    { name:'Wound Care Program', settings:[] },
-    { name:'Palliative Care Program', settings:[] }
-  ];
-  var selectedPrograms = [];
-  function programsForCareSetting(){
-    return PROGRAM_OPTIONS.filter(function(p){ return settingsStillCovered(p.settings); });
+  // Phase 2 item 6 — Programs are no longer scoped to Care Setting alone (the old model). A
+  // Program is eligible here only if Care Settings Configuration has actually assigned it to
+  // this Care Setting's Facility Assignment for a specific Facility — mirroring
+  // getFacilityProgramIds(). Union across every selected (Care Setting, Facility) pair, same
+  // union-not-intersection convention used everywhere else in this picker: a board covering ED
+  // @ Main Hospital and ICU @ Eastside should offer everything eligible at either combination.
+  function programEntriesEligible(csNames, facilityNames){
+    var seen = {}; var out = [];
+    (csNames||[]).forEach(function(cs){
+      (facilityNames||[]).forEach(function(f){
+        programsEligibleFor(cs, f).forEach(function(p){ if(!seen[p.id]){ seen[p.id]=true; out.push(p); } });
+      });
+    });
+    return out;
   }
+  function isProgramNameEligible(name, csNames, facilityNames){
+    return programEntriesEligible(csNames, facilityNames).some(function(p){
+      return p.name === name || (p.subPrograms||[]).some(function(sp){ return sp.name === name; });
+    });
+  }
+  var selectedPrograms = [];
+  function programsForCareSetting(){ return programEntriesEligible(selectedCareSettings, selectedFacilities); }
   function updateProgramButton(){
     var btn = document.getElementById('programAccessBtn');
     if(!btn) return;
@@ -2747,24 +2774,28 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(!menu) return;
     var options = programsForCareSetting();
     var eligible = [];
-    options.forEach(function(p){ eligible.push(p.name); (p.subPrograms||[]).forEach(function(sp){ eligible.push(sp); }); });
+    options.forEach(function(p){ eligible.push(p.name); (p.subPrograms||[]).forEach(function(sp){ eligible.push(sp.name); }); });
     selectedPrograms = selectedPrograms.filter(function(p){ return eligible.indexOf(p) > -1; });
     menu.innerHTML = options.length ? options.map(function(p){
       var subs = p.subPrograms || [];
-      var checkedCount = subs.filter(function(sp){ return selectedPrograms.indexOf(sp) > -1; }).length;
+      var checkedCount = subs.filter(function(sp){ return selectedPrograms.indexOf(sp.name) > -1; }).length;
       var parentChecked = selectedPrograms.indexOf(p.name) > -1;
       var countLabel = subs.length ? ' <span class="muted program-group-count">('+checkedCount+' of '+subs.length+')</span>' : '';
       var html = '<div class="program-group">' +
         '<label class="picker-option program-group-parent" style="cursor:pointer;"><input type="checkbox" class="program-parent-cb" value="'+p.name+'"'+(parentChecked?' checked':'')+' onchange="toggleProgramParent(this)"> '+p.name+countLabel+'</label>';
       if(subs.length){
         html += subs.map(function(sp){
-          var subChecked = selectedPrograms.indexOf(sp) > -1 ? ' checked' : '';
-          return '<label class="picker-option picker-option-sub" style="cursor:pointer;"><input type="checkbox" class="program-child-cb" value="'+sp+'"'+subChecked+' onchange="toggleProgramChild(this)"> '+sp+'</label>';
+          var subChecked = selectedPrograms.indexOf(sp.name) > -1 ? ' checked' : '';
+          return '<label class="picker-option picker-option-sub" style="cursor:pointer;"><input type="checkbox" class="program-child-cb" value="'+sp.name+'"'+subChecked+' onchange="toggleProgramChild(this)"> '+sp.name+'</label>';
         }).join('');
       }
       html += '</div>';
       return html;
-    }).join('') : '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting first</div>';
+    }).join('') : (
+      (!selectedCareSettings.length || !selectedFacilities.length)
+        ? '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting and Facility first</div>'
+        : '<div class="picker-option" style="cursor:default;color:var(--muted)">No Programs assigned to the selected Care Setting(s) at the selected Facility(ies)</div>'
+    );
     updateProgramButton();
   }
   function updateProgramGroupCount(group){
@@ -2888,13 +2919,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(checked && pos===-1) selectedFacilities.push(value);
     if(!checked && pos>-1){
       selectedFacilities.splice(pos,1);
-      // Drop the resource claim along with the facility — otherwise it sits orphaned in
-      // memory and silently reappears if the same facility is re-added this session.
-      delete boardResources[value];
+      // Drop the Unit selections along with the facility — otherwise they sit orphaned in
+      // memory and silently reappear if the same facility is re-added this session.
+      delete selectedUnits[value];
     }
     updateConnFacilityButton();
     renderCareSettingInfo();
-    renderResourceAllocation();
+    renderProgramMenu();
+    renderUnitAllocation();
     updateReadiness();
   }
 
@@ -2914,8 +2946,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function renderTransferDestinations(){
-    var defaults = ['Operating Room','Inpatient'];
-    var options = Object.keys(CARE_SETTINGS).filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
+    var defaults = ['OR','Hospitalization'];
+    var options = activeCareSettingNames().filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
     document.getElementById('transferDestinations').innerHTML = options.map(function(cs){
       var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
       return '<label class="check-option"><input type="checkbox"'+checked+' onchange="renderExceptionalExits()"> '+cs+'</label>';
@@ -3048,17 +3080,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       // same access review as the people who actually work it. Blocking, not warning.
       var configBroaderThanBoard = selectedConfigAccess.filter(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
       if(configBroaderThanBoard.length) caresettingBlocking.push('Configuration access includes ' + configBroaderThanBoard.join(', ') + ' without Board access — add ' + (configBroaderThanBoard.length===1?'it':'them') + ' to Board access or remove ' + (configBroaderThanBoard.length===1?'it':'them') + ' from Configuration access');
-      // Over-allocated resources are blocking, not just a warning — a board can sit in Draft
-      // over capacity while someone is mid-edit, but it can't be Activated that way.
-      selectedFacilities.forEach(function(facility){
-        resourceTypesForFacility(facility).forEach(function(type){
-          var label = resourceTypeLabel(type);
-          var capacity = resourceCapacity(facility, type);
-          if(!capacity) return;
-          var totalClaimed = resourceAllocatedByOthers(facility, type) + ((boardResources[facility]||{})[type]||0);
-          if(totalClaimed > capacity) caresettingBlocking.push(label + ' at ' + facility + ' are over-allocated across boards: ' + totalClaimed + ' claimed of ' + capacity + ' available');
-        });
-      });
+      // Resource over-allocation is no longer this section's concern — Care Settings
+      // Configuration enforces capacity ceilings when resources are allocated to a Unit
+      // (Phase 1/2). What Trackerboard still needs to guard against is two Trackerboards
+      // claiming the same Unit; that exclusion check is Phase 3, item 9 — deliberately not
+      // built here yet, so it isn't silently missing without a note.
       if(caresettingBlocking.length) return { state:'incomplete', issues:caresettingBlocking };
       var caresettingWarnings = [];
       if(!hasConfigAccess) caresettingWarnings.push('No Configuration access role selected');
@@ -3085,9 +3111,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       if(completeStatuses.length === 0) workflowBlocking.push('Mark one status as Completion');
       else if(completeStatuses.length > 1) workflowBlocking.push('More than one status is marked Completion');
 
-      // Completion has no normal outgoing Next status.
+      // Completion may move a patient backward, but never forward — flag only forward Next
+      // statuses, not any Next status at all.
       completeStatuses.forEach(function(st){
-        if(st.allowedNext && st.allowedNext.length) workflowBlocking.push('"'+st.name+'" is a Completion status but still has Next statuses configured');
+        var forwardNext = (st.allowedNext||[]).filter(function(id){ return statusDirectionLabel(st.id, id) === 'forward'; });
+        if(forwardNext.length){
+          var names = forwardNext.map(function(id){ var t = STATUSES.find(function(x){ return x.id===id; }); return t ? t.name : id; });
+          workflowBlocking.push('"'+st.name+'" is a Completion status but has a forward Next status configured: '+names.join(', '));
+        }
       });
 
       var diagnostics = computeStatusDiagnostics();
@@ -3221,7 +3252,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   /* ---------- Statuses & Workflow ---------- */
 
   var STATUS_PRESETS = {
-    'Emergency Department': [
+    'ED': [
       { name:'Waiting List', desc:'Patient has arrived and is waiting to be seen.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1],
@@ -3239,7 +3270,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         allowedNext:[],
                 enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
     ],
-    'Operating Room': [
+    'OR': [
       { name:'Pre-OR', desc:'Patient is being prepped ahead of the procedure.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1],
@@ -3261,7 +3292,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         allowedNext:[],
                 enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
     ],
-    'Inpatient': [
+    'Hospitalization': [
       { name:'Admitted', desc:'Patient has been admitted to the unit.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1,2],
@@ -3610,15 +3641,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     // destinations from here, in either direction. Whether a given destination reads as
     // "forward" or "backward" is inferred automatically from where it sits in the workflow
     // order on the left, not something configured separately per status.
+    // A Completion status is the exception: it can still move a patient backward (e.g. to
+    // correct a mistaken discharge), but never forward — there's nothing after Completion by
+    // definition. Forward destinations are excluded from the list entirely for a Completion
+    // status, not merely disabled, so there's nothing to uncheck-by-mistake.
     var allowedNextHtml = STATUSES.map(function(other, idx){
       if(idx===selectedIndex) return '';
-      var checked = s.allowedNext.indexOf(other.id)>-1;
       var dir = statusDirectionLabel(s.id, other.id);
+      if(s.complete && dir === 'forward') return '';
+      var checked = s.allowedNext.indexOf(other.id)>-1;
       var dirTag = dir ? '<span class="tag" style="margin-left:6px;">'+(dir==='forward'?'Forward':'Backward')+'</span>' : '';
       return '<label class="check-option">'+
         '<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext(\''+other.id+'\', this.checked)"> '+other.name+dirTag+
       '</label>';
     }).join('');
+    var noBackwardOptions = s.complete && !allowedNextHtml.trim();
 
     var currentRole = s.start ? 'starting' : (s.complete ? 'completion' : 'normal');
 
@@ -3627,7 +3664,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         '<input class="text" id="statusNameInput" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
       '</div>'+
       '<div class="field full" style="margin-top:14px"><label for="statusDescInput">Description</label><textarea class="textarea" id="statusDescInput" onchange="updateStatusDesc(this.value)">'+s.desc+'</textarea></div>'+
-      '<div class="field full" style="margin-top:14px"><label>Status role</label>'+
+      '<div class="field full" style="margin-top:14px"><label><span style="display:inline-flex;align-items:center;gap:4px;">Status role <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status roles" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover"><strong>Normal</strong> &mdash; a regular step in the workflow.<br><strong>Starting</strong> &mdash; where a patient enters the board; exactly one status must be Starting.<br><strong>Completion</strong> &mdash; where a patient exits the board; exactly one status must be Completion. It can still move a patient backward to an earlier status, but never forward.</span></span></span></label>'+
         '<div class="segmented" role="radiogroup" aria-label="Status role">'+
           '<label><input type="radio" name="statusRole"'+(currentRole==='normal'?' checked':'')+' onchange="setStatusRole(\'normal\')"> Normal</label>'+
           '<label><input type="radio" name="statusRole"'+(currentRole==='starting'?' checked':'')+' onchange="setStatusRole(\'starting\')"> Starting</label>'+
@@ -3635,12 +3672,16 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         '</div>'+
       '</div>'+
       lwotBlock+
-      (s.complete ? '' :
       '<div class="subsection">'+
         '<h4>Status Changes</h4>'+
-        '<p>Statuses a patient can move to from here — either direction, based on the order set in the workflow list.</p>'+
-        '<div class="check-grid">'+allowedNextHtml+'</div>'+
-      '</div>')+
+        (s.complete ?
+          '<p>A Completion status can still move a patient backward to an earlier status (for example, to correct a mistaken discharge) — but never forward, since there\'s nothing after Completion.</p>'+
+          '<div class="check-grid">'+(noBackwardOptions ? '<p class="muted" style="margin:0;">No earlier statuses to move back to — this is the first status in the workflow order.</p>' : allowedNextHtml)+'</div>'
+        :
+          '<p>Statuses a patient can move to from here — either direction, based on the order set in the workflow list.</p>'+
+          '<div class="check-grid">'+allowedNextHtml+'</div>'
+        )+
+      '</div>'+
       '<div class="subsection">'+
         '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Longer-Stay Alert</span></label></h4>'+
         '<p>Get notified if a patient stays in this status longer than expected.</p>'+
