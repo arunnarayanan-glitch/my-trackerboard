@@ -14,31 +14,32 @@
   --bad:#a23a2c;--bad-bg:#fdecea;--neutral:#e9edf1;
   --font:"Segoe UI","Helvetica Neue",Arial,sans-serif;
   --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;
-  --field-gap:8px 14px;--chip-radius:10px;
+  --field-gap:11px 16px;--chip-radius:10px;
 }
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.35 var(--font)}
 button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #8eb6db;outline-offset:2px}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
 .app{display:grid;grid-template-rows:42px minmax(0,1fr);width:100vw;height:100vh;min-width:760px}.main{display:grid;grid-template-rows:auto auto minmax(0,1fr);min-height:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--navy);color:#fff}.topgroup,.toolbar-left,.toolbar-right,.filters{display:flex;align-items:center;gap:9px;min-width:0}.brand{font-weight:700}.sq{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#2671a6;color:#fff;border:1px solid #ffffff2b;border-radius:2px;cursor:pointer}.search{position:relative;width:clamp(280px,34vw,540px)}.search input{width:100%;height:28px;padding:0 34px 0 10px;border:0;border-radius:2px}.search button{position:absolute;right:0;top:0;width:30px;height:28px;background:transparent;color:var(--navy);cursor:pointer}.avatar{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:#dceaf4;color:var(--navy);font-size:11px;font-weight:700}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:17px}.filter-bar{padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.summary,.muted,.help{color:var(--muted);font-size:12px}.filters{flex-wrap:wrap}.control{height:30px;padding:0 9px;background:#fff;border:1px solid #c4ced8;border-radius:2px}.control.compact{width:auto;min-width:125px;height:29px;font-size:12px}.filter-select-btn{width:220px;height:32px;padding:0 26px 0 10px;background:#fff;border:1px solid #c4ced8;border-radius:2px;font-size:12.5px;text-align:left;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filter-select-btn::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #687681;transform:translateY(-50%);pointer-events:none}.filter-select-btn[aria-expanded="true"]::after{border-top-color:var(--navy)}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:58px;padding:12px 22px;background:#fff;border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:17px}.filter-bar{padding:13px 22px;background:#fff;border-bottom:1px solid var(--line)}.summary,.muted,.help{color:var(--muted);font-size:12px}.filters{flex-wrap:wrap}.control{height:30px;padding:0 9px;background:#fff;border:1px solid #c4ced8;border-radius:2px}.control.compact{width:auto;min-width:125px;height:29px;font-size:12px}.filter-select-btn{width:220px;height:32px;padding:0 26px 0 10px;background:#fff;border:1px solid #c4ced8;border-radius:2px;font-size:12.5px;text-align:left;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filter-select-btn::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #687681;transform:translateY(-50%);pointer-events:none}.filter-select-btn[aria-expanded="true"]::after{border-top-color:var(--navy)}
 .btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:2px}.btn{min-height:30px;padding:0 13px;background:#fff;border:1px solid #c4ced8}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:#eef2f5}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.primary:hover:not(:disabled){background:var(--navy2)}.btn.small{min-height:26px;padding:0 9px;font-size:12px}.btn.danger{color:var(--bad);border-color:#e6bbb5}.btn.tertiary{background:transparent;border-color:transparent;color:#4d5d6a}.btn.tertiary:hover:not(:disabled){background:#eef2f5;border-color:#c4ced8}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:29px;height:29px;padding:0;background:#fff;border:1px solid #c4ced8}.link-btn{padding:0;background:transparent;color:#245f96;font-weight:700}.link-btn:hover{text-decoration:underline}
-.content{min-height:0;overflow:auto;padding:14px 18px 20px}.table-shell{min-width:930px;background:#fff;border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:9px 10px;text-align:left;vertical-align:middle;border-bottom:1px solid #e7ebef}.table th{background:#f7f9fb;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.table tbody tr:hover{background:#f7fbfe}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:700;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:700}.cell-meta{margin-top:2px;color:var(--muted);font-size:11.5px}.tags{display:flex;flex-wrap:wrap;gap:5px}.tag,.pill{display:inline-flex;align-items:center;gap:4px;min-height:21px;padding:2px 7px;border-radius:var(--chip-radius);font-size:11px;font-weight:700;white-space:nowrap}.tag{background:var(--neutral);color:#4d5d6a}.pill.active{background:var(--ok-bg);color:var(--ok)}.pill.draft{background:#dbe8f4;color:var(--navy2)}.pill.inactive{background:var(--warn-bg);color:var(--warn)}.pill.retired,.pill.superseded{background:var(--neutral);color:#596673}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:#245f96;font-size:12px;font-weight:700;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.actions{text-align:right!important}.menu-wrap{position:relative;display:inline-flex}.menu{position:absolute;z-index:40;top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:#fff;border:1px solid #c4ced8;box-shadow:0 8px 22px #001f3d29}.menu.open{display:block}.menu-divider{margin:4px 0;border-top:1px solid #e8edf1}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:#fafbfc;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.pager{display:flex;align-items:center;gap:6px}
-.backdrop{position:fixed;z-index:90;inset:0;display:none;background:#00224438}.backdrop.open{display:block}.drawer{position:fixed;z-index:100;top:0;right:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;width:min(1120px,78vw);height:100vh;background:#fff;box-shadow:-8px 0 24px #00264d2e;transform:translateX(105%);transition:.18s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:17px}.drawer-sub{margin-top:3px;color:var(--muted);font-size:12px}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:#fff;border-bottom:1px solid var(--line);color:#4d5d6a;font-size:12px}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:#9aa7b2;flex:0 0 auto}.validation-strip.error{background:#fff;color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:#fff;color:var(--warn)}.validation-strip.warning .validation-dot{background:#d09a21}.validation-strip.success{background:#fff;color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #dbe8f4;font-size:12px}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:#f7f9fb}.drawer-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:12px}
-.card{margin-bottom:14px;background:#fff;border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 9px;border-bottom:1px solid #e8edf1}.card-title{margin:0;font-size:15px}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:12px}.section-state{flex:0 0 auto;padding:2px 7px;border-radius:10px;background:var(--neutral);color:#4d5d6a;font-size:11px;font-weight:700}.section-state.ok{background:var(--ok-bg);color:var(--ok)}.section-state.progress{background:var(--blue-soft);color:var(--navy2)}.section-state.bad{background:var(--bad-bg);color:var(--bad)}.card-body{padding:8px 15px 15px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}
+.content{min-height:0;overflow:auto;padding:20px 22px 26px}.table-shell{min-width:930px;background:#fff;border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:13px 14px;text-align:left;vertical-align:middle;border-bottom:1px solid #e7ebef}.table th{background:#f7f9fb;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.table tbody tr:hover{background:#f7fbfe}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:700;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:700}.cell-meta{margin-top:2px;color:var(--muted);font-size:11.5px}.tags{display:flex;flex-wrap:wrap;gap:5px}.tag,.pill{display:inline-flex;align-items:center;gap:4px;min-height:21px;padding:2px 7px;border-radius:var(--chip-radius);font-size:11px;font-weight:700;white-space:nowrap}.tag{background:var(--neutral);color:#4d5d6a}.pill.active{background:var(--ok-bg);color:var(--ok)}.pill.draft{background:#dbe8f4;color:var(--navy2)}.pill.inactive{background:var(--warn-bg);color:var(--warn)}.pill.retired,.pill.superseded{background:var(--neutral);color:#596673}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:#245f96;font-size:12px;font-weight:700;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.actions{text-align:right!important}.menu-wrap{position:relative;display:inline-flex}.menu{position:absolute;z-index:40;top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:#fff;border:1px solid #c4ced8;box-shadow:0 8px 22px #001f3d29}.menu.open{display:block}.menu-divider{margin:4px 0;border-top:1px solid #e8edf1}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:#fafbfc;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.pager{display:flex;align-items:center;gap:6px}
+.backdrop{position:fixed;z-index:90;inset:0;display:none;background:#00224438}.backdrop.open{display:block}.drawer{position:fixed;z-index:100;top:0;right:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto auto;width:85vw;height:100vh;background:#fff;box-shadow:-8px 0 24px #00264d2e;transform:translateX(105%);transition:.18s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:14px 22px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:17px}.drawer-sub{margin-top:3px;color:var(--muted);font-size:12px}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:#fff;border-bottom:1px solid var(--line);color:#4d5d6a;font-size:12px}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:#9aa7b2;flex:0 0 auto}.validation-strip.error{background:#fff;color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:#fff;color:var(--warn)}.validation-strip.warning .validation-dot{background:#d09a21}.validation-strip.success{background:#fff;color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #dbe8f4;font-size:12px}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:24px;background:#f7f9fb}.drawer-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:58px;padding:12px 22px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:12px}
+.card{margin-bottom:18px;background:#fff;border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 20px 10px;border-bottom:1px solid #e8edf1}.card-title{margin:0;font-size:15px}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:12px}.section-state{flex:0 0 auto;padding:2px 7px;border-radius:10px;background:var(--neutral);color:#4d5d6a;font-size:11px;font-weight:700}.section-state.ok{background:var(--ok-bg);color:var(--ok)}.section-state.progress{background:var(--blue-soft);color:var(--navy2)}.section-state.bad{background:var(--bad-bg);color:var(--bad)}.card-body{padding:10px 20px 15px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap);margin-bottom:2px}
 .comments-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap);align-items:start}
 .comments-grid .check-option{margin-top:21px}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:#4d5d6a;font-size:12px;font-weight:700}.text,.textarea{width:100%;background:#fff;border:1px solid #c4ced8;border-radius:2px}.text{height:30px;padding:0 9px}.textarea{min-height:78px;padding:8px 9px;resize:vertical}.field-error{display:none;margin-top:5px;color:var(--bad);font-size:12px}.field.error .text,.field.error .textarea{border-color:#d9988f;background:#fffafa}.field.error .field-error{display:block}.short-meta{display:flex;align-items:center;justify-content:space-between;min-height:23px;margin-top:4px;color:var(--muted);font-size:11px}
-.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:#f5f8fb;border:1px solid #dce5ed}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:2px 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:#fff;border:1px solid #c4ced8;border-radius:2px;box-shadow:0 8px 20px #001f3d24;padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:2px;text-align:left;background:transparent;cursor:pointer;font-size:13px}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f8fafb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:11px}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#245f96;font-weight:700;text-decoration:none}.manage:hover{text-decoration:underline}
+.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:#f5f8fb;border:1px solid #dce5ed}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:2px 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}
+.picker-input button.text{position:relative;padding-right:26px}.picker-input button.text::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #687681;transform:translateY(-50%);pointer-events:none}.picker-input button.text[aria-expanded="true"]::after{border-top-color:var(--navy)}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:#fff;border:1px solid #c4ced8;border-radius:2px;box-shadow:0 8px 20px #001f3d24;padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:2px;text-align:left;background:transparent;cursor:pointer;font-size:13px}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f8fafb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:11px}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#245f96;font-weight:700;text-decoration:none}.manage:hover{text-decoration:underline}
 .flow-shell{margin-bottom:14px;padding:11px;background:#fbfcfd;border:1px solid var(--line)}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:#fff;border:1px solid #dde3e8;color:var(--muted);cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);color:var(--ink)}.flow-node.bad{border-color:#d9988f;background:#fffafa;color:var(--ink)}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:#7f8b95;font-size:18px}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:#f8fafb;border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:11px}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:#f1f4f7;border:1px solid #e1e6ea}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid #e4e9ed}.subsection h4{margin:0 0 4px;font-size:13px}.subsection p{margin:0 0 9px;color:var(--muted);font-size:11.5px}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.check-option{min-height:30px;padding:5px 7px;background:#fafbfc;border:1px solid #e2e7eb;font-size:12px}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:12px}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:#f6f7f8;border-left:3px solid #aeb8c1;color:#4d5d6a;font-size:12px}
-.modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:16px}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #e8edf1}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f1f4f7;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:12px}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:11px}
-@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid,.comments-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
+.modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:16px}.modal-body{min-height:0;overflow:auto;padding:20px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #e8edf1}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f1f4f7;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:12px}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:11px}
+@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid,.comments-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}.drawer-main{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.section-nav{flex-direction:row;overflow-x:auto;overflow-y:visible;border-right:0;border-bottom:1px solid var(--line);padding:6px 10px;}.section-nav-item{flex:0 0 auto;border-left:0;border-bottom:2px solid transparent;}.section-nav-item.active{border-bottom-color:var(--navy);}}
 </style>
 <style>
 /* Mockup-only additions layered on top of the reference design system above.
    The Create screen is now the reference's own drawer/backdrop pattern,
    only widened to 70vw per request and given a light (non-navy) quick-nav
    so it reads correctly on the drawer's white background. */
-.drawer{ width:70vw; }
+.drawer{ width:85vw; }
 .check-grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
 .check-option.locked{ opacity:.6; }
 .widget-card{ padding:11px 12px; background:#fafbfc; border:1px solid #e2e7eb; border-top:1px solid #e2e7eb; }
@@ -114,6 +115,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .check-option.heading{ border:0; background:none; padding:0; font-weight:700; font-size:13px; }
 .status-list-body{ display:flex; flex-direction:column; gap:4px; }
 .status-item-wrapper{ display:flex; flex-direction:column; }
+.status-item-wrapper + .status-item-wrapper{ border-top:1px solid var(--line); padding-top:4px; }
 .status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:8px; border:1px solid transparent; background-color:transparent; cursor:pointer; transition:background-color .15s ease, border-color .15s ease; }
 .status-card.bad{ border-color:#d9988f; background-color:#fffafa; }
 .status-card:hover{ background-color:#f8fafc; }
@@ -137,6 +139,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .card.collapsed .card-body{ display:none; }
 .tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:11px; border:1px solid #c4ced8; border-radius:2px; background:#fff; }
 .check-option:has(input[type="checkbox"]:not(:checked)) .tier-select{ display:none; }
+.check-option.unit-check-card{ flex-direction:column; align-items:flex-start; gap:3px; min-height:auto; padding:8px 10px; }
+.check-option.unit-check-card .unit-check-top{ display:inline-flex; align-items:center; gap:6px; font-weight:700; }
+.check-option.unit-check-card .unit-check-meta{ padding-left:21px; color:var(--muted); font-size:11px; font-weight:400; }
 .widget-placement-group{ margin-bottom:22px; }
 .widget-placement-group:last-child{ margin-bottom:0; }
 .widget-placement-title{ margin:0 0 2px; font-size:13px; }
@@ -152,13 +157,17 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .col-row{ display:flex; align-items:center; gap:8px; min-height:36px; padding:6px 10px; border-bottom:1px solid #eef1f4; }
 .col-row:last-child{ border-bottom:0; }
 .col-row.locked{ background:#f8fafb; color:var(--muted); }
-.col-row.dragging{ opacity:.4; }
-.col-row.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
+.col-row.dragging, .widget-card.dragging, .status-card.dragging{ opacity:.4; }
+.col-row.drag-over, .widget-card.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
+.status-card.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
 .col-row .col-order{ flex:0 0 20px; font-size:11px; color:var(--muted); text-align:right; }
 .col-row .col-name{ flex:1 1 auto; min-width:0; }
 .col-row .col-icon{ flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; width:16px; color:var(--muted); }
 .col-row .col-drag{ display:flex; align-items:center; justify-content:center; flex:0 0 16px; color:var(--muted); cursor:grab; }
 .col-row .col-drag:active{ cursor:grabbing; }
+.drag-handle{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:24px; height:24px; background:transparent; border:0; color:var(--muted); cursor:grab; }
+.drag-handle:hover{ color:var(--ink); }
+.drag-handle:active{ cursor:grabbing; }
 .action-position-tag{ flex:0 0 auto; padding:2px 7px; border-radius:var(--chip-radius); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; white-space:nowrap; }
 .action-position-tag.inline{ background:var(--blue-soft); color:var(--navy2); }
 .signal-color-input{ flex:0 0 auto; width:30px; height:26px; padding:1px; border:1px solid #c4ced8; border-radius:2px; cursor:pointer; background:#fff; }
@@ -207,16 +216,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .info-popover-wrap.open .info-popover{ display:block; }
 .info-popover .ip-title{ margin:0 0 6px; font-weight:700; font-size:13px; }
 .info-popover .ip-row{ display:flex; align-items:baseline; gap:5px; padding:3px 0; }
+.info-popover .ip-row.stacked{ display:block; padding:5px 0 3px; }
+.info-popover .ip-row.stacked .ip-label{ display:block; margin-bottom:3px; }
+.info-popover .ip-row.stacked .ip-value{ display:block; }
 .info-popover .ip-label{ flex:0 0 auto; color:var(--muted); }
 .info-popover .ip-value{ flex:0 1 auto; word-break:break-word; }
 .list-trigger{ padding:0; background:transparent; border:0; color:#245f96; font-weight:700; font-size:inherit; cursor:pointer; }
 .list-trigger:hover{ text-decoration:underline; }
-.section-nav{ display:flex; align-items:stretch; gap:2px; overflow-x:auto; padding:0 13px; background:#fff; border-bottom:1px solid var(--line); }
-.section-nav-item{ display:flex; align-items:center; gap:8px; flex:0 0 auto; padding:11px 14px; background:transparent; border:0; border-bottom:2px solid transparent; font:inherit; font-size:13px; font-weight:700; color:var(--muted); white-space:nowrap; cursor:pointer; }
-.section-nav-item:hover{ color:var(--ink); }
-.section-nav-item.active{ color:var(--navy); border-bottom-color:var(--navy); }
-.section-nav-item .section-state{ font-weight:700; }
+.drawer-main{ display:grid; grid-template-columns:20% 80%; min-height:0; }
+.section-nav{ display:flex; flex-direction:column; align-items:stretch; gap:2px; overflow-y:auto; padding:14px 10px; background:#fafbfc; border-right:1px solid var(--line); border-bottom:0; }
+.section-nav-item{ display:flex; align-items:center; gap:8px; padding:11px 13px; background:transparent; border:0; border-left:3px solid transparent; border-radius:2px; font:inherit; font-size:13px; font-weight:700; color:var(--muted); white-space:normal; text-align:left; cursor:pointer; }
+.section-nav-item:hover{ color:var(--ink); background:#eef1f4; }
+.section-nav-item.active{ color:var(--navy); background:#fff; border-left-color:var(--navy); }
+.section-nav-item .section-state{ font-weight:700; margin-left:auto; }
 .section-state.warn{ background:var(--warn-bg); color:var(--warn); }
+.section-state.icon-only{ display:inline-flex; align-items:center; justify-content:center; padding:0; background:transparent; color:var(--ok); }
 .drawer-foot-zone{ display:flex; align-items:center; gap:8px; }
 .readiness-link{ background:transparent; border:0; padding:4px 8px; font:inherit; font-size:12.5px; font-weight:700; color:var(--muted); cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
 .readiness-link.ok{ color:var(--ok); }
@@ -268,8 +282,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     <section class="content">
       <div class="table-shell">
         <table class="table" aria-label="Trackerboards">
-          <colgroup><col style="width:26%"><col style="width:14%"><col style="width:16%"><col style="width:14%"><col style="width:12%"><col style="width:9%"><col style="width:12%"></colgroup>
-          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph">▲</span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph">▲</span></button></th><th data-key-th="facilities"><button type="button" class="sort-th" onclick="setDashboardSort('facilities')">Facilities<span class="sort-glyph">▲</span></button></th><th data-key-th="program"><button type="button" class="sort-th" onclick="setDashboardSort('program')">Programs<span class="sort-glyph">▲</span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated Date<span class="sort-glyph">▲</span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph">▲</span></button></th><th class="actions">Actions</th></tr></thead>
+          <colgroup><col style="width:23%"><col style="width:12%"><col style="width:14%"><col style="width:12%"><col style="width:11%"><col style="width:10%"><col style="width:8%"><col style="width:10%"></colgroup>
+          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph">▲</span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph">▲</span></button></th><th data-key-th="facilities"><button type="button" class="sort-th" onclick="setDashboardSort('facilities')">Facilities<span class="sort-glyph">▲</span></button></th><th data-key-th="program"><button type="button" class="sort-th" onclick="setDashboardSort('program')">Programs<span class="sort-glyph">▲</span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated On<span class="sort-glyph">▲</span></button></th><th data-key-th="updatedBy"><button type="button" class="sort-th" onclick="setDashboardSort('updatedBy')">Updated By<span class="sort-glyph">▲</span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph">▲</span></button></th><th class="actions">Actions</th></tr></thead>
           <tbody id="dashboardBody"></tbody>
         </table>
         <div class="table-footer">
@@ -289,15 +303,16 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 <div class="backdrop" id="backdrop" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Create New Trackerboard">
   <div class="drawer-head">
-    <div><h2 class="drawer-title">Create trackerboard</h2><div class="drawer-sub" id="drawerLifecycleState">Draft · ID generated when saved</div></div>
+    <div><h2 class="drawer-title">Create trackerboard</h2><div class="drawer-sub" id="drawerLifecycleState" style="display:none;"></div></div>
     <div class="drawer-actions">
+      <button type="button" class="btn small" onclick="openSamplePreview()">Preview sample board</button>
       <button class="icon-btn" type="button" onclick="closeDrawer()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
     </div>
   </div>
 
+  <div class="drawer-main">
   <div class="section-nav" id="sectionNav" role="tablist" aria-label="Trackerboard configuration sections" onkeydown="handleSectionNavKeydown(event)">
-    <button type="button" class="section-nav-item" data-section="basic" role="tab" aria-selected="true" tabindex="0" aria-controls="sec-basic" onclick="goToSection('basic')">Basic Information</button>
-    <button type="button" class="section-nav-item" data-section="caresetting" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-caresetting" onclick="goToSection('caresetting')">Scope &amp; Access</button>
+    <button type="button" class="section-nav-item" data-section="caresetting" role="tab" aria-selected="true" tabindex="0" aria-controls="sec-caresetting" onclick="goToSection('caresetting')">Basic Information</button>
     <button type="button" class="section-nav-item" data-section="workflow" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-workflow" onclick="goToSection('workflow')">Status &amp; Workflow</button>
     <button type="button" class="section-nav-item" data-section="widgets" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-widgets" onclick="goToSection('widgets')">Widgets</button>
     <button type="button" class="section-nav-item" data-section="table" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-table" onclick="goToSection('table')">Patient Table</button>
@@ -305,55 +320,55 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   <div class="drawer-body">
 
-    <div class="card" id="sec-basic" data-section-key="basic">
+    <div class="card" id="sec-caresetting" data-section-key="caresetting">
       <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="true" aria-controls="sec-basic-body" aria-label="Toggle Basic Information section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Basic Information</h2>
-        <button type="button" class="btn small" style="margin-left:auto;" onclick="event.stopPropagation();openSamplePreview()">Preview sample board</button>
-        <span class="section-state" id="cardState-basic"></span>
-      </div>
-      <div class="card-body" id="sec-basic-body">
-        <div class="form-grid">
-          <div class="field"><label for="trackerboardNameInput">Board Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"><p class="field-error" id="nameFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Board Name is required.</p></div>
-          <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"><p class="field-error" id="shortNameFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Short Name is required.</p></div>
-          <div class="field full"><label for="trackerboardDescInput">Description</label><textarea class="textarea" id="trackerboardDescInput" placeholder="What is this trackerboard used for?"></textarea></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card collapsed" id="sec-caresetting" data-section-key="caresetting">
-      <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-caresetting-body" aria-label="Toggle Scope &amp; Access section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Scope &amp; Access</h2>
-        <span class="section-state" id="cardState-caresetting"></span>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="true" aria-controls="sec-caresetting-body" aria-label="Toggle Basic Information section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Basic Information</h2>
+        <span class="section-state" id="cardState-caresetting" style="margin-left:auto;"></span>
       </div>
       <div class="card-body" id="sec-caresetting-body">
+        <div class="form-grid" data-field-group="basic">
+          <div class="field"><label for="trackerboardNameInput">Board Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"><p class="field-error" id="nameFieldError" style="display:none;">Board Name is required.</p></div>
+          <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"><p class="field-error" id="shortNameFieldError" style="display:none;">Short Name is required.</p></div>
+          <div class="field full"><label for="trackerboardDescInput">Description</label><textarea class="textarea" id="trackerboardDescInput" placeholder="What is this trackerboard used for?"></textarea></div>
+        </div>
+
+        <div class="subsection" data-field-group="scope">
         <div class="form-grid">
-          <div class="field"><label for="careSettingBtn">Care Setting</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="careSettingBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleCareSettingPicker()">Select Care Setting…</button></div><div class="picker-menu" id="careSettingMenu"></div></div>
-            <p class="field-error" id="careSettingFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Care Setting.</p>
+          <div class="field">
+            <label for="careSettingBtn">Care Setting</label>
+            <div style="display:flex;gap:8px;align-items:flex-start;">
+              <div class="picker" style="flex:1 1 auto;"><div class="picker-input"><button type="button" class="text" id="careSettingBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleCareSettingPicker()">Select Care Setting…</button></div><div class="picker-menu" id="careSettingMenu"></div></div>
+              <button type="button" class="btn small" id="careSettingInfoBtn" style="display:none;flex:0 0 auto;" onclick="openCareSettingInfoModal()">Show care setting information</button>
+            </div>
+            <p class="field-error" id="careSettingFieldError" style="display:none;">Select at least one Care Setting.</p>
           </div>
         </div>
-        <div class="derived-scope" id="careSettingInfo" style="display:none">
-          <div class="derived-scope-head">
-            <strong>Care Setting Information</strong>
-          </div>
-          <div class="info-grid" id="careSettingInfoGrid"></div>
         </div>
-        <div class="form-grid">
-          <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility…</button></div><div class="picker-menu" id="connFacilityMenu"></div></div><p class="field-error" id="facilityFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Facility.</p></div>
+        <div class="subsection" data-field-group="scope">
+          <div class="form-grid">
+          <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility…</button></div><div class="picker-menu" id="connFacilityMenu"></div></div><p class="field-error" id="facilityFieldError" style="display:none;">Select at least one Facility.</p></div>
+          </div>
         </div>
         <div class="subsection" id="unitAllocationSection" style="display:none">
           <h4>Units <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About Units" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Units and their resources are configured in Care Settings Configuration, not here. Select which Units this board tracks — a Unit already claimed by another Trackerboard won't appear. Resource counts shown are a live read of that Unit's current allocation.</span></span></h4>
           <div class="col-unified-list">
-            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="unitFacilitySearch" placeholder="Search facilities…" oninput="renderUnitAllocation()"></div>
             <div id="unitAllocationGrid" class="resource-facility-list"></div>
           </div>
         </div>
-        <div class="form-grid">
-          <div class="field"><label for="programAccessBtn">Programs <span class="muted" style="font-weight:400;">(optional)</span></label><div class="picker"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Programs…</button></div><div class="picker-menu" id="programAccessMenu"></div></div></div>
-        </div>
         <div class="subsection">
+          <div class="form-grid">
+          <div class="field"><label for="programAccessBtn">Programs</label>
+            <div style="display:flex;gap:8px;align-items:flex-start;">
+              <div class="picker" style="flex:1 1 auto;"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Programs…</button></div><div class="picker-menu" id="programAccessMenu"></div></div>
+              <div class="picker" id="subProgramPickerWrap" style="flex:1 1 auto;display:none;"><div class="picker-input"><button type="button" class="text" id="subProgramBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleSubProgramPicker()">Select Sub-programs…</button></div><div class="picker-menu" id="subProgramMenu"></div></div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="subsection" data-field-group="scope">
           <h4>Access</h4>
           <div class="form-grid">
-            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Select at least one Board access role.</p></div><p class="field-error" id="accessBroaderWarning" style="grid-column:1/-1;display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Configuration access includes groups without Board access.</p>
+            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;">Select at least one Board access role.</p></div><p class="field-error" id="accessBroaderWarning" style="grid-column:1/-1;display:none;">Configuration access includes groups without Board access.</p>
           </div>
         </div>
       </div>
@@ -481,7 +496,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
               <label class="check-option"><input type="checkbox" id="freeTextCommentsEnabled" checked onchange="toggleFreeTextCommentsVisibility(this.checked); updateReadiness();"> Free text</label>
               <div class="field" id="commentCharLimitField"><label for="commentCharLimit">Character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">20&ndash;280</span></span></div>
             </div>
-            <p class="field-error" id="commentsBothOffWarning" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Operational comments is on, but both Predefined comments and Free text are off — turn on at least one, or turn off Operational comments.</p>
+            <p class="field-error" id="commentsBothOffWarning" style="display:none;">Operational comments is on, but both Predefined comments and Free text are off — turn on at least one, or turn off Operational comments.</p>
           </div>
         </div>
 
@@ -498,11 +513,13 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
             <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="actionSearchInput" placeholder="Search actions…" oninput="renderActionLibrary()"></div>
             <div id="actionLibraryList"></div>
           </div>
-          <p class="field-error" id="statusChangeSafetyWarning" style="display:none;"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> No status-change action is enabled. Patients have no way to move through the workflow.</p>
+          <p class="field-error" id="statusChangeSafetyWarning" style="display:none;">No status-change action is enabled. Patients have no way to move through the workflow.</p>
         </div>
 
       </div>
     </div>
+
+  </div>
 
   </div>
 
@@ -580,32 +597,12 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     <div class="modal-body" style="background:#f4f6f8;">
       <p class="muted" style="margin:0 0 12px;">A generic example, not a preview of the board you're building — this shows roughly where things will sit once you configure Widgets, Statuses, and Table columns below.</p>
 
-      <!-- Top strip: maps to Widgets -->
-      <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr 1.4fr 1.4fr;gap:8px;margin-bottom:8px;">
-        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
-          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
-          <div style="font-size:20px;font-weight:700;color:#c7ced4;">00</div>
-          <div class="muted" style="font-size:11px;">Total Patients</div>
-        </div>
-        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
-          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
-          <div style="color:#c7ced4;font-size:12px;">— / —</div>
-        </div>
-        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
-          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
-          <div style="color:#c7ced4;font-size:12px;">— / —</div>
-        </div>
-        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
-          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
-          <div style="color:#c7ced4;font-size:12px;">No entries</div>
-        </div>
-        <div style="border:1px solid var(--line);background:#fff;padding:10px;">
-          <div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">Widget</div>
-          <div style="color:#c7ced4;font-size:12px;">No entries</div>
-        </div>
-      </div>
+      <!-- Top strip: maps to Widgets. Populated dynamically from the actual enabled widget
+           config in openSamplePreview() — count and columns reflect what's really turned on,
+           rather than a fixed 5-box layout. -->
+      <div id="previewStripRow" style="display:grid;gap:8px;margin-bottom:8px;"></div>
 
-      <div style="display:grid;grid-template-columns:1fr 220px;gap:8px;">
+      <div id="previewMainRow" style="display:grid;grid-template-columns:1fr 220px;gap:8px;">
         <div>
           <!-- Status tabs with counts -->
           <div style="display:flex;align-items:center;border-bottom:1px solid var(--line);background:#fff;padding:0 4px;">
@@ -630,16 +627,24 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
             </tbody>
           </table>
         </div>
-        <!-- Side panel: maps to Signals -->
-        <div style="background:#fff;border:1px solid var(--line);">
-          <div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;"><span>Signal 1</span><span class="muted">0</span></div>
-          <div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;"><span>Signal 2</span><span class="muted">0</span></div>
-          <div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;display:flex;justify-content:space-between;"><span>Signal 3</span><span class="muted">0</span></div>
-          <div style="padding:9px 10px;font-size:12px;display:flex;justify-content:space-between;"><span>Signal 4</span><span class="muted">0</span></div>
-        </div>
+        <!-- Side panel: maps to the Side Panel Widgets group (e.g. Cardex). Shown only when a
+             panel widget is enabled; when it's not, this column disappears and the top strip
+             reclaims the full 5-slot width, matching the actual widget capacity rules. -->
+        <div id="previewPanelCol" style="background:#fff;border:1px solid var(--line);"></div>
       </div>
     </div>
     <div class="modal-foot"><button class="btn primary" type="button" onclick="closeSamplePreview()">Close</button></div>
+  </div>
+</div>
+
+<!-- Care Setting information — large modal with a real table, replacing the old always-visible
+     inline block. Values come from Care Settings Configuration's Clinical Defaults; Trackerboard
+     doesn't maintain its own copy. -->
+<div class="modal-backdrop" id="careSettingInfoModalBackdrop">
+  <div class="modal large" role="dialog" aria-modal="true" aria-label="Care setting information">
+    <div class="modal-head"><h2>Care setting information</h2><button class="icon-btn" type="button" onclick="closeCareSettingInfoModal()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
+    <div class="modal-body" id="careSettingInfoModalBody"></div>
+    <div class="modal-foot"><button class="btn primary" type="button" onclick="closeCareSettingInfoModal()">Close</button></div>
   </div>
 </div>
 
@@ -650,7 +655,49 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   // Static and generic on purpose — same content every time, regardless of what's selected in
   // the drawer. Not wired to selectedCareSettings/STATUSES/etc.; see the note in the markup.
   function openSamplePreview(){
+    renderPreviewWidgets();
     showModalBackdrop('samplePreviewBackdrop');
+  }
+
+  // Reflects the real widget configuration in the wireframe: the strip shows one box per
+  // enabled top-strip widget (using its real label), and the side panel column only appears
+  // when a panel widget (e.g. Cardex) is enabled — otherwise the strip reclaims the full width,
+  // matching the 5-slot capacity split in widgetGroupCapacity().
+  function renderPreviewWidgets(){
+    var stripRow = document.getElementById('previewStripRow');
+    var mainRow = document.getElementById('previewMainRow');
+    var panelCol = document.getElementById('previewPanelCol');
+    if(!stripRow || !mainRow || !panelCol) return;
+    var stripKeys = orderedVisibleWidgetsByPlacement('strip').filter(function(k){ return widgetEnabled[k]; });
+    var panelKeys = orderedVisibleWidgetsByPlacement('panel').filter(function(k){ return widgetEnabled[k]; });
+
+    if(!stripKeys.length){
+      stripRow.style.gridTemplateColumns = '1fr';
+      stripRow.innerHTML = '<div class="muted" style="border:1px dashed #c9d2da;background:#fff;padding:10px;font-size:12px;">No top strip widgets enabled</div>';
+    } else {
+      stripRow.style.gridTemplateColumns = 'repeat('+stripKeys.length+',1fr)';
+      stripRow.innerHTML = stripKeys.map(function(k){
+        var def = widgetByKey(k);
+        return '<div style="border:1px solid var(--line);background:#fff;padding:10px;">'+
+          '<div class="muted" style="font-size:10px;text-transform:uppercase;margin-bottom:4px;">'+def.label+'</div>'+
+          '<div style="color:#c7ced4;font-size:12px;">— / —</div>'+
+        '</div>';
+      }).join('');
+    }
+
+    if(!panelKeys.length){
+      mainRow.style.gridTemplateColumns = '1fr';
+      panelCol.style.display = 'none';
+      panelCol.innerHTML = '';
+    } else {
+      mainRow.style.gridTemplateColumns = '1fr 220px';
+      panelCol.style.display = '';
+      panelCol.innerHTML = panelKeys.map(function(k, i){
+        var def = widgetByKey(k);
+        var isLast = i === panelKeys.length - 1;
+        return '<div style="padding:9px 10px;'+(isLast?'':'border-bottom:1px solid var(--line);')+'font-size:12px;display:flex;justify-content:space-between;"><span>'+def.label+'</span><span class="muted">0</span></div>';
+      }).join('');
+    }
   }
   function closeSamplePreview(){
     document.getElementById('samplePreviewBackdrop').classList.remove('open');
@@ -672,7 +719,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   var pendingUniqueId = '';
   function openDrawer(id){
     editingId = id || null;
-    formDirty = false; dirtySections = {};
+    formDirty = false; dirtySections = {}; touchedGroups = {};
     drawerTriggerEl = document.activeElement;
     var t = id ? TRACKERBOARDS.find(function(x){ return x.id === id; }) : null;
     var data = t ? (t.pendingDraft || t) : null;
@@ -737,7 +784,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var sCard = document.getElementById('sec-'+sec.key);
       if(!sCard) return;
       var sToggleBtn = sCard.querySelector('.card-toggle');
-      var sOpen = sec.key === 'basic';
+      var sOpen = sec.key === 'caresetting';
       sCard.classList.toggle('collapsed', !sOpen);
       if(sToggleBtn) sToggleBtn.setAttribute('aria-expanded', sOpen ? 'true' : 'false');
     });
@@ -754,7 +801,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var activateBtn = document.getElementById('activateBtn');
     if(!t){
       titleEl.textContent = 'Create trackerboard';
-      if(subEl) subEl.textContent = 'Draft · ID generated when saved';
+      if(subEl){ subEl.textContent = ''; subEl.style.display = 'none'; }
       saveBtn.style.display = '';
       saveBtn.textContent = 'Save as draft';
       activateBtn.textContent = 'Activate';
@@ -763,19 +810,19 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     }
     titleEl.textContent = t.name;
     if(t.status === 'Draft'){
-      if(subEl) subEl.textContent = 'Draft · ID ' + t.id;
+      if(subEl){ subEl.textContent = 'Draft · ID ' + t.id; subEl.style.display = ''; }
       saveBtn.style.display = '';
       saveBtn.textContent = 'Save draft';
       activateBtn.textContent = 'Activate trackerboard';
       activateBtn.setAttribute('onclick', "saveTrackerboard('Active')");
     } else if(t.status === 'Inactive'){
-      if(subEl) subEl.textContent = 'Inactive · ID ' + t.id;
+      if(subEl){ subEl.textContent = 'Inactive · ID ' + t.id; subEl.style.display = ''; }
       saveBtn.style.display = '';
       saveBtn.textContent = 'Save changes';
       activateBtn.textContent = 'Reactivate trackerboard';
       activateBtn.setAttribute('onclick', "saveTrackerboard('Active')");
     } else {
-      if(subEl) subEl.textContent = 'Active · ID ' + t.id;
+      if(subEl){ subEl.textContent = 'Active · ID ' + t.id; subEl.style.display = ''; }
       saveBtn.style.display = '';
       saveBtn.textContent = 'Save draft changes';
       activateBtn.textContent = 'Publish changes';
@@ -818,7 +865,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
   function confirmDiscardChanges(){
     document.getElementById('unsavedModalBackdrop').classList.remove('open');
-    formDirty = false; dirtySections = {};
+    formDirty = false; dirtySections = {}; touchedGroups = {};
     try{ localStorage.removeItem(recoveryKey()); }catch(e){}
     hideDrawer();
   }
@@ -881,8 +928,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       signals: JSON.parse(JSON.stringify(signalState)),
       inlineActionLimit: parseInt((document.getElementById('inlineActionLimit')||{}).value, 10) || 3,
       transferEnabled: document.getElementById('transferEnabled').checked,
-      updated: 'Just now'
+      updated: formatUpdatedTimestamp(new Date()),
+      updatedBy: CURRENT_USER
     };
+  }
+
+  // Formats a Date as e.g. "08/02/2026 12:30 PM" to match the Updated On column.
+  function formatUpdatedTimestamp(d){
+    var mm = String(d.getMonth()+1).padStart(2,'0');
+    var dd = String(d.getDate()).padStart(2,'0');
+    var yyyy = d.getFullYear();
+    var h = d.getHours();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; if(h === 0) h = 12;
+    var min = String(d.getMinutes()).padStart(2,'0');
+    return mm+'/'+dd+'/'+yyyy+' '+h+':'+min+' '+ampm;
   }
 
   // Real, timestamped event log per board, replacing the two hardcoded lines the Activity Log
@@ -912,9 +972,10 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     // delete-confirmation modal asks you to type the Board Name back). Block it here rather
     // than only at Activation, which used to let a completely blank board get saved.
     if(!record.name){
-      dirtySections['basic'] = true;
+      dirtySections['caresetting'] = true;
+      touchedGroups['basic'] = true;
       updateFieldErrors();
-      goToSection('basic');
+      goToSection('caresetting');
       showToast('Board Name is required before saving, even as a draft.');
       document.getElementById('trackerboardNameInput').focus();
       return;
@@ -926,7 +987,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var shortNameTaken = record.shortName && otherTrackerboards().some(function(t){ return (t.shortName||'').toLowerCase() === record.shortName.toLowerCase(); });
     if(nameTaken || shortNameTaken){
       showToast(nameTaken ? 'Board Name "'+record.name+'" is already in use. Choose a different name before saving.' : 'Short Name "'+record.shortName+'" is already in use. Choose a different short name before saving.');
-      goToSection('basic');
+      touchedGroups['basic'] = true;
+      goToSection('caresetting');
       return;
     }
 
@@ -944,7 +1006,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           Object.assign(existing, draftRecord, { status: 'Active', everActivated: true });
           existing.pendingDraft = null;
           try{ localStorage.removeItem(recoveryKey()); }catch(e){}
-          formDirty = false; dirtySections = {};
+          formDirty = false; dirtySections = {}; touchedGroups = {};
           logAuditEvent(existing.id, 'Published changes');
           hideDrawer();
           renderDashboard();
@@ -953,7 +1015,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       }
       existing.pendingDraft = draftRecord;
       try{ localStorage.removeItem(recoveryKey()); }catch(e){}
-      formDirty = false; dirtySections = {};
+      formDirty = false; dirtySections = {}; touchedGroups = {};
       logAuditEvent(existing.id, 'Saved draft changes to live board', 'Not yet published');
       hideDrawer();
       renderDashboard();
@@ -980,7 +1042,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           record.everActivated = true;
           if(existing){ Object.assign(existing, record); } else { TRACKERBOARDS.push(record); }
           try{ localStorage.removeItem(recoveryKey()); }catch(e){}
-          formDirty = false; dirtySections = {};
+          formDirty = false; dirtySections = {}; touchedGroups = {};
           logAuditEvent(record.id, existing ? 'Activated' : 'Created and activated');
           hideDrawer();
           renderDashboard();
@@ -992,7 +1054,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var isNew = !existing;
     if(existing){ Object.assign(existing, record); } else { TRACKERBOARDS.push(record); }
     try{ localStorage.removeItem(recoveryKey()); }catch(e){}
-    formDirty = false; dirtySections = {};
+    formDirty = false; dirtySections = {}; touchedGroups = {};
     logAuditEvent(record.id, isNew ? 'Created as Draft' : 'Saved as Draft');
     hideDrawer();
     renderDashboard();
@@ -1016,11 +1078,10 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(field) field.classList.toggle('error', !!show);
   }
   function updateFieldErrors(){
-    var basicTouched = sectionTouched('basic');
+    var basicTouched = !!touchedGroups['basic'];
+    var scopeTouched = !!touchedGroups['scope'];
     setFieldError('nameFieldError', basicTouched && !document.getElementById('trackerboardNameInput').value.trim());
     setFieldError('shortNameFieldError', basicTouched && !document.getElementById('shortNameInput').value.trim());
-
-    var scopeTouched = sectionTouched('caresetting');
     setFieldError('careSettingFieldError', scopeTouched && !selectedCareSettings.length);
     setFieldError('facilityFieldError', scopeTouched && selectedFacilities.length === 0);
     setFieldError('boardAccessFieldError', scopeTouched && selectedRuntimeAccess.length === 0);
@@ -1100,10 +1161,18 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   var formDirty = false;
   var dirtySections = {};
+  var touchedGroups = {};
   function markDirty(evt){
     formDirty = true;
     var card = evt.target && evt.target.closest ? evt.target.closest('[data-section-key]') : null;
     if(card) dirtySections[card.getAttribute('data-section-key')] = true;
+    // Basic Information and Scope & Access now live in one merged section, so dirtySections
+    // alone is too coarse for field-level error display — typing a single letter in Board Name
+    // would otherwise also mark Care Setting/Facility/Board Access as "touched" and show their
+    // errors before the user has even reached them. data-field-group tracks each field cluster
+    // independently for that purpose; dirtySections still drives the section-level badge as before.
+    var group = evt.target && evt.target.closest ? evt.target.closest('[data-field-group]') : null;
+    if(group) touchedGroups[group.getAttribute('data-field-group')] = true;
     updateReadiness();
     writeRecoverySnapshot();
   }
@@ -1287,14 +1356,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   var SEED_ACTIONS = { statusChange:true, addViewOrders:true, encounterNote:true, documents:true, viewCardexAlerts:true, patientDemographics:true };
 
   var TRACKERBOARDS = [
-    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['ED'], facilities:['Main Hospital','North Campus'], programs:['ED Surge'], selectedUnits:{ 'Main Hospital':[{csName:'ED', unitId:'unit-ed-mh-1'}], 'North Campus':[{csName:'ED', unitId:'unit-ed-nc-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07 Aug 2026', status:'Active', activePatients:6, dependents:1 },
-    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['ED'], facilities:['Eastside Medical Center'], programs:['ED Surge'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'26 Jul 2026', status:'Active', activePatients:4, dependents:1 },
-    { name:'Hospitalization Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['Hospitalization'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'Hospitalization', unitId:'unit-hosp-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'05 Aug 2026', status:'Draft', activePatients:0, dependents:0 },
-    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['ICU'], facilities:['Main Hospital'], programs:['Critical Care Management','General Medicine Program'], selectedUnits:{ 'Main Hospital':[{csName:'ICU', unitId:'unit-icu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'11 Aug 2026', status:'Active', activePatients:9, dependents:2 },
-    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['OR'], facilities:['Main Hospital'], programs:['Surgical Services Program'], selectedUnits:{ 'Main Hospital':[{csName:'OR', unitId:'unit-or-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'28 Jul 2026', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['OR'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'OR', unitId:'unit-or-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'30 Jul 2026', status:'Draft', activePatients:0, dependents:0 },
-    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['OR'], facilities:['Eastside Medical Center'], programs:['Surgical Services Program'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'02 Aug 2026', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Neonatology Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks newborns admitted for specialty neonatal care.',careSettings:['Neonatology'], facilities:['Main Hospital'], programs:[], selectedUnits:{ 'Main Hospital':[{csName:'Neonatology', unitId:'unit-nicu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'14 Aug 2026', status:'Active', activePatients:3, dependents:0 }
+    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['ED'], facilities:['Main Hospital','North Campus'], programs:['ED Surge'], selectedUnits:{ 'Main Hospital':[{csName:'ED', unitId:'unit-ed-mh-1'}], 'North Campus':[{csName:'ED', unitId:'unit-ed-nc-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/07/2026 09:15 AM', updatedBy:'Priya Nair', status:'Active', activePatients:6, dependents:1 },
+    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['ED'], facilities:['Eastside Medical Center'], programs:['ED Surge'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/26/2026 02:40 PM', updatedBy:'Johnny Stark', status:'Active', activePatients:4, dependents:1 },
+    { name:'Hospitalization Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['Hospitalization'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'Hospitalization', unitId:'unit-hosp-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'08/05/2026 11:05 AM', updatedBy:'Arun', status:'Draft', activePatients:0, dependents:0 },
+    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['ICU'], facilities:['Main Hospital'], programs:['Critical Care Management','General Medicine Program'], selectedUnits:{ 'Main Hospital':[{csName:'ICU', unitId:'unit-icu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/11/2026 04:22 PM', updatedBy:'Priya Nair', status:'Active', activePatients:9, dependents:2 },
+    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['OR'], facilities:['Main Hospital'], programs:['Surgical Services Program'], selectedUnits:{ 'Main Hospital':[{csName:'OR', unitId:'unit-or-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/28/2026 10:50 AM', updatedBy:'Johnny Stark', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['OR'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'OR', unitId:'unit-or-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'07/30/2026 03:10 PM', updatedBy:'Arun', status:'Draft', activePatients:0, dependents:0 },
+    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['OR'], facilities:['Eastside Medical Center'], programs:['Surgical Services Program'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/02/2026 12:30 PM', updatedBy:'Johnny Stark', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Neonatology Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks newborns admitted for specialty neonatal care.',careSettings:['Neonatology'], facilities:['Main Hospital'], programs:[], selectedUnits:{ 'Main Hospital':[{csName:'Neonatology', unitId:'unit-nicu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/14/2026 08:05 AM', updatedBy:'Priya Nair', status:'Active', activePatients:3, dependents:0 }
   ];
 
   function allFacilities(){
@@ -1563,9 +1632,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     });
     var body = document.getElementById('dashboardBody');
     if(!TRACKERBOARDS.length){
-      body.innerHTML = '<tr><td colspan="7"><div class="empty"><strong>No Trackerboards have been created yet.</strong><div style="margin-top:10px;"><button class="btn primary" type="button" onclick="openDrawer()">New trackerboard</button></div></div></td></tr>';
+      body.innerHTML = '<tr><td colspan="8"><div class="empty"><strong>No Trackerboards have been created yet.</strong><div style="margin-top:10px;"><button class="btn primary" type="button" onclick="openDrawer()">New trackerboard</button></div></div></td></tr>';
     } else if(!filtered.length){
-      body.innerHTML = '<tr><td colspan="7"><div class="empty"><strong>No Trackerboards match the current search and filters.</strong><div style="margin-top:10px;"><button class="btn" type="button" onclick="clearAllFilters()">Clear filters</button></div></div></td></tr>';
+      body.innerHTML = '<tr><td colspan="8"><div class="empty"><strong>No Trackerboards match the current search and filters.</strong><div style="margin-top:10px;"><button class="btn" type="button" onclick="clearAllFilters()">Clear filters</button></div></div></td></tr>';
     } else {
       body.innerHTML = filtered.map(function(t){
         var statusClass = statusPillClass(t.status);
@@ -1577,7 +1646,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         var infoPopoverBody = '<div class="ip-title">'+t.name+'</div>'+
           '<div class="ip-row"><span class="ip-label">ID:</span><span class="ip-value">'+t.id+'</span></div>'+
           '<div class="ip-row"><span class="ip-label">Short name:</span><span class="ip-value">'+(t.shortName||'—')+'</span></div>'+
-          '<div class="ip-row"><span class="ip-label">Description:</span><span class="ip-value">'+(t.desc ? t.desc : '—')+'</span></div>';
+          '<div class="ip-row stacked"><span class="ip-label">Description</span><span class="ip-value">'+(t.desc ? t.desc : '—')+'</span></div>';
         var boardInfo = ' <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="Board information for '+t.name+'" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+infoPopoverBody+'</span></span>';
         var unavailableFacility = t.facilityUnavailable ? ' <span class="tag" style="color:var(--bad);">Unavailable</span>' : '';
         return '<tr>'+
@@ -1586,6 +1655,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
           '<td>'+facilityChips+unavailableFacility+'</td>'+
           '<td>'+programChips+'</td>'+
           '<td>'+t.updated+'</td>'+
+          '<td>'+(t.updatedBy||'—')+'</td>'+
           '<td><span class="pill '+statusClass+'">'+t.status+'</span>'+(t.pendingDraft?' <span class="pill pending">Pending changes</span>':'')+'</td>'+
           '<td class="actions"><div class="menu-wrap">'+
             '<button class="icon-btn" type="button" onclick="toggleMenu(this)" aria-label="Row actions for '+t.name+'"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></button>'+
@@ -1616,14 +1686,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     { key:'codeTeam', label:'Code Team', settings:[], placement:'strip' },
     { key:'doctorsOnDuty', label:'Doctors on Duty', settings:[], placement:'strip' },
     { key:'cardexPanel', label:'Cardex Panel', settings:[], placement:'panel' },
-    { key:'losDelay', label:'Length of Stay & Delay', desc:'Patients approaching or exceeding total-stay or status-duration thresholds.', settings:['ED','Hospitalization','OR'], placement:'strip' },
-    { key:'pendingWork', label:'Pending Work Summary', desc:'Counts of pending orders, results, medications, assessments, documentation, or approvals.', settings:['ED','Hospitalization','OR','Outpatient Clinic'], placement:'strip' },
-    { key:'transferReadiness', label:'Transfer & Discharge Readiness', desc:'Pending transfers, expected discharges, blockers, and patients ready for the next destination.', settings:['ED','Hospitalization'], placement:'panel' },
-    { key:'expectedArrivals', label:'Expected Arrivals / Waitlist', desc:'Scheduled arrivals, pre-arrivals, and waiting patients within a defined time window.', settings:['ED','Outpatient Clinic','OR'], placement:'panel' },
-    { key:'acuityMix', label:'Acuity / Triage Mix', desc:'Patient count by triage or acuity category.', settings:['ED'], placement:'strip' },
-    { key:'resourceTurnover', label:'Resource Turnover', desc:'Available, occupied, blocked, cleaning, or pending resources.', settings:['ED','Hospitalization','OR'], placement:'strip' },
+    { key:'losDelay', label:'Length of Stay & Delay', desc:'Patients approaching or exceeding total-stay or status-duration thresholds.', settings:[], placement:'strip' },
+    { key:'pendingWork', label:'Pending Work Summary', desc:'Counts of pending orders, results, medications, assessments, documentation, or approvals.', settings:[], placement:'strip' },
+    { key:'transferReadiness', label:'Transfer & Discharge Readiness', desc:'Pending transfers, expected discharges, blockers, and patients ready for the next destination.', settings:[], placement:'panel' },
+    { key:'expectedArrivals', label:'Expected Arrivals / Waitlist', desc:'Scheduled arrivals, pre-arrivals, and waiting patients within a defined time window.', settings:[], placement:'panel' },
+    { key:'acuityMix', label:'Acuity / Triage Mix', desc:'Patient count by triage or acuity category.', settings:[], placement:'strip' },
+    { key:'resourceTurnover', label:'Resource Turnover', desc:'Available, occupied, blocked, cleaning, or pending resources.', settings:[], placement:'strip' },
     { key:'careTeamWorkload', label:'Care Team Workload', desc:'Patient count assigned to each provider or nurse; may highlight unassigned patients.', settings:[], placement:'panel' },
-    { key:'isolationSummary', label:'Isolation / Precaution Summary', desc:'Count of patients requiring isolation or special precautions.', settings:['ED','Hospitalization','OR'], placement:'strip' },
+    { key:'isolationSummary', label:'Isolation / Precaution Summary', desc:'Count of patients requiring isolation or special precautions.', settings:[], placement:'strip' },
     { key:'documentationGaps', label:'Documentation Gaps', desc:'Patients with missing required forms, assessments, notes, or signatures.', settings:[], placement:'panel' }
   ];
   var TOTAL_WIDGET_SLOTS = 5;
@@ -1670,18 +1740,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     updateReadiness();
   }
 
-  function moveWidgetInOrder(key, dir){
-    var def = widgetByKey(key);
-    var groupKeys = orderedVisibleWidgetsByPlacement(def.placement);
-    var atVisible = groupKeys.indexOf(key);
-    var swapAtVisible = atVisible + dir;
-    if(atVisible < 0 || swapAtVisible < 0 || swapAtVisible >= groupKeys.length) return;
-    var otherKey = groupKeys[swapAtVisible];
-    var a = widgetOrder.indexOf(key), b = widgetOrder.indexOf(otherKey);
-    var tmp = widgetOrder[a]; widgetOrder[a] = widgetOrder[b]; widgetOrder[b] = tmp;
-    renderWidgetLibrary();
-  }
-
+  
   function setTotalPatientsGroupBy(v){ widgetSettings.totalPatients.groupBy = v; }
   function toggleCardexItem(item, checked){
     var arr = widgetSettings.cardexPanel.items;
@@ -1740,19 +1799,18 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         // are disabled rather than just warned about — governed capacity should actually be
         // governed, not just flagged after the fact.
         var atCapacity = !enabled && enabledCount >= capacity;
-        return '<div class="subsection widget-card"'+(i===0?' style="margin-top:0;"':'')+'>'+
+        return '<div class="subsection widget-card"'+(i===0?' style="margin-top:0;"':'')+' ondragover="onReorderDragOver(event,\'widget\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'widget\',\''+key+'\')">'+
           '<div class="widget-head">'+
+            '<button class="drag-handle" type="button" draggable="true" aria-label="Drag to reorder '+def.label+'" ondragstart="onReorderDragStart(event,\'widget\',\''+key+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</button>'+
             '<span class="widget-position">'+(i+1)+'</span>'+
             '<h4><label class="switch-heading"'+(atCapacity?' title="'+group.label+' is full — turn another one off first to enable this."':'')+'><input type="checkbox"'+(enabled?' checked':'')+(atCapacity?' disabled':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label></h4>'+
-            '<div class="widget-move"><button class="icon-btn" type="button" onclick="moveWidgetInOrder(\''+key+'\',-1)" aria-label="Move '+def.label+' up"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></button><button class="icon-btn" type="button" onclick="moveWidgetInOrder(\''+key+'\',1)" aria-label="Move '+def.label+' down"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></button></div>'+
           '</div>'+
           '<div class="widget-body"'+(enabled?'':' style="display:none;"')+'>'+widgetBodyHtml(key)+'</div>'+
         '</div>';
       }).join('');
       return '<div class="widget-placement-group">'+
-        '<h4 class="widget-placement-title">'+group.label+' <span class="muted" style="font-weight:400;">&mdash; '+enabledCount+' of '+capacity+' enabled</span></h4>'+
-        '<p class="help" style="margin-top:0;">'+group.desc+'</p>'+
-        (overCapacity ? '<p class="help" style="color:var(--warn);"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> '+enabledCount+' enabled here — more than '+capacity+' may not fit and could get cut off or overlap on the live board.</p>' : '')+
+        '<h4 class="widget-placement-title">'+group.label+' <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About '+group.label+'" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+group.desc+'</span></span> <span class="muted" style="font-weight:400;">&mdash; '+enabledCount+' of '+capacity+' enabled</span></h4>'+
+        (overCapacity ? '<p class="help" style="color:var(--warn);">'+enabledCount+' enabled here — more than '+capacity+' may not fit and could get cut off or overlap on the live board.</p>' : '')+
         cardsHtml +
       '</div>';
     }).join('');
@@ -1786,9 +1844,17 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   // Facility from within this eligibility list; it doesn't grant eligibility itself, and neither
   // does Trackerboard.
   var PROGRAMS_SOURCE = [
+    { id:'prog-gi-endoscopy', name:'GI Endoscopy Program', shortCode:'GIE',
+      facilities:['Main Hospital','North Campus'],
+      subPrograms:[ { id:'sub-upper-gi', name:'Upper GI Procedures' }, { id:'sub-lower-gi', name:'Lower GI / Colonoscopy' } ] },
+    { id:'prog-ophthalmology', name:'Ophthalmology Program',
+      facilities:['Main Hospital','Eastside Medical Center'] },
+    { id:'prog-cardiac-cath', name:'Cardiac Catheterization Program', shortCode:'CCP',
+      facilities:['Main Hospital','North Campus'],
+      subPrograms:[ { id:'sub-diagnostic-cath', name:'Diagnostic Catheterization' }, { id:'sub-interventional-cath', name:'Interventional Procedures' } ] },
     { id:'prog-gen-med', name:'General Medicine Program',
       facilities:['Main Hospital','North Campus','California Branch','Texas Branch'] },
-    { id:'prog-behavioral', name:'Behavioral Health Program',
+    { id:'prog-behavioral', name:'Behavioral Health Program', shortCode:'BHP',
       facilities:['Main Hospital','California Branch'],
       subPrograms:[ { id:'sub-adolescent-bh', name:'Adolescent Behavioral Health' }, { id:'sub-substance-use', name:'Substance Use Program' } ] },
     { id:'prog-surgical', name:'Surgical Services Program',
@@ -1810,43 +1876,78 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   // generateUnitId() now produces (Phase 1) — so a Trackerboard can persist "this board = this
   // Unit id" safely.
   var CARE_SETTINGS_SOURCE = {
+    'Endoscopy': { status:'active', visitCategory:'Procedure', duration:{ value:75, unit:'minutes' }, chiefComplaintForm:'GI Procedure Intake Form', facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-gi-endoscopy','prog-critical','prog-ambulatory','prog-gen-med'],
+          units:[ { id:'unit-endo-mh-1', name:'Unit 1', resources:{ rooms:4, recoveryBays:8 } }, { id:'unit-endo-mh-2', name:'Unit 2', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-endo-mh-3', name:'Unit 3', resources:{ rooms:2, recoveryBays:4 } } ] },
+        'North Campus': { enabled:true, programs:['prog-gi-endoscopy'],
+          units:[ { id:'unit-endo-nc-1', name:'Unit 1', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-endo-nc-2', name:'Unit 2', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-endo-nc-3', name:'Unit 3', resources:{ rooms:1, recoveryBays:2 } } ] }
+      } },
+    'Ophthalmology': { status:'active', visitCategory:'Procedure', duration:{ value:40, unit:'minutes' }, chiefComplaintForm:null, facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-ophthalmology','prog-gen-med','prog-ambulatory','prog-surgical'],
+          units:[ { id:'unit-oph-mh-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-oph-mh-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-oph-mh-3', name:'Unit 3', resources:{ rooms:1 } } ] },
+        'Eastside Medical Center': { enabled:true, programs:['prog-ophthalmology'],
+          units:[ { id:'unit-oph-emc-1', name:'Unit 1', resources:{ rooms:2 } }, { id:'unit-oph-emc-2', name:'Unit 2', resources:{ rooms:1 } }, { id:'unit-oph-emc-3', name:'Unit 3', resources:{ rooms:1 } } ] }
+      } },
+    'Cath Lab': { status:'active', visitCategory:'Procedure', duration:{ value:2, unit:'hours' }, chiefComplaintForm:'Cardiac Procedure Intake Form', facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-cardiac-cath','prog-critical','prog-gen-med','prog-surgical'],
+          units:[ { id:'unit-cath-mh-1', name:'Unit 1', resources:{ rooms:3, recoveryBays:6 } }, { id:'unit-cath-mh-2', name:'Unit 2', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-cath-mh-3', name:'Unit 3', resources:{ rooms:1, recoveryBays:2 } } ] },
+        'North Campus': { enabled:true, programs:['prog-cardiac-cath'],
+          units:[ { id:'unit-cath-nc-1', name:'Unit 1', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-cath-nc-2', name:'Unit 2', resources:{ rooms:1, recoveryBays:2 } }, { id:'unit-cath-nc-3', name:'Unit 3', resources:{ rooms:1, recoveryBays:2 } } ] }
+      } },
     'ED': { status:'active', visitCategory:'Urgent', duration:{ value:60, unit:'minutes' }, chiefComplaintForm:'ED Triage Form', facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-ed-surge','prog-critical'],
-          units:[ { id:'unit-ed-mh-1', name:'Unit 1', resources:{ beds:8, chairs:4, rooms:4 } }, { id:'unit-ed-mh-2', name:'Unit 2', resources:{ beds:6, chairs:3 } } ] },
+        // Main Hospital carries a wider program list than the other Facilities here on purpose —
+        // it's the most likely first Facility a user picks, and a flagship site plausibly touches
+        // more of the org's Programs than a satellite branch would.
+        'Main Hospital': { enabled:true, programs:['prog-ed-surge','prog-critical','prog-gen-med','prog-surgical','prog-ambulatory','prog-endo-premium'],
+          units:[ { id:'unit-ed-mh-1', name:'Unit 1', resources:{ beds:8, chairs:4, rooms:4 } }, { id:'unit-ed-mh-2', name:'Unit 2', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-mh-3', name:'Unit 3', resources:{ beds:5, chairs:2 } } ] },
         'North Campus': { enabled:true, programs:['prog-ed-surge'],
-          units:[ { id:'unit-ed-nc-1', name:'Unit 1', resources:{ beds:8, chairs:4 } }, { id:'unit-ed-nc-2', name:'Unit 2', resources:{ beds:5, chairs:2 } } ] },
+          units:[ { id:'unit-ed-nc-1', name:'Unit 1', resources:{ beds:8, chairs:4 } }, { id:'unit-ed-nc-2', name:'Unit 2', resources:{ beds:5, chairs:2 } }, { id:'unit-ed-nc-3', name:'Unit 3', resources:{ beds:4, chairs:2 } } ] },
         'Eastside Medical Center': { enabled:true, programs:['prog-ed-surge'],
-          units:[ { id:'unit-ed-emc-1', name:'Unit 1', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-emc-2', name:'Unit 2', resources:{ beds:4, chairs:2 } } ] }
+          units:[ { id:'unit-ed-emc-1', name:'Unit 1', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-emc-2', name:'Unit 2', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-emc-3', name:'Unit 3', resources:{ beds:3, chairs:2 } } ] },
+        'California Branch': { enabled:true, programs:['prog-ed-surge','prog-ambulatory'],
+          units:[ { id:'unit-ed-cab-1', name:'Unit 1', resources:{ beds:5, chairs:2 } }, { id:'unit-ed-cab-2', name:'Unit 2', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-cab-3', name:'Unit 3', resources:{ beds:3, chairs:1 } } ] },
+        'Texas Branch': { enabled:true, programs:['prog-ed-surge','prog-endo-premium'],
+          units:[ { id:'unit-ed-txb-1', name:'Unit 1', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-txb-2', name:'Unit 2', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-txb-3', name:'Unit 3', resources:{ beds:3, chairs:1 } } ] },
+        'New Jersey Branch': { enabled:true, programs:['prog-endo-premium'],
+          units:[ { id:'unit-ed-njb-1', name:'Unit 1', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-njb-2', name:'Unit 2', resources:{ beds:3, chairs:2 } }, { id:'unit-ed-njb-3', name:'Unit 3', resources:{ beds:2, chairs:1 } } ] }
       } },
     'ICU': { status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form', facilities:{
         'Main Hospital': { enabled:true, programs:['prog-critical','prog-gen-med'],
-          units:[ { id:'unit-icu-mh-1', name:'Unit 1', resources:{ beds:16 } }, { id:'unit-icu-mh-2', name:'Unit 2', resources:{ beds:8 } } ] },
+          units:[ { id:'unit-icu-mh-1', name:'Unit 1', resources:{ beds:16 } }, { id:'unit-icu-mh-2', name:'Unit 2', resources:{ beds:8 } }, { id:'unit-icu-mh-3', name:'Unit 3', resources:{ beds:6 } } ] },
         'Eastside Medical Center': { enabled:true, programs:['prog-critical'],
-          units:[ { id:'unit-icu-emc-1', name:'Unit 1', resources:{ beds:9 } }, { id:'unit-icu-emc-2', name:'Unit 2', resources:{ beds:6 } } ] }
+          units:[ { id:'unit-icu-emc-1', name:'Unit 1', resources:{ beds:9 } }, { id:'unit-icu-emc-2', name:'Unit 2', resources:{ beds:6 } }, { id:'unit-icu-emc-3', name:'Unit 3', resources:{ beds:4 } } ] }
       } },
     'Hospitalization': { status:'active', visitCategory:'Follow-up', duration:{ value:2, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form', facilities:{
         'Main Hospital': { enabled:true, programs:['prog-gen-med','prog-behavioral'],
-          units:[ { id:'unit-hosp-mh-1', name:'Unit 1', resources:{ beds:40, providers:22 } }, { id:'unit-hosp-mh-2', name:'Unit 2', resources:{ beds:18, providers:9 } } ] },
+          units:[ { id:'unit-hosp-mh-1', name:'Unit 1', resources:{ beds:40, providers:22 } }, { id:'unit-hosp-mh-2', name:'Unit 2', resources:{ beds:18, providers:9 } }, { id:'unit-hosp-mh-3', name:'Unit 3', resources:{ beds:12, providers:6 } } ] },
         'North Campus': { enabled:true, programs:['prog-gen-med'],
-          units:[ { id:'unit-hosp-nc-1', name:'Unit 1', resources:{ beds:22 } }, { id:'unit-hosp-nc-2', name:'Unit 2', resources:{ beds:12 } } ] }
+          units:[ { id:'unit-hosp-nc-1', name:'Unit 1', resources:{ beds:22 } }, { id:'unit-hosp-nc-2', name:'Unit 2', resources:{ beds:12 } }, { id:'unit-hosp-nc-3', name:'Unit 3', resources:{ beds:8 } } ] }
       } },
     'Neonatology': { status:'active', visitCategory:'New Patient', duration:{ value:1, unit:'hours' }, chiefComplaintForm:null, facilities:{
         'Main Hospital': { enabled:true, programs:[],
-          units:[ { id:'unit-nicu-mh-1', name:'Unit 1', resources:{ beds:10 } }, { id:'unit-nicu-mh-2', name:'Unit 2', resources:{ beds:6 } } ] }
+          units:[ { id:'unit-nicu-mh-1', name:'Unit 1', resources:{ beds:10 } }, { id:'unit-nicu-mh-2', name:'Unit 2', resources:{ beds:6 } }, { id:'unit-nicu-mh-3', name:'Unit 3', resources:{ beds:4 } } ] }
       } },
     'OR': { status:'active', visitCategory:'Procedure', duration:{ value:90, unit:'minutes' }, chiefComplaintForm:null, facilities:{
         'Main Hospital': { enabled:true, programs:['prog-surgical'],
-          units:[ { id:'unit-or-mh-1', name:'Unit 1', resources:{ rooms:6 } }, { id:'unit-or-mh-2', name:'Unit 2', resources:{ rooms:3 } } ] },
+          units:[ { id:'unit-or-mh-1', name:'Unit 1', resources:{ rooms:6 } }, { id:'unit-or-mh-2', name:'Unit 2', resources:{ rooms:3 } }, { id:'unit-or-mh-3', name:'Unit 3', resources:{ rooms:2 } } ] },
         'North Campus': { enabled:true, programs:['prog-surgical'],
-          units:[ { id:'unit-or-nc-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-or-nc-2', name:'Unit 2', resources:{ rooms:2 } } ] },
+          units:[ { id:'unit-or-nc-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-or-nc-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-or-nc-3', name:'Unit 3', resources:{ rooms:1 } } ] },
         'Eastside Medical Center': { enabled:true, programs:['prog-surgical'],
-          units:[ { id:'unit-or-emc-1', name:'Unit 1', resources:{ rooms:2 } }, { id:'unit-or-emc-2', name:'Unit 2', resources:{ rooms:2 } } ] }
+          units:[ { id:'unit-or-emc-1', name:'Unit 1', resources:{ rooms:2 } }, { id:'unit-or-emc-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-or-emc-3', name:'Unit 3', resources:{ rooms:1 } } ] }
+      } },
+    // New active Care Setting — brings the total to 6 (Phase X item 4). Deliberately a flat,
+    // independent Care Setting with no relationship to any other — the parent/child Care Setting
+    // question (a separate open item) isn't addressed by this addition.
+    'Radiology': { status:'active', visitCategory:'Procedure', duration:{ value:45, unit:'minutes' }, chiefComplaintForm:null, facilities:{
+        'Main Hospital': { enabled:true, programs:['prog-gen-med'],
+          units:[ { id:'unit-rad-mh-1', name:'Unit 1', resources:{ rooms:4 } }, { id:'unit-rad-mh-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-rad-mh-3', name:'Unit 3', resources:{ rooms:2 } } ] },
+        'North Campus': { enabled:true, programs:[],
+          units:[ { id:'unit-rad-nc-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-rad-nc-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-rad-nc-3', name:'Unit 3', resources:{ rooms:1 } } ] }
       } }
     // Maternity (inactive), Endoscopy (draft), Cath Lab (retired) intentionally excluded — only
     // 'active' Care Settings are offered to Trackerboard, matching Phase 2 item 4.
-    // Every Facility now carries at least 2 Units — the seed Trackerboards below already claim
-    // one Unit at nearly every combo, so a single-Unit Facility meant "create new board" almost
-    // always hit an empty, seemingly-broken picker. See conversation: "not every combo is working."
+    // Every Facility now carries at least 3 Units — bumped from 2 (see conversation: "Each
+    // facility should have at least 3 or more units").
   };
 
 
@@ -1916,15 +2017,12 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var pos = list.findIndex(function(c){ return c.csName === csName && c.unitId === unitId; });
     if(checked && pos === -1) list.push({ csName:csName, unitId:unitId });
     else if(!checked && pos > -1) list.splice(pos, 1);
-    // Patch in place rather than a full renderUnitAllocation() rebuild — a full rebuild would
-    // destroy and recreate the open picker-menu, closing it after every single checkbox click.
-    // That breaks the exact scenario this design exists for: picking many Units in one sitting.
-    var id = facilityIdPart(facilityName);
+    // Patch the summary count and the one card's checked state in place rather than a full
+    // renderUnitAllocation() rebuild — a full rebuild would collapse the currently-expanded
+    // facility's scroll position on every single checkbox click.
     var summaryEl = document.querySelector('.resource-facility-row[data-facility="'+facilityName.replace(/"/g,'\\"')+'"] .resource-facility-summary');
     var newCount = list.filter(function(sel){ return findUnitCandidate(facilityName, sel.csName, sel.unitId); }).length;
     if(summaryEl) summaryEl.textContent = newCount ? newCount+' Unit'+(newCount===1?'':'s')+' selected' : 'No Units selected';
-    if(document.getElementById('unitPickerList-'+id)) renderUnitPickerList(facilityName);
-    if(unitFacilityExpanded[facilityName]) renderSelectedUnitsList(facilityName);
     updateReadiness();
   }
 
@@ -1972,77 +2070,27 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     renderUnitAllocation();
   }
 
-  // Opens the "Select Units" dropdown for one Facility. Only one instance can be open at a time —
-  // same convention as every other .picker-menu in this file. Sized larger than the default
-  // .picker-menu (taller, and full-width of the card body it now lives in) since a cramped
-  // header-sized dropdown was the original problem.
-  function toggleUnitPicker(facility){
-    var id = facilityIdPart(facility);
-    var menu = document.getElementById('unitPickerMenu-'+id);
-    var btn = document.getElementById('unitPickerBtn-'+id);
-    if(!menu) return;
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){
-      menu.innerHTML =
-        '<div style="padding:8px 8px 6px;"><input type="text" class="text" id="unitPickerSearch-'+id+'" placeholder="Search units…" style="height:32px;" oninput="renderUnitPickerList(\''+facility.replace(/'/g,"\\'")+'\')"></div>'+
-        '<div id="unitPickerList-'+id+'"></div>';
-      renderUnitPickerList(facility);
-      menu.classList.add('open');
-      if(btn) btn.setAttribute('aria-expanded','true');
-    } else if(btn){ btn.setAttribute('aria-expanded','false'); }
-  }
-  // Renders only the checkbox list inside an already-open picker (not the search input itself),
-  // so typing doesn't destroy and recreate the input the user is actively focused in.
-  function renderUnitPickerList(facility){
-    var id = facilityIdPart(facility);
-    var list = document.getElementById('unitPickerList-'+id);
-    if(!list) return;
-    var searchEl = document.getElementById('unitPickerSearch-'+id);
-    var query = ((searchEl ? searchEl.value : '') || '').toLowerCase();
+  // Renders one Facility's Units as a checkbox-card grid (3 per row, same .check-grid.cols-3
+  // component the Cardex panel widget uses) instead of a search-and-select dropdown. Each card
+  // is the checkbox, the Unit name, and that Unit's own resource breakdown together — no
+  // separate "selected units" review list, since the checked state and the card's own info
+  // already show what's selected. Never summed across Units (a user needs to know what Unit 1
+  // has, not a total merged with Unit 2's).
+  function renderUnitCheckGrid(facility){
     var multiCS = selectedCareSettings.length > 1;
-    var candidates = selectableUnitsForFacility(facility).filter(function(c){
-      return !query || c.unit.name.toLowerCase().indexOf(query) > -1;
-    });
+    var candidates = selectableUnitsForFacility(facility);
     if(!candidates.length){
-      list.innerHTML = '<div class="picker-option" style="cursor:default;color:var(--muted)">'+(query ? 'No matching Units.' : 'No Units available at this Facility for the selected Care Setting(s).')+'</div>';
-      return;
+      return '<p class="muted" style="margin:0;padding:8px;">No Units available at this Facility for the selected Care Setting(s).</p>';
     }
-    list.innerHTML = candidates.map(function(c){
+    return '<div class="check-grid cols-3">'+candidates.map(function(c){
       var u = c.unit;
       var checked = isUnitSelected(facility, c.csName, u.id);
       var csTag = multiCS ? ' <span class="muted">(' + c.csName + ')</span>' : '';
-      return '<label class="picker-option" style="cursor:pointer;">'+
-        '<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+c.csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', this.checked)"> '+
-        u.name+csTag+' <span class="muted" style="font-size:11px;">&mdash; '+formatUnitResources(u)+'</span>'+
+      return '<label class="check-option unit-check-card">'+
+        '<span class="unit-check-top"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+c.csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', this.checked)"> '+u.name+csTag+'</span>'+
+        '<span class="unit-check-meta">'+formatUnitResources(u)+'</span>'+
       '</label>';
-    }).join('');
-  }
-
-  // Renders the reviewed-selection panel for one Facility — bounded height (scrolls internally),
-  // its own search, one row per selected Unit with that Unit's own resource breakdown (never
-  // summed across Units — see conversation: "I want to know what is Unit 1 and not in Unit 2").
-  function renderSelectedUnitsList(facility){
-    var id = facilityIdPart(facility);
-    var container = document.getElementById('unitSelectedList-'+id);
-    if(!container) return;
-    var multiCS = selectedCareSettings.length > 1;
-    var claims = (selectedUnits[facility] || []).map(function(sel){
-      return { sel:sel, candidate: findUnitCandidate(facility, sel.csName, sel.unitId) };
-    }).filter(function(x){ return x.candidate; });
-    if(!claims.length){
-      container.innerHTML = '<p class="muted" style="margin:0;padding:8px;">No Units selected yet.</p>';
-      return;
-    }
-    container.innerHTML = claims.map(function(x){
-      var u = x.candidate.unit, csName = x.sel.csName;
-      var csTag = multiCS ? ' <span class="muted" style="font-weight:400;">(' + csName + ')</span>' : '';
-      return '<div class="resource-type-row">'+
-        '<span class="rt-label">'+u.name+csTag+'</span>'+
-        '<span class="short-meta">'+formatUnitResources(u)+'</span>'+
-        '<button type="button" class="icon-btn mini mild-icon" aria-label="Remove '+u.name+'" onclick="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', false)">&times;</button>'+
-      '</div>';
-    }).join('');
+    }).join('')+'</div>';
   }
 
   function renderUnitAllocation(){
@@ -2052,28 +2100,12 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(!selectedFacilities.length){ section.style.display = 'none'; return; }
     section.style.display = '';
 
-    var searchInput = document.getElementById('unitFacilitySearch');
-    var query = ((searchInput ? searchInput.value : '') || '').toLowerCase();
-
-    var rowsHtml = selectedFacilities.filter(function(facility){
-      return !query || facility.toLowerCase().indexOf(query) > -1;
-    }).map(function(facility){
+    var rowsHtml = selectedFacilities.map(function(facility){
       var selectedCount = (selectedUnits[facility] || []).filter(function(sel){ return findUnitCandidate(facility, sel.csName, sel.unitId); }).length;
-      var id = facilityIdPart(facility);
       var open = !!unitFacilityExpanded[facility];
       var summaryLabel = selectedCount ? selectedCount+' Unit'+(selectedCount===1?'':'s')+' selected' : 'No Units selected';
 
-      var bodyHtml = '';
-      if(open){
-        bodyHtml =
-          '<div class="resource-facility-body">'+
-            '<div class="picker" style="max-width:none;">'+
-              '<div class="picker-input"><button type="button" class="text" id="unitPickerBtn-'+id+'" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleUnitPicker(\''+facility.replace(/'/g,"\\'")+'\')">Select Units…</button></div>'+
-              '<div class="picker-menu" id="unitPickerMenu-'+id+'" style="max-height:340px;"></div>'+
-            '</div>'+
-            '<div id="unitSelectedList-'+id+'" style="max-height:260px;overflow:auto;border:1px solid var(--line);"></div>'+
-          '</div>';
-      }
+      var bodyHtml = open ? '<div class="resource-facility-body">'+renderUnitCheckGrid(facility)+'</div>' : '';
 
       return '<div class="resource-facility-row'+(open?' open':'')+'" data-facility="'+facility.replace(/"/g,'&quot;')+'">' +
         '<button type="button" class="resource-facility-header" aria-expanded="'+open+'" onclick="toggleUnitFacilityExpanded(\''+facility.replace(/'/g,"\\'")+'\')">' +
@@ -2086,13 +2118,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       '</div>';
     }).join('');
 
-    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">No matching Facilities.</p>';
-
-    // Re-render any expanded panels in place after a full grid rebuild (e.g. a Facility was
-    // added/removed), so an in-progress search or scroll position isn't silently reset.
-    selectedFacilities.forEach(function(facility){
-      if(unitFacilityExpanded[facility]) renderSelectedUnitsList(facility);
-    });
+    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">No Facilities selected.</p>';
   }
 
   function facilityIdPart(str){ return String(str).replace(/[^a-z0-9]/gi, ''); }
@@ -2176,7 +2202,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function onReorderDragStart(e, listType, key){
     reorderDrag = { listType:listType, key:key };
     if(e.dataTransfer){ e.dataTransfer.effectAllowed = 'move'; try{ e.dataTransfer.setData('text/plain', key); }catch(err){} }
-    var row = e.currentTarget.closest('.col-row');
+    var row = e.currentTarget.closest('.col-row, .widget-card, .status-card');
     if(row) row.classList.add('dragging');
   }
   function onReorderDragOver(e, listType){
@@ -2199,11 +2225,30 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       syncActionLibraryState();
       renderActionLibrary();
       updateReadiness();
+    } else if(listType === 'widget'){
+      // Dragging is confined to the same placement group (strip vs. panel) — same constraint
+      // the old up/down arrows enforced, since the two groups have independent capacity limits.
+      if(widgetByKey(reorderDrag.key).placement !== widgetByKey(targetKey).placement) return;
+      reorderArray(widgetOrder, reorderDrag.key, targetKey);
+      renderWidgetLibrary();
+    } else if(listType === 'status'){
+      var draggedId = reorderDrag.key;
+      var selectedId = STATUSES[selectedIndex] ? STATUSES[selectedIndex].id : null;
+      var fromIdx = STATUSES.findIndex(function(s){ return s.id === draggedId; });
+      var toIdx = STATUSES.findIndex(function(s){ return s.id === targetKey; });
+      if(fromIdx === -1 || toIdx === -1 || fromIdx === toIdx) return;
+      var moved = STATUSES.splice(fromIdx, 1)[0];
+      STATUSES.splice(toIdx, 0, moved);
+      if(selectedId) selectedIndex = STATUSES.findIndex(function(s){ return s.id === selectedId; });
+      renderStatusList();
+      renderStatusEditor();
+      renderFlowMap();
+      updateReadiness();
     }
   }
   function onReorderDragEnd(){
-    document.querySelectorAll('.col-row.dragging').forEach(function(el){ el.classList.remove('dragging'); });
-    document.querySelectorAll('.col-row.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+    document.querySelectorAll('.col-row.dragging, .widget-card.dragging, .status-card.dragging').forEach(function(el){ el.classList.remove('dragging'); });
+    document.querySelectorAll('.col-row.drag-over, .widget-card.drag-over, .status-card.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
     reorderDrag = { listType:null, key:null };
   }
 
@@ -2248,7 +2293,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
     list.innerHTML = lockedHtml + rowsHtml;
     var countEl = document.getElementById('columnSelectedCount');
-    if(countEl) countEl.textContent = (LOCKED_COLUMN_KEYS.length + selectedColumns.length) + ' of ' + (LOCKED_COLUMN_KEYS.length + columnsForCareSetting().filter(function(c){return !c.locked;}).length) + ' columns selected';
+    if(countEl) countEl.textContent = (LOCKED_COLUMN_KEYS.length + selectedColumns.length) + ' of ' + COLUMN_COUNT_SOFT_LIMIT + ' columns selected (recommended)';
     var warning = document.getElementById('columnCountWarning');
     if(warning){
       var total = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
@@ -2642,30 +2687,31 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function renderCareSettingInfo(){
-    var wrap = document.getElementById('careSettingInfo');
-    if(!selectedCareSettings.length){
-      wrap.style.display = 'none';
-      return;
-    }
-    wrap.style.display = '';
-    var grid = document.getElementById('careSettingInfoGrid');
-    // Each selected Care Setting gets its own Visit/Duration/Form row — a board covering more
-    // than one Care Setting is genuinely subject to more than one set of these values. Values
-    // come straight from Care Settings Configuration's Clinical Defaults; Trackerboard doesn't
-    // maintain its own copy.
-    var html = selectedCareSettings.map(function(cs){
-      var cfg = careSettingRecord(cs);
-      if(!cfg) return '';
-      var items = [
-        { label:cs+' — Default Visit Category', value:cfg.visitCategory },
-        { label:cs+' — Duration', value:cfg.duration.value+' '+cfg.duration.unit }
-      ];
-      if(cfg.chiefComplaintForm) items.push({ label:cs+' — Chief Complaint Form', value:cfg.chiefComplaintForm, link:true });
-      return items.map(function(it){
-        return '<div class="info-item"><span class="info-label">'+it.label+'</span><span class="info-value'+(it.link?' link':'')+'">'+it.value+'</span></div>';
+    var btn = document.getElementById('careSettingInfoBtn');
+    if(!btn) return;
+    btn.style.display = selectedCareSettings.length ? '' : 'none';
+  }
+
+  // Large modal version of Care Setting info — replaces the old always-visible inline block.
+  // Rendered as a real table (rows = selected Care Settings, columns = the same Clinical
+  // Defaults fields) rather than repeated label/value pairs, per the "clean and organized
+  // table" ask.
+  function openCareSettingInfoModal(){
+    var body = document.getElementById('careSettingInfoModalBody');
+    if(body){
+      var rowsHtml = selectedCareSettings.map(function(cs){
+        var cfg = careSettingRecord(cs);
+        if(!cfg) return '';
+        var duration = cfg.duration.value+' '+cfg.duration.unit;
+        var form = cfg.chiefComplaintForm ? '<span class="info-value link">'+cfg.chiefComplaintForm+'</span>' : '—';
+        return '<tr><td>'+cs+'</td><td>'+cfg.visitCategory+'</td><td>'+duration+'</td><td>'+form+'</td></tr>';
       }).join('');
-    }).join('');
-    grid.innerHTML = html;
+      body.innerHTML = '<table class="history" style="width:100%;"><thead><tr><th>Care Setting</th><th>Default Visit Category</th><th>Duration</th><th>Chief Complaint Form</th></tr></thead><tbody>'+rowsHtml+'</tbody></table>';
+    }
+    showModalBackdrop('careSettingInfoModalBackdrop');
+  }
+  function closeCareSettingInfoModal(){
+    document.getElementById('careSettingInfoModalBackdrop').classList.remove('open');
   }
 
   var selectedCareSettings = [];
@@ -2843,16 +2889,18 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function updateProgramButton(){
     var btn = document.getElementById('programAccessBtn');
     if(!btn) return;
-    btn.textContent = selectedPrograms.length ? selectedPrograms.length + ' selected' : 'Select Programs…';
+    // Count only top-level Programs here — sub-programs have their own button/count in the
+    // adjacent dropdown, so a Program with 2 of 2 sub-programs checked shouldn't inflate this
+    // count to look like 3 things are selected when it's really 1 Program.
+    var topLevelCount = selectedPrograms.filter(function(name){
+      return programsForCareSetting().some(function(p){ return p.name === name; });
+    }).length;
+    btn.textContent = topLevelCount ? topLevelCount + ' selected' : 'Select Programs…';
   }
-  // The parent Program checkbox is its own independent selection, not a computed sum of its
-  // subprograms — this is a deliberate tradeoff. Checking the parent is a convenience: it
-  // selects the Program AND auto-checks every subprogram under it, since picking a Program
-  // usually means "all of it." From there, subprograms can be unchecked individually without
-  // forcing the parent off. If every subprogram ends up unchecked while the parent stays
-  // checked, that is a valid, intentional state — "this Program in general, with no specific
-  // subprogram called out" — not an error state, so it is never silently overridden.
-  // Unchecking the parent itself removes it AND every one of its subprograms.
+  // Sub-programs are never auto-selected by checking a parent Program — the user picks each one
+  // manually in the adjacent Sub-programs dropdown. Unchecking the parent still clears its
+  // sub-programs, since they'd otherwise remain selected but invisible once that dropdown
+  // disappears.
   function renderProgramMenu(){
     var menu = document.getElementById('programAccessMenu');
     if(!menu) return;
@@ -2861,66 +2909,84 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     options.forEach(function(p){ eligible.push(p.name); (p.subPrograms||[]).forEach(function(sp){ eligible.push(sp.name); }); });
     selectedPrograms = selectedPrograms.filter(function(p){ return eligible.indexOf(p) > -1; });
     menu.innerHTML = options.length ? options.map(function(p){
-      var subs = p.subPrograms || [];
-      var checkedCount = subs.filter(function(sp){ return selectedPrograms.indexOf(sp.name) > -1; }).length;
       var parentChecked = selectedPrograms.indexOf(p.name) > -1;
-      var countLabel = subs.length ? ' <span class="muted program-group-count">('+checkedCount+' of '+subs.length+')</span>' : '';
-      var html = '<div class="program-group">' +
-        '<label class="picker-option program-group-parent" style="cursor:pointer;"><input type="checkbox" class="program-parent-cb" value="'+p.name+'"'+(parentChecked?' checked':'')+' onchange="toggleProgramParent(this)"> '+p.name+countLabel+'</label>';
-      if(subs.length){
-        html += subs.map(function(sp){
-          var subChecked = selectedPrograms.indexOf(sp.name) > -1 ? ' checked' : '';
-          return '<label class="picker-option picker-option-sub" style="cursor:pointer;"><input type="checkbox" class="program-child-cb" value="'+sp.name+'"'+subChecked+' onchange="toggleProgramChild(this)"> '+sp.name+'</label>';
-        }).join('');
-      }
-      html += '</div>';
-      return html;
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" class="program-parent-cb" value="'+p.name+'"'+(parentChecked?' checked':'')+' onchange="toggleProgramParent(this)"> '+p.name+'</label>';
     }).join('') : (
       (!selectedCareSettings.length || !selectedFacilities.length)
         ? '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting and Facility first</div>'
         : '<div class="picker-option" style="cursor:default;color:var(--muted)">No Programs assigned to the selected Care Setting(s) at the selected Facility(ies)</div>'
     );
     updateProgramButton();
-  }
-  function updateProgramGroupCount(group){
-    var childCbs = group.querySelectorAll('.program-child-cb');
-    if(!childCbs.length) return;
-    var checkedCount = Array.prototype.filter.call(childCbs, function(c){ return c.checked; }).length;
-    var countEl = group.querySelector('.program-group-count');
-    if(countEl) countEl.textContent = '('+checkedCount+' of '+childCbs.length+')';
+    renderSubProgramMenu();
   }
   function toggleProgramParent(cb){
-    var group = cb.closest('.program-group');
     var name = cb.value;
     var checked = cb.checked;
+    var program = programsForCareSetting().find(function(p){ return p.name === name; });
     var pos = selectedPrograms.indexOf(name);
     if(checked && pos===-1) selectedPrograms.push(name);
     if(!checked && pos>-1) selectedPrograms.splice(pos,1);
-    // Checking cascades to every subprogram (the convenience default). Unchecking the parent
-    // also clears every subprogram — with the parent gone, a leftover subprogram selection
-    // would be orphaned and confusing to see in the summary.
-    var childCbs = group.querySelectorAll('.program-child-cb');
-    Array.prototype.forEach.call(childCbs, function(c){
-      c.checked = checked;
-      var p = selectedPrograms.indexOf(c.value);
-      if(checked && p===-1) selectedPrograms.push(c.value);
-      if(!checked && p>-1) selectedPrograms.splice(p,1);
-    });
-    updateProgramGroupCount(group);
-    updateProgramButton();
-  }
-  function toggleProgramChild(cb){
-    var pos = selectedPrograms.indexOf(cb.value);
-    if(cb.checked && pos===-1) selectedPrograms.push(cb.value);
-    if(!cb.checked && pos>-1) selectedPrograms.splice(pos,1);
-    // The parent is left exactly as it was — see the note above renderProgramMenu(). Unchecking
-    // a subprogram never forces the parent off, and it stays available to re-check individually.
-    updateProgramGroupCount(cb.closest('.program-group'));
-    updateProgramButton();
+    // No auto-select on check — the user picks sub-programs manually. Unchecking the parent
+    // still clears its sub-programs, so nothing stays selected once it's hidden from view.
+    if(!checked){
+      (program && program.subPrograms || []).forEach(function(sp){
+        var p = selectedPrograms.indexOf(sp.name);
+        if(p>-1) selectedPrograms.splice(p,1);
+      });
+    }
+    renderProgramMenu();
   }
   function toggleProgramPicker(){
     var menu = document.getElementById('programAccessMenu');
     var btn = document.getElementById('programAccessBtn');
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+
+  // Sub-programs render in their own adjacent dropdown rather than nested under each parent
+  // Program — this keeps the picker usable when more than one selected Program has its own
+  // sub-programs. Each row is tagged with its parent Program's short code (e.g. "BHP") so
+  // ownership stays clear even when sub-programs from different parents are listed together.
+  function selectedProgramsWithSubs(){
+    return programsForCareSetting().filter(function(p){
+      return (p.subPrograms||[]).length && selectedPrograms.indexOf(p.name) > -1;
+    });
+  }
+  function renderSubProgramMenu(){
+    var wrap = document.getElementById('subProgramPickerWrap');
+    var menu = document.getElementById('subProgramMenu');
+    var btn = document.getElementById('subProgramBtn');
+    if(!wrap || !menu || !btn) return;
+    var parents = selectedProgramsWithSubs();
+    if(!parents.length){
+      wrap.style.display = 'none';
+      menu.classList.remove('open');
+      return;
+    }
+    wrap.style.display = '';
+    menu.innerHTML = parents.map(function(p){
+      return (p.subPrograms||[]).map(function(sp){
+        var checked = selectedPrograms.indexOf(sp.name) > -1;
+        var codeTag = p.shortCode ? '<span class="muted" style="float:right;">'+p.shortCode+'</span>' : '';
+        return '<label class="picker-option" style="cursor:pointer;display:flex;"><span style="flex:1 1 auto;"><input type="checkbox" value="'+sp.name+'"'+(checked?' checked':'')+' onchange="toggleSubProgram(this)"> '+sp.name+'</span>'+codeTag+'</label>';
+      }).join('');
+    }).join('');
+    var selectedCount = parents.reduce(function(n,p){ return n + (p.subPrograms||[]).filter(function(sp){ return selectedPrograms.indexOf(sp.name) > -1; }).length; }, 0);
+    btn.textContent = selectedCount ? selectedCount + ' selected' : 'Select Sub-programs…';
+  }
+  function toggleSubProgram(cb){
+    var pos = selectedPrograms.indexOf(cb.value);
+    if(cb.checked && pos===-1) selectedPrograms.push(cb.value);
+    if(!cb.checked && pos>-1) selectedPrograms.splice(pos,1);
+    // The parent Program is left exactly as it was — see the note above renderProgramMenu().
+    // Unchecking a sub-program never forces the parent off, and it stays available to re-check.
+    renderSubProgramMenu();
+  }
+  function toggleSubProgramPicker(){
+    var menu = document.getElementById('subProgramMenu');
+    var btn = document.getElementById('subProgramBtn');
     var willOpen = !menu.classList.contains('open');
     document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
     if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
@@ -2952,7 +3018,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(!el) return;
     var broader = selectedConfigAccess.filter(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
     if(broader.length){
-      el.innerHTML = '<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> Configuration access includes ' + broader.join(', ') + ' without Board access — this blocks activation until resolved.';
+      el.innerHTML = 'Configuration access includes ' + broader.join(', ') + ' without Board access — this blocks activation until resolved.';
       el.style.display = '';
     } else {
       el.style.display = 'none';
@@ -3040,8 +3106,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   var SECTION_ORDER = [
-    { key:'basic', label:'Basic Information' },
-    { key:'caresetting', label:'Scope & Access' },
+    { key:'caresetting', label:'Basic Information' },
     { key:'workflow', label:'Status & Workflow' },
     { key:'widgets', label:'Widgets' },
     { key:'table', label:'Patient Table' }
@@ -3138,24 +3203,19 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function computeSectionState(key){
-    if(key === 'basic'){
+    if(key === 'caresetting'){
       var name = document.getElementById('trackerboardNameInput').value.trim();
       var shortName = document.getElementById('shortNameInput').value.trim();
-      var basicBlocking = [];
-      if(!name) basicBlocking.push('Board Name is required');
-      else if(otherTrackerboards().some(function(t){ return t.name.toLowerCase() === name.toLowerCase(); })) basicBlocking.push('Board Name "'+name+'" is already in use');
-      // Short Name is only required for first draft save; it becomes blocking before activation (§42.1).
-      if(!shortName) basicBlocking.push('Short Name is required before activation');
-      else if(otherTrackerboards().some(function(t){ return (t.shortName||'').toLowerCase() === shortName.toLowerCase(); })) basicBlocking.push('Short Name "'+shortName+'" is already in use');
-      if(basicBlocking.length) return { state:'incomplete', issues:basicBlocking };
-      return { state:'complete', issues:[] };
-    }
-    if(key === 'caresetting'){
       var hasCareSetting = selectedCareSettings.length > 0;
       var hasFacility = selectedFacilities.length > 0;
       var hasBoardAccess = selectedRuntimeAccess.length > 0;
       var hasConfigAccess = selectedConfigAccess.length > 0;
       var caresettingBlocking = [];
+      if(!name) caresettingBlocking.push('Board Name is required');
+      else if(otherTrackerboards().some(function(t){ return t.name.toLowerCase() === name.toLowerCase(); })) caresettingBlocking.push('Board Name "'+name+'" is already in use');
+      // Short Name is only required for first draft save; it becomes blocking before activation (§42.1).
+      if(!shortName) caresettingBlocking.push('Short Name is required before activation');
+      else if(otherTrackerboards().some(function(t){ return (t.shortName||'').toLowerCase() === shortName.toLowerCase(); })) caresettingBlocking.push('Short Name "'+shortName+'" is already in use');
       if(!hasCareSetting) caresettingBlocking.push('Select at least one Care Setting');
       if(!hasFacility) caresettingBlocking.push('Select at least one Facility');
       if(!hasBoardAccess) caresettingBlocking.push('Select at least one Board access role');
@@ -3259,6 +3319,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function sectionTouched(key){
     return !!editingId || !!dirtySections[key];
   }
+  var SECTION_CHECK_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.485 1.929a1 1 0 0 1 .04 1.414l-7.5 8a1 1 0 0 1-1.455.037l-3.5-3.5a1 1 0 1 1 1.415-1.415l2.757 2.757 6.829-7.293a1 1 0 0 1 1.414-.04z"/></svg>';
   function sectionBadge(key){
     var info = computeSectionState(key);
     var touched = sectionTouched(key);
@@ -3266,11 +3327,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       // A section can satisfy every requirement without anyone having looked at it — Widgets and
       // Patient Table both start pre-filled with working defaults. "Complete" implies someone
       // reviewed and confirmed it; that's not true until the section has actually been touched.
-      return touched ? { cls:'section-state ok', label:'Complete' } : { cls:'section-state', label:'Using recommended defaults' };
+      // Placeholder states carry no actionable information, so they show no badge at all rather
+      // than a "Not started" / "Using recommended defaults" tag. A completed, ready section gets
+      // a plain check instead of a text pill.
+      return touched ? { cls:'section-state ok icon-only', html:SECTION_CHECK_SVG, ariaLabel:'Complete', empty:false } : { empty:true };
     }
-    if(!touched) return { cls:'section-state', label:'Not started' };
-    if(info.state === 'warning') return { cls:'section-state warn', label:info.issues.length > 1 ? info.issues.length + ' to review' : '1 to review' };
-    return { cls:'section-state progress', label:info.issues.length > 1 ? info.issues.length + ' to go' : (info.issues.length === 1 ? '1 to go' : 'In progress') };
+    if(!touched) return { empty:true };
+    if(info.state === 'warning') return { cls:'section-state warn', html:info.issues.length > 1 ? info.issues.length + ' to review' : '1 to review', empty:false };
+    return { cls:'section-state progress', html:info.issues.length > 1 ? info.issues.length + ' to go' : (info.issues.length === 1 ? '1 to go' : 'In progress'), empty:false };
   }
 
   function renderSectionNav(){
@@ -3279,10 +3343,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var current = currentOpenSection();
     SECTION_ORDER.forEach(function(sec){
       var badge = sectionBadge(sec.key);
-      var stateClass = badge.cls, stateLabel = badge.label;
 
       var cardState = document.getElementById('cardState-'+sec.key);
-      if(cardState){ cardState.className = stateClass; cardState.textContent = stateLabel; }
+      if(cardState){
+        if(badge.empty){
+          cardState.className = 'section-state';
+          cardState.innerHTML = '';
+          cardState.style.display = 'none';
+          cardState.removeAttribute('aria-label');
+        } else {
+          cardState.className = badge.cls;
+          cardState.innerHTML = badge.html;
+          cardState.style.display = '';
+          if(badge.ariaLabel) cardState.setAttribute('aria-label', badge.ariaLabel); else cardState.removeAttribute('aria-label');
+        }
+      }
 
       var btn = nav.querySelector('[data-section="'+sec.key+'"]');
       if(!btn) return;
@@ -3291,7 +3366,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       btn.setAttribute('aria-selected', active ? 'true' : 'false');
       btn.setAttribute('tabindex', active ? '0' : '-1');
       var navStateEl = btn.querySelector('.section-state');
-      if(active){
+      if(active || badge.empty){
         if(navStateEl) navStateEl.remove();
         return;
       }
@@ -3299,8 +3374,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         navStateEl = document.createElement('span');
         btn.appendChild(navStateEl);
       }
-      navStateEl.className = stateClass;
-      navStateEl.textContent = stateLabel;
+      navStateEl.className = badge.cls;
+      navStateEl.innerHTML = badge.html;
+      if(badge.ariaLabel) navStateEl.setAttribute('aria-label', badge.ariaLabel); else navStateEl.removeAttribute('aria-label');
     });
   }
 
@@ -3336,6 +3412,31 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   /* ---------- Statuses & Workflow ---------- */
 
   var STATUS_PRESETS = {
+    // Grounded in real GI endoscopy unit patient flow: registration/wait, a pre-procedure prep
+    // area (IV access, consent, gown change), the procedure itself, a monitored recovery period
+    // until discharge criteria (responsiveness, stable vitals) are met, then discharge.
+    'Endoscopy': [
+      { name:'Checked In', desc:'Patient has arrived and is checked in, awaiting the pre-procedure prep area.',
+        start:true, complete:false, allowLWOT:true,
+        allowedNext:[1],
+                enableTimer:true, timerValue:'20', timerUnit:'minutes', alert:'Patient waiting longer than expected' },
+      { name:'Pre-Procedure Prep', desc:'Patient is being prepped — IV access, consent confirmation, and gown change ahead of the procedure.',
+        start:false, complete:false, allowLWOT:true,
+        allowedNext:[2],
+                enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'In Procedure', desc:'Patient is in the endoscopy suite undergoing the procedure.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[3],
+                enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
+      { name:'Recovery', desc:'Patient is recovering post-procedure and monitored until discharge criteria (responsiveness, stable vitals) are met.',
+        start:false, complete:false, allowLWOT:false,
+        allowedNext:[4],
+                enableTimer:true, timerValue:'45', timerUnit:'minutes', alert:'Patient in Recovery longer than expected' },
+      { name:'Discharged', desc:'Patient has met discharge criteria and left the unit.',
+        start:false, complete:true, allowLWOT:false,
+        allowedNext:[],
+                enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
+    ],
     'ED': [
       { name:'Waiting List', desc:'Patient has arrived and is waiting to be seen.',
         start:true, complete:false, allowLWOT:true,
@@ -3448,8 +3549,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   var STATUSES = [];
   var selectedIndex = 0;
 
-  var ICON_UP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
-  var ICON_DOWN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
   var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>';
 
   function renderStatusList(){
@@ -3465,16 +3564,15 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var tagText = s.start ? 'Starting' : s.complete ? 'Completing' : '';
       var selected = i === selectedIndex;
       var warningText = diagnostics.unreachable[s.id] ? 'Unreachable' : (diagnostics.noExit[s.id] ? 'No exit' : '');
-      var warningHtml = warningText ? '<div class="status-subtitle status-warn"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg></span> '+warningText+'</div>' : '';
+      var warningHtml = warningText ? '<div class="status-subtitle status-warn">'+warningText+'</div>' : '';
       html += '<div class="status-item-wrapper">'+
-        '<div class="status-card'+(selected?' selected':'')+(warningText?' bad':'')+'" onclick="if(event.target.tagName!==\'INPUT\' && !event.target.closest(\'.action-btn\')) selectStatus('+i+')">'+
+        '<div class="status-card'+(selected?' selected':'')+(warningText?' bad':'')+'" onclick="if(event.target.tagName!==\'INPUT\' && !event.target.closest(\'.action-btn\') && !event.target.closest(\'.drag-handle\')) selectStatus('+i+')" ondragover="onReorderDragOver(event,\'status\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'status\',\''+s.id+'\')">'+
+          '<button class="drag-handle" type="button" draggable="true" aria-label="Drag to reorder '+s.name+'" ondragstart="onReorderDragStart(event,\'status\',\''+s.id+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</button>'+
           '<div class="status-info">'+
             '<input class="status-title" value="'+s.name+'" placeholder="Status title…" oninput="updateStatusName('+i+', this.value)" onfocus="selectStatus('+i+')">'+
             (warningHtml || (tagText ? '<div class="status-subtitle">'+tagText+'</div>' : ''))+
           '</div>'+
           '<div class="status-actions">'+
-            '<button class="action-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',-1)" aria-label="Move up">'+ICON_UP+'</button>'+
-            '<button class="action-btn" type="button" onclick="event.stopPropagation();moveStatus('+i+',1)" aria-label="Move down">'+ICON_DOWN+'</button>'+
             '<button class="action-btn" type="button" onclick="event.stopPropagation();deleteStatus('+i+')" aria-label="Delete">'+ICON_CLOSE+'</button>'+
           '</div>'+
         '</div>'+
@@ -3572,15 +3670,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       renderStatusEditor();
     }, { confirmLabel:"Delete", danger:true });
   }
-  function moveStatus(i, dir){
-    var j = i+dir;
-    if(j<0 || j>=STATUSES.length) return;
-    var tmp = STATUSES[i]; STATUSES[i]=STATUSES[j]; STATUSES[j]=tmp;
-    if(selectedIndex===i) selectedIndex=j;
-    else if(selectedIndex===j) selectedIndex=i;
-    renderStatusList();
-    renderStatusEditor();
-  }
+
 
   function selectStatus(i){
     selectedIndex = i;
@@ -3646,7 +3736,12 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     applyChange();
   }
 
-  function toggleLWOT(checked){ STATUSES[selectedIndex].allowLWOT = checked; }
+  function toggleLWOT(checked){
+    STATUSES[selectedIndex].allowLWOT = checked;
+    renderFlowMap();
+    renderStatusList();
+    updateReadiness();
+  }
 
   function toggleAllowedNext(targetId, checked){
     var s = STATUSES[selectedIndex];
@@ -3655,6 +3750,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(!checked && pos>-1) s.allowedNext.splice(pos,1);
     renderFlowMap();
     renderStatusEditor();
+    renderStatusList();
+    updateReadiness();
   }
 
   function updateStatusDesc(value){ STATUSES[selectedIndex].desc = value; }
