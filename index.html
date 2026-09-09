@@ -1681,11 +1681,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(willOpen) wrap.classList.add('open');
   }
   var WIDGET_LIBRARY = [
-    { key:'totalPatients', label:'Total Patients', settings:[], placement:'strip' },
-    { key:'resourceAvailability', label:'Resource Availability', settings:[], placement:'strip' },
-    { key:'codeTeam', label:'Code Team', settings:[], placement:'strip' },
-    { key:'doctorsOnDuty', label:'Doctors on Duty', settings:[], placement:'strip' },
-    { key:'cardexPanel', label:'Cardex Panel', settings:[], placement:'panel' },
+    { key:'totalPatients', label:'Total Patients', desc:'Choose one grouping for this count. Defaults to Workflow Status; the Care-Setting-specific option appears alongside it once a Care Setting is selected.', settings:[], placement:'strip' },
+    { key:'resourceAvailability', label:'Resource Availability', desc:'Shows whatever this board has claimed per Facility in Resource Allocation above — each Facility\'s live board only shows the resource types that Facility actually has. Nothing to configure here.', settings:[], placement:'strip' },
+    { key:'codeTeam', label:'Code Team', desc:'Team membership is maintained on the live board.', settings:[], placement:'strip' },
+    { key:'doctorsOnDuty', label:'Doctors on Duty', desc:'The on-duty list is maintained on the live board.', settings:[], placement:'strip' },
+    { key:'cardexPanel', label:'Cardex Panel', desc:'Choose which items appear in the Cardex panel on the live board.', settings:[], placement:'panel' },
     { key:'losDelay', label:'Length of Stay & Delay', desc:'Patients approaching or exceeding total-stay or status-duration thresholds.', settings:[], placement:'strip' },
     { key:'pendingWork', label:'Pending Work Summary', desc:'Counts of pending orders, results, medications, assessments, documentation, or approvals.', settings:[], placement:'strip' },
     { key:'transferReadiness', label:'Transfer & Discharge Readiness', desc:'Pending transfers, expected discharges, blockers, and patients ready for the next destination.', settings:[], placement:'panel' },
@@ -1755,16 +1755,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var options = [{ v:'workflowStatus', label:'Group by Workflow Status' }];
       if(selectedCareSettings.indexOf('ED') > -1) options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
       if(selectedCareSettings.indexOf('Hospitalization') > -1 || selectedCareSettings.indexOf('OR') > -1) options.push({ v:'unit', label:'Group by Unit' });
-      return '<p>Choose one grouping for this count. Defaults to Workflow Status; the Care-Setting-specific option appears alongside it once a Care Setting is selected.</p><div class="check-grid cols-3">'+
+      return '<div class="check-grid cols-3">'+
         options.map(function(o){
           return '<label class="check-option"><input type="radio" name="totalPatientsGroupBy" value="'+o.v+'"'+(s.groupBy===o.v?' checked':'')+' onchange="setTotalPatientsGroupBy(\''+o.v+'\')"> '+o.label+'</label>';
         }).join('') + '</div>';
     }
-    if(key === 'resourceAvailability'){
-      return '<p>Shows whatever this board has claimed per Facility in Resource Allocation above — each Facility\'s live board only shows the resource types that Facility actually has. Nothing to configure here.</p>';
-    }
-    if(key === 'codeTeam') return '<p>Team membership is maintained on the live board.</p>';
-    if(key === 'doctorsOnDuty') return '<p>The on-duty list is maintained on the live board.</p>';
+    if(key === 'resourceAvailability') return '';
+    if(key === 'codeTeam') return '';
+    if(key === 'doctorsOnDuty') return '';
     if(key === 'cardexPanel'){
       var cx = widgetSettings.cardexPanel;
       var items = [['awaitingApprovals','Awaiting Approvals'],['mar','MAR'],['medications','Medications'],['labRadiology','Lab / Radiology'],['rejectedMeds','Rejected Medication List']];
@@ -1773,8 +1771,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleCardexItem(\''+it[0]+'\', this.checked)"> '+it[1]+'</label>';
       }).join('')+'</div>';
     }
-    var def = widgetByKey(key);
-    return def && def.desc ? '<p>'+def.desc+'</p>' : '';
+    // Every other widget in the library is desc-only (no configurable settings) — that text now
+    // lives in the info icon next to the widget's name, not as a permanent paragraph here.
+    return '';
   }
 
   function renderWidgetLibrary(){
@@ -1802,8 +1801,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         return '<div class="subsection widget-card"'+(i===0?' style="margin-top:0;"':'')+' ondragover="onReorderDragOver(event,\'widget\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'widget\',\''+key+'\')">'+
           '<div class="widget-head">'+
             '<button class="drag-handle" type="button" draggable="true" aria-label="Drag to reorder '+def.label+'" ondragstart="onReorderDragStart(event,\'widget\',\''+key+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</button>'+
-            '<span class="widget-position">'+(i+1)+'</span>'+
-            '<h4><label class="switch-heading"'+(atCapacity?' title="'+group.label+' is full — turn another one off first to enable this."':'')+'><input type="checkbox"'+(enabled?' checked':'')+(atCapacity?' disabled':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label></h4>'+
+            '<h4><label class="switch-heading"'+(atCapacity?' title="'+group.label+' is full — turn another one off first to enable this."':'')+'><input type="checkbox"'+(enabled?' checked':'')+(atCapacity?' disabled':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About '+def.label+'" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+(def.desc||'No additional details for this widget.')+'</span></span></h4>'+
           '</div>'+
           '<div class="widget-body"'+(enabled?'':' style="display:none;"')+'>'+widgetBodyHtml(key)+'</div>'+
         '</div>';
@@ -2278,17 +2276,16 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
     var lockedHtml = LOCKED_COLUMN_KEYS.map(function(k){
       var c = columnByKey(k);
-      return '<div class="col-row locked"><span class="col-drag"></span><span class="col-order"></span><span class="col-name">'+c.label+'</span><span class="tag">Always included</span></div>';
+      return '<div class="col-row locked"><span class="col-drag"></span><span class="col-name">'+c.label+'</span><span class="tag">Always included</span></div>';
     }).join('');
 
     var rowsHtml = filtered.length ? filtered.map(function(c){
       var pos = selectedColumns.indexOf(c.key);
       var checked = pos > -1;
-      var orderLabel = checked ? (pos + LOCKED_COLUMN_KEYS.length + 1) : '';
       var dragHandle = checked ?
         ('<span class="col-drag" draggable="true" tabindex="0" aria-label="Drag to reorder '+c.label+'" ondragstart="onReorderDragStart(event,\'column\',\''+c.key+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</span>') :
         '<span class="col-drag" aria-hidden="true"></span>';
-      return '<label class="col-row" ondragover="onReorderDragOver(event,\'column\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'column\',\''+c.key+'\')">'+dragHandle+'<span class="col-order">'+orderLabel+'</span><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleColumnSelected(\''+c.key+'\', this.checked)"> <span class="col-name">'+c.label+'</span></label>';
+      return '<label class="col-row" ondragover="onReorderDragOver(event,\'column\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'column\',\''+c.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleColumnSelected(\''+c.key+'\', this.checked)"> <span class="col-name">'+c.label+'</span></label>';
     }).join('') : '<p class="muted" style="padding:8px;">No matching columns</p>';
 
     list.innerHTML = lockedHtml + rowsHtml;
@@ -2422,7 +2419,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     list.innerHTML = sorted.length ? sorted.map(function(a){
       var pos = selectedActions.indexOf(a.key);
       var checked = pos > -1;
-      var orderLabel = checked ? (pos + 1) : '';
       var dragHandle = checked ?
         ('<span class="col-drag" draggable="true" tabindex="0" aria-label="Drag to reorder '+a.label+'" ondragstart="onReorderDragStart(event,\'action\',\''+a.key+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</span>') :
         '<span class="col-drag" aria-hidden="true"></span>';
@@ -2431,7 +2427,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       // a separate list-of-names summary underneath that repeats the same information.
       var positionTag = checked && pos < limit ? '<span class="action-position-tag inline">Inline</span>' : '';
       var iconHtml = '<span class="col-icon" aria-hidden="true">'+actionIconSvg(a.icon)+'</span>';
-      return '<label class="col-row" ondragover="onReorderDragOver(event,\'action\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'action\',\''+a.key+'\')">'+dragHandle+'<span class="col-order">'+orderLabel+'</span><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> '+iconHtml+'<span class="col-name">'+a.label+'</span>'+positionTag+'</label>';
+      return '<label class="col-row" ondragover="onReorderDragOver(event,\'action\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'action\',\''+a.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> '+iconHtml+'<span class="col-name">'+a.label+'</span>'+positionTag+'</label>';
     }).join('') : '<p class="muted" style="padding:8px;">No matching actions</p>';
     var countEl = document.getElementById('actionSelectedCount');
     if(countEl) countEl.textContent = selectedActions.length + ' of ' + ACTION_LIBRARY.length + ' actions selected';
