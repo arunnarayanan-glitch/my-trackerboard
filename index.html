@@ -46,6 +46,15 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .widget-card .widget-body{ margin-top:9px; }
 .widget-head{ display:flex; align-items:center; gap:9px; }
 .widget-head h4{ flex:1; min-width:0; margin:0; }
+.widget-tile-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin-top:10px; }
+.widget-tile{ display:flex; flex-direction:column; gap:7px; padding:9px 10px; background:#fafbfc; border:1px solid #e2e7eb; border-radius:4px; min-height:76px; }
+.widget-tile.enabled{ background:#eef6fc; border-color:#bcd7ea; }
+.widget-tile.at-capacity{ opacity:.55; }
+.widget-tile.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
+.widget-tile.dragging{ opacity:.4; }
+.widget-tile-top{ display:flex; align-items:center; gap:4px; }
+.widget-tile .switch-heading{ align-items:flex-start; gap:8px; }
+.widget-tile .switch-label{ font-size:12.5px; line-height:1.3; }
 .widget-position{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:var(--neutral); color:#4d5d6a; font-size:11px; font-weight:700; }
 .widget-move{ display:flex; gap:2px; flex:0 0 auto; }
 .widget-move .icon-btn{ width:24px; height:24px; font-size:11px; }
@@ -372,8 +381,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       <div class="card-body" id="sec-table-body">
 
         <div class="subsection" style="margin-top:0;padding-top:0;border-top:0;">
-          <h4>Columns <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About column reordering" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Checked columns get a drag handle — drag them into the order they'll appear on the board. Patient Name and PID are always included and pinned first.</span></span></h4>
           <div class="col-builder-controls">
+            <h4 style="margin:0;">Columns <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About column reordering" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Checked columns get a drag handle — drag them into the order they'll appear on the board. Patient Name and PID are always included and pinned first.</span></span></h4>
             <span style="flex:1 1 auto;"></span>
             <span id="columnSelectedCount" class="muted" style="white-space:nowrap;"></span>
             <button class="link-btn" type="button" onclick="resetColumnsToRecommended()">Reset to recommended</button>
@@ -386,7 +395,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         </div>
 
         <div class="subsection">
-          <h4>Patient actions</h4>
+          <h4>Actions</h4>
           <div class="col-builder-controls" style="flex-wrap:wrap;">
             <span class="help" style="margin:0;">The first <input class="text" type="number" id="inlineActionLimit" value="3" min="1" max="10" style="width:52px;height:24px;padding:0 5px;display:inline-block;vertical-align:middle;" onchange="renderActionLibrary();"> selected actions appear inline, in drag order; the rest overflow to a menu.</span>
             <span style="flex:1 1 auto;"></span>
@@ -1669,42 +1678,56 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var enabledCount = ordered.filter(function(k){ return widgetEnabled[k]; }).length;
       var capacity = widgetGroupCapacity(group.key);
       var overCapacity = enabledCount > capacity;
-      var cardsHtml = ordered.map(function(key, i){
+      // Compact tile per widget — a plain on/off toggle with a drag handle and an info icon.
+      // Widgets with actual configurable settings (today: Total Patients, Cardex Panel) don't
+      // expand inline, which would break the grid's uniform tile height; instead they get a
+      // small settings panel below the whole grid, shown only while that widget is enabled.
+      // Side Panel only ever has 1 slot (widgetGroupCapacity caps it at 1), so reordering among
+      // Side Panel widgets has no visible effect — no drag handle offered there at all, only on
+      // Top Strip where order genuinely matters.
+      var reorderable = group.key !== 'panel';
+      var tilesHtml = ordered.map(function(key){
         var def = widgetByKey(key);
         var enabled = !!widgetEnabled[key];
         // Hard cap: once a group is at capacity, the remaining not-yet-enabled widgets in it
         // are disabled rather than just warned about — governed capacity should actually be
         // governed, not just flagged after the fact.
         var atCapacity = !enabled && enabledCount >= capacity;
-        return '<div class="subsection widget-card"'+(i===0?' style="margin-top:0;"':'')+' ondragover="onReorderDragOver(event,\'widget\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'widget\',\''+key+'\')">'+
-          '<div class="widget-head">'+
-            '<button class="drag-handle" type="button" draggable="true" aria-label="Drag to reorder '+def.label+'" ondragstart="onReorderDragStart(event,\'widget\',\''+key+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</button>'+
-            '<h4><label class="switch-heading"'+(atCapacity?' title="'+group.label+' is full — turn another one off first to enable this."':'')+'><input type="checkbox"'+(enabled?' checked':'')+(atCapacity?' disabled':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About '+def.label+'" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+(def.desc||'No additional details for this widget.')+'</span></span></h4>'+
+        var dragAttrs = reorderable ? ' ondragover="onReorderDragOver(event,\'widget\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'widget\',\''+key+'\')"' : '';
+        var handleHtml = reorderable ? '<button class="drag-handle" type="button" draggable="true" aria-label="Drag to reorder '+def.label+'" ondragstart="onReorderDragStart(event,\'widget\',\''+key+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</button>' : '';
+        return '<div class="widget-tile'+(enabled?' enabled':'')+(atCapacity?' at-capacity':'')+'" data-widget-key="'+key+'"'+dragAttrs+'>'+
+          '<div class="widget-tile-top">'+
+            handleHtml+
+            '<span style="flex:1 1 auto;"></span>'+
+            '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About '+def.label+'" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+(def.desc||'No additional details for this widget.')+'</span></span>'+
           '</div>'+
-          '<div class="widget-body"'+(enabled?'':' style="display:none;"')+'>'+widgetBodyHtml(key)+'</div>'+
+          '<label class="switch-heading"'+(atCapacity?' title="'+group.label+' is full — turn another one off first to enable this."':'')+'><input type="checkbox"'+(enabled?' checked':'')+(atCapacity?' disabled':'')+' onchange="toggleWidgetEnabled(\''+key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+def.label+'</span></label>'+
         '</div>';
       }).join('');
+      // Settings panel: one compact card per currently-enabled widget in this group that
+      // actually has configurable options — most widgets contribute nothing here.
+      var settingsKeys = ordered.filter(function(key){ return widgetEnabled[key] && widgetBodyHtml(key); });
+      var settingsHtml = settingsKeys.length ? (
+        '<div class="subsection" style="margin-top:12px;">'+
+          '<h5 style="margin:0 0 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);">Widget settings</h5>'+
+          settingsKeys.map(function(key){
+            var def = widgetByKey(key);
+            return '<div class="widget-card" style="margin-bottom:8px;border-radius:4px;">'+
+              '<h5 style="margin:0 0 8px;font-size:12.5px;font-weight:700;">'+def.label+'</h5>'+
+              widgetBodyHtml(key)+
+            '</div>';
+          }).join('')+
+        '</div>'
+      ) : '';
       return '<div class="widget-placement-group">'+
         '<h4 class="widget-placement-title">'+group.label+' <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About '+group.label+'" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+group.desc+'</span></span> <span class="muted" style="font-weight:400;">&mdash; '+enabledCount+' of '+capacity+' enabled</span></h4>'+
         (overCapacity ? '<p class="help" style="color:var(--warn);">'+enabledCount+' enabled here — more than '+capacity+' may not fit and could get cut off or overlap on the live board.</p>' : '')+
-        cardsHtml +
+        '<div class="widget-tile-grid">'+tilesHtml+'</div>'+
+        settingsHtml +
       '</div>';
     }).join('');
   }
 
-  /* =========================================================================================
-     Care Setting is the only entity Trackerboard still reads from Care Settings Configuration.
-     Care Setting and Trackerboard both sit above the concept of a physical Facility — a
-     Trackerboard is configured once against a Care Setting, with no Facility, Unit, Program, or
-     Access binding of its own. A Facility that needs a Care Setting enables it in Facility
-     Settings (Care Settings Configuration, a separate tool) and from there gets whichever
-     Trackerboard is live for that Care Setting; none of that Facility-side wiring lives here.
-     Multiple Trackerboards can exist for the same Care Setting (e.g. 4 separate boards all
-     scoped to "ED") — a Facility enabling ED picks exactly one of them. In a real implementation
-     this list would be an API call into Care Settings Configuration rather than a mirrored
-     constant, and can include a `parent` for Care Settings that are subs of a broader one (e.g.
-     ICU's NICU / PICU subs) so a Trackerboard can be scoped to the sub directly.
-     ========================================================================================= */
   /* =========================================================================================
      Care Setting is the only entity Trackerboard still reads from Care Settings Configuration.
      Care Setting and Trackerboard both sit above the concept of a physical Facility — a
@@ -1724,10 +1747,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
      needs a special case for "this Care Setting has no Subs."
 
      Only Subs are ever selectable on a Trackerboard; Main is a grouping label, never a pickable
-     value. The Trackerboard picker shows each Sub's Short Name (not its full name) as the primary
-     label, with its Main name alongside for context, and search matches on Sub Short Name only.
-     Short Name uniqueness across Subs is guaranteed by Care Settings Configuration, not enforced
-     here — Trackerboard keys everything on Short Name as the stable identifier.
+     value. The Trackerboard picker shows each Sub's full name as the primary label, with its
+     Main's Short Name alongside as a tag, and search matches on Sub full name only. Short Name
+     uniqueness across Subs is guaranteed by Care Settings Configuration, not enforced here —
+     Trackerboard keys everything on the Sub's Short Name as the stable identifier, even though
+     that value is never shown in the picker itself.
 
      In a real implementation this would be an API call into Care Settings Configuration rather
      than a mirrored constant.
@@ -1860,7 +1884,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function onReorderDragStart(e, listType, key){
     reorderDrag = { listType:listType, key:key };
     if(e.dataTransfer){ e.dataTransfer.effectAllowed = 'move'; try{ e.dataTransfer.setData('text/plain', key); }catch(err){} }
-    var row = e.currentTarget.closest('.col-row, .widget-card, .status-card');
+    var row = e.currentTarget.closest('.col-row, .widget-card, .widget-tile, .status-card');
     if(row) row.classList.add('dragging');
   }
   function onReorderDragOver(e, listType){
@@ -1905,8 +1929,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     }
   }
   function onReorderDragEnd(){
-    document.querySelectorAll('.col-row.dragging, .widget-card.dragging, .status-card.dragging').forEach(function(el){ el.classList.remove('dragging'); });
-    document.querySelectorAll('.col-row.drag-over, .widget-card.drag-over, .status-card.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+    document.querySelectorAll('.col-row.dragging, .widget-card.dragging, .widget-tile.dragging, .status-card.dragging').forEach(function(el){ el.classList.remove('dragging'); });
+    document.querySelectorAll('.col-row.drag-over, .widget-card.drag-over, .widget-tile.drag-over, .status-card.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
     reorderDrag = { listType:null, key:null };
   }
 
@@ -2100,11 +2124,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   // for "Clinical & safety alerts". This gives each signal an actual enabled state plus a
   // severity that maps to how it presents on the live board.
   var SIGNAL_LIBRARY = [
-    { key:'clinicalSafety', label:'Clinical & safety alerts', defaultEnabled:true, defaultSeverity:'critical', icon:'exclamation-octagon' },
-    { key:'visitorRestriction', label:'Visitor / confidentiality restriction', defaultEnabled:true, defaultSeverity:'critical', icon:'eye-slash' },
-    { key:'assessmentRequired', label:'Assessment required', defaultEnabled:true, defaultSeverity:'caution', icon:'clipboard-check' },
-    { key:'documentationIncomplete', label:'Documentation incomplete', defaultEnabled:true, defaultSeverity:'caution', icon:'file-earmark-x' },
-    { key:'orderPending', label:'Order pending', defaultEnabled:true, defaultSeverity:'caution', icon:'hourglass-split' },
+    { key:'clinicalSafety', label:'Clinical & safety alerts', defaultEnabled:false, defaultSeverity:'critical', icon:'exclamation-octagon' },
+    { key:'visitorRestriction', label:'Visitor / confidentiality restriction', defaultEnabled:false, defaultSeverity:'critical', icon:'eye-slash' },
+    { key:'assessmentRequired', label:'Assessment required', defaultEnabled:false, defaultSeverity:'caution', icon:'clipboard-check' },
+    { key:'documentationIncomplete', label:'Documentation incomplete', defaultEnabled:false, defaultSeverity:'caution', icon:'file-earmark-x' },
+    { key:'orderPending', label:'Order pending', defaultEnabled:false, defaultSeverity:'caution', icon:'hourglass-split' },
     { key:'specimenPending', label:'Specimen pending', defaultEnabled:false, defaultSeverity:'caution', icon:'droplet-half' },
     { key:'dischargeTaskPending', label:'Discharge task pending', defaultEnabled:false, defaultSeverity:'informational', icon:'door-open' },
     { key:'transferPrepIncomplete', label:'Transfer preparation incomplete', defaultEnabled:false, defaultSeverity:'informational', icon:'arrow-left-right' },
@@ -2323,7 +2347,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   // These fields aren't currently persisted with the record (pre-existing gap, unrelated to
   // this change), so there's nothing to "load" — every drawer open resets Comments to its
-  // known-good default (on, with both options enabled and a 140-char limit).
+  // known-good default (off; the sub-options below are pre-filled with sensible starting values
+  // for whenever someone does turn it on, but the section itself doesn't start enabled).
   function resetCommentsSectionToDefaults(){
     var predefined = document.getElementById('predefinedCommentsEnabled');
     var freeText = document.getElementById('freeTextCommentsEnabled');
@@ -2337,8 +2362,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     toggleFreeTextCommentsVisibility(true);
     var cb = document.getElementById('commentsSectionEnabled');
     var body = document.getElementById('commentsBody');
-    if(cb) cb.checked = true;
-    if(body) body.style.display = '';
+    if(cb) cb.checked = false;
+    if(body) body.style.display = 'none';
     updateCommentsBothOffWarning();
   }
 
