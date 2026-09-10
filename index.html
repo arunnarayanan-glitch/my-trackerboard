@@ -32,14 +32,14 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .picker-input button.text{position:relative;padding-right:26px}.picker-input button.text::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #687681;transform:translateY(-50%);pointer-events:none}.picker-input button.text[aria-expanded="true"]::after{border-top-color:var(--navy)}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:#fff;border:1px solid #c4ced8;border-radius:2px;box-shadow:0 8px 20px #001f3d24;padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:2px;text-align:left;background:transparent;cursor:pointer;font-size:13px}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f8fafb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:11px}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#245f96;font-weight:700;text-decoration:none}.manage:hover{text-decoration:underline}
 .flow-shell{margin-bottom:14px;padding:11px;background:#fbfcfd;border:1px solid var(--line)}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:#fff;border:1px solid #dde3e8;color:var(--muted);cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);color:var(--ink)}.flow-node.bad{border-color:#d9988f;background:#fffafa;color:var(--ink)}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:#7f8b95;font-size:18px}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:#f8fafb;border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#245f96;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:11px}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:#f1f4f7;border:1px solid #e1e6ea}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid #e4e9ed}.subsection h4{margin:0 0 4px;font-size:13px}.subsection p{margin:0 0 9px;color:var(--muted);font-size:11.5px}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.check-option{min-height:30px;padding:5px 7px;background:#fafbfc;border:1px solid #e2e7eb;font-size:12px}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:12px}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:#f6f7f8;border-left:3px solid #aeb8c1;color:#4d5d6a;font-size:12px}
 .modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:16px}.modal-body{min-height:0;overflow:auto;padding:20px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #e8edf1}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f8fafb;color:var(--muted);font-size:11px;text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f1f4f7;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:12px}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:11px}
-@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid,.comments-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}.drawer-main{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.section-nav{flex-direction:row;overflow-x:auto;overflow-y:visible;border-right:0;border-bottom:1px solid var(--line);padding:6px 10px;}.section-nav-item{flex:0 0 auto;border-left:0;border-bottom:2px solid transparent;}.section-nav-item.active{border-bottom-color:var(--navy);}}
+@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid,.comments-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
 </style>
 <style>
 /* Mockup-only additions layered on top of the reference design system above.
    The Create screen is now the reference's own drawer/backdrop pattern,
    only widened to 70vw per request and given a light (non-navy) quick-nav
    so it reads correctly on the drawer's white background. */
-.drawer{ width:85vw; }
+.drawer{ width:60vw; }
 .check-grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
 .check-option.locked{ opacity:.6; }
 .widget-card{ padding:11px 12px; background:#fafbfc; border:1px solid #e2e7eb; border-top:1px solid #e2e7eb; }
@@ -139,9 +139,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .card.collapsed .card-body{ display:none; }
 .tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:11px; border:1px solid #c4ced8; border-radius:2px; background:#fff; }
 .check-option:has(input[type="checkbox"]:not(:checked)) .tier-select{ display:none; }
-.check-option.unit-check-card{ flex-direction:column; align-items:flex-start; gap:3px; min-height:auto; padding:8px 10px; }
-.check-option.unit-check-card .unit-check-top{ display:inline-flex; align-items:center; gap:6px; font-weight:700; }
-.check-option.unit-check-card .unit-check-meta{ padding-left:21px; color:var(--muted); font-size:11px; font-weight:400; }
 .widget-placement-group{ margin-bottom:22px; }
 .widget-placement-group:last-child{ margin-bottom:0; }
 .widget-placement-title{ margin:0 0 2px; font-size:13px; }
@@ -185,28 +182,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .signal-legend-icon-demo, .legend-icon-demo{ flex:0 0 auto; display:inline-flex; color:var(--muted); }
 .signal-legend-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; color:#4d5d6a; }
 .signal-legend-caption{ margin:0; color:var(--muted); font-size:11px; line-height:1.4; }
-.resource-cell-input{ width:60px; height:26px; padding:0 4px; text-align:right; }
 .col-list-search .pill-toggle{ flex:0 0 auto; padding:4px 10px; border:1px solid #c4ced8; border-radius:12px; background:#fff; color:#4d5d6a; font-size:11px; font-weight:700; cursor:pointer; white-space:nowrap; }
 .col-list-search .pill-toggle[aria-pressed="true"]{ background:var(--bad-bg); border-color:#d9988f; color:var(--bad); }
-.resource-facility-list{ display:flex; flex-direction:column; }
-.resource-facility-row{ border-bottom:1px solid #eef1f4; }
-.resource-facility-row:last-child{ border-bottom:0; }
-.resource-facility-header{ display:flex; align-items:center; gap:10px; width:100%; padding:9px 12px; background:transparent; border:0; text-align:left; cursor:pointer; font:inherit; color:inherit; }
-.resource-facility-header:hover{ background:#f8fafb; }
-.resource-facility-header .chevron{ flex:0 0 auto; color:var(--muted); transition:transform .15s; }
-.resource-facility-row.open .resource-facility-header .chevron{ transform:rotate(90deg); }
-.resource-facility-name{ flex:0 0 auto; font-weight:700; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.resource-facility-summary{ flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11.5px; color:var(--muted); }
-.resource-util-bar{ flex:0 0 54px; height:5px; background:#e7ebef; border-radius:3px; overflow:hidden; }
-.resource-util-bar-fill{ height:100%; background:var(--ok); }
-.resource-util-bar-fill.warn{ background:var(--bad); }
-.resource-status-chip{ flex:0 0 auto; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; white-space:nowrap; }
-.resource-status-chip.ok{ background:#e5f3ea; color:#1f7a3f; }
-.resource-status-chip.warn{ background:var(--bad-bg); color:var(--bad); }
-.resource-facility-body{ padding:2px 12px 12px 34px; display:flex; flex-direction:column; gap:9px; }
-.resource-type-row{ display:flex; align-items:center; gap:10px; }
-.resource-type-row .rt-label{ flex:1 1 auto; min-width:0; font-size:12.5px; }
-.resource-type-row .rt-input-wrap{ flex:0 0 auto; display:flex; align-items:center; gap:6px; }
 @media(max-width:900px){ .col-builder{ grid-template-columns:1fr; } }
 .info-popover-wrap{ position:relative; display:inline-flex; vertical-align:middle; margin-left:4px; }
 .info-popover-trigger{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; padding:0; background:transparent; border:0; border-radius:50%; color:var(--muted); cursor:pointer; }
@@ -223,12 +200,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .info-popover .ip-value{ flex:0 1 auto; word-break:break-word; }
 .list-trigger{ padding:0; background:transparent; border:0; color:#245f96; font-weight:700; font-size:inherit; cursor:pointer; }
 .list-trigger:hover{ text-decoration:underline; }
-.drawer-main{ display:grid; grid-template-columns:20% 80%; min-height:0; }
-.section-nav{ display:flex; flex-direction:column; align-items:stretch; gap:2px; overflow-y:auto; padding:14px 10px; background:#fafbfc; border-right:1px solid var(--line); border-bottom:0; }
-.section-nav-item{ display:flex; align-items:center; gap:8px; padding:11px 13px; background:transparent; border:0; border-left:3px solid transparent; border-radius:2px; font:inherit; font-size:13px; font-weight:700; color:var(--muted); white-space:normal; text-align:left; cursor:pointer; }
-.section-nav-item:hover{ color:var(--ink); background:#eef1f4; }
-.section-nav-item.active{ color:var(--navy); background:#fff; border-left-color:var(--navy); }
-.section-nav-item .section-state{ font-weight:700; margin-left:auto; }
+.drawer-main{ display:grid; grid-template-columns:1fr; min-height:0; }
 .section-state.warn{ background:var(--warn-bg); color:var(--warn); }
 .section-state.icon-only{ display:inline-flex; align-items:center; justify-content:center; padding:0; background:transparent; color:var(--ok); }
 .drawer-foot-zone{ display:flex; align-items:center; gap:8px; }
@@ -271,9 +243,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     <section class="filter-bar" aria-label="Search and filters">
       <div class="filters">
         <div class="picker" style="max-width:340px;flex:1 1 220px;"><label for="dashboardSearchInput" class="visually-hidden">Search boards</label><input type="text" class="text" id="dashboardSearchInput" placeholder="Search boards…" oninput="onDashboardSearchInput(this.value)"></div>
-        <div class="picker" style="max-width:220px;"><button type="button" class="filter-select-btn" id="facilityFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('facility')">Facility: All</button><div class="picker-menu" id="facilityFilterMenu"></div></div>
         <div class="picker" style="max-width:220px;"><button type="button" class="filter-select-btn" id="careSettingFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('careSetting')">Care Setting: All</button><div class="picker-menu" id="careSettingFilterMenu"></div></div>
-        <div class="picker" style="max-width:220px;"><button type="button" class="filter-select-btn" id="programFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('program')">Program: All</button><div class="picker-menu" id="programFilterMenu"></div></div>
         <div class="picker" style="max-width:220px;"><button type="button" class="filter-select-btn" id="statusFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('status')">Status: All</button><div class="picker-menu" id="statusFilterMenu"></div></div>
         <button type="button" class="link-btn" id="clearFiltersBtn" style="display:none;" onclick="clearAllFilters()">Clear all</button>
       </div>
@@ -282,8 +252,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     <section class="content">
       <div class="table-shell">
         <table class="table" aria-label="Trackerboards">
-          <colgroup><col style="width:23%"><col style="width:12%"><col style="width:14%"><col style="width:12%"><col style="width:11%"><col style="width:10%"><col style="width:8%"><col style="width:10%"></colgroup>
-          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph">▲</span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph">▲</span></button></th><th data-key-th="facilities"><button type="button" class="sort-th" onclick="setDashboardSort('facilities')">Facilities<span class="sort-glyph">▲</span></button></th><th data-key-th="program"><button type="button" class="sort-th" onclick="setDashboardSort('program')">Programs<span class="sort-glyph">▲</span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated On<span class="sort-glyph">▲</span></button></th><th data-key-th="updatedBy"><button type="button" class="sort-th" onclick="setDashboardSort('updatedBy')">Updated By<span class="sort-glyph">▲</span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph">▲</span></button></th><th class="actions">Actions</th></tr></thead>
+          <colgroup><col style="width:28%"><col style="width:18%"><col style="width:15%"><col style="width:13%"><col style="width:11%"><col style="width:15%"></colgroup>
+          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph">▲</span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph">▲</span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated On<span class="sort-glyph">▲</span></button></th><th data-key-th="updatedBy"><button type="button" class="sort-th" onclick="setDashboardSort('updatedBy')">Updated By<span class="sort-glyph">▲</span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph">▲</span></button></th><th class="actions">Actions</th></tr></thead>
           <tbody id="dashboardBody"></tbody>
         </table>
         <div class="table-footer">
@@ -311,13 +281,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   </div>
 
   <div class="drawer-main">
-  <div class="section-nav" id="sectionNav" role="tablist" aria-label="Trackerboard configuration sections" onkeydown="handleSectionNavKeydown(event)">
-    <button type="button" class="section-nav-item" data-section="caresetting" role="tab" aria-selected="true" tabindex="0" aria-controls="sec-caresetting" onclick="goToSection('caresetting')">Basic Information</button>
-    <button type="button" class="section-nav-item" data-section="workflow" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-workflow" onclick="goToSection('workflow')">Status &amp; Workflow</button>
-    <button type="button" class="section-nav-item" data-section="widgets" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-widgets" onclick="goToSection('widgets')">Widgets</button>
-    <button type="button" class="section-nav-item" data-section="table" role="tab" aria-selected="false" tabindex="-1" aria-controls="sec-table" onclick="goToSection('table')">Patient Table</button>
-  </div>
-
   <div class="drawer-body">
 
     <div class="card" id="sec-caresetting" data-section-key="caresetting">
@@ -343,33 +306,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
             <p class="field-error" id="careSettingFieldError" style="display:none;">Select at least one Care Setting.</p>
           </div>
         </div>
-        </div>
-        <div class="subsection" data-field-group="scope">
-          <div class="form-grid">
-          <div class="field"><label for="connFacilityBtn">Facility</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="connFacilityBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleConnFacilityPicker()">Select Facility…</button></div><div class="picker-menu" id="connFacilityMenu"></div></div><p class="field-error" id="facilityFieldError" style="display:none;">Select at least one Facility.</p></div>
-          </div>
-        </div>
-        <div class="subsection" id="unitAllocationSection" style="display:none">
-          <h4>Units <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About Units" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Units and their resources are configured in Care Settings Configuration, not here. Select which Units this board tracks — a Unit already claimed by another Trackerboard won't appear. Resource counts shown are a live read of that Unit's current allocation.</span></span></h4>
-          <div class="col-unified-list">
-            <div id="unitAllocationGrid" class="resource-facility-list"></div>
-          </div>
-        </div>
-        <div class="subsection">
-          <div class="form-grid">
-          <div class="field"><label for="programAccessBtn">Programs</label>
-            <div style="display:flex;gap:8px;align-items:flex-start;">
-              <div class="picker" style="flex:1 1 auto;"><div class="picker-input"><button type="button" class="text" id="programAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleProgramPicker()">Select Programs…</button></div><div class="picker-menu" id="programAccessMenu"></div></div>
-              <div class="picker" id="subProgramPickerWrap" style="flex:1 1 auto;display:none;"><div class="picker-input"><button type="button" class="text" id="subProgramBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleSubProgramPicker()">Select Sub-programs…</button></div><div class="picker-menu" id="subProgramMenu"></div></div>
-            </div>
-          </div>
-          </div>
-        </div>
-        <div class="subsection" data-field-group="scope">
-          <h4>Access</h4>
-          <div class="form-grid">
-            <div class="field"><label for="configAccessBtn">Configuration Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="configAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('config')">Select roles…</button></div><div class="picker-menu" id="configAccessMenu"></div></div></div><div class="field"><label for="runtimeAccessBtn">Board Access</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="runtimeAccessBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleAccessPicker('runtime')">Select roles…</button></div><div class="picker-menu" id="runtimeAccessMenu"></div></div><p class="field-error" id="boardAccessFieldError" style="display:none;">Select at least one Board access role.</p></div><p class="field-error" id="accessBroaderWarning" style="grid-column:1/-1;display:none;">Configuration access includes groups without Board access.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -450,6 +386,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         </div>
 
         <div class="subsection">
+          <h4>Patient actions</h4>
+          <div class="col-builder-controls" style="flex-wrap:wrap;">
+            <span class="help" style="margin:0;">The first <input class="text" type="number" id="inlineActionLimit" value="3" min="1" max="10" style="width:52px;height:24px;padding:0 5px;display:inline-block;vertical-align:middle;" onchange="renderActionLibrary();"> selected actions appear inline, in drag order; the rest overflow to a menu.</span>
+            <span style="flex:1 1 auto;"></span>
+            <span id="actionSelectedCount" class="muted" style="white-space:nowrap;"></span>
+            <button class="link-btn" type="button" onclick="resetActionsToDefault()">Reset to default</button>
+          </div>
+          <div class="col-unified-list">
+            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="actionSearchInput" placeholder="Search actions…" oninput="renderActionLibrary()"></div>
+            <div id="actionLibraryList"></div>
+          </div>
+          <p class="field-error" id="statusChangeSafetyWarning" style="display:none;">No status-change action is enabled. Patients have no way to move through the workflow.</p>
+        </div>
+
+        <div class="subsection">
           <h4><label class="switch-heading"><input type="checkbox" id="signalsSectionEnabled" onchange="toggleSignalsSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Signals</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About signals" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Alerts and reminders that show up on a patient row &mdash; separate from the row actions below.</span></span></h4>
           <div class="widget-body" id="signalsBody" style="display:none;">
             <div class="help" style="margin:-4px 0 8px; display:flex; align-items:center; gap:5px;">Choose how urgent this should look to the care team. <span class="info-popover-wrap"><button type="button" class="link-btn" style="font-size:11.5px;" onclick="toggleInfoPopover(this)">See examples</button><span class="info-popover wide">
@@ -498,22 +449,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
             </div>
             <p class="field-error" id="commentsBothOffWarning" style="display:none;">Operational comments is on, but both Predefined comments and Free text are off — turn on at least one, or turn off Operational comments.</p>
           </div>
-        </div>
-
-        <div class="subsection">
-          <h4>Patient actions</h4>
-          <p>Toggle which actions launch from a patient row, and drag to set the order.</p>
-          <p class="help" style="margin:-4px 0 10px;">The first <input class="text" type="number" id="inlineActionLimit" value="3" min="1" max="10" style="width:52px;height:24px;padding:0 5px;display:inline-block;vertical-align:middle;" onchange="renderActionLibrary();"> selected actions appear inline, in drag order; the rest overflow to a menu.</p>
-          <div class="col-builder-controls">
-            <span style="flex:1 1 auto;"></span>
-            <span id="actionSelectedCount" class="muted" style="white-space:nowrap;"></span>
-            <button class="link-btn" type="button" onclick="resetActionsToDefault()">Reset to default</button>
-          </div>
-          <div class="col-unified-list">
-            <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="actionSearchInput" placeholder="Search actions…" oninput="renderActionLibrary()"></div>
-            <div id="actionLibraryList"></div>
-          </div>
-          <p class="field-error" id="statusChangeSafetyWarning" style="display:none;">No status-change action is enabled. Patients have no way to move through the workflow.</p>
         </div>
 
       </div>
@@ -730,17 +665,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     shortNameEdited = !!data;
     selectedCareSettings = data ? (data.careSettings || (data.careSetting ? [data.careSetting] : [])).slice() : [];
     updateCareSettingButton();
-    selectedFacilities = data ? (data.facilities || []).slice() : [];
-    renderConnFacilityMenu();
-    selectedUnits = data && data.selectedUnits ? JSON.parse(JSON.stringify(data.selectedUnits)) : {};
-    renderUnitAllocation();
-    selectedPrograms = data ? (data.programs || []).slice() : [];
-    renderProgramMenu();
-    selectedConfigAccess = data ? (data.configAccess || []).slice() : [];
-    selectedRuntimeAccess = data ? (data.runtimeAccess || []).slice() : [];
-    renderAccessMenu('config');
-    renderAccessMenu('runtime');
-    updateAccessWarning();
     renderCareSettingInfo();
     STATUSES = (data && data.statuses) ? JSON.parse(JSON.stringify(data.statuses)) : (selectedCareSettings.length === 1 && STATUS_PRESETS[selectedCareSettings[0]] ? clonePreset(STATUS_PRESETS[selectedCareSettings[0]]) : []);
     selectedIndex = 0;
@@ -894,8 +818,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     if(!t.name || !t.name.trim()) issues.push('a Board Name');
     if(!t.shortName || !t.shortName.trim()) issues.push('a Short Name');
     if(!t.careSettings || !t.careSettings.length) issues.push('at least one Care Setting');
-    if(!t.facilities || !t.facilities.length) issues.push('at least one Facility');
-    if(!t.runtimeAccess || !t.runtimeAccess.length) issues.push('at least one Board access role');
     if(t.statuses){
       if(t.statuses.length < 2) issues.push('at least two statuses');
       if(!t.statuses.some(function(s){ return s.start; })) issues.push('a Starting status');
@@ -915,11 +837,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       id: (pendingUniqueId || '').trim(),
       desc: document.getElementById('trackerboardDescInput').value,
       careSettings: selectedCareSettings.slice(),
-      facilities: selectedFacilities.slice(),
-      selectedUnits: selectedFacilities.reduce(function(acc, f){ acc[f] = (selectedUnits[f] || []).slice(); return acc; }, {}),
-      programs: selectedPrograms.slice(),
-      configAccess: selectedConfigAccess.slice(),
-      runtimeAccess: selectedRuntimeAccess.slice(),
       statuses: JSON.parse(JSON.stringify(STATUSES)),
       widgets: { order: widgetOrder.slice(), enabled: Object.assign({}, widgetEnabled), settings: JSON.parse(JSON.stringify(widgetSettings)) },
       columns: selectedColumns.slice(),
@@ -1032,8 +949,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       openConfirmModal('Activate "'+record.name+'"?',
         '<ul style="margin:0 0 8px;padding-left:18px;">'+
           '<li>Care Setting: '+((record.careSettings||[]).join(', ')||'—')+'</li>'+
-          '<li>Facilities: '+(record.facilities.join(', ')||'—')+'</li>'+
-          '<li>Board access: '+(record.runtimeAccess.join(', ')||'—')+'</li>'+
           '<li>Workflow: '+record.statuses.length+' statuses</li>'+
         '</ul>'+
         'The board will become available to permitted users immediately.',
@@ -1083,8 +998,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     setFieldError('nameFieldError', basicTouched && !document.getElementById('trackerboardNameInput').value.trim());
     setFieldError('shortNameFieldError', basicTouched && !document.getElementById('shortNameInput').value.trim());
     setFieldError('careSettingFieldError', scopeTouched && !selectedCareSettings.length);
-    setFieldError('facilityFieldError', scopeTouched && selectedFacilities.length === 0);
-    setFieldError('boardAccessFieldError', scopeTouched && selectedRuntimeAccess.length === 0);
   }
 
   function updateReadiness(){
@@ -1166,11 +1079,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     formDirty = true;
     var card = evt.target && evt.target.closest ? evt.target.closest('[data-section-key]') : null;
     if(card) dirtySections[card.getAttribute('data-section-key')] = true;
-    // Basic Information and Scope & Access now live in one merged section, so dirtySections
+    // Basic Information now holds just Name/Short Name/Description/Care Setting, so dirtySections
     // alone is too coarse for field-level error display — typing a single letter in Board Name
-    // would otherwise also mark Care Setting/Facility/Board Access as "touched" and show their
-    // errors before the user has even reached them. data-field-group tracks each field cluster
-    // independently for that purpose; dirtySections still drives the section-level badge as before.
+    // would otherwise also mark Care Setting as "touched" and show its error before the user has
+    // even reached it. data-field-group tracks each field cluster independently for that purpose;
+    // dirtySections still drives the section-level badge as before.
     var group = evt.target && evt.target.closest ? evt.target.closest('[data-field-group]') : null;
     if(group) touchedGroups[group.getAttribute('data-field-group')] = true;
     updateReadiness();
@@ -1215,8 +1128,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     // Full restore, mirroring the same field population openDrawer() does when loading a saved
     // record, using the snapshot as the data source. This previously restored only 4 fields
     // (name/shortName/desc/careSetting) even though writeRecoverySnapshot captures the whole
-    // form via collectTrackerboardFromForm() — meaning Facilities, Programs, Access, Statuses,
-    // Columns, Actions, Signals, and Widgets were silently dropped on "Restore" every time.
+    // form via collectTrackerboardFromForm() — meaning Statuses, Columns, Actions, Signals, and
+    // Widgets were silently dropped on "Restore" every time.
     document.getElementById('trackerboardNameInput').value = snap.name || '';
     document.getElementById('shortNameInput').value = snap.shortName || '';
     pendingUniqueId = snap.id || '';
@@ -1224,17 +1137,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     document.getElementById('trackerboardDescInput').value = snap.desc || '';
     selectedCareSettings = (snap.careSettings || (snap.careSetting ? [snap.careSetting] : [])).slice();
     updateCareSettingButton();
-    selectedFacilities = (snap.facilities || []).slice();
-    renderConnFacilityMenu();
-    selectedUnits = snap.selectedUnits ? JSON.parse(JSON.stringify(snap.selectedUnits)) : {};
-    renderUnitAllocation();
-    selectedPrograms = (snap.programs || []).slice();
-    renderProgramMenu();
-    selectedConfigAccess = (snap.configAccess || []).slice();
-    selectedRuntimeAccess = (snap.runtimeAccess || []).slice();
-    renderAccessMenu('config');
-    renderAccessMenu('runtime');
-    updateAccessWarning();
     renderCareSettingInfo();
     STATUSES = snap.statuses ? JSON.parse(JSON.stringify(snap.statuses)) : (selectedCareSettings.length === 1 && STATUS_PRESETS[selectedCareSettings[0]] ? clonePreset(STATUS_PRESETS[selectedCareSettings[0]]) : []);
     selectedIndex = 0;
@@ -1356,46 +1258,35 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   var SEED_ACTIONS = { statusChange:true, addViewOrders:true, encounterNote:true, documents:true, viewCardexAlerts:true, patientDemographics:true };
 
   var TRACKERBOARDS = [
-    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['ED'], facilities:['Main Hospital','North Campus'], programs:['ED Surge'], selectedUnits:{ 'Main Hospital':[{csName:'ED', unitId:'unit-ed-mh-1'}], 'North Campus':[{csName:'ED', unitId:'unit-ed-nc-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/07/2026 09:15 AM', updatedBy:'Priya Nair', status:'Active', activePatients:6, dependents:1 },
-    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['ED'], facilities:['Eastside Medical Center'], programs:['ED Surge'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/26/2026 02:40 PM', updatedBy:'Johnny Stark', status:'Active', activePatients:4, dependents:1 },
-    { name:'Hospitalization Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['Hospitalization'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'Hospitalization', unitId:'unit-hosp-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'08/05/2026 11:05 AM', updatedBy:'Arun', status:'Draft', activePatients:0, dependents:0 },
-    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['ICU'], facilities:['Main Hospital'], programs:['Critical Care Management','General Medicine Program'], selectedUnits:{ 'Main Hospital':[{csName:'ICU', unitId:'unit-icu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse','Care Manager'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/11/2026 04:22 PM', updatedBy:'Priya Nair', status:'Active', activePatients:9, dependents:2 },
-    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['OR'], facilities:['Main Hospital'], programs:['Surgical Services Program'], selectedUnits:{ 'Main Hospital':[{csName:'OR', unitId:'unit-or-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/28/2026 10:50 AM', updatedBy:'Johnny Stark', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['OR'], facilities:['North Campus'], programs:[], selectedUnits:{ 'North Campus':[{csName:'OR', unitId:'unit-or-nc-1'}] }, runtimeAccess:[], configAccess:[], everActivated:false, updated:'07/30/2026 03:10 PM', updatedBy:'Arun', status:'Draft', activePatients:0, dependents:0 },
-    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['OR'], facilities:['Eastside Medical Center'], programs:['Surgical Services Program'], selectedUnits:{}, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/02/2026 12:30 PM', updatedBy:'Johnny Stark', status:'Inactive', activePatients:0, dependents:0 },
-    { name:'Neonatology Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks newborns admitted for specialty neonatal care.',careSettings:['Neonatology'], facilities:['Main Hospital'], programs:[], selectedUnits:{ 'Main Hospital':[{csName:'Neonatology', unitId:'unit-nicu-mh-1'}] }, runtimeAccess:['Unit Charge Nurse'], configAccess:['Trackerboard Admin'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/14/2026 08:05 AM', updatedBy:'Priya Nair', status:'Active', activePatients:3, dependents:0 }
+    { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'EDT001', desc:'Main ED board for tracking patients from arrival through discharge.',careSettings:['ED','OR','ICU'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/07/2026 09:15 AM', updatedBy:'Sarah Mitchell', status:'Active', activePatients:6, dependents:1 },
+    { name:'ED Overflow Trackerboard', id:'EDT003', shortName:'EDT003', desc:'Overflow board used when the main ED is at capacity.',careSettings:['ED'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/26/2026 02:40 PM', updatedBy:'Johnny Stark', status:'Active', activePatients:4, dependents:1 },
+    { name:'ED Pediatric Trackerboard', id:'EDT005', shortName:'EDT005', desc:'Separate ED board scoped to pediatric arrivals.',careSettings:['ED'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:false, updated:'08/09/2026 01:20 PM', updatedBy:'Michael Reynolds', status:'Draft', activePatients:0, dependents:0 },
+    { name:'ED Fast Track Trackerboard', id:'EDT010', shortName:'EDT010', desc:'Lower-acuity fast-track lane, separate from the main ED flow.',careSettings:['ED'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:false, updated:'08/09/2026 01:45 PM', updatedBy:'Michael Reynolds', status:'Draft', activePatients:0, dependents:0 },
+    { name:'Hospitalization Trackerboard', id:'IPT004', shortName:'IPT004', desc:'Tracks admitted patients across general inpatient units.',careSettings:['HOSP'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:false, updated:'08/05/2026 11:05 AM', updatedBy:'Michael Reynolds', status:'Draft', activePatients:0, dependents:0 },
+    { name:'ICU Trackerboard', id:'IPT009', shortName:'IPT009', desc:'Tracks intensive care patients who need closer monitoring.',careSettings:['ICU','NICU'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/11/2026 04:22 PM', updatedBy:'Sarah Mitchell', status:'Active', activePatients:9, dependents:2 },
+    { name:'NICU Trackerboard', id:'IPT011', shortName:'IPT011', desc:'Tracks neonatal intensive care patients.',careSettings:['NICU'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/12/2026 09:40 AM', updatedBy:'Sarah Mitchell', status:'Active', activePatients:5, dependents:0 },
+    { name:'Operating Room Trackerboard', id:'ORT002', shortName:'ORT002', desc:'Tracks patients through prep, surgery, and recovery.',careSettings:['OR'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/28/2026 10:50 AM', updatedBy:'Johnny Stark', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Same-Day Surgery Trackerboard', id:'ORT006', shortName:'ORT006', desc:'For patients who go home the same day as their procedure.',careSettings:['OR'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:false, updated:'07/30/2026 03:10 PM', updatedBy:'Michael Reynolds', status:'Draft', activePatients:0, dependents:0 },
+    { name:'Post-Op Recovery Trackerboard', id:'ORT008', shortName:'ORT008', desc:'Tracks patients recovering after their procedure.',careSettings:['OR','HOSP'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/02/2026 12:30 PM', updatedBy:'Johnny Stark', status:'Inactive', activePatients:0, dependents:0 },
+    { name:'Neonatology Trackerboard', id:'OPC007', shortName:'OPC007', desc:'Tracks newborns admitted for specialty neonatal care.',careSettings:['NEO'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/14/2026 08:05 AM', updatedBy:'Sarah Mitchell', status:'Active', activePatients:3, dependents:0 }
   ];
 
-  function allFacilities(){
-    var set = {};
-    TRACKERBOARDS.forEach(function(t){ t.facilities.forEach(function(f){ set[f] = true; }); });
-    return Object.keys(set).sort();
-  }
   function allCareSettingsUsed(){
     var set = {};
     TRACKERBOARDS.forEach(function(t){ (t.careSettings||[]).forEach(function(cs){ set[cs] = true; }); });
     return Object.keys(set).sort();
   }
-  function allProgramsUsed(){
-    var set = {};
-    TRACKERBOARDS.forEach(function(t){ (t.programs||[]).forEach(function(p){ set[p] = true; }); });
-    return Object.keys(set).sort();
-  }
 
-  var dashboardFilters = { facility: [], careSetting: [], program: [], status: [], search: '' };
+  var dashboardFilters = { careSetting: [], status: [], search: '' };
   var dashboardSort = { key: 'name', dir: 1 };
 
   function filterOptionsFor(type){
-    if(type === 'facility') return allFacilities();
-    if(type === 'program') return allProgramsUsed().concat(['No Program']);
     if(type === 'status') return ['Draft','Active','Inactive'];
     return allCareSettingsUsed();
   }
 
   function initDashboardFilters(){
-    renderFilterMenu('facility');
     renderFilterMenu('careSetting');
-    renderFilterMenu('program');
     renderFilterMenu('status');
   }
 
@@ -1406,8 +1297,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function filtersActive(){
-    return !!(dashboardFilters.search || dashboardFilters.facility.length || dashboardFilters.careSetting.length ||
-      dashboardFilters.program.length || dashboardFilters.status.length);
+    return !!(dashboardFilters.search || dashboardFilters.careSetting.length || dashboardFilters.status.length);
   }
 
   function updateClearFiltersVisibility(){
@@ -1416,11 +1306,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function clearAllFilters(){
-    dashboardFilters = { facility: [], careSetting: [], program: [], status: [], search: '' };
+    dashboardFilters = { careSetting: [], status: [], search: '' };
     document.getElementById('dashboardSearchInput').value = '';
-    renderFilterMenu('facility');
     renderFilterMenu('careSetting');
-    renderFilterMenu('program');
     renderFilterMenu('status');
     updateClearFiltersVisibility();
     renderDashboard();
@@ -1448,7 +1336,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function updateFilterButtonLabel(type){
     var btn = document.getElementById(type + 'FilterBtn');
     if(!btn) return;
-    var label = type === 'facility' ? 'Facility' : type === 'program' ? 'Program' : (type === 'status' ? 'Status' : 'Care Setting');
+    var label = type === 'status' ? 'Status' : 'Care Setting';
     var count = dashboardFilters[type].length;
     btn.textContent = label + ': ' + (count ? count + ' selected' : 'All');
   }
@@ -1613,18 +1501,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var q = (dashboardFilters.search||'').trim().toLowerCase();
     var filtered = TRACKERBOARDS.filter(function(t){
       var searchOk = !q || t.name.toLowerCase().indexOf(q)>-1 || (t.shortName||'').toLowerCase().indexOf(q)>-1 || t.id.toLowerCase().indexOf(q)>-1;
-      var facilityOk = !dashboardFilters.facility.length || t.facilities.some(function(f){ return dashboardFilters.facility.indexOf(f) > -1; });
       var careOk = !dashboardFilters.careSetting.length || (t.careSettings||[]).some(function(cs){ return dashboardFilters.careSetting.indexOf(cs) > -1; });
-      var programOk = !dashboardFilters.program.length || dashboardFilters.program.some(function(p){
-        return p === 'No Program' ? !(t.programs&&t.programs.length) : (t.programs||[]).indexOf(p) > -1;
-      });
       var statusOk = !dashboardFilters.status.length || dashboardFilters.status.indexOf(t.status) > -1;
-      return searchOk && facilityOk && careOk && programOk && statusOk;
+      return searchOk && careOk && statusOk;
     });
     var key = dashboardSort.key, dir = dashboardSort.dir;
     filtered.sort(function(a,b){
-      var av = key === 'facilities' ? a.facilities.join(', ') : key === 'program' ? (a.programs||[]).join(', ') : key === 'careSetting' ? (a.careSettings||[]).join(', ') : a[key];
-      var bv = key === 'facilities' ? b.facilities.join(', ') : key === 'program' ? (b.programs||[]).join(', ') : key === 'careSetting' ? (b.careSettings||[]).join(', ') : b[key];
+      var av = key === 'careSetting' ? (a.careSettings||[]).join(', ') : a[key];
+      var bv = key === 'careSetting' ? (b.careSettings||[]).join(', ') : b[key];
       return av < bv ? -1*dir : av > bv ? 1*dir : 0;
     });
     document.querySelectorAll('.table th[data-key-th]').forEach(function(th){
@@ -1632,28 +1516,22 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     });
     var body = document.getElementById('dashboardBody');
     if(!TRACKERBOARDS.length){
-      body.innerHTML = '<tr><td colspan="8"><div class="empty"><strong>No Trackerboards have been created yet.</strong><div style="margin-top:10px;"><button class="btn primary" type="button" onclick="openDrawer()">New trackerboard</button></div></div></td></tr>';
+      body.innerHTML = '<tr><td colspan="6"><div class="empty"><strong>No Trackerboards have been created yet.</strong><div style="margin-top:10px;"><button class="btn primary" type="button" onclick="openDrawer()">New trackerboard</button></div></div></td></tr>';
     } else if(!filtered.length){
-      body.innerHTML = '<tr><td colspan="8"><div class="empty"><strong>No Trackerboards match the current search and filters.</strong><div style="margin-top:10px;"><button class="btn" type="button" onclick="clearAllFilters()">Clear filters</button></div></div></td></tr>';
+      body.innerHTML = '<tr><td colspan="6"><div class="empty"><strong>No Trackerboards match the current search and filters.</strong><div style="margin-top:10px;"><button class="btn" type="button" onclick="clearAllFilters()">Clear filters</button></div></div></td></tr>';
     } else {
       body.innerHTML = filtered.map(function(t){
         var statusClass = statusPillClass(t.status);
         var careSettingList = t.careSettings || [];
         var careSettingChips = careSettingList.length ? careSettingList[0] + (careSettingList.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(careSettingList.length-1)+' more</button><span class="info-popover">'+popoverList('Care Settings', careSettingList)+'</span></span>' : '') : '—';
-        var facilityChips = t.facilities.length ? t.facilities[0] + (t.facilities.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(t.facilities.length-1)+' more</button><span class="info-popover">'+popoverList('Facilities', t.facilities)+'</span></span>' : '') : '—';
-        var programList = t.programs||[];
-        var programChips = programList.length ? programList[0] + (programList.length>1 ? ' <span class="info-popover-wrap"><button type="button" class="list-trigger" onclick="toggleInfoPopover(this)" aria-haspopup="true">+'+(programList.length-1)+' more</button><span class="info-popover">'+popoverList('Programs', programList)+'</span></span>' : '') : '—';
         var infoPopoverBody = '<div class="ip-title">'+t.name+'</div>'+
           '<div class="ip-row"><span class="ip-label">ID:</span><span class="ip-value">'+t.id+'</span></div>'+
           '<div class="ip-row"><span class="ip-label">Short name:</span><span class="ip-value">'+(t.shortName||'—')+'</span></div>'+
           '<div class="ip-row stacked"><span class="ip-label">Description</span><span class="ip-value">'+(t.desc ? t.desc : '—')+'</span></div>';
         var boardInfo = ' <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="Board information for '+t.name+'" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">'+infoPopoverBody+'</span></span>';
-        var unavailableFacility = t.facilityUnavailable ? ' <span class="tag" style="color:var(--bad);">Unavailable</span>' : '';
         return '<tr>'+
           '<td><span class="cell-title">'+t.name+'</span>'+boardInfo+'</td>'+
           '<td>'+careSettingChips+'</td>'+
-          '<td>'+facilityChips+unavailableFacility+'</td>'+
-          '<td>'+programChips+'</td>'+
           '<td>'+t.updated+'</td>'+
           '<td>'+(t.updatedBy||'—')+'</td>'+
           '<td><span class="pill '+statusClass+'">'+t.status+'</span>'+(t.pendingDraft?' <span class="pill pending">Pending changes</span>':'')+'</td>'+
@@ -1682,7 +1560,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
   var WIDGET_LIBRARY = [
     { key:'totalPatients', label:'Total Patients', desc:'Choose one grouping for this count. Defaults to Workflow Status; the Care-Setting-specific option appears alongside it once a Care Setting is selected.', settings:[], placement:'strip' },
-    { key:'resourceAvailability', label:'Resource Availability', desc:'Shows whatever this board has claimed per Facility in Resource Allocation above — each Facility\'s live board only shows the resource types that Facility actually has. Nothing to configure here.', settings:[], placement:'strip' },
+    { key:'resourceAvailability', label:'Resource Availability', desc:'Shows resource counts for whichever Facility is running this board — each Facility\'s live board only shows the resource types that Facility actually has. Nothing to configure here.', settings:[], placement:'strip' },
     { key:'codeTeam', label:'Code Team', desc:'Team membership is maintained on the live board.', settings:[], placement:'strip' },
     { key:'doctorsOnDuty', label:'Doctors on Duty', desc:'The on-duty list is maintained on the live board.', settings:[], placement:'strip' },
     { key:'cardexPanel', label:'Cardex Panel', desc:'Choose which items appear in the Cardex panel on the live board.', settings:[], placement:'panel' },
@@ -1754,7 +1632,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var s = widgetSettings.totalPatients;
       var options = [{ v:'workflowStatus', label:'Group by Workflow Status' }];
       if(selectedCareSettings.indexOf('ED') > -1) options.push({ v:'triage', label:'Group by Triage (High / Medium / Low)' });
-      if(selectedCareSettings.indexOf('Hospitalization') > -1 || selectedCareSettings.indexOf('OR') > -1) options.push({ v:'unit', label:'Group by Unit' });
+      if(selectedCareSettings.indexOf('HOSP') > -1 || selectedCareSettings.indexOf('OR') > -1) options.push({ v:'unit', label:'Group by Unit' });
       return '<div class="check-grid cols-3">'+
         options.map(function(o){
           return '<label class="check-option"><input type="radio" name="totalPatientsGroupBy" value="'+o.v+'"'+(s.groupBy===o.v?' checked':'')+' onchange="setTotalPatientsGroupBy(\''+o.v+'\')"> '+o.label+'</label>';
@@ -1815,313 +1693,95 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   /* =========================================================================================
-     PHASE 2 — replaces Trackerboard's previously independent Care Setting / Facility / Program /
-     Resource model with one that mirrors Care Settings Configuration's actual data shape and seed
-     data, instead of a disjoint hardcoded set. In a real implementation this block would be a set
-     of API calls into Care Settings Configuration (list active Care Settings, get a Care Setting's
-     Facility Assignments, get a Facility's eligible Programs, get a Facility's Units) rather than
-     a mirrored constant — the functions below (activeCareSettingNames, facilitiesEnabledFor,
-     programsEligibleFor, unitsFor) are written as the seam where that swap happens; nothing that
-     calls them needs to change when they become real fetches.
-
-     Facility and Care Setting names are also now the SAME names Care Settings Configuration uses
-     (Main Hospital, North Campus, etc. / ED, ICU, etc.) — the earlier prototypes used entirely
-     different seed data (Riverside Clinic, "Emergency Department", ...) which meant nothing could
-     actually connect between the two tools even once the wiring was built. That mismatch is fixed
-     here, not worked around.
+     Care Setting is the only entity Trackerboard still reads from Care Settings Configuration.
+     Care Setting and Trackerboard both sit above the concept of a physical Facility — a
+     Trackerboard is configured once against a Care Setting, with no Facility, Unit, Program, or
+     Access binding of its own. A Facility that needs a Care Setting enables it in Facility
+     Settings (Care Settings Configuration, a separate tool) and from there gets whichever
+     Trackerboard is live for that Care Setting; none of that Facility-side wiring lives here.
+     Multiple Trackerboards can exist for the same Care Setting (e.g. 4 separate boards all
+     scoped to "ED") — a Facility enabling ED picks exactly one of them. In a real implementation
+     this list would be an API call into Care Settings Configuration rather than a mirrored
+     constant, and can include a `parent` for Care Settings that are subs of a broader one (e.g.
+     ICU's NICU / PICU subs) so a Trackerboard can be scoped to the sub directly.
      ========================================================================================= */
+  /* =========================================================================================
+     Care Setting is the only entity Trackerboard still reads from Care Settings Configuration.
+     Care Setting and Trackerboard both sit above the concept of a physical Facility — a
+     Trackerboard is configured once against a Care Setting, with no Facility, Unit, Program, or
+     Access binding of its own. A Facility that needs a Care Setting enables it in Facility
+     Settings (Care Settings Configuration, a separate tool) and from there gets whichever
+     Trackerboard is live for that Care Setting; none of that Facility-side wiring lives here.
+     Multiple Trackerboards can exist for the same Care Setting (e.g. 4 separate boards all
+     scoped to "ED") — a Facility enabling ED picks exactly one of them.
 
-  var RESOURCE_TYPE_CATALOG = {
-    beds:'Beds', chairs:'Chairs', rooms:'Rooms', lobbies:'Lobbies', equipment:'Equipment',
-    providers:'Providers', gurneys:'Gurneys', isolationBays:'Isolation Bays', prepBays:'Prep Bays'
-  };
-  function resourceTypeLabel(type){ return RESOURCE_TYPE_CATALOG[type] || type; }
+     Care Setting is always two levels: a Main (e.g. "IP") and one or more Subs under it (e.g.
+     Hospitalization, ICU, NICU, PICU). A Sub is not mandatory at creation — but there is no such
+     thing as a bare Main with zero Subs from Trackerboard's point of view: a Main with none
+     explicitly created gets a single default Sub synthesized here, sharing the Main's name and
+     status (e.g. Main "ED" with no authored Sub yields exactly one Sub, "ED"). This keeps every
+     row structurally identical — a leaf-level Sub with a Main label attached — so nothing here
+     needs a special case for "this Care Setting has no Subs."
 
-  // Programs are real entities with their own Facility eligibility, mirroring Care Settings
-  // Configuration's PROGRAMS array — Care Settings Configuration only ever assigns a Program to a
-  // Facility from within this eligibility list; it doesn't grant eligibility itself, and neither
-  // does Trackerboard.
-  var PROGRAMS_SOURCE = [
-    { id:'prog-gi-endoscopy', name:'GI Endoscopy Program', shortCode:'GIE',
-      facilities:['Main Hospital','North Campus'],
-      subPrograms:[ { id:'sub-upper-gi', name:'Upper GI Procedures' }, { id:'sub-lower-gi', name:'Lower GI / Colonoscopy' } ] },
-    { id:'prog-ophthalmology', name:'Ophthalmology Program',
-      facilities:['Main Hospital','Eastside Medical Center'] },
-    { id:'prog-cardiac-cath', name:'Cardiac Catheterization Program', shortCode:'CCP',
-      facilities:['Main Hospital','North Campus'],
-      subPrograms:[ { id:'sub-diagnostic-cath', name:'Diagnostic Catheterization' }, { id:'sub-interventional-cath', name:'Interventional Procedures' } ] },
-    { id:'prog-gen-med', name:'General Medicine Program',
-      facilities:['Main Hospital','North Campus','California Branch','Texas Branch'] },
-    { id:'prog-behavioral', name:'Behavioral Health Program', shortCode:'BHP',
-      facilities:['Main Hospital','California Branch'],
-      subPrograms:[ { id:'sub-adolescent-bh', name:'Adolescent Behavioral Health' }, { id:'sub-substance-use', name:'Substance Use Program' } ] },
-    { id:'prog-surgical', name:'Surgical Services Program',
-      facilities:['Main Hospital','North Campus','Eastside Medical Center','California Branch','Texas Branch'] },
-    { id:'prog-ambulatory', name:'Ambulatory Care Program', facilities:['California Branch','Texas Branch'] },
-    { id:'prog-critical', name:'Critical Care Management', facilities:['Main Hospital','Eastside Medical Center','California Branch'] },
-    { id:'prog-ed-surge', name:'ED Surge', facilities:['Main Hospital','North Campus','Eastside Medical Center'] },
-    { id:'prog-endo-premium', name:'Endo Premium', facilities:['Texas Branch','New Jersey Branch','Main Hospital'] },
-    { id:'prog-endo-plus', name:'Endo Plus', facilities:['Ohio Branch','North Campus'] }
-  ];
-  function programById(id){ return PROGRAMS_SOURCE.find(function(p){ return p.id === id; }) || null; }
+     Only Subs are ever selectable on a Trackerboard; Main is a grouping label, never a pickable
+     value. The Trackerboard picker shows each Sub's Short Name (not its full name) as the primary
+     label, with its Main name alongside for context, and search matches on Sub Short Name only.
+     Short Name uniqueness across Subs is guaranteed by Care Settings Configuration, not enforced
+     here — Trackerboard keys everything on Short Name as the stable identifier.
 
-  // Mirrors Care Settings Configuration's CARE_SETTINGS records: status (only 'active' Care
-  // Settings are offered here — draft/inactive/retired are not selectable from Trackerboard, same
-  // as Care Settings Configuration itself would enforce), and per-Facility Assignments carrying
-  // `enabled`, the Program ids already assigned to that Facility by Care Settings Configuration,
-  // and named Units with their own resource rows. Units are scoped Care Setting + Facility + name
-  // (confirmed identity rule) and carry a stable id — the same shape Care Settings Configuration's
-  // generateUnitId() now produces (Phase 1) — so a Trackerboard can persist "this board = this
-  // Unit id" safely.
+     In a real implementation this would be an API call into Care Settings Configuration rather
+     than a mirrored constant.
+     ========================================================================================= */
   var CARE_SETTINGS_SOURCE = {
-    'Endoscopy': { status:'active', visitCategory:'Procedure', duration:{ value:75, unit:'minutes' }, chiefComplaintForm:'GI Procedure Intake Form', facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-gi-endoscopy','prog-critical','prog-ambulatory','prog-gen-med'],
-          units:[ { id:'unit-endo-mh-1', name:'Unit 1', resources:{ rooms:4, recoveryBays:8 } }, { id:'unit-endo-mh-2', name:'Unit 2', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-endo-mh-3', name:'Unit 3', resources:{ rooms:2, recoveryBays:4 } } ] },
-        'North Campus': { enabled:true, programs:['prog-gi-endoscopy'],
-          units:[ { id:'unit-endo-nc-1', name:'Unit 1', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-endo-nc-2', name:'Unit 2', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-endo-nc-3', name:'Unit 3', resources:{ rooms:1, recoveryBays:2 } } ] }
-      } },
-    'Ophthalmology': { status:'active', visitCategory:'Procedure', duration:{ value:40, unit:'minutes' }, chiefComplaintForm:null, facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-ophthalmology','prog-gen-med','prog-ambulatory','prog-surgical'],
-          units:[ { id:'unit-oph-mh-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-oph-mh-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-oph-mh-3', name:'Unit 3', resources:{ rooms:1 } } ] },
-        'Eastside Medical Center': { enabled:true, programs:['prog-ophthalmology'],
-          units:[ { id:'unit-oph-emc-1', name:'Unit 1', resources:{ rooms:2 } }, { id:'unit-oph-emc-2', name:'Unit 2', resources:{ rooms:1 } }, { id:'unit-oph-emc-3', name:'Unit 3', resources:{ rooms:1 } } ] }
-      } },
-    'Cath Lab': { status:'active', visitCategory:'Procedure', duration:{ value:2, unit:'hours' }, chiefComplaintForm:'Cardiac Procedure Intake Form', facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-cardiac-cath','prog-critical','prog-gen-med','prog-surgical'],
-          units:[ { id:'unit-cath-mh-1', name:'Unit 1', resources:{ rooms:3, recoveryBays:6 } }, { id:'unit-cath-mh-2', name:'Unit 2', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-cath-mh-3', name:'Unit 3', resources:{ rooms:1, recoveryBays:2 } } ] },
-        'North Campus': { enabled:true, programs:['prog-cardiac-cath'],
-          units:[ { id:'unit-cath-nc-1', name:'Unit 1', resources:{ rooms:2, recoveryBays:4 } }, { id:'unit-cath-nc-2', name:'Unit 2', resources:{ rooms:1, recoveryBays:2 } }, { id:'unit-cath-nc-3', name:'Unit 3', resources:{ rooms:1, recoveryBays:2 } } ] }
-      } },
-    'ED': { status:'active', visitCategory:'Urgent', duration:{ value:60, unit:'minutes' }, chiefComplaintForm:'ED Triage Form', facilities:{
-        // Main Hospital carries a wider program list than the other Facilities here on purpose —
-        // it's the most likely first Facility a user picks, and a flagship site plausibly touches
-        // more of the org's Programs than a satellite branch would.
-        'Main Hospital': { enabled:true, programs:['prog-ed-surge','prog-critical','prog-gen-med','prog-surgical','prog-ambulatory','prog-endo-premium'],
-          units:[ { id:'unit-ed-mh-1', name:'Unit 1', resources:{ beds:8, chairs:4, rooms:4 } }, { id:'unit-ed-mh-2', name:'Unit 2', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-mh-3', name:'Unit 3', resources:{ beds:5, chairs:2 } } ] },
-        'North Campus': { enabled:true, programs:['prog-ed-surge'],
-          units:[ { id:'unit-ed-nc-1', name:'Unit 1', resources:{ beds:8, chairs:4 } }, { id:'unit-ed-nc-2', name:'Unit 2', resources:{ beds:5, chairs:2 } }, { id:'unit-ed-nc-3', name:'Unit 3', resources:{ beds:4, chairs:2 } } ] },
-        'Eastside Medical Center': { enabled:true, programs:['prog-ed-surge'],
-          units:[ { id:'unit-ed-emc-1', name:'Unit 1', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-emc-2', name:'Unit 2', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-emc-3', name:'Unit 3', resources:{ beds:3, chairs:2 } } ] },
-        'California Branch': { enabled:true, programs:['prog-ed-surge','prog-ambulatory'],
-          units:[ { id:'unit-ed-cab-1', name:'Unit 1', resources:{ beds:5, chairs:2 } }, { id:'unit-ed-cab-2', name:'Unit 2', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-cab-3', name:'Unit 3', resources:{ beds:3, chairs:1 } } ] },
-        'Texas Branch': { enabled:true, programs:['prog-ed-surge','prog-endo-premium'],
-          units:[ { id:'unit-ed-txb-1', name:'Unit 1', resources:{ beds:6, chairs:3 } }, { id:'unit-ed-txb-2', name:'Unit 2', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-txb-3', name:'Unit 3', resources:{ beds:3, chairs:1 } } ] },
-        'New Jersey Branch': { enabled:true, programs:['prog-endo-premium'],
-          units:[ { id:'unit-ed-njb-1', name:'Unit 1', resources:{ beds:4, chairs:2 } }, { id:'unit-ed-njb-2', name:'Unit 2', resources:{ beds:3, chairs:2 } }, { id:'unit-ed-njb-3', name:'Unit 3', resources:{ beds:2, chairs:1 } } ] }
-      } },
-    'ICU': { status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form', facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-critical','prog-gen-med'],
-          units:[ { id:'unit-icu-mh-1', name:'Unit 1', resources:{ beds:16 } }, { id:'unit-icu-mh-2', name:'Unit 2', resources:{ beds:8 } }, { id:'unit-icu-mh-3', name:'Unit 3', resources:{ beds:6 } } ] },
-        'Eastside Medical Center': { enabled:true, programs:['prog-critical'],
-          units:[ { id:'unit-icu-emc-1', name:'Unit 1', resources:{ beds:9 } }, { id:'unit-icu-emc-2', name:'Unit 2', resources:{ beds:6 } }, { id:'unit-icu-emc-3', name:'Unit 3', resources:{ beds:4 } } ] }
-      } },
-    'Hospitalization': { status:'active', visitCategory:'Follow-up', duration:{ value:2, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form', facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-gen-med','prog-behavioral'],
-          units:[ { id:'unit-hosp-mh-1', name:'Unit 1', resources:{ beds:40, providers:22 } }, { id:'unit-hosp-mh-2', name:'Unit 2', resources:{ beds:18, providers:9 } }, { id:'unit-hosp-mh-3', name:'Unit 3', resources:{ beds:12, providers:6 } } ] },
-        'North Campus': { enabled:true, programs:['prog-gen-med'],
-          units:[ { id:'unit-hosp-nc-1', name:'Unit 1', resources:{ beds:22 } }, { id:'unit-hosp-nc-2', name:'Unit 2', resources:{ beds:12 } }, { id:'unit-hosp-nc-3', name:'Unit 3', resources:{ beds:8 } } ] }
-      } },
-    'Neonatology': { status:'active', visitCategory:'New Patient', duration:{ value:1, unit:'hours' }, chiefComplaintForm:null, facilities:{
-        'Main Hospital': { enabled:true, programs:[],
-          units:[ { id:'unit-nicu-mh-1', name:'Unit 1', resources:{ beds:10 } }, { id:'unit-nicu-mh-2', name:'Unit 2', resources:{ beds:6 } }, { id:'unit-nicu-mh-3', name:'Unit 3', resources:{ beds:4 } } ] }
-      } },
-    'OR': { status:'active', visitCategory:'Procedure', duration:{ value:90, unit:'minutes' }, chiefComplaintForm:null, facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-surgical'],
-          units:[ { id:'unit-or-mh-1', name:'Unit 1', resources:{ rooms:6 } }, { id:'unit-or-mh-2', name:'Unit 2', resources:{ rooms:3 } }, { id:'unit-or-mh-3', name:'Unit 3', resources:{ rooms:2 } } ] },
-        'North Campus': { enabled:true, programs:['prog-surgical'],
-          units:[ { id:'unit-or-nc-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-or-nc-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-or-nc-3', name:'Unit 3', resources:{ rooms:1 } } ] },
-        'Eastside Medical Center': { enabled:true, programs:['prog-surgical'],
-          units:[ { id:'unit-or-emc-1', name:'Unit 1', resources:{ rooms:2 } }, { id:'unit-or-emc-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-or-emc-3', name:'Unit 3', resources:{ rooms:1 } } ] }
-      } },
-    // New active Care Setting — brings the total to 6 (Phase X item 4). Deliberately a flat,
-    // independent Care Setting with no relationship to any other — the parent/child Care Setting
-    // question (a separate open item) isn't addressed by this addition.
-    'Radiology': { status:'active', visitCategory:'Procedure', duration:{ value:45, unit:'minutes' }, chiefComplaintForm:null, facilities:{
-        'Main Hospital': { enabled:true, programs:['prog-gen-med'],
-          units:[ { id:'unit-rad-mh-1', name:'Unit 1', resources:{ rooms:4 } }, { id:'unit-rad-mh-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-rad-mh-3', name:'Unit 3', resources:{ rooms:2 } } ] },
-        'North Campus': { enabled:true, programs:[],
-          units:[ { id:'unit-rad-nc-1', name:'Unit 1', resources:{ rooms:3 } }, { id:'unit-rad-nc-2', name:'Unit 2', resources:{ rooms:2 } }, { id:'unit-rad-nc-3', name:'Unit 3', resources:{ rooms:1 } } ] }
-      } }
+    'IP': { shortName:'IP', status:'active', subs:[
+      { name:'Hospitalization', shortName:'HOSP', status:'active', visitCategory:'Follow-up', duration:{ value:2, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' },
+      { name:'ICU', shortName:'ICU', status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' },
+      { name:'NICU', shortName:'NICU', status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' },
+      { name:'PICU', shortName:'PICU', status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' }
+    ] },
+    // Neonatology is kept as its own Main for now — whether it should fold into IP's NICU Sub
+    // instead is still an open question, not yet confirmed either way.
+    'Neonatology': { shortName:'NEO', status:'active', visitCategory:'New Patient', duration:{ value:1, unit:'hours' }, chiefComplaintForm:null, subs:[] },
+    'ED': { shortName:'ED', status:'active', visitCategory:'Urgent', duration:{ value:60, unit:'minutes' }, chiefComplaintForm:'ED Triage Form', subs:[] },
+    'OR': { shortName:'OR', status:'active', visitCategory:'Procedure', duration:{ value:90, unit:'minutes' }, chiefComplaintForm:null, subs:[] },
+    'Radiology': { shortName:'RAD', status:'active', visitCategory:'Procedure', duration:{ value:45, unit:'minutes' }, chiefComplaintForm:null, subs:[] }
     // Maternity (inactive), Endoscopy (draft), Cath Lab (retired) intentionally excluded — only
-    // 'active' Care Settings are offered to Trackerboard, matching Phase 2 item 4.
-    // Every Facility now carries at least 3 Units — bumped from 2 (see conversation: "Each
-    // facility should have at least 3 or more units").
+    // 'active' Care Settings are offered to Trackerboard.
   };
 
-
-  function activeCareSettingNames(){
-    return Object.keys(CARE_SETTINGS_SOURCE).filter(function(cs){ return CARE_SETTINGS_SOURCE[cs].status === 'active'; });
-  }
-  function careSettingRecord(csName){ return CARE_SETTINGS_SOURCE[csName] || null; }
-  // Facilities enabled for a Care Setting — this is what Trackerboard's Facility picker filters
-  // to once a Care Setting is chosen (Phase 2 item 5), instead of listing every facility.
-  function facilitiesEnabledFor(csName){
-    var cs = careSettingRecord(csName);
-    if(!cs) return [];
-    return Object.keys(cs.facilities).filter(function(f){ return cs.facilities[f].enabled; });
-  }
-  function facilityLink(csName, facilityName){
-    var cs = careSettingRecord(csName);
-    return cs ? (cs.facilities[facilityName] || null) : null;
-  }
-  // Programs already assigned to this Care Setting × Facility combination — mirrors
-  // getFacilityProgramIds() in Care Settings Configuration (Phase 2 item 6).
-  function programsEligibleFor(csName, facilityName){
-    var link = facilityLink(csName, facilityName);
-    return link ? (link.programs || []).map(programById).filter(Boolean) : [];
-  }
-  // Units belonging to this Care Setting × Facility — Phase 2 item 7's picker reads from here.
-  function unitsFor(csName, facilityName){
-    var link = facilityLink(csName, facilityName);
-    return link ? (link.units || []) : [];
-  }
-  function unitByCompositeId(csName, facilityName, unitId){
-    return unitsFor(csName, facilityName).find(function(u){ return u.id === unitId; }) || null;
-  }
-  function formatUnitResources(unit){
-    var types = Object.keys(unit.resources || {});
-    if(!types.length) return 'No resources allocated to this Unit yet.';
-    return types.map(function(t){ return unit.resources[t] + ' ' + resourceTypeLabel(t).toLowerCase(); }).join(', ');
-  }
-  // ALL_FACILITIES kept for anywhere that still needs "every known facility name" independent of
-  // Care Setting eligibility (there should be none post-Phase-2, but retained defensively).
-  var ALL_FACILITIES = ['Main Hospital','North Campus','Eastside Medical Center','California Branch','Ohio Branch','New Jersey Branch','Texas Branch'];
-
-  // selectedUnits: { [facilityName]: [ { csName, unitId } ] } — multi-select per Facility
-  // (decision: multi-select, not single). This REPLACES boardResources: Trackerboard no longer
-  // authors resource numbers, it only records which already-configured Units it claims. Resource
-  // counts are always read live from CARE_SETTINGS_SOURCE at display time (Option C — Unit's
-  // resource total is a live read, not a number Trackerboard owns).
-  var selectedUnits = {};
-
-  // A Unit is claimed elsewhere if any OTHER Trackerboard's selectedUnits already references it —
-  // it disappears from this board's list in that case (decision: disappear, not disable), except
-  // for Units this same Trackerboard already owns while being edited (see Phase 3 exclusion note —
-  // parked, not yet implemented: today this checks against otherTrackerboards() only, so a board
-  // editing its own prior selection is already safe; the open question was about a subtler replay
-  // case and remains for Phase 3).
-  function unitClaimedElsewhere(csName, facilityName, unitId){
-    return otherTrackerboards().some(function(t){
-      var claims = (t.selectedUnits && t.selectedUnits[facilityName]) || [];
-      return claims.some(function(c){ return c.csName === csName && c.unitId === unitId; });
-    });
-  }
-  function isUnitSelected(facilityName, csName, unitId){
-    return ((selectedUnits[facilityName] || [])).some(function(c){ return c.csName === csName && c.unitId === unitId; });
-  }
-  function toggleUnitSelection(facilityName, csName, unitId, checked){
-    if(!selectedUnits[facilityName]) selectedUnits[facilityName] = [];
-    var list = selectedUnits[facilityName];
-    var pos = list.findIndex(function(c){ return c.csName === csName && c.unitId === unitId; });
-    if(checked && pos === -1) list.push({ csName:csName, unitId:unitId });
-    else if(!checked && pos > -1) list.splice(pos, 1);
-    // Patch the summary count and the one card's checked state in place rather than a full
-    // renderUnitAllocation() rebuild — a full rebuild would collapse the currently-expanded
-    // facility's scroll position on every single checkbox click.
-    var summaryEl = document.querySelector('.resource-facility-row[data-facility="'+facilityName.replace(/"/g,'\\"')+'"] .resource-facility-summary');
-    var newCount = list.filter(function(sel){ return findUnitCandidate(facilityName, sel.csName, sel.unitId); }).length;
-    if(summaryEl) summaryEl.textContent = newCount ? newCount+' Unit'+(newCount===1?'':'s')+' selected' : 'No Units selected';
-    updateReadiness();
+  // Every Main resolves to at least one Sub — a Main with none authored gets exactly one
+  // synthesized here, sharing the Main's own name/status/Short Name. Never mutates
+  // CARE_SETTINGS_SOURCE itself; this only affects what callers see.
+  function subsForMain(mainName){
+    var main = CARE_SETTINGS_SOURCE[mainName];
+    if(!main) return [];
+    if(main.subs && main.subs.length) return main.subs;
+    return [{ name:mainName, shortName:main.shortName, status:main.status, visitCategory:main.visitCategory, duration:main.duration, chiefComplaintForm:main.chiefComplaintForm }];
   }
 
-
-  // Phase 2 items 7–8, revised for scale — replaces the old editable Resource Allocation
-  // accordion. Trackerboard no longer authors resource numbers; it only selects which
-  // already-configured Units (from Care Settings Configuration) this board tracks.
-  //
-  // Two independent scale problems, two independent fixes:
-  // 1. Many FACILITIES on one board — handled by the facility-name search below, and each
-  //    Facility collapses to a single header row (chevron left, name, fixed-position selected
-  //    count on the right) until expanded, so a board covering many Facilities doesn't turn into
-  //    a wall of open controls.
-  // 2. Many UNITS at one Facility (30, 100+) — a checkbox rendered per Unit doesn't work at that
-  //    count, so selecting happens through a search-and-select dropdown. It lives INSIDE the
-  //    expanded card body — not squeezed into the header, which is what made it too small to use
-  //    — so it can take the card's full width and a taller menu instead of a cramped ~180px box.
-  //    Reviewing what's already selected is a separate concern from selecting — each selected
-  //    Unit keeps its own resource breakdown visible (never summed across Units — a user needs
-  //    to know what Unit 1 has, not a total merged with Unit 2's) — inside a fixed-height,
-  //    internally-scrolling panel with its own search, so its footprint stays bounded whether
-  //    3 or 300 Units are selected.
-  function unitCandidatesForFacility(facility){
+  // The flattened, pickable list: every active Sub (real or synthesized) across every active
+  // Main, each carrying its Main's name and Short Name. Clustered by Main (alphabetical), Subs
+  // alphabetical by their displayed (full) name within their cluster, no group headers — Care
+  // Setting picker, transfer destinations, and the Care Setting info modal all read from this
+  // same flattened list rather than the Main/Sub tree directly. The picker shows a Sub's full
+  // name as the primary label and its Main's Short Name as the secondary tag — the Sub's own
+  // Short Name is used only as the stable identifier a Trackerboard stores, never displayed.
+  function flattenedCareSettings(){
+    var mains = Object.keys(CARE_SETTINGS_SOURCE).filter(function(m){ return CARE_SETTINGS_SOURCE[m].status === 'active'; }).sort();
     var out = [];
-    selectedCareSettings.forEach(function(cs){
-      if(!facilityLink(cs, facility)) return; // this Care Setting isn't enabled at this Facility
-      unitsFor(cs, facility).forEach(function(u){ out.push({ csName:cs, unit:u }); });
+    mains.forEach(function(mainName){
+      subsForMain(mainName).filter(function(s){ return s.status === 'active'; })
+        .slice().sort(function(a,b){ return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; })
+        .forEach(function(sub){ out.push(Object.assign({ mainName:mainName, mainShortName:CARE_SETTINGS_SOURCE[mainName].shortName }, sub)); });
     });
     return out;
   }
-  // A Unit already claimed by a different Trackerboard is excluded outright (decision: disappear,
-  // not disable) — it never appears in the picker dropdown at all. Note: this does not yet
-  // special-case "claimed by this same Trackerboard while editing it" — parked pending
-  // confirmation (see the note above unitClaimedElsewhere) rather than assumed either way.
-  function selectableUnitsForFacility(facility){
-    return unitCandidatesForFacility(facility).filter(function(c){ return !unitClaimedElsewhere(c.csName, facility, c.unit.id); });
+  function activeCareSettingNames(){
+    return flattenedCareSettings().map(function(s){ return s.shortName; });
   }
-  function findUnitCandidate(facility, csName, unitId){
-    return selectableUnitsForFacility(facility).find(function(c){ return c.csName === csName && c.unit.id === unitId; }) || null;
+  function careSettingRecord(shortName){
+    return flattenedCareSettings().find(function(s){ return s.shortName === shortName; }) || null;
   }
-
-  var unitFacilityExpanded = {}; // { [facilityName]: true } — whole-card collapse/expand state.
-  function toggleUnitFacilityExpanded(facility){
-    unitFacilityExpanded[facility] = !unitFacilityExpanded[facility];
-    renderUnitAllocation();
-  }
-
-  // Renders one Facility's Units as a checkbox-card grid (3 per row, same .check-grid.cols-3
-  // component the Cardex panel widget uses) instead of a search-and-select dropdown. Each card
-  // is the checkbox, the Unit name, and that Unit's own resource breakdown together — no
-  // separate "selected units" review list, since the checked state and the card's own info
-  // already show what's selected. Never summed across Units (a user needs to know what Unit 1
-  // has, not a total merged with Unit 2's).
-  function renderUnitCheckGrid(facility){
-    var multiCS = selectedCareSettings.length > 1;
-    var candidates = selectableUnitsForFacility(facility);
-    if(!candidates.length){
-      return '<p class="muted" style="margin:0;padding:8px;">No Units available at this Facility for the selected Care Setting(s).</p>';
-    }
-    return '<div class="check-grid cols-3">'+candidates.map(function(c){
-      var u = c.unit;
-      var checked = isUnitSelected(facility, c.csName, u.id);
-      var csTag = multiCS ? ' <span class="muted">(' + c.csName + ')</span>' : '';
-      return '<label class="check-option unit-check-card">'+
-        '<span class="unit-check-top"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleUnitSelection(\''+facility.replace(/'/g,"\\'")+'\', \''+c.csName.replace(/'/g,"\\'")+'\', \''+String(u.id).replace(/'/g,"\\'")+'\', this.checked)"> '+u.name+csTag+'</span>'+
-        '<span class="unit-check-meta">'+formatUnitResources(u)+'</span>'+
-      '</label>';
-    }).join('')+'</div>';
-  }
-
-  function renderUnitAllocation(){
-    var section = document.getElementById('unitAllocationSection');
-    var grid = document.getElementById('unitAllocationGrid');
-    if(!section || !grid) return;
-    if(!selectedFacilities.length){ section.style.display = 'none'; return; }
-    section.style.display = '';
-
-    var rowsHtml = selectedFacilities.map(function(facility){
-      var selectedCount = (selectedUnits[facility] || []).filter(function(sel){ return findUnitCandidate(facility, sel.csName, sel.unitId); }).length;
-      var open = !!unitFacilityExpanded[facility];
-      var summaryLabel = selectedCount ? selectedCount+' Unit'+(selectedCount===1?'':'s')+' selected' : 'No Units selected';
-
-      var bodyHtml = open ? '<div class="resource-facility-body">'+renderUnitCheckGrid(facility)+'</div>' : '';
-
-      return '<div class="resource-facility-row'+(open?' open':'')+'" data-facility="'+facility.replace(/"/g,'&quot;')+'">' +
-        '<button type="button" class="resource-facility-header" aria-expanded="'+open+'" onclick="toggleUnitFacilityExpanded(\''+facility.replace(/'/g,"\\'")+'\')">' +
-          '<svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>' +
-          '<span class="resource-facility-name">'+facility+'</span>' +
-          '<span style="flex:1 1 auto;"></span>' +
-          '<span class="resource-facility-summary" style="flex:0 0 auto;">'+summaryLabel+'</span>' +
-        '</button>' +
-        bodyHtml +
-      '</div>';
-    }).join('');
-
-    grid.innerHTML = rowsHtml || '<p class="muted" style="padding:12px;">No Facilities selected.</p>';
-  }
-
-  function facilityIdPart(str){ return String(str).replace(/[^a-z0-9]/gi, ''); }
-
-
 
 
   var PATIENT_COLUMNS = [
@@ -2130,11 +1790,11 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     { key:'currentStatus', label:'Current Status', category:'Workflow' },
     { key:'timeInStatus', label:'Time in Status', category:'Workflow' },
     { key:'arrivalTime', label:'Arrival / Admission / Appointment Time', category:'Workflow' },
-    { key:'lengthOfStay', label:'Total Length of Stay / Waiting Time', category:'Workflow', settings:['ED','Hospitalization','OR'] },
+    { key:'lengthOfStay', label:'Total Length of Stay / Waiting Time', category:'Workflow', settings:['ED','HOSP','OR'] },
     { key:'pendingWork', label:'Pending Work Indicators', category:'Workflow' },
-    { key:'disposition', label:'Disposition / Next Destination', category:'Workflow', settings:['ED','Hospitalization'] },
-    { key:'dischargeBlockers', label:'Discharge / Transfer Blockers', category:'Workflow', settings:['ED','Hospitalization'] },
-    { key:'expectedDischarge', label:'Expected Discharge Date / Time', category:'Workflow', settings:['Hospitalization'] },
+    { key:'disposition', label:'Disposition / Next Destination', category:'Workflow', settings:['ED','HOSP'] },
+    { key:'dischargeBlockers', label:'Discharge / Transfer Blockers', category:'Workflow', settings:['ED','HOSP'] },
+    { key:'expectedDischarge', label:'Expected Discharge Date / Time', category:'Workflow', settings:['HOSP'] },
     { key:'age', label:'Age', category:'Demographics', recommended:true },
     { key:'patientType', label:'Patient Type', category:'Demographics', recommended:true },
     { key:'bed', label:'Assigned Bed', category:'Resource', recommended:true },
@@ -2144,7 +1804,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     { key:'vitals', label:'Vitals', category:'Clinical', recommended:true },
     { key:'medicalConditions', label:'Medical Conditions', category:'Clinical' },
     { key:'allergies', label:'Allergies', category:'Clinical' },
-    { key:'isolation', label:'Isolation / Precautions', category:'Clinical', settings:['ED','Hospitalization','OR'] },
+    { key:'isolation', label:'Isolation / Precautions', category:'Clinical', settings:['ED','HOSP','OR'] },
     { key:'triageAcuity', label:'Triage / Acuity', category:'ED', settings:['ED'] },
     { key:'chiefComplaint', label:'Chief Complaint / Reason for Visit', category:'ED', settings:['ED','Outpatient Clinic'] },
     { key:'scheduledProcedure', label:'Scheduled Procedure / Appointment Time', category:'OR', settings:['OR','Outpatient Clinic'] },
@@ -2599,7 +2259,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     var bothOff = !!(sectionCb && sectionCb.checked && predefined && !predefined.checked && freeText && !freeText.checked);
     warning.style.display = bothOff ? '' : 'none';
   }
-  // Same convention as every other picker button in Scope & Access (Facility, Programs) —
+  // Same convention as every other picker button in this drawer (Care Setting) —
   // the button's own text reflects the current selection instead of staying generic.
   function updateCommentCategoriesButton(){
     var btn = document.getElementById('commentCategoriesBtn');
@@ -2700,7 +2360,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         if(!cfg) return '';
         var duration = cfg.duration.value+' '+cfg.duration.unit;
         var form = cfg.chiefComplaintForm ? '<span class="info-value link">'+cfg.chiefComplaintForm+'</span>' : '—';
-        return '<tr><td>'+cs+'</td><td>'+cfg.visitCategory+'</td><td>'+duration+'</td><td>'+form+'</td></tr>';
+        return '<tr><td>'+cfg.name+' <span class="muted">('+cfg.mainShortName+')</span></td><td>'+cfg.visitCategory+'</td><td>'+duration+'</td><td>'+form+'</td></tr>';
       }).join('');
       body.innerHTML = '<table class="history" style="width:100%;"><thead><tr><th>Care Setting</th><th>Default Visit Category</th><th>Duration</th><th>Chief Complaint Form</th></tr></thead><tbody>'+rowsHtml+'</tbody></table>';
     }
@@ -2711,7 +2371,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   var selectedCareSettings = [];
-  var selectedFacilities = [];
 
   function statusesMatchPreset(careSetting){
     var preset = STATUS_PRESETS[careSetting];
@@ -2722,14 +2381,19 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   function updateCareSettingButton(){
     var btn = document.getElementById('careSettingBtn');
     if(!btn) return;
-    btn.textContent = selectedCareSettings.length ? selectedCareSettings.join(', ') : 'Select Care Setting…';
+    if(!selectedCareSettings.length){ btn.textContent = 'Select Care Setting…'; return; }
+    var names = selectedCareSettings.map(function(shortName){
+      var rec = careSettingRecord(shortName);
+      return rec ? rec.name : shortName;
+    });
+    btn.textContent = names.join(', ');
   }
   function renderCareSettingMenu(){
     var menu = document.getElementById('careSettingMenu');
     if(!menu) return;
-    menu.innerHTML = activeCareSettingNames().map(function(cs){
-      var checked = selectedCareSettings.indexOf(cs) > -1 ? ' checked' : '';
-      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+cs+'"'+checked+' onchange="toggleCareSetting(this, \''+cs.replace(/'/g,"\\'")+'\')"> '+cs+'</label>';
+    menu.innerHTML = flattenedCareSettings().map(function(sub){
+      var checked = selectedCareSettings.indexOf(sub.shortName) > -1 ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;display:flex;"><span style="flex:1 1 auto;"><input type="checkbox" value="'+sub.shortName+'"'+checked+' onchange="toggleCareSetting(this, \''+sub.shortName.replace(/'/g,"\\'")+'\')"> '+sub.name+'</span><span class="muted" style="flex:0 0 auto;">'+sub.mainShortName+'</span></label>';
     }).join('');
     updateCareSettingButton();
   }
@@ -2743,51 +2407,21 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     else { btn.setAttribute('aria-expanded','false'); }
   }
 
-  // Union across every selected Care Setting: a Facility, Program, Column, or Widget is
-  // available if it applies to ANY of them, not only if it applies to all — a board covering
-  // both ED and Inpatient should still offer everything either one would offer on its own.
-  function unionFacilitiesForSelected(){
-    var set = [];
-    selectedCareSettings.forEach(function(cs){
-      facilitiesEnabledFor(cs).forEach(function(f){ if(set.indexOf(f) === -1) set.push(f); });
-    });
-    return set;
-  }
   function settingsStillCovered(settings){
     return !settings || !settings.length || settings.some(function(s){ return selectedCareSettings.indexOf(s) > -1; });
   }
 
   // Adding a Care Setting only ever grows what's available — nothing currently configured can
   // become invalid, so it never needs confirmation. Removing one can shrink the eligible pool
-  // out from under a Facility/Program/Column/Widget that's currently selected; that's the only
-  // direction that needs a heads-up, mirroring how changing the single Care Setting used to warn
-  // before this was multi-select.
+  // out from under a Column or Widget that's currently selected; that's the only direction that
+  // needs a heads-up.
   function computeCareSettingRemovalImpact(removedValue){
     var remaining = selectedCareSettings.filter(function(cs){ return cs !== removedValue; });
-    var remainingFacilities = [];
-    remaining.forEach(function(cs){
-      facilitiesEnabledFor(cs).forEach(function(f){ if(remainingFacilities.indexOf(f) === -1) remainingFacilities.push(f); });
-    });
     var items = [];
-    var droppedFacilities = selectedFacilities.filter(function(f){ return remainingFacilities.indexOf(f) === -1; });
-    if(droppedFacilities.length) items.push(droppedFacilities.length + (droppedFacilities.length===1?' selected Facility':' selected Facilities') + ' (' + droppedFacilities.join(', ') + ')');
-    var keptFacilities = selectedFacilities.filter(function(f){ return remainingFacilities.indexOf(f) > -1; });
-    var droppedPrograms = selectedPrograms.filter(function(name){
-      return !isProgramNameEligible(name, remaining, keptFacilities);
-    });
-    if(droppedPrograms.length) items.push(droppedPrograms.length + (droppedPrograms.length===1?' selected Program':' selected Programs') + ' (' + droppedPrograms.join(', ') + ')');
     var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.length && !c.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedColumns.forEach(function(c){ items.push(c.label + ' column'); });
     var droppedWidgets = WIDGET_LIBRARY.filter(function(w){ return widgetEnabled[w.key] && w.settings && w.settings.length && !w.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedWidgets.forEach(function(w){ items.push(w.label + ' widget'); });
-    // Units belonging to the removed Care Setting are dropped from selectedUnits too — surface
-    // that explicitly rather than silently discarding a Unit selection.
-    var droppedUnitFacilities = [];
-    Object.keys(selectedUnits).forEach(function(f){
-      var claims = selectedUnits[f].filter(function(c){ return c.csName === removedValue; });
-      if(claims.length) droppedUnitFacilities.push(f + ' (' + claims.length + ')');
-    });
-    if(droppedUnitFacilities.length) items.push('Unit selections at ' + droppedUnitFacilities.join(', '));
     return items;
   }
 
@@ -2817,12 +2451,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   function applyCareSettingAdd(value){
     updateCareSettingButton();
-    renderConnFacilityMenu();
-    renderProgramMenu();
     renderColumnLibrary();
     renderWidgetLibrary();
     renderCareSettingInfo();
-    renderUnitAllocation();
     // First-ever pick loads that Care Setting's standard workflow as a starting point, same
     // convenience the single-select version had — but only when nothing's been built yet, so
     // adding a second (or third) Care Setting later never clobbers real work in progress.
@@ -2833,15 +2464,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 
   function applyCareSettingRemove(){
     updateCareSettingButton();
-    var eligibleFacilities = unionFacilitiesForSelected();
-    selectedFacilities = selectedFacilities.filter(function(f){
-      if(eligibleFacilities.indexOf(f) > -1) return true;
-      delete selectedUnits[f];
-      return false;
-    });
-    renderConnFacilityMenu();
-    selectedPrograms = selectedPrograms.filter(function(name){ return isProgramNameEligible(name, selectedCareSettings, selectedFacilities); });
-    renderProgramMenu();
     selectedColumns = selectedColumns.filter(function(k){ var c = columnByKey(k); return !c || settingsStillCovered(c.settings); });
     renderColumnLibrary();
     Object.keys(widgetEnabled).forEach(function(k){
@@ -2849,240 +2471,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       if(w && widgetEnabled[k] && !settingsStillCovered(w.settings)) widgetEnabled[k] = false;
     });
     renderWidgetLibrary();
-    // A Unit selection belonging to a Care Setting that's no longer selected is no longer valid,
-    // even at a Facility that's still selected via a different Care Setting.
-    Object.keys(selectedUnits).forEach(function(f){
-      selectedUnits[f] = selectedUnits[f].filter(function(c){ return selectedCareSettings.indexOf(c.csName) > -1; });
-    });
-    renderUnitAllocation();
     renderCareSettingInfo();
     if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
     updateReadiness();
-  }
-
-  // Phase 2 item 6 — Programs are no longer scoped to Care Setting alone (the old model). A
-  // Program is eligible here only if Care Settings Configuration has actually assigned it to
-  // this Care Setting's Facility Assignment for a specific Facility — mirroring
-  // getFacilityProgramIds(). Union across every selected (Care Setting, Facility) pair, same
-  // union-not-intersection convention used everywhere else in this picker: a board covering ED
-  // @ Main Hospital and ICU @ Eastside should offer everything eligible at either combination.
-  function programEntriesEligible(csNames, facilityNames){
-    var seen = {}; var out = [];
-    (csNames||[]).forEach(function(cs){
-      (facilityNames||[]).forEach(function(f){
-        programsEligibleFor(cs, f).forEach(function(p){ if(!seen[p.id]){ seen[p.id]=true; out.push(p); } });
-      });
-    });
-    return out;
-  }
-  function isProgramNameEligible(name, csNames, facilityNames){
-    return programEntriesEligible(csNames, facilityNames).some(function(p){
-      return p.name === name || (p.subPrograms||[]).some(function(sp){ return sp.name === name; });
-    });
-  }
-  var selectedPrograms = [];
-  function programsForCareSetting(){ return programEntriesEligible(selectedCareSettings, selectedFacilities); }
-  function updateProgramButton(){
-    var btn = document.getElementById('programAccessBtn');
-    if(!btn) return;
-    // Count only top-level Programs here — sub-programs have their own button/count in the
-    // adjacent dropdown, so a Program with 2 of 2 sub-programs checked shouldn't inflate this
-    // count to look like 3 things are selected when it's really 1 Program.
-    var topLevelCount = selectedPrograms.filter(function(name){
-      return programsForCareSetting().some(function(p){ return p.name === name; });
-    }).length;
-    btn.textContent = topLevelCount ? topLevelCount + ' selected' : 'Select Programs…';
-  }
-  // Sub-programs are never auto-selected by checking a parent Program — the user picks each one
-  // manually in the adjacent Sub-programs dropdown. Unchecking the parent still clears its
-  // sub-programs, since they'd otherwise remain selected but invisible once that dropdown
-  // disappears.
-  function renderProgramMenu(){
-    var menu = document.getElementById('programAccessMenu');
-    if(!menu) return;
-    var options = programsForCareSetting();
-    var eligible = [];
-    options.forEach(function(p){ eligible.push(p.name); (p.subPrograms||[]).forEach(function(sp){ eligible.push(sp.name); }); });
-    selectedPrograms = selectedPrograms.filter(function(p){ return eligible.indexOf(p) > -1; });
-    menu.innerHTML = options.length ? options.map(function(p){
-      var parentChecked = selectedPrograms.indexOf(p.name) > -1;
-      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" class="program-parent-cb" value="'+p.name+'"'+(parentChecked?' checked':'')+' onchange="toggleProgramParent(this)"> '+p.name+'</label>';
-    }).join('') : (
-      (!selectedCareSettings.length || !selectedFacilities.length)
-        ? '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting and Facility first</div>'
-        : '<div class="picker-option" style="cursor:default;color:var(--muted)">No Programs assigned to the selected Care Setting(s) at the selected Facility(ies)</div>'
-    );
-    updateProgramButton();
-    renderSubProgramMenu();
-  }
-  function toggleProgramParent(cb){
-    var name = cb.value;
-    var checked = cb.checked;
-    var program = programsForCareSetting().find(function(p){ return p.name === name; });
-    var pos = selectedPrograms.indexOf(name);
-    if(checked && pos===-1) selectedPrograms.push(name);
-    if(!checked && pos>-1) selectedPrograms.splice(pos,1);
-    // No auto-select on check — the user picks sub-programs manually. Unchecking the parent
-    // still clears its sub-programs, so nothing stays selected once it's hidden from view.
-    if(!checked){
-      (program && program.subPrograms || []).forEach(function(sp){
-        var p = selectedPrograms.indexOf(sp.name);
-        if(p>-1) selectedPrograms.splice(p,1);
-      });
-    }
-    renderProgramMenu();
-  }
-  function toggleProgramPicker(){
-    var menu = document.getElementById('programAccessMenu');
-    var btn = document.getElementById('programAccessBtn');
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    else { btn.setAttribute('aria-expanded','false'); }
-  }
-
-  // Sub-programs render in their own adjacent dropdown rather than nested under each parent
-  // Program — this keeps the picker usable when more than one selected Program has its own
-  // sub-programs. Each row is tagged with its parent Program's short code (e.g. "BHP") so
-  // ownership stays clear even when sub-programs from different parents are listed together.
-  function selectedProgramsWithSubs(){
-    return programsForCareSetting().filter(function(p){
-      return (p.subPrograms||[]).length && selectedPrograms.indexOf(p.name) > -1;
-    });
-  }
-  function renderSubProgramMenu(){
-    var wrap = document.getElementById('subProgramPickerWrap');
-    var menu = document.getElementById('subProgramMenu');
-    var btn = document.getElementById('subProgramBtn');
-    if(!wrap || !menu || !btn) return;
-    var parents = selectedProgramsWithSubs();
-    if(!parents.length){
-      wrap.style.display = 'none';
-      menu.classList.remove('open');
-      return;
-    }
-    wrap.style.display = '';
-    menu.innerHTML = parents.map(function(p){
-      return (p.subPrograms||[]).map(function(sp){
-        var checked = selectedPrograms.indexOf(sp.name) > -1;
-        var codeTag = p.shortCode ? '<span class="muted" style="float:right;">'+p.shortCode+'</span>' : '';
-        return '<label class="picker-option" style="cursor:pointer;display:flex;"><span style="flex:1 1 auto;"><input type="checkbox" value="'+sp.name+'"'+(checked?' checked':'')+' onchange="toggleSubProgram(this)"> '+sp.name+'</span>'+codeTag+'</label>';
-      }).join('');
-    }).join('');
-    var selectedCount = parents.reduce(function(n,p){ return n + (p.subPrograms||[]).filter(function(sp){ return selectedPrograms.indexOf(sp.name) > -1; }).length; }, 0);
-    btn.textContent = selectedCount ? selectedCount + ' selected' : 'Select Sub-programs…';
-  }
-  function toggleSubProgram(cb){
-    var pos = selectedPrograms.indexOf(cb.value);
-    if(cb.checked && pos===-1) selectedPrograms.push(cb.value);
-    if(!cb.checked && pos>-1) selectedPrograms.splice(pos,1);
-    // The parent Program is left exactly as it was — see the note above renderProgramMenu().
-    // Unchecking a sub-program never forces the parent off, and it stays available to re-check.
-    renderSubProgramMenu();
-  }
-  function toggleSubProgramPicker(){
-    var menu = document.getElementById('subProgramMenu');
-    var btn = document.getElementById('subProgramBtn');
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    else { btn.setAttribute('aria-expanded','false'); }
-  }
-
-  var ACCESS_ROLES = ['Trackerboard Admin', 'Unit Charge Nurse', 'Care Manager', 'IT / Configuration Analyst', 'Read-only Viewer', 'Unit Manager', 'Clinical Coordinator', 'Nursing Supervisor', 'Registration Staff', 'Attending Provider', 'Quality & Safety Analyst'];
-  var selectedConfigAccess = [];
-  var selectedRuntimeAccess = [];
-  function accessState(kind){ return kind === 'config' ? selectedConfigAccess : selectedRuntimeAccess; }
-  function updateAccessButton(kind){
-    var btn = document.getElementById(kind + 'AccessBtn');
-    if(!btn) return;
-    var arr = accessState(kind);
-    btn.textContent = arr.length ? arr.length + ' selected' : 'Select roles…';
-  }
-  function renderAccessMenu(kind){
-    var menu = document.getElementById(kind + 'AccessMenu');
-    if(!menu) return;
-    var arr = accessState(kind);
-    menu.innerHTML = ACCESS_ROLES.map(function(r){
-      var checked = arr.indexOf(r) > -1 ? ' checked' : '';
-      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+r+'"'+checked+' onchange="toggleAccessRole(\''+kind+'\', \''+r+'\', this.checked)"> '+r+'</label>';
-    }).join('');
-    updateAccessButton(kind);
-  }
-  function updateAccessWarning(){
-    var el = document.getElementById('accessBroaderWarning');
-    if(!el) return;
-    var broader = selectedConfigAccess.filter(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
-    if(broader.length){
-      el.innerHTML = 'Configuration access includes ' + broader.join(', ') + ' without Board access — this blocks activation until resolved.';
-      el.style.display = '';
-    } else {
-      el.style.display = 'none';
-    }
-    var field = el.closest('.field');
-    if(field) field.classList.toggle('error', broader.length > 0);
-  }
-  function toggleAccessRole(kind, role, checked){
-    var arr = accessState(kind);
-    var pos = arr.indexOf(role);
-    if(checked && pos===-1) arr.push(role);
-    if(!checked && pos>-1) arr.splice(pos,1);
-    updateAccessButton(kind);
-    updateAccessWarning();
-  }
-  function toggleAccessPicker(kind){
-    var menu = document.getElementById(kind + 'AccessMenu');
-    var btn = document.getElementById(kind + 'AccessBtn');
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    else { btn.setAttribute('aria-expanded','false'); }
-  }
-
-  function connFacilityOptions(){
-    return unionFacilitiesForSelected();
-  }
-
-  function updateConnFacilityButton(){
-    var btn = document.getElementById('connFacilityBtn');
-    if(!btn) return;
-    btn.textContent = selectedFacilities.length ? selectedFacilities.length + ' ' + (selectedFacilities.length>1?'facilities':'facility') + ' selected' : 'Select Facility…';
-  }
-
-  function renderConnFacilityMenu(){
-    var options = connFacilityOptions();
-    var menu = document.getElementById('connFacilityMenu');
-    if(!menu) return;
-    menu.innerHTML = options.length ? options.map(function(f){
-      var checked = selectedFacilities.indexOf(f) > -1 ? ' checked' : '';
-      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+f+'"'+checked+' onchange="toggleConnFacility(\''+f.replace(/'/g,"\\'")+'\', this.checked)"> '+f+'</label>';
-    }).join('') : '<div class="picker-option" style="cursor:default;color:var(--muted)">Select a Care Setting first</div>';
-    updateConnFacilityButton();
-  }
-
-  function toggleConnFacility(value, checked){
-    var pos = selectedFacilities.indexOf(value);
-    if(checked && pos===-1) selectedFacilities.push(value);
-    if(!checked && pos>-1){
-      selectedFacilities.splice(pos,1);
-      // Drop the Unit selections along with the facility — otherwise they sit orphaned in
-      // memory and silently reappear if the same facility is re-added this session.
-      delete selectedUnits[value];
-    }
-    updateConnFacilityButton();
-    renderCareSettingInfo();
-    renderProgramMenu();
-    renderUnitAllocation();
-    updateReadiness();
-  }
-
-  function toggleConnFacilityPicker(){
-    var menu = document.getElementById('connFacilityMenu');
-    var btn = document.getElementById('connFacilityBtn');
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    else { btn.setAttribute('aria-expanded','false'); }
   }
 
   function toggleTransferEnabled(checked){
@@ -3092,7 +2483,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
   }
 
   function renderTransferDestinations(){
-    var defaults = ['OR','Hospitalization'];
+    var defaults = ['OR','HOSP'];
     var options = activeCareSettingNames().filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
     document.getElementById('transferDestinations').innerHTML = options.map(function(cs){
       var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
@@ -3203,9 +2594,6 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       var name = document.getElementById('trackerboardNameInput').value.trim();
       var shortName = document.getElementById('shortNameInput').value.trim();
       var hasCareSetting = selectedCareSettings.length > 0;
-      var hasFacility = selectedFacilities.length > 0;
-      var hasBoardAccess = selectedRuntimeAccess.length > 0;
-      var hasConfigAccess = selectedConfigAccess.length > 0;
       var caresettingBlocking = [];
       if(!name) caresettingBlocking.push('Board Name is required');
       else if(otherTrackerboards().some(function(t){ return t.name.toLowerCase() === name.toLowerCase(); })) caresettingBlocking.push('Board Name "'+name+'" is already in use');
@@ -3213,22 +2601,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
       if(!shortName) caresettingBlocking.push('Short Name is required before activation');
       else if(otherTrackerboards().some(function(t){ return (t.shortName||'').toLowerCase() === shortName.toLowerCase(); })) caresettingBlocking.push('Short Name "'+shortName+'" is already in use');
       if(!hasCareSetting) caresettingBlocking.push('Select at least one Care Setting');
-      if(!hasFacility) caresettingBlocking.push('Select at least one Facility');
-      if(!hasBoardAccess) caresettingBlocking.push('Select at least one Board access role');
-      // A Configuration Access role that isn't also a Board Access role is an RBAC gap, not
-      // just a note — it means someone can reconfigure the board without being covered by the
-      // same access review as the people who actually work it. Blocking, not warning.
-      var configBroaderThanBoard = selectedConfigAccess.filter(function(r){ return selectedRuntimeAccess.indexOf(r) === -1; });
-      if(configBroaderThanBoard.length) caresettingBlocking.push('Configuration access includes ' + configBroaderThanBoard.join(', ') + ' without Board access — add ' + (configBroaderThanBoard.length===1?'it':'them') + ' to Board access or remove ' + (configBroaderThanBoard.length===1?'it':'them') + ' from Configuration access');
-      // Resource over-allocation is no longer this section's concern — Care Settings
-      // Configuration enforces capacity ceilings when resources are allocated to a Unit
-      // (Phase 1/2). What Trackerboard still needs to guard against is two Trackerboards
-      // claiming the same Unit; that exclusion check is Phase 3, item 9 — deliberately not
-      // built here yet, so it isn't silently missing without a note.
       if(caresettingBlocking.length) return { state:'incomplete', issues:caresettingBlocking };
-      var caresettingWarnings = [];
-      if(!hasConfigAccess) caresettingWarnings.push('No Configuration access role selected');
-      if(caresettingWarnings.length) return { state:'warning', issues:caresettingWarnings };
       return { state:'complete', issues:[] };
     }
     if(key === 'workflow'){
@@ -3333,65 +2706,26 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
     return { cls:'section-state progress', html:info.issues.length > 1 ? info.issues.length + ' to go' : (info.issues.length === 1 ? '1 to go' : 'In progress'), empty:false };
   }
 
+  // Renamed in spirit only — this now just keeps each card header's completion badge
+  // (cardState-*) in sync. The vertical tab rail it used to also drive is gone; navigation
+  // between sections happens purely through the accordion-style card headers now.
   function renderSectionNav(){
-    var nav = document.getElementById('sectionNav');
-    if(!nav) return;
-    var current = currentOpenSection();
     SECTION_ORDER.forEach(function(sec){
       var badge = sectionBadge(sec.key);
-
       var cardState = document.getElementById('cardState-'+sec.key);
-      if(cardState){
-        if(badge.empty){
-          cardState.className = 'section-state';
-          cardState.innerHTML = '';
-          cardState.style.display = 'none';
-          cardState.removeAttribute('aria-label');
-        } else {
-          cardState.className = badge.cls;
-          cardState.innerHTML = badge.html;
-          cardState.style.display = '';
-          if(badge.ariaLabel) cardState.setAttribute('aria-label', badge.ariaLabel); else cardState.removeAttribute('aria-label');
-        }
+      if(!cardState) return;
+      if(badge.empty){
+        cardState.className = 'section-state';
+        cardState.innerHTML = '';
+        cardState.style.display = 'none';
+        cardState.removeAttribute('aria-label');
+      } else {
+        cardState.className = badge.cls;
+        cardState.innerHTML = badge.html;
+        cardState.style.display = '';
+        if(badge.ariaLabel) cardState.setAttribute('aria-label', badge.ariaLabel); else cardState.removeAttribute('aria-label');
       }
-
-      var btn = nav.querySelector('[data-section="'+sec.key+'"]');
-      if(!btn) return;
-      var active = sec.key === current;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-      btn.setAttribute('tabindex', active ? '0' : '-1');
-      var navStateEl = btn.querySelector('.section-state');
-      if(active || badge.empty){
-        if(navStateEl) navStateEl.remove();
-        return;
-      }
-      if(!navStateEl){
-        navStateEl = document.createElement('span');
-        btn.appendChild(navStateEl);
-      }
-      navStateEl.className = badge.cls;
-      navStateEl.innerHTML = badge.html;
-      if(badge.ariaLabel) navStateEl.setAttribute('aria-label', badge.ariaLabel); else navStateEl.removeAttribute('aria-label');
     });
-  }
-
-  function handleSectionNavKeydown(e){
-    var navKeys = ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'];
-    if(navKeys.indexOf(e.key) === -1) return;
-    e.preventDefault();
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('#sectionNav .section-nav-item'));
-    var idx = buttons.indexOf(document.activeElement);
-    if(idx === -1) idx = buttons.findIndex(function(b){ return b.classList.contains('active'); });
-    if(idx === -1) idx = 0;
-    var nextIdx = idx;
-    if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') nextIdx = (idx - 1 + buttons.length) % buttons.length;
-    else if(e.key === 'ArrowRight' || e.key === 'ArrowDown') nextIdx = (idx + 1) % buttons.length;
-    else if(e.key === 'Home') nextIdx = 0;
-    else if(e.key === 'End') nextIdx = buttons.length - 1;
-    var target = buttons[nextIdx];
-    goToSection(target.getAttribute('data-section'));
-    target.focus();
   }
 
   function toggleFlowMapVisibility(){
@@ -3473,7 +2807,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
         allowedNext:[],
                 enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
     ],
-    'Hospitalization': [
+    'HOSP': [
       { name:'Admitted', desc:'Patient has been admitted to the unit.',
         start:true, complete:false, allowLWOT:true,
         allowedNext:[1,2],
