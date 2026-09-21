@@ -9,7 +9,7 @@
   /* blueEHR design-system palette (see common_v3_1.css / uikit-custom.css)
      -- consolidated per UI punch-list: colors, shadows, radius, z-index,
      durations and type scale are now single sources of truth. */
-  --navy:#1a4f85;--navy2:#003366;--blue:#1a4f85;--blue-soft:#edf2f9;--blue-border:#bcd7ea;
+  --navy:#1a4f85;--navy2:#003366;--blue:#1a4f85;--blue-soft:#edf2f9;--blue-border:#bcd7ea;--btn-secondary-border:#b3c9e7;
   --ink:#000;--muted:#5c6b76;--muted-soft:#9aa7b2;--line:#d7dde1;--line-soft:#e8ecef;
   --bg:#f2f4f6;--white:#fff;--surface-tint:#f4f8fb;--surface-alt:#f7fbfc;--surface-dark:#263746;
   --ok:#1a7a41;--ok-bg:#e7f5ea;--warn:#8a6b12;--warn-bg:#fff6d9;
@@ -113,7 +113,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .app{display:grid;grid-template-rows:42px minmax(0,1fr);width:100vw;height:100vh;min-width:760px}.main{display:grid;grid-template-rows:auto auto minmax(0,1fr);min-height:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--navy);color:var(--white)}.topgroup,.toolbar-left,.toolbar-right,.filters{display:flex;align-items:center;gap:9px;min-width:0}.brand{font-weight:600}.sq{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#2671a6;color:var(--white);border:1px solid rgba(255,255,255,.17);border-radius:var(--radius);cursor:pointer}.search{position:relative;width:clamp(280px,34vw,540px)}.search input{width:100%;height:28px;padding:0 34px 0 10px;border:0;border-radius:var(--radius)}.search button{position:absolute;right:0;top:0;width:30px;height:28px;background:transparent;color:var(--navy);cursor:pointer}.avatar{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:var(--blue-soft);color:var(--navy);font-size:var(--text-xs);font-weight:600}
 .toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:var(--white);border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:var(--text-xl)}.filter-bar{padding:8px 18px;background:var(--white);border-bottom:1px solid var(--line)}.summary,.muted,.help{color:var(--muted);font-size:var(--text-sm)}.filters{flex-wrap:wrap}.control{height:30px;padding:5px 10px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-md);box-shadow:none}.control.compact{width:auto;min-width:125px;height:29px;font-size:var(--text-sm)}.filter-select-btn{width:220px;height:32px;padding:0 26px 0 10px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-sm);text-align:left;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filter-select-btn::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--muted);transform:translateY(-50%);pointer-events:none}.filter-select-btn[aria-expanded="true"]::after{border-top-color:var(--navy)}.toggle{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--muted);white-space:nowrap}.toggle input{width:15px;height:15px;margin:0}
-.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:var(--radius);line-height:1}.btn{min-height:30px;padding:0 13px;background:var(--white);color:var(--ink);border:1px solid var(--line-soft)}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:var(--white);color:var(--navy);border-color:var(--line-soft)}.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--white)}.btn.primary:hover:not(:disabled){background:var(--navy2);border-color:var(--navy2);color:var(--white)}.btn.small{min-height:26px;padding:0 9px;font-size:var(--text-sm)}.btn.danger{color:var(--bad);border-color:var(--bad-border-soft)}.btn.tertiary{background:transparent;border-color:transparent;color:var(--muted)}.btn.tertiary:hover:not(:disabled){background:var(--surface-tint);color:var(--navy);border-color:var(--line)}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:34px;height:34px;padding:0;background:var(--white);border:1px solid var(--line)}.link-btn{padding:0;background:transparent;color:var(--navy);font-weight:600}.link-btn:hover{text-decoration:underline}
+.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:var(--radius);line-height:1}.btn{min-height:30px;padding:0 13px;background:var(--blue-soft);color:var(--navy);border:1px solid var(--btn-secondary-border)}.btn:hover:not(:disabled){background:var(--blue-border);color:var(--navy);border-color:var(--btn-secondary-border)}.icon-btn:hover:not(:disabled){background:var(--surface-tint);color:var(--navy);border-color:var(--line)}.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--white)}.btn.primary:hover:not(:disabled){background:var(--navy2);border-color:var(--navy2);color:var(--white)}.btn.small{min-height:26px;padding:0 9px;font-size:var(--text-sm)}.btn.danger{color:var(--bad);border-color:var(--bad-border-soft)}.btn.tertiary{background:transparent;border-color:transparent;color:var(--muted)}.btn.tertiary:hover:not(:disabled){background:var(--surface-tint);color:var(--navy);border-color:var(--line)}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:34px;height:34px;padding:0;background:var(--white);border:1px solid var(--line)}.link-btn{padding:0;background:transparent;color:var(--navy);font-weight:600}.link-btn:hover{text-decoration:underline}
 .content{min-height:0;overflow:auto;padding:14px 18px 20px}.table-shell{min-width:1180px;background:var(--white);border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:9px 10px;text-align:left;vertical-align:middle}.table td{border-bottom:1px solid var(--line-soft)}.table tbody tr{height:52px}.table th{background:var(--surface-tint);color:var(--muted-soft);font-size:var(--text-xs);font-weight:600;border-bottom:1px solid var(--line-soft)}.table tbody tr:hover{background:var(--surface-alt)}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:600;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:600}.cell-meta{margin-top:2px;color:var(--muted);font-size:var(--text-xs)}.tags{display:flex;flex-wrap:wrap;gap:5px}
 /* Badge atom — one shared box model for every status/label chip in the tool (Care Setting
    lifecycle pill, Facility count tag, card completion state, readiness indicator). Previously
@@ -128,30 +128,33 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .pill.retired,.pill.superseded{background:var(--neutral);color:var(--muted)}
 .section-state.bad{background:var(--bad-bg);color:var(--bad)}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:var(--navy);font-size:var(--text-sm);font-weight:600;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:var(--text-sm);font-weight:600}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.table th.actions,.table td.actions{text-align:right}.menu-wrap{position:relative;display:inline-flex}.menu-wrap>.icon-btn{background:transparent;border-color:transparent}.menu-wrap>.icon-btn:hover:not(:disabled){background:var(--blue-soft);border-color:transparent}.menu{position:absolute;z-index:var(--z-dropdown);top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow-md)}.menu.open{display:block}.menu-divider{margin:4px 0;border-top:1px solid var(--line-soft)}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:var(--surface-alt);border-top:1px solid var(--line);color:var(--muted);font-size:var(--text-sm)}.pager{display:flex;align-items:center;gap:6px}
 .backdrop{position:fixed;z-index:var(--z-backdrop);inset:0;display:none;background:var(--overlay)}.backdrop.open{display:block}.drawer{position:fixed;z-index:var(--z-drawer);top:0;right:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(1120px,78vw);height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:var(--text-xl)}.drawer-sub{margin-top:3px;color:var(--muted);font-size:var(--text-sm)}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:var(--white);border-bottom:1px solid var(--line);color:var(--muted);font-size:var(--text-sm)}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:var(--muted-soft);flex:0 0 auto}.validation-strip.error{background:var(--white);color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:var(--white);color:var(--warn)}.validation-strip.warning .validation-dot{background:var(--warn)}.validation-strip.success{background:var(--white);color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid var(--blue-soft);font-size:var(--text-sm)}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:var(--white)}.drawer-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:var(--text-sm)}.sub-cs-banner{align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid var(--blue-soft);font-size:var(--text-sm);color:var(--ink)}
-.card{margin-bottom:14px;background:var(--white);border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 11px;border-bottom:1px solid var(--line-soft)}.card-title{margin:0;font-size:var(--text-lg)}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:var(--text-sm)}.section-state{flex:0 0 auto}.card-body{padding:15px}.flat-section{margin:10px 0 22px;padding-bottom:18px;border-bottom:1px solid var(--line-soft)}.flat-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.flat-section-title{margin:0 0 12px;font-size:var(--text-lg);font-weight:600;color:var(--ink)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:var(--muted);font-size:var(--text-sm);font-weight:600}.text,.textarea{width:100%;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-md);box-shadow:none;text-align:left}
+.card{margin-bottom:14px;background:var(--white);border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 11px;border-bottom:1px solid var(--line-soft)}.card-title{margin:0;display:flex;align-items:center;font-size:var(--text-lg)}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:var(--text-sm)}.section-state{flex:0 0 auto}.card-body{padding:15px}.flat-section{margin:10px 0 22px;padding-bottom:18px;border-bottom:1px solid var(--line-soft)}.flat-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.flat-section-title{margin:0 0 12px;font-size:var(--text-lg);font-weight:600;color:var(--ink)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:var(--muted);font-size:var(--text-sm);font-weight:600}.text,.textarea{width:100%;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-md);box-shadow:none;text-align:left}
 /* Text-alignment convention: content defaults to left. Right-align is
    reserved for numeric values and row-action columns (see .text-right
    usages below); center is reserved for standalone empty/callout states. */
 .text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text{height:30px;padding:5px 10px}.textarea{min-height:78px;padding:8px 10px;resize:vertical}.field-error{display:none;margin-top:5px;color:var(--bad);font-size:var(--text-sm)}.field.error .text,.field.error .textarea{border-color:var(--bad-border);background:var(--bad-bg)}.field.error .field-error{display:block}.field-hint-warn{margin-top:5px;color:var(--warn);font-size:var(--text-sm)}.short-meta{display:flex;align-items:center;justify-content:space-between;min-height:23px;margin-top:4px;color:var(--muted);font-size:var(--text-xs)}
 .section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:var(--surface-alt);border:1px solid var(--line-soft)}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:0 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:var(--z-picker);top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:var(--radius);text-align:left;background:transparent;cursor:pointer;font-size:var(--text-sm)}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:var(--surface-tint);border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:var(--text-xs)}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:var(--navy);font-weight:600;text-decoration:none}.manage:hover{text-decoration:underline}
-.flow-shell{margin-bottom:14px;padding:11px;background:var(--surface-alt);border:1px solid var(--line)}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:var(--white);border:1px solid var(--line-soft);color:var(--muted);cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);color:var(--ink)}.flow-node.bad{border-color:var(--bad-border);background:var(--bad-bg);color:var(--ink)}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:var(--muted-soft);font-size:var(--text-xl)}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:var(--surface-tint);border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:var(--navy);cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:var(--navy);cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:var(--text-xs)}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:var(--surface-tint);border:1px solid var(--line-soft)}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid var(--line-soft)}.subsection h4{margin:0 0 4px;font-size:var(--text-sm)}.subsection p{margin:0 0 9px;color:var(--muted);font-size:var(--text-xs)}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.check-option{min-height:30px;padding:5px 7px;background:var(--surface-alt);border:1px solid var(--line-soft);font-size:var(--text-sm)}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:var(--text-sm)}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:var(--surface-tint);border-left:3px solid var(--muted-soft);color:var(--muted);font-size:var(--text-sm)}
+.status-list-body{display:flex;flex-direction:column;gap:8px}.status-actions{display:flex;gap:3px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:var(--surface-tint);border:1px solid var(--line-soft)}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid var(--line-soft)}.subsection h4{margin:0 0 10px;font-size:var(--text-sm)}.subsection p{margin:0 0 9px;color:var(--muted);font-size:var(--text-xs)}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.check-option{min-height:30px;padding:5px 7px;background:var(--surface-alt);border:1px solid var(--line-soft);font-size:var(--text-sm)}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:var(--text-sm)}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:var(--surface-tint);border-left:3px solid var(--muted-soft);color:var(--muted);font-size:var(--text-sm)}
 .modal-backdrop{position:fixed;z-index:var(--z-modal);inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:var(--overlay)}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:var(--white);box-shadow:var(--shadow-lg)}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:var(--text-lg)}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid var(--line-soft)}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid var(--line-soft)}.history th{background:var(--surface-tint);color:var(--muted);font-size:var(--text-xs);text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:var(--surface-tint);border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:var(--z-toast);right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:var(--surface-dark);color:var(--white);box-shadow:var(--shadow-md);font-size:var(--text-sm)}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:var(--white);font-size:var(--text-xs)}
 /* Activity log: a right-side panel (not a centered modal) at 30% of the screen width, styled
    after a version-history list — bold entry title, a "reflect date" line, a "created by" line,
    and a hairline divider between entries. Reuses the app's existing .backdrop dimmer. */
-.audit-panel{position:fixed;z-index:var(--z-drawer);top:0;right:0;display:flex;flex-direction:column;width:30vw;min-width:320px;max-width:520px;height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}
-.audit-panel.open{transform:translateX(0)}
-.audit-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-height:55px;padding:12px 17px;border-bottom:1px solid var(--line)}
-.audit-panel-title{margin:0;font-size:var(--text-lg);font-weight:700}
+.side-panel{position:fixed;top:0;right:0;display:flex;flex-direction:column;height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}
+.side-panel.open{transform:translateX(0)}
+.side-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}
+.side-panel-title{margin:0;font-size:var(--text-lg);font-weight:700}
+.side-panel-body{flex:1;min-height:0;overflow-y:auto;padding:16px 17px}
+.audit-panel{z-index:var(--z-drawer);width:30vw;min-width:320px;max-width:520px}
+.audit-panel-head{align-items:flex-start;padding:12px 17px}
 .audit-panel-sub{margin-top:2px;font-size:var(--text-sm);color:var(--muted)}
-.audit-panel-body{flex:1;min-height:0;overflow-y:auto;padding:4px 17px}
+.audit-panel-body{padding:4px 17px}
 .audit-entry{padding:12px 0;border-bottom:1px solid var(--line-soft)}
 .audit-entry:last-child{border-bottom:0}
 .audit-entry-title{font-size:var(--text-base);font-weight:700;color:var(--ink);margin-bottom:4px}
 .audit-entry-line{font-size:var(--text-sm);color:var(--muted)}
 @media(max-width:980px){.audit-panel{width:60vw}}
 @media(max-width:760px){.audit-panel{width:100vw;max-width:none}}
-@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
+@media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
   </style>
 <style>
 /* Mockup-only additions layered on top of the reference design system above.
@@ -182,12 +185,6 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .desc-info{ position:relative; display:inline-flex; vertical-align:middle; margin-left:5px; color:var(--muted); cursor:help; }
 .desc-info:hover .desc-popover, .desc-info:focus .desc-popover{ display:block; }
 .desc-popover{ display:none; position:absolute; z-index:var(--z-popover); top:130%; left:0; width:max-content; max-width:260px; padding:8px 10px; background:var(--surface-dark); color:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-md); font-size:var(--text-xs); font-weight:400; line-height:1.4; text-transform:none; letter-spacing:normal; white-space:normal; }
-.disclosure-toggle{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:0; background:transparent; border:0; text-align:left; cursor:pointer; }
-.disclosure-title{ font-weight:600; font-size:var(--text-sm); flex:0 0 auto; }
-.disclosure-summary{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } /* uses .text-right utility per alignment convention */
-.disclosure-chevron{ flex:0 0 auto; color:var(--muted); transition:transform var(--dur-fast); transform:rotate(-90deg); }
-.disclosure.open .disclosure-chevron{ transform:rotate(0deg); }
-.disclosure-body{ margin-top:11px; }
 .switch-heading{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; vertical-align:middle; }
 .switch-heading input{ position:absolute; opacity:0; width:1px; height:1px; }
 .switch-track{ position:relative; flex:0 0 auto; width:34px; height:19px; background:var(--line); border-radius:var(--chip-radius); transition:background var(--dur-fast); }
@@ -225,13 +222,16 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .cs-info-card .info-value.muted{ color:var(--muted); font-weight:400; }
 /* Care setting information panel: a secondary right panel stacked on top of the create/edit
    drawer (higher z-index), sized to 70% of the drawer's own width rather than the full screen. */
-.cs-info-panel{position:fixed;z-index:var(--z-modal);top:0;right:0;display:flex;flex-direction:column;width:calc(60vw * 0.7);min-width:340px;max-width:640px;height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}
-.cs-info-panel.open{transform:translateX(0)}
-.cs-info-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}
-.cs-info-panel-title{margin:0;font-size:var(--text-lg);font-weight:700}
-.cs-info-panel-body{flex:1;min-height:0;overflow-y:auto;padding:16px 17px;display:flex;flex-direction:column;gap:12px}
-@media(max-width:980px){.cs-info-panel{width:60vw}}
-@media(max-width:760px){.cs-info-panel{width:100vw;max-width:none}}
+.side-panel-stacked{z-index:var(--z-modal)}
+/* These two backdrops sit behind a panel stacked ON TOP of the main create/edit drawer, so
+   they need to be above the drawer's own z-index too — otherwise the drawer underneath stays
+   clickable/editable while the panel is open, since the shared .backdrop class alone only
+   reaches --z-backdrop (below the drawer). */
+#csInfoBackdrop, #statusEditBackdrop{ z-index:var(--z-modal); }
+.side-panel-70{width:calc(60vw * 0.7);min-width:340px;max-width:640px}
+@media(max-width:980px){.side-panel-70{width:60vw}}
+@media(max-width:760px){.side-panel-70{width:100vw;max-width:none}}
+.cs-info-panel-body{display:flex;flex-direction:column;gap:12px}
 .inherit-badge{ display:inline-flex; align-items:center; gap:3px; margin-left:6px; color:var(--muted); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; vertical-align:middle; }
 .layer-tag{ flex:0 0 auto; padding:2px 8px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
 .layer-tag.definition{ background:var(--surface-tint); color:var(--muted); }
@@ -257,28 +257,27 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .check-option.heading{ border:0; background:none; padding:0; font-weight:600; font-size:var(--text-sm); }
 .status-list-body{ display:flex; flex-direction:column; gap:4px; }
 .status-item-wrapper{ display:flex; flex-direction:column; }
-.status-item-wrapper + .status-item-wrapper{ border-top:1px solid var(--line); padding-top:4px; }
-.status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:8px; border:1px solid transparent; background-color:transparent; cursor:pointer; transition:background-color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+.status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:var(--radius); border:1px solid var(--line); background-color:transparent; cursor:pointer; transition:background-color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
 .status-card.bad{ border-color:var(--bad-border); background-color:var(--bad-bg); }
 .status-card:hover{ background-color:var(--surface-alt); }
 .status-card.selected{ background-color:var(--blue-soft); border-color:var(--blue-border); }
 .status-info{ display:flex; flex-direction:column; gap:3px; flex-grow:1; min-width:0; }
-.status-title{ font:inherit; font-size:var(--text-lg); font-weight:400; color:var(--ink); line-height:1.3; border:none; background:transparent; outline:none; width:100%; padding:0; }
-.status-title:focus{ border-bottom:1px solid var(--blue); }
+.status-title{ font-size:var(--text-lg); font-weight:600; color:var(--ink); line-height:1.3; }
 .status-subtitle{ font-size:var(--text-sm); color:var(--muted); }
 .status-card.selected .status-subtitle{ color:var(--navy2); }
 .status-actions{ display:flex; align-items:center; gap:16px; margin-left:12px; opacity:0; visibility:hidden; transition:opacity var(--dur-fast) ease, visibility var(--dur-fast) ease; }
 .status-card.selected .status-actions, .status-card:hover .status-actions, .status-card:focus-within .status-actions{ opacity:1; visibility:visible; }
+.status-remove-btn{ color:var(--bad); }
 .action-btn{ width:auto; height:auto; min-width:24px; min-height:24px; padding:4px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:0; color:var(--ink); cursor:pointer; transition:color var(--dur-fast) ease, transform var(--dur-fast) ease; }
 .action-btn:hover{ background:transparent; border-color:transparent; color:var(--blue); transform:scale(1.1); }
 .action-btn svg{ width:18px; height:18px; display:block; }
 .tag-remove{ margin-left:2px; border:0; background:transparent; color:inherit; cursor:pointer; font-size:var(--text-sm); line-height:1; padding:0; }
 .field .control{ width:100%; }
-.flow-node.next{ border-color:var(--ok); box-shadow:inset 0 0 0 1px var(--ok); }
 .card-toggle{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; padding:0; margin-right:2px; background:transparent; border:0; color:var(--muted); cursor:pointer; vertical-align:middle; }
 .card-chevron{ display:inline-block; transition:transform var(--dur-fast); }
 .card.collapsed .card-chevron{ transform:rotate(-90deg); }
 .card.collapsed .card-body{ display:none; }
+.card.collapsed .workflow-add-btn{ display:none; }
 .tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:var(--text-xs); border:1px solid var(--line); border-radius:var(--radius); background:var(--white); }
 .check-option:has(input[type="checkbox"]:not(:checked)) .tier-select{ display:none; }
 .widget-placement-group{ margin-bottom:22px; }
@@ -327,8 +326,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .col-list-search .pill-toggle{ flex:0 0 auto; padding:4px 10px; border:1px solid var(--line); border-radius:12px; background:var(--white); color:var(--muted); font-size:var(--text-xs); font-weight:700; cursor:pointer; white-space:nowrap; }
 .col-list-search .pill-toggle[aria-pressed="true"]{ background:var(--bad-bg); border-color:var(--bad-border); color:var(--bad); }
 @media(max-width:900px){ .col-builder{ grid-template-columns:1fr; } }
-.info-popover-wrap{ position:relative; display:inline-flex; vertical-align:middle; margin-left:4px; }
-.info-popover-trigger{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; padding:0; background:transparent; border:0; border-radius:50%; color:var(--muted); cursor:pointer; }
+.info-popover-wrap{ position:relative; display:inline-flex; align-items:center; vertical-align:middle; margin-left:4px; line-height:1; }
+.info-popover-trigger{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; padding:0; background:transparent; border:0; border-radius:50%; color:var(--muted); cursor:pointer; line-height:1; }
 .info-popover-trigger:hover{ color:var(--navy2); background:var(--blue-soft); }
 .info-popover{ display:none; position:absolute; z-index:var(--z-popover); top:130%; left:0; width:max-content; min-width:200px; max-width:280px; padding:10px 12px; background:var(--white); border:1px solid var(--line); box-shadow:var(--shadow-sm); font-size:var(--text-sm); font-weight:400; text-align:left; }
 .info-popover.wide{ max-width:620px; min-width:460px; }
@@ -351,15 +350,14 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .readiness-link.warn{ color:var(--warn); }
 .readiness-link.progress{ color:var(--navy2); }
 .readiness-link.bad{ color:var(--bad); }
-.segmented{ display:inline-flex; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
-.segmented label{ display:flex; align-items:center; gap:6px; padding:7px 16px; font-size:var(--text-sm); font-weight:600; color:var(--muted); cursor:pointer; border-right:1px solid var(--line); background:var(--white); }
+.segmented{ display:flex; width:100%; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+.segmented label{ flex:1; display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:0; padding:8px 12px; font-size:var(--text-sm); font-weight:600; line-height:1; color:var(--muted); cursor:pointer; border-right:1px solid var(--line); background:var(--white); text-align:center; transition:background var(--dur-fast) ease, color var(--dur-fast) ease; }
 .segmented label:last-child{ border-right:0; }
+.segmented label:hover{ background:var(--surface-tint); color:var(--navy); }
 .segmented input{ position:absolute; opacity:0; width:1px; height:1px; }
-.segmented label:has(input:checked){ background:var(--blue); color:var(--white); }
+.segmented label:has(input:checked){ background:var(--navy); color:var(--white); }
+.segmented label:has(input:checked):hover{ background:var(--navy); color:var(--white); }
 .status-warn{ color:var(--bad); font-weight:700; }
-.exceptional-exits{ margin-top:10px; padding-top:10px; border-top:1px solid var(--blue-soft); font-size:var(--text-sm); color:var(--muted); }
-.exceptional-exits strong{ display:block; margin-bottom:4px; font-size:var(--text-xs); text-transform:uppercase; letter-spacing:.03em; color:var(--muted); }
-.exceptional-exits ul{ margin:0; padding-left:18px; }
 @media(max-width:1280px){ .drawer{ width:88vw; } }
 @media(max-width:980px){ .drawer{ width:100vw; } }
 
@@ -518,7 +516,6 @@ select.control{ padding-right:26px; }
   <div class="drawer-head">
     <div><h2 class="drawer-title">Create trackerboard</h2><div class="drawer-sub" id="drawerLifecycleState" style="display:none;"></div></div>
     <div class="drawer-actions">
-      <button type="button" class="btn small" onclick="openSamplePreview()">Preview sample board</button>
       <button class="icon-btn" type="button" onclick="closeDrawer()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
     </div>
   </div>
@@ -533,14 +530,14 @@ select.control{ padding-right:26px; }
       </div>
       <div class="card-body" id="sec-caresetting-body">
         <div class="form-grid" data-field-group="basic" style="grid-template-columns:2fr 1fr;">
-          <div class="field"><label for="trackerboardNameInput">Board Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"><p class="field-error" id="nameFieldError" style="display:none;">Board Name is required.</p></div>
-          <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"><p class="field-error" id="shortNameFieldError" style="display:none;">Short Name is required.</p></div>
+          <div class="field"><label for="trackerboardNameInput"><span>Board Name <span style="color:var(--bad)">*</span></span></label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"><p class="field-error" id="nameFieldError" style="display:none;">Board Name is required.</p></div>
+          <div class="field"><label for="shortNameInput"><span>Short Name <span style="color:var(--bad)">*</span></span></label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"><p class="field-error" id="shortNameFieldError" style="display:none;">Short Name is required.</p></div>
         </div>
 
         <div class="subsection" data-field-group="scope">
         <div class="form-grid">
           <div class="field full">
-            <label for="careSettingBtn">Care Setting</label>
+            <label for="careSettingBtn"><span>Care Setting <span style="color:var(--bad)">*</span></span></label>
             <div class="cs-picker-row">
               <div class="picker cs-picker-wide"><div class="picker-input" style="display:block;"><div class="cs-tag-box" id="careSettingBtn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" onclick="toggleCareSettingPicker()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCareSettingPicker();}"></div></div><div class="picker-menu" id="careSettingMenu"></div></div>
               <button type="button" class="btn small" id="careSettingInfoBtn" disabled onclick="openCareSettingInfoModal()">Show care setting information</button>
@@ -554,40 +551,21 @@ select.control{ padding-right:26px; }
 
     <div class="card collapsed" id="sec-workflow" data-section-key="workflow">
       <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle Status & Workflow section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Status &amp; Workflow <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Order controls how statuses are presented. Patient movement follows the configured Next statuses.</span></span></h2>
-        <span class="section-state" id="cardState-workflow"></span>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle Statuses section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Statuses <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Order controls how statuses are presented. Patient movement follows the configured Allowed Transitions.</span></span></h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="section-state" id="cardState-workflow"></span>
+          <button class="btn small workflow-add-btn" type="button" onclick="insertStatus(nextInsertIndex())">+ Add New Status</button>
+        </div>
       </div>
       <div class="card-body" id="sec-workflow-body">
 
-        <div class="flow-shell disclosure" id="flowShell">
-          <button type="button" class="disclosure-toggle" onclick="toggleFlowMapVisibility()" aria-expanded="false" aria-controls="flowMapBody">
-            <span class="disclosure-title">How patients flow through this board</span>
-            <span class="muted disclosure-summary text-right" id="flowMapToggleLabel">Show diagram</span>
-            <span class="disclosure-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span>
-          </button>
-          <div class="disclosure-body" id="flowMapBody" style="display:none;">
-            <p class="muted" style="margin:8px 0 6px;">Green statuses can be reached from the one you've selected.</p>
-            <div class="flow-map" id="flowMap"></div>
-          </div>
-          <div class="exceptional-exits" id="exceptionalExits" style="display:none;"></div>
-        </div>
-        <div class="workflow">
-          <div class="status-list">
-            <div class="panel-head"><strong>Statuses</strong><div style="display:flex;align-items:center;gap:10px;"><span class="muted" id="statusCountLabel"></span><button class="btn small" type="button" onclick="insertStatus(STATUSES.length)">+ Add new</button></div></div>
-            <div class="status-list-body" id="statusListBody"></div>
-          </div>
-          <div class="status-editor">
-            <div class="panel-head"><strong id="statusEditorTitle"></strong></div>
-            <div class="status-editor-body" id="statusEditorBody"></div>
-          </div>
-        </div>
+        <div class="status-list-body" id="statusListBody"></div>
 
         <div class="subsection">
-          <h4><label class="switch-heading"><input type="checkbox" id="transferEnabled" onchange="toggleTransferEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Allow transfer to another Care Setting</span></label></h4>
+          <h4><label class="switch-heading"><input type="checkbox" id="transferEnabled" onchange="toggleTransferEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Transfer to other care settings</span></label></h4>
           <p class="muted" id="transferDisabledNote" style="display:none;margin:6px 0 0;">Set a Care Setting first to enable transfers.</p>
           <div class="widget-body" id="transferBody" style="display:none;">
-            <p class="field-label" style="margin-bottom:6px;">Eligible Care Settings <span style="color:var(--bad)">*</span></p>
-            <div class="check-grid cols-3" id="transferDestinations"></div>
+            <div class="field full"><label for="transferDestBtn"><span>Eligible Care Settings <span style="color:var(--bad)">*</span></span></label><div class="picker cs-picker-wide"><div class="picker-input" style="display:block;"><div class="cs-tag-box" id="transferDestBtn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" onclick="toggleTransferDestPicker()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTransferDestPicker();}"></div></div><div class="picker-menu" id="transferDestMenu"></div></div></div>
           </div>
         </div>
 
@@ -816,12 +794,28 @@ select.control{ padding-right:26px; }
      inline block. Values come from Care Settings Configuration's Clinical Defaults; Trackerboard
      doesn't maintain its own copy. -->
 <div class="backdrop" id="csInfoBackdrop" onclick="closeCareSettingInfoModal()"></div>
-<div class="cs-info-panel" id="csInfoPanel" role="dialog" aria-modal="true" aria-label="Care setting information">
-  <div class="cs-info-panel-head">
-    <h2 class="cs-info-panel-title">Care setting information</h2>
+<div class="cs-info-panel side-panel side-panel-stacked side-panel-70" id="csInfoPanel" role="dialog" aria-modal="true" aria-label="Care setting information">
+  <div class="cs-info-panel-head side-panel-head">
+    <h2 class="side-panel-title">Care setting information</h2>
     <button class="icon-btn" type="button" onclick="closeCareSettingInfoModal()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
   </div>
-  <div class="cs-info-panel-body" id="careSettingInfoModalBody"></div>
+  <div class="cs-info-panel-body side-panel-body" id="careSettingInfoModalBody"></div>
+</div>
+
+<div class="backdrop" id="statusEditBackdrop" onclick="cancelStatusEditor()"></div>
+<div class="status-edit-panel side-panel side-panel-stacked side-panel-70" id="statusEditPanel" role="dialog" aria-modal="true" aria-label="Edit status">
+  <div class="side-panel-head">
+    <div>
+      <h2 class="side-panel-title">Edit Status</h2>
+      <div class="audit-panel-sub" id="statusEditorTitle" style="display:none;"></div>
+    </div>
+    <button class="icon-btn" type="button" onclick="cancelStatusEditor()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
+  </div>
+  <div class="side-panel-body" id="statusEditorBody"></div>
+  <div class="modal-foot">
+    <button class="btn" type="button" onclick="cancelStatusEditor()">Cancel</button>
+    <button class="btn primary" type="button" onclick="saveStatusEditor()">Save</button>
+  </div>
 </div>
 
 
@@ -921,7 +915,7 @@ select.control{ padding-right:26px; }
     updateCareSettingButton();
     renderCareSettingInfo();
     STATUSES = (data && data.statuses) ? JSON.parse(JSON.stringify(data.statuses)) : (selectedCareSettings.length === 1 && STATUS_PRESETS[selectedCareSettings[0]] ? clonePreset(STATUS_PRESETS[selectedCareSettings[0]]) : []);
-    selectedIndex = 0;
+    selectedIndex = -1;
     renderStatusList();
     renderStatusEditor();
     selectedColumns = data && data.columns ? data.columns.slice() : recommendedColumnKeys();
@@ -1357,7 +1351,7 @@ select.control{ padding-right:26px; }
     updateCareSettingButton();
     renderCareSettingInfo();
     STATUSES = snap.statuses ? JSON.parse(JSON.stringify(snap.statuses)) : (selectedCareSettings.length === 1 && STATUS_PRESETS[selectedCareSettings[0]] ? clonePreset(STATUS_PRESETS[selectedCareSettings[0]]) : []);
-    selectedIndex = 0;
+    selectedIndex = -1;
     renderStatusList();
     renderStatusEditor();
     selectedColumns = snap.columns ? snap.columns.slice() : recommendedColumnKeys();
@@ -1474,8 +1468,8 @@ select.control{ padding-right:26px; }
     if(e.key === 'Escape') document.querySelectorAll('.info-popover-wrap.open').forEach(function(w){ w.classList.remove('open'); });
   });
   var SEED_MIN_STATUSES = [
-    { id:'seed_a', name:'Starting', desc:'', start:true, complete:false, allowLWOT:true, allowedNext:['seed_b'], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'', alertRecipients:[], alertSeverity:'passive', highlightRow:false },
-    { id:'seed_b', name:'Completion', desc:'', start:false, complete:true, allowLWOT:false, allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'', alertRecipients:[], alertSeverity:'passive', highlightRow:false }
+    { id:'seed_a', name:'Starting', desc:'', start:true, complete:false, exceptionalExits:['lwot'], allowedNext:['seed_b'], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'', alertRecipients:[], alertSeverity:'passive', highlightRow:false },
+    { id:'seed_b', name:'Completion', desc:'', start:false, complete:true, exceptionalExits:[], allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'', alertRecipients:[], alertSeverity:'passive', highlightRow:false }
   ];
   var SEED_ACTIONS = { statusChange:true, encounterNote:true, specimenCollection:true, cardexAlerts:true, referral:true, intakeForm:true, documents:true, payment:true, pastVisits:true, visitSummary:true, patientDemographics:true };
 
@@ -2442,7 +2436,6 @@ select.control{ padding-right:26px; }
       if(selectedId) selectedIndex = STATUSES.findIndex(function(s){ return s.id === selectedId; });
       renderStatusList();
       renderStatusEditor();
-      renderFlowMap();
       updateReadiness();
     }
   }
@@ -3089,7 +3082,7 @@ select.control{ padding-right:26px; }
     // Settings later never clobbers real work in progress. Not gated on how many were just
     // added (picking a Main with several Subs at once still counts as a first pick).
     if(!STATUSES.length) applyStatusPreset(value);
-    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+    if(document.getElementById('transferEnabled').checked) renderTransferDestMenu();
     updateReadiness();
   }
 
@@ -3099,29 +3092,114 @@ select.control{ padding-right:26px; }
     renderColumnLibrary();
     renderWidgetLibrary();
     renderCareSettingInfo();
-    if(document.getElementById('transferEnabled').checked) renderTransferDestinations();
+    if(document.getElementById('transferEnabled').checked) renderTransferDestMenu();
     updateReadiness();
   }
 
   function toggleTransferEnabled(checked){
     document.getElementById('transferBody').style.display = checked ? '' : 'none';
-    if(checked) renderTransferDestinations();
-    else if(typeof renderExceptionalExits === 'function') renderExceptionalExits();
+    if(checked) renderTransferDestMenu();
   }
 
-  function renderTransferDestinations(){
-    var defaults = ['OR','HOSP'];
-    var options = activeCareSettingNames().filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
-    document.getElementById('transferDestinations').innerHTML = options.map(function(cs){
-      var checked = defaults.indexOf(cs) !== -1 ? ' checked' : '';
-      return '<label class="check-option"><input type="checkbox"'+checked+' onchange="renderExceptionalExits()"> '+cs+'</label>';
+  var selectedTransferDestinations = [];
+  // Same tag-box + checkbox-menu pattern as the Care Setting and Next-statuses pickers.
+  function transferDestOptions(){
+    return activeCareSettingNames().filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
+  }
+  function updateTransferDestButton(){
+    var btn = document.getElementById('transferDestBtn');
+    if(!btn) return;
+    if(!selectedTransferDestinations.length){
+      btn.innerHTML = '<span class="cs-tag-placeholder">Select eligible care settings…</span>';
+      return;
+    }
+    btn.innerHTML = selectedTransferDestinations.map(function(cs){
+      var rec = careSettingRecord(cs);
+      var label = rec ? rec.name : cs;
+      return '<span class="cs-tag">'+label+'<button type="button" class="cs-tag-remove" aria-label="Remove '+label+'" onclick="event.stopPropagation();toggleTransferDest(\''+cs.replace(/'/g,"\\'")+'\', false)">&times;</button></span>';
     }).join('');
-    renderExceptionalExits();
+  }
+  function renderTransferDestMenu(){
+    var menu = document.getElementById('transferDestMenu');
+    if(!menu) return;
+    var opts = transferDestOptions();
+    // Defaults only apply the first time this renders for a board with nothing chosen yet.
+    if(!selectedTransferDestinations.length){
+      var defaults = ['OR','Hosp'];
+      selectedTransferDestinations = opts.filter(function(cs){ return defaults.indexOf(cs) > -1; });
+    }
+    var optsSet = {};
+    opts.forEach(function(cs){ optsSet[cs] = true; });
+    // Same grouped Main/Sub structure as the Care Setting picker in Basic Information — a
+    // shaded Main header with a select-all checkbox, Subs indented beneath it — just filtered
+    // down to whichever Subs aren't already this board's own Care Setting (can't transfer to
+    // yourself), and without the impact-modal (removing a transfer destination doesn't touch
+    // any widget/column configuration the way removing the board's own Care Setting does).
+    var mains = Object.keys(CARE_SETTINGS_SOURCE).filter(function(m){ return CARE_SETTINGS_SOURCE[m].status === 'active'; }).sort();
+    var html = '';
+    var groupIndex = 0;
+    mains.forEach(function(mainName){
+      var main = CARE_SETTINGS_SOURCE[mainName];
+      var hasRealSubs = main.subs && main.subs.length > 0;
+      var subs = subsForMain(mainName).filter(function(s){ return s.status === 'active' && optsSet[s.shortName]; })
+        .slice().sort(function(a,b){ return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+      if(!subs.length) return;
+      var groupOpenClass = groupIndex > 0 ? ' cs-group-divided' : '';
+      groupIndex++;
+      if(!hasRealSubs){
+        var only = subs[0];
+        var soloChecked = selectedTransferDestinations.indexOf(only.shortName) > -1 ? ' checked' : '';
+        html += '<div class="cs-group'+groupOpenClass+'">' +
+          '<label class="picker-option" style="cursor:pointer;display:flex;"><span style="display:inline-flex;align-items:center;gap:8px;flex:1 1 auto;"><input type="checkbox" value="'+only.shortName+'"'+soloChecked+' onchange="toggleTransferDest(\''+only.shortName.replace(/'/g,"\\'")+'\', this.checked)">'+only.name+'</span></label>' +
+          '</div>';
+      } else {
+        var subShortNames = subs.map(function(s){ return s.shortName; });
+        var selectedCount = subShortNames.filter(function(sn){ return selectedTransferDestinations.indexOf(sn) > -1; }).length;
+        var allSelected = selectedCount === subShortNames.length;
+        var noneSelected = selectedCount === 0;
+        html += '<div class="cs-group'+groupOpenClass+'">' +
+          '<div class="cs-group-head">' +
+          '<label style="display:inline-flex;align-items:center;justify-content:flex-start;gap:8px;cursor:pointer;width:100%;font-weight:400;font-size:var(--text-sm);color:var(--ink);">' +
+          '<input type="checkbox"'+(allSelected?' checked':'')+(!allSelected && !noneSelected ? ' data-indeterminate="1"' : '')+' onchange="toggleMainTransferDest(\''+mainName.replace(/'/g,"\\'")+'\', this.checked, ['+subShortNames.map(function(sn){ return "'"+sn.replace(/'/g,"\\'")+"'"; }).join(',')+'])"> '+mainName+
+          '</label></div>';
+        subs.forEach(function(sub){
+          var checked = selectedTransferDestinations.indexOf(sub.shortName) > -1;
+          html += '<label class="picker-option" style="cursor:pointer;display:flex;padding-left:28px;"><span style="display:inline-flex;align-items:center;gap:8px;flex:1 1 auto;"><input type="checkbox" value="'+sub.shortName+'"'+(checked?' checked':'')+' onchange="toggleTransferDest(\''+sub.shortName.replace(/'/g,"\\'")+'\', this.checked)">'+sub.name+'</span></label>';
+        });
+        html += '</div>';
+      }
+    });
+    menu.innerHTML = html || '<p class="muted" style="padding:8px 10px;margin:0;">No other Care Settings available to transfer to.</p>';
+    menu.querySelectorAll('input[data-indeterminate="1"]').forEach(function(cb){ cb.indeterminate = true; });
+    updateTransferDestButton();
+  }
+  function toggleMainTransferDest(mainName, checked, subShortNames){
+    subShortNames.forEach(function(sn){
+      var pos = selectedTransferDestinations.indexOf(sn);
+      if(checked && pos===-1) selectedTransferDestinations.push(sn);
+      if(!checked && pos>-1) selectedTransferDestinations.splice(pos,1);
+    });
+    renderTransferDestMenu();
+  }
+  function toggleTransferDest(cs, checked){
+    var pos = selectedTransferDestinations.indexOf(cs);
+    if(checked && pos===-1) selectedTransferDestinations.push(cs);
+    if(!checked && pos>-1) selectedTransferDestinations.splice(pos,1);
+    renderTransferDestMenu();
+  }
+  function toggleTransferDestPicker(){
+    var menu = document.getElementById('transferDestMenu');
+    var btn = document.getElementById('transferDestBtn');
+    if(!menu) return;
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ renderTransferDestMenu(); menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
   }
 
   var SECTION_ORDER = [
     { key:'caresetting', label:'Basic Information' },
-    { key:'workflow', label:'Status & Workflow' },
+    { key:'workflow', label:'Statuses' },
     { key:'widgets', label:'Widgets' },
     { key:'table', label:'Patient Table' }
   ];
@@ -3199,7 +3277,7 @@ select.control{ padding-right:26px; }
       STATUSES.forEach(function(st){
         if(st.complete) return;
         if(unreachable[st.id]) return; // already flagged as unreachable, don't double-flag
-        var hasExit = canReachCompletion[st.id] || st.allowLWOT || transferOn;
+        var hasExit = canReachCompletion[st.id] || (st.exceptionalExits && st.exceptionalExits.length) || transferOn;
         if(!hasExit) noExit[st.id] = true;
       });
     }
@@ -3257,7 +3335,7 @@ select.control{ padding-right:26px; }
         var forwardNext = (st.allowedNext||[]).filter(function(id){ return statusDirectionLabel(st.id, id) === 'forward'; });
         if(forwardNext.length){
           var names = forwardNext.map(function(id){ var t = STATUSES.find(function(x){ return x.id===id; }); return t ? t.name : id; });
-          workflowBlocking.push('"'+st.name+'" is a Completion status but has a forward Next status configured: '+names.join(', '));
+          workflowBlocking.push('"'+st.name+'" is a Completion status but has a forward transition configured: '+names.join(', '));
         }
       });
 
@@ -3267,12 +3345,12 @@ select.control{ padding-right:26px; }
         else if(diagnostics.noExit[st.id]) workflowBlocking.push('"'+st.name+'" cannot reach a Completion or permitted exit');
       });
 
-      // Every enabled longer-stay alert has a valid duration and recipient.
+      // Every enabled longer-stay alert has a valid duration. (Recipient/severity/highlight-row
+      // were dropped from the simplified alert UI, so there's nothing left to validate for them.)
       STATUSES.forEach(function(st){
         if(!st.enableTimer) return;
         var v = parseFloat(st.timerValue);
         if(!v || v <= 0) workflowBlocking.push('"'+st.name+'" has a longer-stay alert enabled without a valid duration');
-        if(!st.alertRecipients || !st.alertRecipients.length) workflowBlocking.push('"'+st.name+'" has a longer-stay alert enabled without a Recipient');
       });
 
       if(workflowBlocking.length) return { state:'incomplete', issues:workflowBlocking };
@@ -3352,23 +3430,25 @@ select.control{ padding-right:26px; }
     });
   }
 
-  function toggleFlowMapVisibility(){
-    var wrap = document.getElementById('flowShell');
-    var body = document.getElementById('flowMapBody');
-    var label = document.getElementById('flowMapToggleLabel');
-    var toggleBtn = wrap.querySelector('.disclosure-toggle');
-    var open = wrap.classList.toggle('open');
-    body.style.display = open ? '' : 'none';
-    label.textContent = open ? 'Hide diagram' : 'Show diagram';
-    toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-
   /* ---------- Statuses & Workflow ---------- */
 
+  // A small registry of named ways a patient can exit a status without reaching Completion —
+  // rather than a separate boolean per reason. appliesTo:'starting' reasons only ever show on
+  // the Starting status (nothing has "happened" yet); 'any' reasons are offered on every
+  // non-Completion status. Adding a future reason (AMA, Deceased, Transferred-out, ...) is one
+  // line here, with its own appliesTo rule — nothing else in this file needs to change.
+  var EXIT_REASONS = [
+    { key:'lwot', label:'Left Without Treatment', appliesTo:'any' },
+    { key:'noShow', label:'No Show', appliesTo:'starting' }
+  ];
+  function exitReasonsFor(s){
+    return EXIT_REASONS.filter(function(r){ return r.appliesTo === 'any' || (r.appliesTo === 'starting' && s.start); });
+  }
+
   var UNIVERSAL_STATUS_PRESET = [
-    { name:'Starting', desc:'', start:true, complete:false, allowLWOT:true,
+    { name:'Starting', desc:'', start:true, complete:false, exceptionalExits:['lwot'],
       allowedNext:[1], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' },
-    { name:'Completion', desc:'', start:false, complete:true, allowLWOT:false,
+    { name:'Completion', desc:'', start:false, complete:true, exceptionalExits:[],
       allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }
   ];
   // Every Care Setting resolves to the same two-status starting point (Starting / Completion)
@@ -3384,6 +3464,7 @@ select.control{ padding-right:26px; }
     if(!Array.isArray(s.alertRecipients)) s.alertRecipients = s.alertRecipient ? [s.alertRecipient] : [];
     if(s.alertSeverity === undefined) s.alertSeverity = 'passive';
     if(s.highlightRow === undefined) s.highlightRow = false;
+    if(!Array.isArray(s.exceptionalExits)) s.exceptionalExits = s.allowLWOT ? ['lwot'] : [];
     return s;
   }
 
@@ -3403,18 +3484,26 @@ select.control{ padding-right:26px; }
     var preset = STATUS_PRESETS[careSetting];
     if(!preset) return;
     STATUSES = clonePreset(preset);
-    selectedIndex = 0;
+    selectedIndex = -1;
     renderStatusList();
     renderStatusEditor();
   }
 
   var STATUSES = [];
-  var selectedIndex = 0;
+  var selectedIndex = -1;
 
-  var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+
+  // Plain-text summary of where a status can go next — shown directly on its card in the list
+  // (per the "which statuses can be changed" ask) rather than only inside the edit drawer.
+  function nextStatusSummary(s){
+    var names = (s.allowedNext||[]).map(function(id){
+      var t = STATUSES.find(function(x){ return x.id === id; });
+      return t ? t.name : null;
+    }).filter(Boolean);
+    return names.length ? 'Can move to: ' + names.join(', ') : 'No next statuses set';
+  }
 
   function renderStatusList(){
-    document.getElementById('statusCountLabel').textContent = STATUSES.length + (STATUSES.length===1 ? ' status' : ' statuses');
     var body = document.getElementById('statusListBody');
     if(!STATUSES.length){
       body.innerHTML = '<p class="muted" style="padding:14px;">Select a Care Setting above to define statuses.</p>';
@@ -3423,19 +3512,21 @@ select.control{ padding-right:26px; }
     var diagnostics = computeStatusDiagnostics();
     var html = '';
     STATUSES.forEach(function(s,i){
-      var tagText = s.start ? 'Starting' : s.complete ? 'Completing' : '';
-      var selected = i === selectedIndex;
+      var roleTag = s.start ? 'Starting' : (s.complete ? 'Completion' : 'Regular');
       var warningText = diagnostics.unreachable[s.id] ? 'Unreachable' : (diagnostics.noExit[s.id] ? 'No exit' : '');
-      var warningHtml = warningText ? '<div class="status-subtitle status-warn">'+warningText+'</div>' : '';
+      var roleLine = warningText ? '<div class="status-subtitle status-warn">'+warningText+'</div>' : '<div class="status-subtitle">'+roleTag+'</div>';
+      var nextLine = '<div class="status-subtitle">'+nextStatusSummary(s)+'</div>';
       html += '<div class="status-item-wrapper">'+
-        '<div class="status-card'+(selected?' selected':'')+(warningText?' bad':'')+'" onclick="if(event.target.tagName!==\'INPUT\' && !event.target.closest(\'.action-btn\') && !event.target.closest(\'.drag-handle\')) selectStatus('+i+')" ondragover="onReorderDragOver(event,\'status\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'status\',\''+s.id+'\')">'+
+        '<div class="status-card'+(i===selectedIndex?' selected':'')+(warningText?' bad':'')+'" onclick="if(!event.target.closest(\'.status-text-btn\') && !event.target.closest(\'.drag-handle\')) openStatusEditor('+i+')" ondragover="onReorderDragOver(event,\'status\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'status\',\''+s.id+'\')">'+
           '<button class="drag-handle" type="button" draggable="true" aria-label="Drag to reorder '+s.name+'" ondragstart="onReorderDragStart(event,\'status\',\''+s.id+'\')" ondragend="onReorderDragEnd()">'+GRIP_ICON+'</button>'+
           '<div class="status-info">'+
-            '<input class="status-title" value="'+s.name+'" placeholder="Status title…" oninput="updateStatusName('+i+', this.value)" onfocus="selectStatus('+i+')">'+
-            (warningHtml || (tagText ? '<div class="status-subtitle">'+tagText+'</div>' : ''))+
+            '<div class="status-title">'+s.name+'</div>'+
+            roleLine+
+            nextLine+
           '</div>'+
           '<div class="status-actions">'+
-            '<button class="action-btn" type="button" onclick="event.stopPropagation();deleteStatus('+i+')" aria-label="Delete">'+ICON_CLOSE+'</button>'+
+            '<button class="link-btn status-text-btn" type="button" onclick="openStatusEditor('+i+')">Edit</button>'+
+            '<button class="link-btn status-text-btn status-remove-btn" type="button" onclick="deleteStatus('+i+')">Remove</button>'+
           '</div>'+
         '</div>'+
       '</div>';
@@ -3443,65 +3534,19 @@ select.control{ padding-right:26px; }
     body.innerHTML = html;
   }
 
-  function updateStatusName(i, value){
-    STATUSES[i].name = value;
-    if(i === selectedIndex){
-      document.getElementById('statusEditorTitle').textContent = value;
-      var nameInput = document.getElementById('statusNameInput');
-      if(nameInput) nameInput.value = value;
-    }
+  // Where a newly added status lands by default: immediately before whichever status is
+  // currently Completion, looked up fresh on every call — never a stale/remembered index, so
+  // it stays correct even if Completion gets reassigned to a different status later. Falls
+  // back to appending at the end only if nothing is marked Completion at all.
+  function nextInsertIndex(){
+    var completionIdx = STATUSES.findIndex(function(s){ return s.complete; });
+    return completionIdx > -1 ? completionIdx : STATUSES.length;
   }
-
-  function renderFlowMap(){
-    var container = document.getElementById('flowMap');
-    var shell = document.getElementById('flowShell');
-    if(!container) return;
-    if(!STATUSES.length){
-      container.innerHTML = '';
-      if(shell) shell.style.display = 'none';
-      return;
-    }
-    if(shell) shell.style.display = '';
-    var s = STATUSES[selectedIndex];
-    var diagnostics = computeStatusDiagnostics();
-    container.innerHTML = STATUSES.map(function(st, i){
-      var unreachable = diagnostics.unreachable[st.id];
-      var noExit = diagnostics.noExit[st.id];
-      var cls = 'flow-node';
-      if(i === selectedIndex) cls += ' selected';
-      else if(s.allowedNext.indexOf(st.id) > -1) cls += ' next';
-      if(unreachable || noExit) cls += ' bad';
-      var tag = st.start ? 'Starting' : (st.complete ? 'Completing' : (unreachable ? 'Unreachable' : (noExit ? 'No exit' : '')));
-      return '<button type="button" class="'+cls+'" onclick="selectStatus('+i+')"><strong>'+st.name+'</strong>'+(tag?'<small>'+tag+'</small>':'')+'</button>';
-    }).join('<span class="flow-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg></span>');
-    renderExceptionalExits();
-  }
-
-  function renderExceptionalExits(){
-    var el = document.getElementById('exceptionalExits');
-    if(!el) return;
-    var lines = [];
-    STATUSES.forEach(function(st){
-      if(st.allowLWOT) lines.push(st.name + ' &mdash; LWT');
-    });
-    var transferOn = document.getElementById('transferEnabled') && document.getElementById('transferEnabled').checked;
-    if(transferOn){
-      var destinations = Array.prototype.slice.call(document.querySelectorAll('#transferDestinations input:checked')).map(function(cb){ return cb.closest('label').textContent.trim(); });
-      // Transfer eligibility is a board-wide setting (every non-Completion status can use it),
-      // not specific to whichever status happens to be selected — state it that way.
-      if(destinations.length) lines.push('Any non-Completion status &mdash; Transfer to ' + destinations.join(', '));
-    }
-    if(!lines.length){ el.style.display = 'none'; el.innerHTML = ''; return; }
-    el.style.display = '';
-    el.innerHTML = '<strong>Exceptional exits</strong><ul>' + lines.map(function(l){ return '<li>'+l+'</li>'; }).join('') + '</ul>';
-  }
-
   function insertStatus(atIndex){
-    STATUSES.splice(atIndex, 0, normalizeStatusDefaults({ id:nextStatusId(), name:'New Status', desc:'', start:false, complete:false, allowLWOT:false,
+    STATUSES.splice(atIndex, 0, normalizeStatusDefaults({ id:nextStatusId(), name:'New Status', desc:'', start:false, complete:false, exceptionalExits:[],
       allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes', alert:'' }));
-    selectedIndex = atIndex;
     renderStatusList();
-    renderStatusEditor();
+    openStatusEditor(atIndex);
     var nameInput = document.getElementById('statusNameInput');
     if(nameInput) nameInput.focus();
   }
@@ -3513,13 +3558,13 @@ select.control{ padding-right:26px; }
     if(referencedBy.length){
       openConfirmModal(
         "&quot;"+target.name+"&quot; cannot be deleted yet",
-        "It is referenced as a Next status by " + referencedBy.map(function(st){ return "&quot;"+st.name+"&quot;"; }).join(", ") + ". Remove that reference before deleting this status.",
-        function(){ selectStatus(STATUSES.indexOf(referencedBy[0])); },
+        "It is referenced as an allowed transition by " + referencedBy.map(function(st){ return "&quot;"+st.name+"&quot;"; }).join(", ") + ". Remove that reference before deleting this status.",
+        function(){ openStatusEditor(STATUSES.indexOf(referencedBy[0])); },
         { cancelLabel: "Close", confirmLabel: "Review reference" }
       );
       return;
     }
-    openConfirmModal("Delete &quot;"+target.name+"&quot;?", "This cannot be undone.", function(){
+    function performDelete(){
       var removedId = target.id;
       var idx = STATUSES.indexOf(target);
       STATUSES.splice(idx,1);
@@ -3528,16 +3573,66 @@ select.control{ padding-right:26px; }
       });
       if(selectedIndex>=STATUSES.length) selectedIndex = STATUSES.length-1;
       else if(selectedIndex>idx) selectedIndex--;
+      statusEditSnapshot = null; // stale — deletion is immediate, not part of the draft it held
       renderStatusList();
-      renderStatusEditor();
-    }, { confirmLabel:"Delete", danger:true });
+      closeStatusEditor();
+    }
+    // Deleting the only Starting or Completion status silently leaves the workflow with no
+    // entry or exit point — same broken outcome setStatusRole already guards against when
+    // switching a role away, so deletion gets the identical specific warning rather than the
+    // generic "cannot be undone" message.
+    var wasOnlyStart = target.start && STATUSES.filter(function(st){ return st.start; }).length === 1;
+    var wasOnlyComplete = target.complete && STATUSES.filter(function(st){ return st.complete; }).length === 1;
+    if(wasOnlyStart){
+      openConfirmModal('Delete the Starting status?', 'No other status is marked Starting. This workflow will have no entry point until you delete this one.', performDelete, { confirmLabel: 'Delete anyway', danger: true });
+      return;
+    }
+    if(wasOnlyComplete){
+      openConfirmModal('Delete the Completion status?', 'No other status is marked Completion. This workflow will have no exit point until you delete this one.', performDelete, { confirmLabel: 'Delete anyway', danger: true });
+      return;
+    }
+    openConfirmModal("Delete &quot;"+target.name+"&quot;?", "This cannot be undone.", performDelete, { confirmLabel:"Delete", danger:true });
   }
 
 
-  function selectStatus(i){
+  // openStatusEditor is the single entry point for editing a status: it sets selectedIndex
+  // (every update function below reads/writes STATUSES[selectedIndex]), snapshots the whole
+  // STATUSES array so Cancel can restore it exactly (editing one status's role can also flip
+  // start/complete flags on OTHER statuses — a per-status snapshot wouldn't cover that),
+  // renders the editor form into the secondary side panel, and slides that panel open.
+  var statusEditSnapshot = null;
+  function openStatusEditor(i){
     selectedIndex = i;
+    statusEditSnapshot = JSON.parse(JSON.stringify(STATUSES));
     updateStatusListSelection();
     renderStatusEditor();
+    document.querySelectorAll('.modal-backdrop.open').forEach(function(el){ el.classList.remove('open'); });
+    document.getElementById('statusEditBackdrop').classList.add('open');
+    document.getElementById('statusEditPanel').classList.add('open');
+  }
+  function closeStatusEditor(){
+    document.getElementById('statusEditBackdrop').classList.remove('open');
+    document.getElementById('statusEditPanel').classList.remove('open');
+    selectedIndex = -1;
+    updateStatusListSelection();
+  }
+  function saveStatusEditor(){
+    statusEditSnapshot = null;
+    closeStatusEditor();
+  }
+  function cancelStatusEditor(){
+    var dirty = statusEditSnapshot && JSON.stringify(STATUSES) !== JSON.stringify(statusEditSnapshot);
+    if(!dirty){
+      statusEditSnapshot = null;
+      closeStatusEditor();
+      return;
+    }
+    openConfirmModal('Discard unsaved changes?', 'You have unsaved changes to this status. Leaving now will discard them.', function(){
+      STATUSES = JSON.parse(JSON.stringify(statusEditSnapshot));
+      statusEditSnapshot = null;
+      renderStatusList();
+      closeStatusEditor();
+    }, { confirmLabel: 'Discard changes', cancelLabel: 'Keep editing', danger: true });
   }
 
   function updateStatusListSelection(){
@@ -3598,9 +3693,11 @@ select.control{ padding-right:26px; }
     applyChange();
   }
 
-  function toggleLWOT(checked){
-    STATUSES[selectedIndex].allowLWOT = checked;
-    renderFlowMap();
+  function toggleExceptionalExit(key, checked){
+    var s = STATUSES[selectedIndex];
+    var pos = s.exceptionalExits.indexOf(key);
+    if(checked && pos===-1) s.exceptionalExits.push(key);
+    if(!checked && pos>-1) s.exceptionalExits.splice(pos,1);
     renderStatusList();
     updateReadiness();
   }
@@ -3610,73 +3707,35 @@ select.control{ padding-right:26px; }
     var pos = s.allowedNext.indexOf(targetId);
     if(checked && pos===-1) s.allowedNext.push(targetId);
     if(!checked && pos>-1) s.allowedNext.splice(pos,1);
-    renderFlowMap();
     renderStatusEditor();
     renderStatusList();
     updateReadiness();
   }
 
-  function updateStatusDesc(value){ STATUSES[selectedIndex].desc = value; }
-
-  var RECIPIENT_OPTIONS = ['On-duty Nurse', 'Charge Nurse', 'Assigned Provider', 'Unit Group'];
-  function updateRecipientButton(){
-    var btn = document.getElementById('timerRecipientBtn');
-    if(!btn) return;
-    var arr = STATUSES[selectedIndex].alertRecipients || [];
-    btn.textContent = arr.length ? arr.join(', ') : 'Select recipient…';
-  }
-  function renderTimerRecipientMenu(){
-    var menu = document.getElementById('timerRecipientMenu');
-    if(!menu) return;
-    var arr = STATUSES[selectedIndex].alertRecipients || [];
-    menu.innerHTML = RECIPIENT_OPTIONS.map(function(r){
-      var checked = arr.indexOf(r) > -1 ? ' checked' : '';
-      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+r+'"'+checked+' onchange="toggleAlertRecipient(\''+r+'\', this.checked)"> '+r+'</label>';
-    }).join('');
-    updateRecipientButton();
-  }
-  function toggleAlertRecipient(value, checked){
-    var s = STATUSES[selectedIndex];
-    if(!s.alertRecipients) s.alertRecipients = [];
-    var pos = s.alertRecipients.indexOf(value);
-    if(checked && pos===-1) s.alertRecipients.push(value);
-    if(!checked && pos>-1) s.alertRecipients.splice(pos,1);
-    updateRecipientButton();
-    updateReadiness();
-  }
-  function toggleTimerRecipientPicker(){
-    var menu = document.getElementById('timerRecipientMenu');
-    var btn = document.getElementById('timerRecipientBtn');
-    if(!menu || btn.disabled) return;
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    else { btn.setAttribute('aria-expanded','false'); }
-  }
-  function updateAlertSeverity(value){ STATUSES[selectedIndex].alertSeverity = value; }
-  function updateHighlightRow(checked){ STATUSES[selectedIndex].highlightRow = checked; }
   function toggleTimerEnabled(checked){ STATUSES[selectedIndex].enableTimer = checked; renderStatusEditor(); }
   function updateTimerValue(v){ STATUSES[selectedIndex].timerValue = v; }
   function updateTimerUnit(v){ STATUSES[selectedIndex].timerUnit = v; }
-  function updateAlertMessage(v){ STATUSES[selectedIndex].alert = v; }
 
   function renderStatusEditor(){
-    if(!STATUSES.length){
+    if(!STATUSES.length || selectedIndex < 0 || !STATUSES[selectedIndex]){
       document.getElementById('statusEditorTitle').textContent = '';
       document.getElementById('statusEditorBody').innerHTML = '<p class="muted" style="padding:13px;">Select a status to edit it.</p>';
-      renderFlowMap();
       updateReadiness();
       return;
     }
     var s = STATUSES[selectedIndex];
     document.getElementById('statusEditorTitle').textContent = s.name;
 
-    var lwotBlock = '';
+    var exitBlock = '';
     if(!s.complete){
-      lwotBlock =
+      var exitOptions = exitReasonsFor(s);
+      exitBlock =
         '<div class="subsection">'+
-          '<h4>Left Without Treatment</h4>'+
-          '<label class="check-option"><input type="checkbox"'+(s.allowLWOT?' checked':'')+' onchange="toggleLWOT(this.checked)"> Allow patients to exit as &quot;Left Without Treatment&quot; from this status</label>'+
+          '<h4>Exceptional Exit</h4>'+
+          '<div class="check-grid">'+exitOptions.map(function(r){
+            var checked = s.exceptionalExits.indexOf(r.key) > -1;
+            return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleExceptionalExit(\''+r.key+'\', this.checked)"> '+r.label+'</label>';
+          }).join('')+'</div>'+
         '</div>';
     }
 
@@ -3703,42 +3762,34 @@ select.control{ padding-right:26px; }
     var currentRole = s.start ? 'starting' : (s.complete ? 'completion' : 'normal');
 
     document.getElementById('statusEditorBody').innerHTML =
-      '<div class="field full"><label for="statusNameInput">Status Name <span style="color:var(--bad)">*</span></label>'+
+      '<div class="field full"><label for="statusNameInput"><span>Status Name <span style="color:var(--bad)">*</span></span></label>'+
         '<input class="text" id="statusNameInput" type="text" value="'+s.name+'" onchange="renameStatus(this.value)">'+
       '</div>'+
-      '<div class="field full" style="margin-top:14px"><label for="statusDescInput">Description</label><textarea class="textarea" id="statusDescInput" onchange="updateStatusDesc(this.value)">'+s.desc+'</textarea></div>'+
-      '<div class="field full" style="margin-top:14px"><label><span style="display:inline-flex;align-items:center;gap:4px;">Status role <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status roles" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover"><strong>Normal</strong> &mdash; a regular step in the workflow.<br><strong>Starting</strong> &mdash; where a patient enters the board; exactly one status must be Starting.<br><strong>Completion</strong> &mdash; where a patient exits the board; exactly one status must be Completion. It can still move a patient backward to an earlier status, but never forward.</span></span></span></label>'+
+      '<div class="field full" style="margin-top:14px"><label><span style="display:inline-flex;align-items:center;gap:4px;">Status role <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status roles" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover"><strong>Regular</strong> &mdash; a normal step in the workflow.<br><strong>Starting</strong> &mdash; where a patient enters the board; exactly one status must be Starting.<br><strong>Completion</strong> &mdash; where a patient exits the board; exactly one status must be Completion. It can still move a patient backward to an earlier status, but never forward.</span></span></span></label>'+
         '<div class="segmented" role="radiogroup" aria-label="Status role">'+
-          '<label><input type="radio" name="statusRole"'+(currentRole==='normal'?' checked':'')+' onchange="setStatusRole(\'normal\')"> Normal</label>'+
+          '<label><input type="radio" name="statusRole"'+(currentRole==='normal'?' checked':'')+' onchange="setStatusRole(\'normal\')"> Regular</label>'+
           '<label><input type="radio" name="statusRole"'+(currentRole==='starting'?' checked':'')+' onchange="setStatusRole(\'starting\')"> Starting</label>'+
           '<label><input type="radio" name="statusRole"'+(currentRole==='completion'?' checked':'')+' onchange="setStatusRole(\'completion\')"> Completion</label>'+
         '</div>'+
       '</div>'+
-      lwotBlock+
+      exitBlock+
       '<div class="subsection">'+
-        '<h4>Status Changes</h4>'+
-        (s.complete ?
-          '<p>A Completion status can still move a patient backward to an earlier status (for example, to correct a mistaken discharge) — but never forward, since there\'s nothing after Completion.</p>'+
-          '<div class="check-grid">'+(noBackwardOptions ? '<p class="muted" style="margin:0;">No earlier statuses to move back to — this is the first status in the workflow order.</p>' : allowedNextHtml)+'</div>'
-        :
-          '<p>Statuses a patient can move to from here — either direction, based on the order set in the workflow list.</p>'+
-          '<div class="check-grid">'+allowedNextHtml+'</div>'
-        )+
+        '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Longer-stay alert</span></label></h4>'+
+        (s.enableTimer ?
+          '<div class="field full"><label for="timerDurationInput">Alert after</label><div style="display:flex;">'+
+            '<input class="text" id="timerDurationInput" type="text" value="'+s.timerValue+'" placeholder="e.g. 30" style="flex:1;" onchange="updateTimerValue(this.value)">'+
+            '<select class="control" id="timerUnitSelect" style="width:120px;border-left:0;" onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select>'+
+          '</div></div>'
+        : '')+
       '</div>'+
       '<div class="subsection">'+
-        '<h4><label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Longer-Stay Alert</span></label></h4>'+
-        '<p>Get notified if a patient stays in this status longer than expected.</p>'+
-        '<div class="form-grid">'+
-          '<div class="field"><label for="timerDurationInput">Duration</label><input class="text" id="timerDurationInput" type="text" value="'+s.timerValue+'" placeholder="e.g. 30"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerValue(this.value)"></div>'+
-          '<div class="field"><label for="timerUnitSelect">Unit</label><select class="control" id="timerUnitSelect"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
-          '<div class="field"><label for="timerHighlightInput">Highlight patient row</label><label class="check-option"'+(s.enableTimer?'':' style="opacity:.5"')+'><input type="checkbox" id="timerHighlightInput"'+(s.highlightRow?' checked':'')+(s.enableTimer?'':' disabled')+' onchange="updateHighlightRow(this.checked)"> Enabled</label></div>'+
-          '<div class="field"><label for="timerAlertInput">Alert Message</label><input class="text" id="timerAlertInput" type="text" value="'+s.alert+'" placeholder="e.g. Patient waiting longer than expected"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertMessage(this.value)"></div>'+
-          '<div class="field"><label for="timerRecipientBtn">Recipient</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="timerRecipientBtn" aria-haspopup="true" aria-expanded="false"'+(s.enableTimer?'':' disabled')+' onclick="toggleTimerRecipientPicker()">Select recipient…</button></div><div class="picker-menu" id="timerRecipientMenu"></div></div></div>'+
-          '<div class="field"><label for="timerSeveritySelect">Urgency</label><select class="control" id="timerSeveritySelect"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertSeverity(this.value)"><option value="passive"'+(s.alertSeverity==='passive'?' selected':'')+'>No notification &mdash; visible on the board only</option><option value="actionable"'+(s.alertSeverity==='actionable'?' selected':'')+'>Send a notification</option></select></div>'+
-        '</div>'+
+        '<h4>Allowed Transitions</h4>'+
+        (s.complete ?
+          '<div class="check-grid">'+(noBackwardOptions ? '<p class="muted" style="margin:0;">No earlier statuses to move back to — this is the first status in the workflow order.</p>' : allowedNextHtml)+'</div>'
+        :
+          '<div class="check-grid">'+allowedNextHtml+'</div>'
+        )+
       '</div>';
-    renderTimerRecipientMenu();
-    renderFlowMap();
     updateReadiness();
   }
 
@@ -3843,15 +3894,15 @@ select.control{ padding-right:26px; }
 </script>
 <div class="toast-region" id="toastRegion" role="status" aria-live="polite" aria-atomic="true"></div>
 <div class="backdrop" id="auditBackdrop" onclick="closeAuditHistory()"></div>
-<div class="audit-panel" id="auditPanel" role="dialog" aria-modal="true" aria-label="Activity log">
-  <div class="audit-panel-head">
+<div class="audit-panel side-panel" id="auditPanel" role="dialog" aria-modal="true" aria-label="Activity log">
+  <div class="audit-panel-head side-panel-head">
     <div>
-      <h2 class="audit-panel-title">Activity Log</h2>
+      <h2 class="side-panel-title">Activity Log</h2>
       <div class="audit-panel-sub" id="auditModalBoardName"></div>
     </div>
     <button class="icon-btn" type="button" onclick="closeAuditHistory()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
   </div>
-  <div class="audit-panel-body" id="auditHistoryBody"></div>
+  <div class="audit-panel-body side-panel-body" id="auditHistoryBody"></div>
 </div>
 
 </body>
