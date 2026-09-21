@@ -6,15 +6,28 @@
 <title>Trackerboard Configuration</title>
 <style>
 :root{
-  /* blueEHR design-system palette (see common_v3_1.css / uikit-custom.css) */
-  --navy:#1a4f85;--navy2:#003366;--blue:#1a4f85;--blue-soft:#edf2f9;
-  --ink:#000;--muted:#808080;--line:#d7dde1;--bg:#f2f4f6;--white:#fff;
+  /* blueEHR design-system palette (see common_v3_1.css / uikit-custom.css)
+     -- consolidated per UI punch-list: colors, shadows, radius, z-index,
+     durations and type scale are now single sources of truth. */
+  --navy:#1a4f85;--navy2:#003366;--blue:#1a4f85;--blue-soft:#edf2f9;--blue-border:#bcd7ea;
+  --ink:#000;--muted:#5c6b76;--muted-soft:#9aa7b2;--line:#d7dde1;--line-soft:#e8ecef;
+  --bg:#f2f4f6;--white:#fff;--surface-tint:#f4f8fb;--surface-alt:#f7fbfc;--surface-dark:#263746;
   --ok:#1a7a41;--ok-bg:#e7f5ea;--warn:#8a6b12;--warn-bg:#fff6d9;
-  --bad:#b3261e;--bad-bg:#fdecea;--neutral:#eceff2;
+  --bad:#b3261e;--bad-strong:#8a2f23;--bad-border:#d9988f;--bad-border-soft:#e6bbb5;--bad-bg:#fdecea;--neutral:#eceff2;
+  --focus:#8eb6db;--overlay:rgba(0,33,65,.45);
+  --shadow-tint:0,31,61;
+  --shadow-sm:0 8px 20px rgba(var(--shadow-tint),.14);
+  --shadow-md:0 8px 22px rgba(var(--shadow-tint),.18);
+  --shadow-lg:0 20px 60px rgba(var(--shadow-tint),.24);
+  --shadow-drawer:-8px 0 24px rgba(0,38,77,.18);
+  --radius:0;--chip-radius:10px;
+  --dur-fast:.15s;--dur-drawer:.18s;
+  --z-search:2;--z-picker:30;--z-dropdown:40;--z-popover:60;--z-backdrop:90;--z-drawer:100;--z-modal:300;--z-toast:500;
   --font:"roboto","Segoe UI","Helvetica Neue",Arial,sans-serif;
   --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;
-  --field-gap:16px 14px;--chip-radius:10px;
-  --text-xs:11px;--text-sm:12px;--text-base:14px;--text-lg:16px;--text-xl:17px;
+  --field-gap:16px 14px;
+  --text-2xs:10px;--text-xs:11px;--text-sm:12px;--text-md:13px;--text-base:14px;--text-lg:16px;--text-xl:17px;--text-2xl:22px;
+  --fw-bold:700;
 }
 @font-face {
   font-family: 'roboto';
@@ -95,30 +108,49 @@
 .mb-1{margin-bottom:var(--sp-1)}.mb-2{margin-bottom:var(--sp-2)}.mb-3{margin-bottom:var(--sp-3)}
 .text-xs{font-size:var(--text-xs)}.text-sm{font-size:var(--text-sm)}
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.35 var(--font)}
-button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #8eb6db;outline-offset:2px}
+button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
 .app{display:grid;grid-template-rows:42px minmax(0,1fr);width:100vw;height:100vh;min-width:760px}.main{display:grid;grid-template-rows:auto auto minmax(0,1fr);min-height:0}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--navy);color:#fff}.topgroup,.toolbar-left,.toolbar-right,.filters{display:flex;align-items:center;gap:9px;min-width:0}.brand{font-weight:600}.sq{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#2671a6;color:#fff;border:1px solid #ffffff2b;border-radius:0;cursor:pointer}.search{position:relative;width:clamp(280px,34vw,540px)}.search input{width:100%;height:28px;padding:0 34px 0 10px;border:0;border-radius:0}.search button{position:absolute;right:0;top:0;width:30px;height:28px;background:transparent;color:var(--navy);cursor:pointer}.avatar{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:#dceaf4;color:var(--navy);font-size:var(--text-xs);font-weight:600}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:var(--text-xl)}.filter-bar{padding:8px 18px;background:#fff;border-bottom:1px solid var(--line)}.summary,.muted,.help{color:var(--muted);font-size:var(--text-sm)}.filters{flex-wrap:wrap}.control{height:30px;padding:5px 10px;background:#fff;color:#000;border:1px solid #d7dde1;border-radius:0;font-size:13px;box-shadow:none}.control.compact{width:auto;min-width:125px;height:29px;font-size:var(--text-sm)}.filter-select-btn{width:220px;height:32px;padding:0 26px 0 10px;background:#fff;border:1px solid #d7dde1;border-radius:0;font-size:var(--text-sm);text-align:left;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filter-select-btn::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid #808080;transform:translateY(-50%);pointer-events:none}.filter-select-btn[aria-expanded="true"]::after{border-top-color:var(--navy)}.toggle{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);color:#808080;white-space:nowrap}.toggle input{width:15px;height:15px;margin:0}
-.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:0}.btn{min-height:30px;padding:0 13px;background:#fff;color:#000;border:1px solid #e6e6e6}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:#fff;color:#1a4f85;border-color:#e6e6e6}.btn.primary{background:#1a4f85;border-color:#1a4f85;color:#fff}.btn.primary:hover:not(:disabled){background:#003366;border-color:#003366;color:#fff}.btn.small{min-height:26px;padding:0 9px;font-size:var(--text-sm)}.btn.danger{color:var(--bad);border-color:#e6bbb5}.btn.tertiary{background:transparent;border-color:transparent;color:#808080}.btn.tertiary:hover:not(:disabled){background:#f4f8fb;color:#1a4f85;border-color:#d7dde1}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:34px;height:34px;padding:0;background:#fff;border:1px solid #d7dde1}.link-btn{padding:0;background:transparent;color:#1a4f85;font-weight:600}.link-btn:hover{text-decoration:underline}
-.content{min-height:0;overflow:auto;padding:14px 18px 20px}.table-shell{min-width:1180px;background:#fff;border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:9px 10px;text-align:left;vertical-align:middle}.table td{border-bottom:1px solid #edf0f2}.table tbody tr{height:52px}.table th{background:#f4f8fb;color:#8b959e;font-size:var(--text-xs);font-weight:600;border-bottom:1px solid #d7dee5}.table tbody tr:hover{background:#f7fbfe}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:600;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:600}.cell-meta{margin-top:2px;color:var(--muted);font-size:var(--text-xs)}.tags{display:flex;flex-wrap:wrap;gap:5px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:var(--navy);color:var(--white)}.topgroup,.toolbar-left,.toolbar-right,.filters{display:flex;align-items:center;gap:9px;min-width:0}.brand{font-weight:600}.sq{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;background:#2671a6;color:var(--white);border:1px solid rgba(255,255,255,.17);border-radius:var(--radius);cursor:pointer}.search{position:relative;width:clamp(280px,34vw,540px)}.search input{width:100%;height:28px;padding:0 34px 0 10px;border:0;border-radius:var(--radius)}.search button{position:absolute;right:0;top:0;width:30px;height:28px;background:transparent;color:var(--navy);cursor:pointer}.avatar{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:var(--blue-soft);color:var(--navy);font-size:var(--text-xs);font-weight:600}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:8px 18px;background:var(--white);border-bottom:1px solid var(--line)}.toolbar-left{flex:1;flex-wrap:wrap}.toolbar h1{margin:0 8px 0 0;font-size:var(--text-xl)}.filter-bar{padding:8px 18px;background:var(--white);border-bottom:1px solid var(--line)}.summary,.muted,.help{color:var(--muted);font-size:var(--text-sm)}.filters{flex-wrap:wrap}.control{height:30px;padding:5px 10px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-md);box-shadow:none}.control.compact{width:auto;min-width:125px;height:29px;font-size:var(--text-sm)}.filter-select-btn{width:220px;height:32px;padding:0 26px 0 10px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-sm);text-align:left;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.filter-select-btn::after{content:'';position:absolute;right:10px;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--muted);transform:translateY(-50%);pointer-events:none}.filter-select-btn[aria-expanded="true"]::after{border-top-color:var(--navy)}.toggle{display:inline-flex;align-items:center;gap:6px;font-size:var(--text-sm);color:var(--muted);white-space:nowrap}.toggle input{width:15px;height:15px;margin:0}
+.btn,.icon-btn,.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border-radius:var(--radius);line-height:1}.btn{min-height:30px;padding:0 13px;background:var(--white);color:var(--ink);border:1px solid var(--line-soft)}.btn:hover:not(:disabled),.icon-btn:hover:not(:disabled){background:var(--white);color:var(--navy);border-color:var(--line-soft)}.btn.primary{background:var(--navy);border-color:var(--navy);color:var(--white)}.btn.primary:hover:not(:disabled){background:var(--navy2);border-color:var(--navy2);color:var(--white)}.btn.small{min-height:26px;padding:0 9px;font-size:var(--text-sm)}.btn.danger{color:var(--bad);border-color:var(--bad-border-soft)}.btn.tertiary{background:transparent;border-color:transparent;color:var(--muted)}.btn.tertiary:hover:not(:disabled){background:var(--surface-tint);color:var(--navy);border-color:var(--line)}.btn:disabled,.icon-btn:disabled{opacity:.45;cursor:not-allowed}.icon-btn{width:34px;height:34px;padding:0;background:var(--white);border:1px solid var(--line)}.link-btn{padding:0;background:transparent;color:var(--navy);font-weight:600}.link-btn:hover{text-decoration:underline}
+.content{min-height:0;overflow:auto;padding:14px 18px 20px}.table-shell{min-width:1180px;background:var(--white);border:1px solid var(--line)}.table{width:100%;border-collapse:collapse;table-layout:fixed}.table th,.table td{padding:9px 10px;text-align:left;vertical-align:middle}.table td{border-bottom:1px solid var(--line-soft)}.table tbody tr{height:52px}.table th{background:var(--surface-tint);color:var(--muted-soft);font-size:var(--text-xs);font-weight:600;border-bottom:1px solid var(--line-soft)}.table tbody tr:hover{background:var(--surface-alt)}.table tbody tr:last-child td{border-bottom:0}.sort{padding:0;background:transparent;color:inherit;font:inherit;font-weight:600;text-transform:inherit;letter-spacing:inherit;cursor:pointer}.cell-title{font-weight:600}.cell-meta{margin-top:2px;color:var(--muted);font-size:var(--text-xs)}.tags{display:flex;flex-wrap:wrap;gap:5px}
 /* Badge atom — one shared box model for every status/label chip in the tool (Care Setting
    lifecycle pill, Facility count tag, card completion state, readiness indicator). Previously
    four components each defined their own padding/radius/size and, in two cases, a slightly
    different shade for the same conceptual tone (blue-soft "in progress" vs pill.draft's own
    hardcoded blue). Unified here so the same color always means the same thing, everywhere. */
 .tag,.pill,.section-state{display:inline-flex;align-items:center;gap:4px;min-height:21px;padding:2px 7px;border-radius:var(--chip-radius);font-size:var(--text-xs);font-weight:600;white-space:nowrap}
-.tag,.section-state{background:var(--neutral);color:#808080}
+.tag,.section-state{background:var(--neutral);color:var(--muted)}
 .pill.active,.section-state.ok{background:var(--ok-bg);color:var(--ok)}
 .pill.draft,.section-state.progress{background:var(--blue-soft);color:var(--navy2)}
 .pill.inactive{background:var(--warn-bg);color:var(--warn)}
-.pill.retired,.pill.superseded{background:var(--neutral);color:#808080}
-.section-state.bad{background:var(--bad-bg);color:var(--bad)}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:#1a4f85;font-size:var(--text-sm);font-weight:600;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:var(--text-sm);font-weight:600}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.actions{text-align:right!important}.menu-wrap{position:relative;display:inline-flex}.menu-wrap>.icon-btn{background:transparent;border-color:transparent}.menu-wrap>.icon-btn:hover:not(:disabled){background:var(--blue-soft);border-color:transparent}.menu{position:absolute;z-index:40;top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:#fff;border:1px solid #d7dde1;box-shadow:0 8px 22px #001f3d29}.menu.open{display:block}.menu-divider{margin:4px 0;border-top:1px solid #ebebeb}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:#f7fbfc;border-top:1px solid var(--line);color:var(--muted);font-size:var(--text-sm)}.pager{display:flex;align-items:center;gap:6px}
-.backdrop{position:fixed;z-index:90;inset:0;display:none;background:#00224438}.backdrop.open{display:block}.drawer{position:fixed;z-index:100;top:0;right:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(1120px,78vw);height:100vh;background:#fff;box-shadow:-8px 0 24px #00264d2e;transform:translateX(105%);transition:.18s}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:var(--text-xl)}.drawer-sub{margin-top:3px;color:var(--muted);font-size:var(--text-sm)}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:#fff;border-bottom:1px solid var(--line);color:#808080;font-size:var(--text-sm)}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:#9aa7b2;flex:0 0 auto}.validation-strip.error{background:#fff;color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:#fff;color:var(--warn)}.validation-strip.warning .validation-dot{background:#d09a21}.validation-strip.success{background:#fff;color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #edf2f9;font-size:var(--text-sm)}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:#fff}.drawer-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:var(--text-sm)}.sub-cs-banner{align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid #edf2f9;font-size:var(--text-sm);color:var(--ink)}
-.card{margin-bottom:14px;background:#fff;border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 11px;border-bottom:1px solid #ebebeb}.card-title{margin:0;font-size:var(--text-lg)}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:var(--text-sm)}.section-state{flex:0 0 auto}.card-body{padding:15px}.flat-section{margin:10px 0 22px;padding-bottom:18px;border-bottom:1px solid #edf0f2}.flat-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.flat-section-title{margin:0 0 12px;font-size:var(--text-lg);font-weight:600;color:var(--ink)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:#808080;font-size:var(--text-sm);font-weight:600}.text,.textarea{width:100%;background:#fff;color:#000;border:1px solid #d7dde1;border-radius:0;font-size:13px;box-shadow:none}.text{height:30px;padding:5px 10px}.textarea{min-height:78px;padding:8px 10px;resize:vertical}.field-error{display:none;margin-top:5px;color:var(--bad);font-size:var(--text-sm)}.field.error .text,.field.error .textarea{border-color:#d9988f;background:#fffafa}.field.error .field-error{display:block}.field-hint-warn{margin-top:5px;color:var(--warn);font-size:var(--text-sm)}.short-meta{display:flex;align-items:center;justify-content:space-between;min-height:23px;margin-top:4px;color:var(--muted);font-size:var(--text-xs)}
-.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:#f5f8fb;border:1px solid #dce5ed}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:0 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:30;top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:#fff;border:1px solid #d7dde1;border-radius:0;box-shadow:0 8px 20px #001f3d24;padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:0;text-align:left;background:transparent;cursor:pointer;font-size:var(--text-sm)}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:#f4f8fb;border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:var(--text-xs)}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:#1a4f85;font-weight:600;text-decoration:none}.manage:hover{text-decoration:underline}
-.flow-shell{margin-bottom:14px;padding:11px;background:#fbfcfd;border:1px solid var(--line)}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:#fff;border:1px solid #dde3e8;color:var(--muted);cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);color:var(--ink)}.flow-node.bad{border-color:#d9988f;background:#fffafa;color:var(--ink)}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:#7f8b95;font-size:18px}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:#f4f8fb;border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#1a4f85;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:#1a4f85;cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:var(--text-xs)}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:#f4f8fb;border:1px solid #e1e6ea}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid #e4e9ed}.subsection h4{margin:0 0 4px;font-size:var(--text-sm)}.subsection p{margin:0 0 9px;color:var(--muted);font-size:var(--text-xs)}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.check-option{min-height:30px;padding:5px 7px;background:#f7fbfc;border:1px solid #d7dee5;font-size:var(--text-sm)}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:var(--text-sm)}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:#f4f8fb;border-left:3px solid #aeb8c1;color:#808080;font-size:var(--text-sm)}
-.modal-backdrop{position:fixed;z-index:300;inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:#0021416b}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:#fff;box-shadow:0 20px 60px #001f3d3d}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:var(--text-lg)}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid #ebebeb}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid #e6ebef}.history th{background:#f4f8fb;color:var(--muted);font-size:var(--text-xs);text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:#f4f8fb;border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:500;right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:#263746;color:#fff;box-shadow:0 8px 22px #001f3d33;font-size:var(--text-sm)}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:#fff;font-size:var(--text-xs)}
+.pill.retired,.pill.superseded{background:var(--neutral);color:var(--muted)}
+.section-state.bad{background:var(--bad-bg);color:var(--bad)}.versions{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.version-link{display:inline-flex;align-items:center;gap:5px;padding:0;background:transparent;color:var(--navy);font-size:var(--text-sm);font-weight:600;cursor:pointer}.version-link:hover{text-decoration:underline}.ready{display:inline-flex;align-items:center;gap:5px;font-size:var(--text-sm);font-weight:600}.ready.ok{color:var(--ok)}.ready.warn{color:var(--warn)}.ready.bad{color:var(--bad)}.table th.actions,.table td.actions{text-align:right}.menu-wrap{position:relative;display:inline-flex}.menu-wrap>.icon-btn{background:transparent;border-color:transparent}.menu-wrap>.icon-btn:hover:not(:disabled){background:var(--blue-soft);border-color:transparent}.menu{position:absolute;z-index:var(--z-dropdown);top:calc(100% + 4px);right:0;display:none;min-width:180px;padding:4px 0;background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow-md)}.menu.open{display:block}.menu-divider{margin:4px 0;border-top:1px solid var(--line-soft)}.menu button{display:block;width:100%;padding:8px 11px;text-align:left;background:transparent;cursor:pointer}.menu button:hover{background:var(--blue-soft)}.empty{padding:38px 15px;text-align:center}.empty strong{display:block;margin-bottom:4px}.table-footer{display:flex;align-items:center;justify-content:space-between;min-height:42px;padding:7px 10px;background:var(--surface-alt);border-top:1px solid var(--line);color:var(--muted);font-size:var(--text-sm)}.pager{display:flex;align-items:center;gap:6px}
+.backdrop{position:fixed;z-index:var(--z-backdrop);inset:0;display:none;background:var(--overlay)}.backdrop.open{display:block}.drawer{position:fixed;z-index:var(--z-drawer);top:0;right:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(1120px,78vw);height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}.drawer-title{margin:0;font-size:var(--text-xl)}.drawer-sub{margin-top:3px;color:var(--muted);font-size:var(--text-sm)}.drawer-actions{display:flex;gap:6px}.validation-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px;padding:5px 17px;background:var(--white);border-bottom:1px solid var(--line);color:var(--muted);font-size:var(--text-sm)}.validation-summary{display:inline-flex;align-items:center;gap:7px}.validation-dot{width:8px;height:8px;border-radius:50%;background:var(--muted-soft);flex:0 0 auto}.validation-strip.error{background:var(--white);color:var(--bad)}.validation-strip.error .validation-dot{background:var(--bad)}.validation-strip.warning{background:var(--white);color:var(--warn)}.validation-strip.warning .validation-dot{background:var(--warn)}.validation-strip.success{background:var(--white);color:var(--ok)}.validation-strip.success .validation-dot{background:var(--ok)}.validation-strip.neutral{color:var(--muted)}.recovery{display:none;align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid var(--blue-soft);font-size:var(--text-sm)}.recovery.open{display:flex}.drawer-body{min-height:0;overflow-y:auto;padding:18px;background:var(--white)}.drawer-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;padding:9px 17px;border-top:1px solid var(--line)}.autosave{margin-right:auto;color:var(--muted);font-size:var(--text-sm)}.sub-cs-banner{align-items:center;justify-content:space-between;gap:12px;padding:8px 17px;background:var(--blue-soft);border-bottom:1px solid var(--blue-soft);font-size:var(--text-sm);color:var(--ink)}
+.card{margin-bottom:14px;background:var(--white);border:1px solid var(--line)}.card:last-child{margin-bottom:0}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:13px 15px 11px;border-bottom:1px solid var(--line-soft)}.card-title{margin:0;font-size:var(--text-lg)}.card-desc{max-width:760px;margin:4px 0 0;color:var(--muted);font-size:var(--text-sm)}.section-state{flex:0 0 auto}.card-body{padding:15px}.flat-section{margin:10px 0 22px;padding-bottom:18px;border-bottom:1px solid var(--line-soft)}.flat-section:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}.flat-section-title{margin:0 0 12px;font-size:var(--text-lg);font-weight:600;color:var(--ink)}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.field.full{grid-column:1/-1}.field label,.field-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;color:var(--muted);font-size:var(--text-sm);font-weight:600}.text,.textarea{width:100%;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);font-size:var(--text-md);box-shadow:none;text-align:left}
+/* Text-alignment convention: content defaults to left. Right-align is
+   reserved for numeric values and row-action columns (see .text-right
+   usages below); center is reserved for standalone empty/callout states. */
+.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text{height:30px;padding:5px 10px}.textarea{min-height:78px;padding:8px 10px;resize:vertical}.field-error{display:none;margin-top:5px;color:var(--bad);font-size:var(--text-sm)}.field.error .text,.field.error .textarea{border-color:var(--bad-border);background:var(--bad-bg)}.field.error .field-error{display:block}.field-hint-warn{margin-top:5px;color:var(--warn);font-size:var(--text-sm)}.short-meta{display:flex;align-items:center;justify-content:space-between;min-height:23px;margin-top:4px;color:var(--muted);font-size:var(--text-xs)}
+.section-toolbar,.table-toolbar,.flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.derived-scope{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-top:14px;padding:10px 11px;background:var(--surface-alt);border:1px solid var(--line-soft)}.derived-scope .tags{justify-content:flex-end}.derived-scope-copy{min-width:220px}.derived-scope-copy strong{display:block;margin-bottom:2px}.picker{position:relative;max-width:500px;margin-top:0}.picker-input{display:grid;grid-template-columns:minmax(0,1fr) auto}.picker-input .text{border-radius:0 0 0 2px}.picker-input .btn{border-left:0;border-radius:0 2px 2px 0}.picker-menu{position:absolute;z-index:var(--z-picker);top:calc(100% + 3px);left:0;right:0;display:none;max-height:240px;overflow:auto;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:4px}.picker-menu.open{display:block}.picker-option{display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;padding:8px 10px;border-radius:var(--radius);text-align:left;background:transparent;cursor:pointer;font-size:var(--text-sm)}.picker-option input[type="checkbox"]{flex:0 0 auto;width:15px;height:15px;margin:0}.picker-option:hover{background:var(--blue-soft)}.selected-shell{margin-top:15px;border:1px solid var(--line)}.selected-shell .table-toolbar{min-height:39px;margin:0;padding:6px 9px;background:var(--surface-tint);border-bottom:1px solid var(--line)}.selected-shell .table{table-layout:auto}.coverage{display:flex;flex-direction:column;gap:3px;font-size:var(--text-xs)}.coverage .ok{color:var(--ok)}.coverage .bad{color:var(--bad)}.manage{display:inline-flex;margin-top:10px;color:var(--navy);font-weight:600;text-decoration:none}.manage:hover{text-decoration:underline}
+.flow-shell{margin-bottom:14px;padding:11px;background:var(--surface-alt);border:1px solid var(--line)}.flow-map{display:flex;align-items:stretch;gap:7px;overflow-x:auto;padding:2px 1px 6px}.flow-node{flex:0 0 148px;min-height:70px;padding:8px 9px;text-align:left;background:var(--white);border:1px solid var(--line-soft);color:var(--muted);cursor:pointer}.flow-node.selected{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);color:var(--ink)}.flow-node.bad{border-color:var(--bad-border);background:var(--bad-bg);color:var(--ink)}.flow-node strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.flow-node small{display:block;margin-top:5px;color:var(--muted)}.flow-arrow{align-self:center;color:var(--muted-soft);font-size:var(--text-xl)}.workflow{display:grid;grid-template-columns:minmax(260px,32%) minmax(0,1fr);gap:13px;min-height:430px}.status-list,.status-editor{min-width:0;border:1px solid var(--line)}.panel-head{display:flex;align-items:center;justify-content:space-between;min-height:39px;padding:7px 10px;background:var(--surface-tint);border-bottom:1px solid var(--line)}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:var(--navy);cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-list-body{padding:6px}.insert{display:flex;justify-content:center;height:20px}.insert button{width:22px;height:18px;background:transparent;color:var(--navy);cursor:pointer;opacity:.45}.insert button:hover{opacity:1}.status-actions{display:flex;gap:3px}.status-actions .icon-btn{width:24px;height:24px;font-size:var(--text-xs)}.status-editor-body{padding:13px}.flags{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0;padding:10px;background:var(--surface-tint);border:1px solid var(--line-soft)}.flags label,.check-option{display:inline-flex;align-items:center;gap:6px}.subsection{margin-top:15px;padding-top:13px;border-top:1px solid var(--line-soft)}.subsection h4{margin:0 0 4px;font-size:var(--text-sm)}.subsection p{margin:0 0 9px;color:var(--muted);font-size:var(--text-xs)}.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--field-gap)}.check-option{min-height:30px;padding:5px 7px;background:var(--surface-alt);border:1px solid var(--line-soft);font-size:var(--text-sm)}.timer-grid{display:grid;grid-template-columns:85px 110px minmax(0,1fr);gap:8px}.inline-issues{margin-top:11px;padding:8px 9px;background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad);font-size:var(--text-sm)}.inline-issues ul{margin:4px 0 0;padding-left:17px}.scope-note{display:flex;gap:8px;margin-top:14px;padding:10px 11px;background:var(--surface-tint);border-left:3px solid var(--muted-soft);color:var(--muted);font-size:var(--text-sm)}
+.modal-backdrop{position:fixed;z-index:var(--z-modal);inset:0;display:none;align-items:center;justify-content:center;padding:24px;background:var(--overlay)}.modal-backdrop.open{display:flex}.modal{display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(720px,94vw);max-height:82vh;background:var(--white);box-shadow:var(--shadow-lg)}.modal.large{width:min(1040px,94vw)}.modal-head,.modal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:var(--text-lg)}.modal-body{min-height:0;overflow:auto;padding:14px}.modal-foot{justify-content:flex-end;border-top:1px solid var(--line);border-bottom:0}.issue-row,.check-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:37px;padding:7px 8px;border-bottom:1px solid var(--line-soft)}.issue-row:last-child,.check-row:last-child{border-bottom:0}.issue-group{margin-bottom:14px}.issue-group h4{margin:0 0 7px}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:8px 9px;text-align:left;border-bottom:1px solid var(--line-soft)}.history th{background:var(--surface-tint);color:var(--muted);font-size:var(--text-xs);text-transform:uppercase}.compare{margin-top:15px;padding:12px;background:var(--surface-tint);border:1px solid var(--line)}.compare-controls,.preview-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toast-region{position:fixed;z-index:var(--z-toast);right:18px;bottom:38px;display:grid;gap:7px;width:min(340px,calc(100vw - 36px))}.toast{padding:10px 12px;background:var(--surface-dark);color:var(--white);box-shadow:var(--shadow-md);font-size:var(--text-sm)}.proto{display:flex;align-items:center;gap:18px;padding:0 12px;background:var(--navy);color:var(--white);font-size:var(--text-xs)}
+/* Activity log: a right-side panel (not a centered modal) at 30% of the screen width, styled
+   after a version-history list — bold entry title, a "reflect date" line, a "created by" line,
+   and a hairline divider between entries. Reuses the app's existing .backdrop dimmer. */
+.audit-panel{position:fixed;z-index:var(--z-drawer);top:0;right:0;display:flex;flex-direction:column;width:30vw;min-width:320px;max-width:520px;height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}
+.audit-panel.open{transform:translateX(0)}
+.audit-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-height:55px;padding:12px 17px;border-bottom:1px solid var(--line)}
+.audit-panel-title{margin:0;font-size:var(--text-lg);font-weight:700}
+.audit-panel-sub{margin-top:2px;font-size:var(--text-sm);color:var(--muted)}
+.audit-panel-body{flex:1;min-height:0;overflow-y:auto;padding:4px 17px}
+.audit-entry{padding:12px 0;border-bottom:1px solid var(--line-soft)}
+.audit-entry:last-child{border-bottom:0}
+.audit-entry-title{font-size:var(--text-base);font-weight:700;color:var(--ink);margin-bottom:4px}
+.audit-entry-line{font-size:var(--text-sm);color:var(--muted)}
+@media(max-width:980px){.audit-panel{width:60vw}}
+@media(max-width:760px){.audit-panel{width:100vw;max-width:none}}
 @media(max-width:1280px){.drawer{width:88vw}}@media(max-width:980px){.drawer{width:100vw}.workflow{grid-template-columns:1fr}.status-list{max-height:360px;overflow:auto}}@media(max-width:760px){.app{min-width:0}.toolbar{align-items:stretch;flex-direction:column}.filters{align-items:stretch}.form-grid,.check-grid,.timer-grid{grid-template-columns:1fr}.drawer-actions .btn span{display:none}.modal-backdrop{padding:0}.modal,.modal.large{width:100vw;max-height:100vh}}
   </style>
 <style>
@@ -129,40 +161,40 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
 .drawer{ width:60vw; }
 .check-grid.cols-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
 .check-option.locked{ opacity:.6; }
-.widget-card{ padding:11px 12px; background:#f7fbfc; border:1px solid #e2e7eb; border-top:1px solid #e2e7eb; }
+.widget-card{ padding:11px 12px; background:var(--surface-alt); border:1px solid var(--line-soft); border-top:1px solid var(--line-soft); }
 .widget-card .widget-body{ margin-top:9px; }
 .widget-head{ display:flex; align-items:center; gap:9px; }
 .widget-head h4{ flex:1; min-width:0; margin:0; }
 .widget-tile-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin-top:10px; }
-.widget-tile{ display:flex; flex-direction:column; gap:7px; padding:9px 10px; background:#f7fbfc; border:1px solid #e2e7eb; border-radius:4px; min-height:76px; }
-.widget-tile.enabled{ background:#eef6fc; border-color:#bcd7ea; }
+.widget-tile{ display:flex; flex-direction:column; gap:7px; padding:9px 10px; background:var(--surface-alt); border:1px solid var(--line-soft); border-radius:4px; min-height:76px; }
+.widget-tile.enabled{ background:var(--blue-soft); border-color:var(--blue-border); }
 .widget-tile.at-capacity{ opacity:.55; }
 .widget-tile.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
 .widget-tile.dragging{ opacity:.4; }
 .widget-tile-top{ display:flex; align-items:center; gap:4px; }
 .widget-tile .switch-heading{ align-items:flex-start; gap:8px; }
 .widget-tile .switch-label{ font-size:var(--text-sm); line-height:1.3; }
-.widget-position{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:var(--neutral); color:#5c6b76; font-size:var(--text-xs); font-weight:700; }
+.widget-position{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:20px; height:20px; border-radius:50%; background:var(--neutral); color:var(--muted); font-size:var(--text-xs); font-weight:700; }
 .widget-move{ display:flex; gap:2px; flex:0 0 auto; }
 .widget-move .icon-btn{ width:24px; height:24px; font-size:var(--text-xs); }
-.btn.primary.danger{ background:var(--bad); border-color:var(--bad); color:#fff; }
-.btn.primary.danger:hover:not(:disabled){ background:#8a2f23; border-color:#8a2f23; }
+.btn.primary.danger{ background:var(--bad); border-color:var(--bad); color:var(--white); }
+.btn.primary.danger:hover:not(:disabled){ background:var(--bad-strong); border-color:var(--bad-strong); }
 .desc-info{ position:relative; display:inline-flex; vertical-align:middle; margin-left:5px; color:var(--muted); cursor:help; }
 .desc-info:hover .desc-popover, .desc-info:focus .desc-popover{ display:block; }
-.desc-popover{ display:none; position:absolute; z-index:60; top:130%; left:0; width:max-content; max-width:260px; padding:8px 10px; background:#263746; color:#fff; border-radius:0; box-shadow:0 8px 20px #001f3d33; font-size:var(--text-xs); font-weight:400; line-height:1.4; text-transform:none; letter-spacing:normal; white-space:normal; }
+.desc-popover{ display:none; position:absolute; z-index:var(--z-popover); top:130%; left:0; width:max-content; max-width:260px; padding:8px 10px; background:var(--surface-dark); color:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-md); font-size:var(--text-xs); font-weight:400; line-height:1.4; text-transform:none; letter-spacing:normal; white-space:normal; }
 .disclosure-toggle{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:0; background:transparent; border:0; text-align:left; cursor:pointer; }
 .disclosure-title{ font-weight:600; font-size:var(--text-sm); flex:0 0 auto; }
-.disclosure-summary{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:right; }
-.disclosure-chevron{ flex:0 0 auto; color:var(--muted); transition:transform .15s; transform:rotate(-90deg); }
+.disclosure-summary{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } /* uses .text-right utility per alignment convention */
+.disclosure-chevron{ flex:0 0 auto; color:var(--muted); transition:transform var(--dur-fast); transform:rotate(-90deg); }
 .disclosure.open .disclosure-chevron{ transform:rotate(0deg); }
 .disclosure-body{ margin-top:11px; }
 .switch-heading{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; vertical-align:middle; }
 .switch-heading input{ position:absolute; opacity:0; width:1px; height:1px; }
-.switch-track{ position:relative; flex:0 0 auto; width:34px; height:19px; background:#d7dde1; border-radius:10px; transition:background .15s; }
-.switch-track::after{ content:''; position:absolute; top:2px; left:2px; width:15px; height:15px; background:#fff; border-radius:50%; transition:transform .15s; box-shadow:0 1px 2px rgba(0,0,0,.25); }
+.switch-track{ position:relative; flex:0 0 auto; width:34px; height:19px; background:var(--line); border-radius:var(--chip-radius); transition:background var(--dur-fast); }
+.switch-track::after{ content:''; position:absolute; top:2px; left:2px; width:15px; height:15px; background:var(--white); border-radius:50%; transition:transform var(--dur-fast); box-shadow:var(--shadow-sm); }
 .switch-heading input:checked ~ .switch-track{ background:var(--blue); }
 .switch-heading input:checked ~ .switch-track::after{ transform:translateX(15px); }
-.switch-heading input:focus-visible ~ .switch-track{ outline:2px solid #8eb6db; outline-offset:2px; }
+.switch-heading input:focus-visible ~ .switch-track{ outline:2px solid var(--focus); outline-offset:2px; }
 .switch-label{ font-size:var(--text-sm); font-weight:600; }
 /* .field label sets justify-content:space-between for regular field labels (label text + a
    helper icon on the right). Checkbox labels like .check-option that happen to sit inside a
@@ -178,62 +210,76 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
    what wraps the picker — including the nested Program/subprogram rows, which use this same
    .picker-option class. */
 .field .picker-option{ justify-content:flex-start; }
-#careSettingInfo{ display:block; padding:11px 13px; margin-top:10px; }
-#careSettingInfo .derived-scope-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:11px; }
-#careSettingInfo .derived-scope-head strong{ font-size:var(--text-sm); text-transform:uppercase; letter-spacing:.03em; }
-#careSettingInfo .info-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--field-gap); }
-#careSettingInfo .info-item.full{ grid-column:1/-1; }
-#careSettingInfo .info-label{ display:block; color:var(--muted); font-size:var(--text-xs); margin-bottom:3px; }
-#careSettingInfo .info-value{ display:block; color:var(--ink); font-size:var(--text-sm); font-weight:600; }
-#careSettingInfo .info-value.link{ color:var(--navy2); }
-#careSettingInfo .info-value.muted{ color:var(--muted); font-weight:400; }
+/* .cs-info-card: one bordered card per Care Setting in the info panel (see .cs-info-panel
+   below) — a plain neutral border divides the cards, no background color needed to do it.
+   Values stay a single ink color throughout; nothing here is an actual link, so nothing is
+   styled to look like one. Header is a flex row: the Sub's own name+Short Name on the left,
+   and — only when that Sub belongs to a Main with real Subs — the Main's Short Name on the
+   right of the same row. */
+.cs-info-card{ border:1px solid var(--line); }
+.cs-info-card .cs-info-card-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line-soft); font-weight:700; font-size:var(--text-base); }
+.cs-info-card .info-grid{ padding:14px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--field-gap); }
+.cs-info-card .info-item.full{ grid-column:1/-1; }
+.cs-info-card .info-label{ display:block; color:var(--muted); font-size:var(--text-xs); margin-bottom:3px; }
+.cs-info-card .info-value{ display:block; color:var(--ink); font-size:var(--text-sm); font-weight:600; }
+.cs-info-card .info-value.muted{ color:var(--muted); font-weight:400; }
+/* Care setting information panel: a secondary right panel stacked on top of the create/edit
+   drawer (higher z-index), sized to 70% of the drawer's own width rather than the full screen. */
+.cs-info-panel{position:fixed;z-index:var(--z-modal);top:0;right:0;display:flex;flex-direction:column;width:calc(60vw * 0.7);min-width:340px;max-width:640px;height:100vh;background:var(--white);box-shadow:var(--shadow-drawer);transform:translateX(105%);transition:var(--dur-drawer)}
+.cs-info-panel.open{transform:translateX(0)}
+.cs-info-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:55px;padding:10px 17px;border-bottom:1px solid var(--line)}
+.cs-info-panel-title{margin:0;font-size:var(--text-lg);font-weight:700}
+.cs-info-panel-body{flex:1;min-height:0;overflow-y:auto;padding:16px 17px;display:flex;flex-direction:column;gap:12px}
+@media(max-width:980px){.cs-info-panel{width:60vw}}
+@media(max-width:760px){.cs-info-panel{width:100vw;max-width:none}}
 .inherit-badge{ display:inline-flex; align-items:center; gap:3px; margin-left:6px; color:var(--muted); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; vertical-align:middle; }
-.layer-tag{ flex:0 0 auto; padding:2px 8px; border-radius:10px; font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
-.layer-tag.definition{ background:#eef2f6; color:#5c6b76; }
+.layer-tag{ flex:0 0 auto; padding:2px 8px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+.layer-tag.definition{ background:var(--surface-tint); color:var(--muted); }
 .layer-tag.deployment{ background:var(--blue-soft); color:var(--navy2); }
 .pill.pending{ background:var(--warn-bg); color:var(--warn); }
 .stepper{ display:flex; align-items:stretch; gap:0; margin:12px 0; }
-.stepper-stage{ flex:1; min-width:0; padding:10px 12px; background:#f7fbfc; border:1px solid #e2e7eb; border-left:0; }
-.stepper-stage:first-child{ border-left:1px solid #e2e7eb; }
+.stepper-stage{ flex:1; min-width:0; padding:10px 12px; background:var(--surface-alt); border:1px solid var(--line-soft); border-left:0; }
+.stepper-stage:first-child{ border-left:1px solid var(--line-soft); }
 .stepper-stage strong{ display:block; font-size:var(--text-sm); margin-bottom:3px; }
 .stepper-stage p{ margin:0; color:var(--muted); font-size:var(--text-xs); }
 .stepper-stage.overlap{ background:var(--blue-soft); }
-.stepper-arrow{ flex:0 0 auto; align-self:center; padding:0 4px; color:#9aa7b2; font-size:var(--text-base); }
-.placeholder-block{ padding:11px 12px; background:#f6f7f8; border:1px dashed #c9d2da; color:var(--muted); font-size:var(--text-sm); }
-.program-group{ border-bottom:1px solid #eef1f4; padding-bottom:2px; margin-bottom:2px; }
+.stepper-arrow{ flex:0 0 auto; align-self:center; padding:0 4px; color:var(--muted-soft); font-size:var(--text-base); }
+.placeholder-block{ padding:11px 12px; background:var(--surface-alt); border:1px dashed var(--line-soft); color:var(--muted); font-size:var(--text-sm); }
+.program-group{ border-bottom:1px solid var(--line-soft); padding-bottom:2px; margin-bottom:2px; }
 .program-group:last-child{ border-bottom:0; margin-bottom:0; padding-bottom:0; }
 .program-group-parent{ font-weight:700; }
 .program-group-count{ font-weight:400; margin-left:4px; }
-.picker-option-sub{ padding-left:30px; font-size:var(--text-sm); color:#5c6b76; }
+.picker-option-sub{ padding-left:30px; font-size:var(--text-sm); color:var(--muted); }
 .sort-th{ display:inline-flex; align-items:center; gap:4px; background:transparent; border:0; padding:0; font:inherit; color:inherit; text-transform:inherit; letter-spacing:inherit; font-weight:700; cursor:pointer; }
-.sort-th .sort-glyph{ font-size:var(--text-xs); opacity:.4; }
-th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ opacity:1; color:var(--navy2); }
+.sort-th .sort-glyph{ display:inline-flex; font-size:var(--text-sm); color:var(--muted-soft); }
+.sort-th:hover .sort-glyph{ color:var(--muted); }
+th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ color:var(--navy); }
 .check-option.heading{ border:0; background:none; padding:0; font-weight:600; font-size:var(--text-sm); }
 .status-list-body{ display:flex; flex-direction:column; gap:4px; }
 .status-item-wrapper{ display:flex; flex-direction:column; }
 .status-item-wrapper + .status-item-wrapper{ border-top:1px solid var(--line); padding-top:4px; }
-.status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:8px; border:1px solid transparent; background-color:transparent; cursor:pointer; transition:background-color .15s ease, border-color .15s ease; }
-.status-card.bad{ border-color:#d9988f; background-color:#fffafa; }
-.status-card:hover{ background-color:#f8fafc; }
-.status-card.selected{ background-color:#f0f6ff; border-color:#bfdbfe; }
+.status-card{ position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-radius:8px; border:1px solid transparent; background-color:transparent; cursor:pointer; transition:background-color var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+.status-card.bad{ border-color:var(--bad-border); background-color:var(--bad-bg); }
+.status-card:hover{ background-color:var(--surface-alt); }
+.status-card.selected{ background-color:var(--blue-soft); border-color:var(--blue-border); }
 .status-info{ display:flex; flex-direction:column; gap:3px; flex-grow:1; min-width:0; }
 .status-title{ font:inherit; font-size:var(--text-lg); font-weight:400; color:var(--ink); line-height:1.3; border:none; background:transparent; outline:none; width:100%; padding:0; }
 .status-title:focus{ border-bottom:1px solid var(--blue); }
 .status-subtitle{ font-size:var(--text-sm); color:var(--muted); }
 .status-card.selected .status-subtitle{ color:var(--navy2); }
-.status-actions{ display:flex; align-items:center; gap:16px; margin-left:12px; opacity:0; visibility:hidden; transition:opacity .15s ease, visibility .15s ease; }
+.status-actions{ display:flex; align-items:center; gap:16px; margin-left:12px; opacity:0; visibility:hidden; transition:opacity var(--dur-fast) ease, visibility var(--dur-fast) ease; }
 .status-card.selected .status-actions, .status-card:hover .status-actions, .status-card:focus-within .status-actions{ opacity:1; visibility:visible; }
-.action-btn{ width:auto; height:auto; min-width:24px; min-height:24px; padding:4px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:0; color:var(--ink); cursor:pointer; transition:color .15s ease, transform .1s ease; }
+.action-btn{ width:auto; height:auto; min-width:24px; min-height:24px; padding:4px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:0; color:var(--ink); cursor:pointer; transition:color var(--dur-fast) ease, transform var(--dur-fast) ease; }
 .action-btn:hover{ background:transparent; border-color:transparent; color:var(--blue); transform:scale(1.1); }
 .action-btn svg{ width:18px; height:18px; display:block; }
 .tag-remove{ margin-left:2px; border:0; background:transparent; color:inherit; cursor:pointer; font-size:var(--text-sm); line-height:1; padding:0; }
 .field .control{ width:100%; }
 .flow-node.next{ border-color:var(--ok); box-shadow:inset 0 0 0 1px var(--ok); }
 .card-toggle{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; padding:0; margin-right:2px; background:transparent; border:0; color:var(--muted); cursor:pointer; vertical-align:middle; }
-.card-chevron{ display:inline-block; transition:transform .15s; }
+.card-chevron{ display:inline-block; transition:transform var(--dur-fast); }
 .card.collapsed .card-chevron{ transform:rotate(-90deg); }
 .card.collapsed .card-body{ display:none; }
-.tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:var(--text-xs); border:1px solid #d7dde1; border-radius:0; background:#fff; }
+.tier-select{ margin-left:auto; height:22px; padding:1px 4px; font-size:var(--text-xs); border:1px solid var(--line); border-radius:var(--radius); background:var(--white); }
 .check-option:has(input[type="checkbox"]:not(:checked)) .tier-select{ display:none; }
 .widget-placement-group{ margin-bottom:22px; }
 .widget-placement-group:last-child{ margin-bottom:0; }
@@ -244,16 +290,16 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .col-builder-controls{ display:flex; align-items:center; gap:8px; margin-top:10px; flex-wrap:wrap; }
 .col-builder-controls .text{ max-width:260px; }
 .col-unified-list{ margin-top:10px; border:1px solid var(--line); max-height:420px; overflow:auto; }
-.col-list-search{ position:sticky; top:0; z-index:2; display:flex; align-items:center; gap:7px; padding:8px 10px; background:#fff; border-bottom:1px solid var(--line); }
+.col-list-search{ position:sticky; top:0; z-index:var(--z-search); display:flex; align-items:center; gap:7px; padding:8px 10px; background:var(--white); border-bottom:1px solid var(--line); }
 .col-list-search svg{ flex:0 0 auto; color:var(--muted); }
-.col-list-search input{ flex:1 1 auto; height:28px; padding:0 8px; background:#fff; border:1px solid #d7dde1; border-radius:0; }
-.col-row{ display:flex; align-items:center; gap:8px; min-height:36px; padding:6px 10px; border-bottom:1px solid #eef1f4; }
+.col-list-search input{ flex:1 1 auto; height:28px; padding:0 8px; background:var(--white); border:1px solid var(--line); border-radius:var(--radius); }
+.col-row{ display:flex; align-items:center; gap:8px; min-height:36px; padding:6px 10px; border-bottom:1px solid var(--line-soft); }
 .col-row:last-child{ border-bottom:0; }
-.col-row.locked{ background:#f4f8fb; color:var(--muted); }
+.col-row.locked{ background:var(--surface-tint); color:var(--muted); }
 .col-row.dragging, .widget-card.dragging, .status-card.dragging{ opacity:.4; }
 .col-row.drag-over, .widget-card.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
 .status-card.drag-over{ box-shadow:inset 0 2px 0 var(--blue); }
-.col-row .col-order{ flex:0 0 20px; font-size:var(--text-xs); color:var(--muted); text-align:right; }
+.col-row .col-order{ flex:0 0 20px; font-size:var(--text-xs); color:var(--muted); } /* uses .text-right utility per alignment convention */
 .col-row .col-name{ flex:1 1 auto; min-width:0; }
 .col-row .col-icon{ flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; width:16px; color:var(--muted); }
 .col-row .col-drag{ display:flex; align-items:center; justify-content:center; flex:0 0 16px; color:var(--muted); cursor:grab; }
@@ -263,28 +309,28 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .drag-handle:active{ cursor:grabbing; }
 .action-position-tag{ flex:0 0 auto; padding:2px 7px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; white-space:nowrap; }
 .action-position-tag.inline{ background:var(--blue-soft); color:var(--navy2); }
-.signal-color-input{ flex:0 0 auto; width:30px; height:26px; padding:1px; border:1px solid #d7dde1; border-radius:0; cursor:pointer; background:#fff; }
+.signal-color-input{ flex:0 0 auto; width:30px; height:26px; padding:1px; border:1px solid var(--line); border-radius:var(--radius); cursor:pointer; background:var(--white); }
 .signal-color-input:disabled{ opacity:.5; cursor:default; }
-.signal-preview-badge{ display:inline-block; max-width:100%; padding:2px 8px; border-radius:10px; font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; background:#fff4e0; color:#8a5a00; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.signal-preview-badge{ display:inline-block; max-width:100%; padding:2px 8px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; background:var(--warn-bg); color:var(--warn); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .signal-preview-icon{ display:inline-flex; align-items:center; justify-content:center; color:var(--muted); }
 .signal-preview-slot{ flex:0 0 130px; display:flex; align-items:center; justify-content:flex-end; overflow:hidden; }
 .signal-legend{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-bottom:14px; }
 .signal-legend-item{ display:flex; flex-direction:column; gap:6px; }
-.signal-legend-row{ display:flex; align-items:center; gap:6px; padding:7px 9px; background:#fff; border:1px solid var(--line); font-size:var(--text-sm); }
-.signal-legend-row.critical{ background:#fdeceb; border-color:#e2a29b; box-shadow:inset 3px 0 0 var(--bad); }
+.signal-legend-row{ display:flex; align-items:center; gap:6px; padding:7px 9px; background:var(--white); border:1px solid var(--line); font-size:var(--text-sm); }
+.signal-legend-row.critical{ background:var(--bad-bg); border-color:var(--bad-border); box-shadow:inset 3px 0 0 var(--bad); }
 .signal-legend-row .legend-name{ flex:1 1 auto; font-weight:700; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .signal-legend-row .legend-bed{ flex:0 0 auto; color:var(--muted); font-size:var(--text-xs); }
-.signal-legend-badge-demo, .legend-badge-demo{ flex:0 0 auto; padding:2px 7px; border-radius:10px; font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; background:#fff4e0; color:#8a5a00; white-space:nowrap; }
+.signal-legend-badge-demo, .legend-badge-demo{ flex:0 0 auto; padding:2px 7px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; background:var(--warn-bg); color:var(--warn); white-space:nowrap; }
 .signal-legend-icon-demo, .legend-icon-demo{ flex:0 0 auto; display:inline-flex; color:var(--muted); }
-.signal-legend-label{ font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; color:#5c6b76; }
+.signal-legend-label{ font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; color:var(--muted); }
 .signal-legend-caption{ margin:0; color:var(--muted); font-size:var(--text-xs); line-height:1.4; }
-.col-list-search .pill-toggle{ flex:0 0 auto; padding:4px 10px; border:1px solid #d7dde1; border-radius:12px; background:#fff; color:#5c6b76; font-size:var(--text-xs); font-weight:700; cursor:pointer; white-space:nowrap; }
-.col-list-search .pill-toggle[aria-pressed="true"]{ background:var(--bad-bg); border-color:#d9988f; color:var(--bad); }
+.col-list-search .pill-toggle{ flex:0 0 auto; padding:4px 10px; border:1px solid var(--line); border-radius:12px; background:var(--white); color:var(--muted); font-size:var(--text-xs); font-weight:700; cursor:pointer; white-space:nowrap; }
+.col-list-search .pill-toggle[aria-pressed="true"]{ background:var(--bad-bg); border-color:var(--bad-border); color:var(--bad); }
 @media(max-width:900px){ .col-builder{ grid-template-columns:1fr; } }
 .info-popover-wrap{ position:relative; display:inline-flex; vertical-align:middle; margin-left:4px; }
 .info-popover-trigger{ display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; padding:0; background:transparent; border:0; border-radius:50%; color:var(--muted); cursor:pointer; }
 .info-popover-trigger:hover{ color:var(--navy2); background:var(--blue-soft); }
-.info-popover{ display:none; position:absolute; z-index:60; top:130%; left:0; width:max-content; min-width:200px; max-width:280px; padding:10px 12px; background:#fff; border:1px solid #d7dde1; box-shadow:0 8px 20px #001f3d24; font-size:var(--text-sm); font-weight:400; text-align:left; }
+.info-popover{ display:none; position:absolute; z-index:var(--z-popover); top:130%; left:0; width:max-content; min-width:200px; max-width:280px; padding:10px 12px; background:var(--white); border:1px solid var(--line); box-shadow:var(--shadow-sm); font-size:var(--text-sm); font-weight:400; text-align:left; }
 .info-popover.wide{ max-width:620px; min-width:460px; }
 .info-popover-wrap.open .info-popover{ display:block; }
 .info-popover .ip-title{ margin:0 0 6px; font-weight:600; font-size:var(--text-sm); }
@@ -294,7 +340,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .info-popover .ip-row.stacked .ip-value{ display:block; }
 .info-popover .ip-label{ flex:0 0 auto; color:var(--muted); }
 .info-popover .ip-value{ flex:0 1 auto; word-break:break-word; }
-.list-trigger{ padding:0; background:transparent; border:0; color:#1a4f85; font-weight:700; font-size:inherit; cursor:pointer; }
+.list-trigger{ padding:0; background:transparent; border:0; color:var(--navy); font-weight:700; font-size:inherit; cursor:pointer; }
 .list-trigger:hover{ text-decoration:underline; }
 .drawer-main{ display:grid; grid-template-columns:1fr; min-height:0; }
 .section-state.warn{ background:var(--warn-bg); color:var(--warn); }
@@ -305,13 +351,13 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ o
 .readiness-link.warn{ color:var(--warn); }
 .readiness-link.progress{ color:var(--navy2); }
 .readiness-link.bad{ color:var(--bad); }
-.segmented{ display:inline-flex; border:1px solid #d7dde1; border-radius:0; overflow:hidden; }
-.segmented label{ display:flex; align-items:center; gap:6px; padding:7px 16px; font-size:var(--text-sm); font-weight:600; color:#5c6b76; cursor:pointer; border-right:1px solid #d7dde1; background:#fff; }
+.segmented{ display:inline-flex; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+.segmented label{ display:flex; align-items:center; gap:6px; padding:7px 16px; font-size:var(--text-sm); font-weight:600; color:var(--muted); cursor:pointer; border-right:1px solid var(--line); background:var(--white); }
 .segmented label:last-child{ border-right:0; }
 .segmented input{ position:absolute; opacity:0; width:1px; height:1px; }
-.segmented label:has(input:checked){ background:var(--blue); color:#fff; }
+.segmented label:has(input:checked){ background:var(--blue); color:var(--white); }
 .status-warn{ color:var(--bad); font-weight:700; }
-.exceptional-exits{ margin-top:10px; padding-top:10px; border-top:1px solid #edf2f9; font-size:var(--text-sm); color:#5c6b76; }
+.exceptional-exits{ margin-top:10px; padding-top:10px; border-top:1px solid var(--blue-soft); font-size:var(--text-sm); color:var(--muted); }
 .exceptional-exits strong{ display:block; margin-bottom:4px; font-size:var(--text-xs); text-transform:uppercase; letter-spacing:.03em; color:var(--muted); }
 .exceptional-exits ul{ margin:0; padding-left:18px; }
 @media(max-width:1280px){ .drawer{ width:88vw; } }
@@ -334,16 +380,16 @@ select.control{ padding-right:26px; }
    separate look, since there is no existing component library entry for a multi-step
    slot-configuration flow. */
 .wg-slot-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:6px; }
-.wg-slot{ border:1px solid var(--line); background:#fff; min-height:150px; display:flex; flex-direction:column; }
-.wg-slot-label{ font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); background:#f4f8fb; border-bottom:1px solid var(--line); padding:6px 10px; }
+.wg-slot{ border:1px solid var(--line); background:var(--white); min-height:150px; display:flex; flex-direction:column; }
+.wg-slot-label{ font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); background:var(--surface-tint); border-bottom:1px solid var(--line); padding:6px 10px; }
 .wg-slot-body{ flex:1 1 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:14px; text-align:center; }
 .wg-slot-empty-text{ font-size:var(--text-sm); color:var(--muted); }
 .wg-slot-configured{ padding:10px; display:flex; flex-direction:column; gap:6px; flex:1 1 auto; }
 .wg-slot-name{ font-size:var(--text-sm); font-weight:700; color:var(--ink); line-height:1.25; }
 .wg-slot-preview{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; padding:2px; }
-.wg-slot-actions{ display:flex; gap:6px; justify-content:center; border-top:1px solid #edf0f2; padding-top:8px; margin-top:auto; }
+.wg-slot-actions{ display:flex; gap:6px; justify-content:center; border-top:1px solid var(--line-soft); padding-top:8px; margin-top:auto; }
 .wg-mini-section{ border:1px solid var(--line); padding:6px 8px; font-size:var(--text-xs); font-weight:600; color:var(--navy); }
-.wg-config-panel{ border:1px solid var(--navy); background:#fff; margin-top:14px; }
+.wg-config-panel{ border:1px solid var(--navy); background:var(--white); margin-top:14px; }
 .wg-config-head{ display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--blue-soft); border-bottom:1px solid var(--line); }
 .wg-config-head b{ font-size:var(--text-sm); }
 .wg-step-tag{ margin-left:auto; font-size:var(--text-xs); color:var(--muted); }
@@ -354,36 +400,36 @@ select.control{ padding-right:26px; }
 .wg-crumb button{ background:none; border:none; color:var(--navy); cursor:pointer; font:inherit; font-size:inherit; padding:0; }
 .wg-crumb button:hover{ text-decoration:underline; }
 .wg-shape-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.wg-shape-card{ border:1px solid var(--line); padding:16px 14px; cursor:pointer; text-align:left; background:#fff; font:inherit; width:100%; }
+.wg-shape-card{ border:1px solid var(--line); padding:16px 14px; cursor:pointer; text-align:left; background:var(--white); font:inherit; width:100%; }
 .wg-shape-card:hover{ border-color:var(--navy); }
 .wg-shape-card.selected{ border-color:var(--navy); background:var(--blue-soft); }
 .wg-shape-name{ font-weight:700; font-size:var(--text-sm); margin-bottom:4px; color:var(--ink); }
 .wg-shape-desc{ font-size:var(--text-xs); color:var(--muted); line-height:1.4; }
 .wg-catalog-toolbar{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
 .wg-catalog-list{ display:flex; flex-direction:column; gap:6px; max-height:260px; overflow-y:auto; }
-.wg-source-opt{ display:flex; align-items:flex-start; gap:10px; border:1px solid var(--line); padding:10px 12px; cursor:pointer; background:#fff; font:inherit; width:100%; text-align:left; }
-.wg-source-opt:hover{ background:#f7fbfe; }
+.wg-source-opt{ display:flex; align-items:flex-start; gap:10px; border:1px solid var(--line); padding:10px 12px; cursor:pointer; background:var(--white); font:inherit; width:100%; text-align:left; }
+.wg-source-opt:hover{ background:var(--surface-alt); }
 .wg-source-opt.selected{ border-color:var(--navy); background:var(--blue-soft); }
 .wg-source-opt.stub{ opacity:.6; cursor:not-allowed; }
 .wg-source-label{ font-size:var(--text-sm); font-weight:600; color:var(--ink); }
 .wg-source-desc{ font-size:var(--text-xs); color:var(--muted); margin-top:2px; }
-.wg-tagpill{ margin-left:auto; font-size:9px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); border:1px solid var(--line); padding:1px 6px; white-space:nowrap; align-self:center; }
+.wg-tagpill{ margin-left:auto; font-size:var(--text-2xs); text-transform:uppercase; letter-spacing:.03em; color:var(--muted); border:1px solid var(--line); padding:1px 6px; white-space:nowrap; align-self:center; }
 .wg-radio-list{ display:flex; flex-direction:column; gap:6px; }
-.wg-radio-opt{ display:flex; align-items:flex-start; gap:8px; border:1px solid var(--line); padding:8px 10px; cursor:pointer; background:#fff; font:inherit; width:100%; text-align:left; }
-.wg-radio-opt:hover{ background:#f7fbfe; }
+.wg-radio-opt{ display:flex; align-items:flex-start; gap:8px; border:1px solid var(--line); padding:8px 10px; cursor:pointer; background:var(--white); font:inherit; width:100%; text-align:left; }
+.wg-radio-opt:hover{ background:var(--surface-alt); }
 .wg-radio-opt.selected{ border-color:var(--navy); background:var(--blue-soft); }
 .wg-radio-label{ font-size:var(--text-sm); font-weight:600; color:var(--ink); }
 .wg-radio-desc{ font-size:var(--text-xs); color:var(--muted); margin-top:1px; }
 .wg-review-item{ display:flex; align-items:center; gap:8px; border:1px solid var(--line); padding:8px 10px; margin-bottom:6px; }
 .wg-order-btns{ display:flex; flex-direction:column; gap:1px; }
-.wg-order-btns button{ border:1px solid var(--line); background:#fff; width:20px; height:16px; font-size:9px; cursor:pointer; line-height:1; }
+.wg-order-btns button{ border:1px solid var(--line); background:var(--white); width:20px; height:16px; font-size:var(--text-2xs); cursor:pointer; line-height:1; }
 .wg-order-btns button[disabled]{ opacity:.3; cursor:not-allowed; }
-.wg-preview-box{ border:1px dashed var(--line); background:#fafbfc; padding:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100px; }
-.wg-preview-tag{ font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); text-align:center; margin-bottom:8px; }
-.wg-toggle-row{ display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--line); background:#fafbfc; }
+.wg-preview-box{ border:1px dashed var(--line); background:var(--surface-alt); padding:14px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100px; }
+.wg-preview-tag{ font-size:var(--text-2xs); font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); text-align:center; margin-bottom:8px; }
+.wg-toggle-row{ display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid var(--line); background:var(--surface-alt); }
 .wg-section-list{ display:flex; flex-direction:column; gap:6px; }
-.wg-section-row{ display:flex; align-items:center; gap:10px; border:1px solid var(--line); padding:10px 12px; background:#fff; }
-.wg-section-row.unchecked{ background:#fafbfc; }
+.wg-section-row{ display:flex; align-items:center; gap:10px; border:1px solid var(--line); padding:10px 12px; background:var(--white); }
+.wg-section-row.unchecked{ background:var(--surface-alt); }
 .wg-section-name{ flex:1 1 auto; font-size:var(--text-sm); font-weight:600; color:var(--ink); }
 .wg-section-name.unchecked{ color:var(--muted); font-weight:400; }
 
@@ -394,15 +440,29 @@ select.control{ padding-right:26px; }
 
 /* Care Setting field: multi-select tag picker, fixed 80/20 split with the info button (Grid,
    not Flexbox, so the gap is correctly subtracted from the 80%/20% split rather than added on
-   top of it). */
-.cs-picker-row{ display:grid; grid-template-columns:80% 20%; gap:8px; align-items:start; }
+   top of it). align-items:center (not start) so the info button stays vertically centered
+   against the tag box even as the box grows to a second row of tags. */
+.cs-picker-row{ display:grid; grid-template-columns:80% 20%; gap:8px; align-items:center; }
 .picker.cs-picker-wide{ max-width:none; }
-.cs-tag-box{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-height:32px; padding:5px 8px; background:#fff; border:1px solid var(--line); cursor:pointer; }
-.cs-tag-box:focus{ outline:2px solid #8eb6db; outline-offset:1px; }
-.cs-tag{ display:inline-flex; align-items:center; gap:4px; background:var(--blue-soft); border:1px solid #b9cfe6; color:var(--navy2); font-size:var(--text-xs); font-weight:600; padding:2px 4px 2px 8px; white-space:nowrap; }
-.cs-tag-remove{ background:none; border:none; color:var(--navy2); cursor:pointer; font-size:13px; line-height:1; padding:0 2px; display:inline-flex; }
-.cs-tag-remove:hover{ color:var(--bad); }
+/* Trailing chevron mirrors .filter-select-btn's dropdown affordance so this control reads as
+   a dropdown like every other picker in the app. Rotates via [aria-expanded="true"]. */
+.cs-tag-box{ position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-height:32px; padding:5px 26px 5px 8px; background:var(--white); border:1px solid var(--line); cursor:pointer; }
+.cs-tag-box::after{ content:''; position:absolute; right:10px; top:50%; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid var(--muted-soft); transform:translateY(-50%); pointer-events:none; }
+.cs-tag-box[aria-expanded="true"]::after{ border-top-color:var(--navy); }
+.cs-tag-box:focus{ outline:2px solid var(--focus); outline-offset:1px; }
+.cs-tag{ display:inline-flex; align-items:center; gap:4px; background:var(--navy); border:1px solid var(--navy); color:var(--white); font-size:var(--text-xs); font-weight:600; padding:2px 4px 2px 8px; white-space:nowrap; }
+.cs-tag-remove{ background:none; border:none; margin:0; color:var(--white); cursor:pointer; font-size:var(--text-xs); line-height:1; padding:0; width:14px; height:14px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; }
+.cs-tag-remove:hover{ background:rgba(255,255,255,.25); }
 .cs-tag-placeholder{ color:var(--muted); font-size:var(--text-sm); }
+/* Each Care Setting (with its Subs) renders as its own clearly divided block inside the
+   dropdown, instead of a bare border-top hairline: a shaded, full-bleed header bar plus a
+   divider between one Care Setting's block and the next. */
+.cs-group{ padding:2px 0; }
+.cs-group-divided{ margin-top:4px; padding-top:6px; border-top:1px solid var(--line-soft); }
+.cs-group-head{ margin:0 -4px 2px; padding:6px 10px; background:var(--neutral); }
+/* The info button sits beside a 32px-tall tag box (see .cs-tag-box); match that height
+   exactly rather than relying on the row's align-items alone. */
+#careSettingInfoBtn{ min-height:32px; height:32px; }
 </style>
 </head>
 <body>
@@ -436,7 +496,7 @@ select.control{ padding-right:26px; }
       <div class="table-shell">
         <table class="table" aria-label="Trackerboards">
           <colgroup><col style="width:30%"><col style="width:20%"><col style="width:13%"><col style="width:15%"><col style="width:12%"><col style="width:10%"></colgroup>
-          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/></svg></span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/></svg></span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated On<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/></svg></span></button></th><th data-key-th="updatedBy"><button type="button" class="sort-th" onclick="setDashboardSort('updatedBy')">Updated By<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/></svg></span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16" style="vertical-align:-0.125em;"><path d="M3.204 11h9.592L8 5.519zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659"/></svg></span></button></th><th class="actions">Actions</th></tr></thead>
+          <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated On<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="updatedBy"><button type="button" class="sort-th" onclick="setDashboardSort('updatedBy')">Updated By<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th class="actions">Actions</th></tr></thead>
           <tbody id="dashboardBody"></tbody>
         </table>
         <div class="table-footer">
@@ -472,7 +532,7 @@ select.control{ padding-right:26px; }
         <span class="section-state" id="cardState-caresetting" style="margin-left:auto;"></span>
       </div>
       <div class="card-body" id="sec-caresetting-body">
-        <div class="form-grid" data-field-group="basic">
+        <div class="form-grid" data-field-group="basic" style="grid-template-columns:2fr 1fr;">
           <div class="field"><label for="trackerboardNameInput">Board Name</label><input class="text" type="text" id="trackerboardNameInput" placeholder="e.g. Emergency Department Trackerboard" oninput="onTrackerboardNameInput(this.value)"><p class="field-error" id="nameFieldError" style="display:none;">Board Name is required.</p></div>
           <div class="field"><label for="shortNameInput">Short Name</label><input class="text" type="text" id="shortNameInput" placeholder="e.g. EDT" oninput="onShortNameInput(this.value)"><p class="field-error" id="shortNameFieldError" style="display:none;">Short Name is required.</p></div>
         </div>
@@ -502,7 +562,7 @@ select.control{ padding-right:26px; }
         <div class="flow-shell disclosure" id="flowShell">
           <button type="button" class="disclosure-toggle" onclick="toggleFlowMapVisibility()" aria-expanded="false" aria-controls="flowMapBody">
             <span class="disclosure-title">How patients flow through this board</span>
-            <span class="muted disclosure-summary" id="flowMapToggleLabel">Show diagram</span>
+            <span class="muted disclosure-summary text-right" id="flowMapToggleLabel">Show diagram</span>
             <span class="disclosure-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span>
           </button>
           <div class="disclosure-body" id="flowMapBody" style="display:none;">
@@ -625,7 +685,7 @@ select.control{ padding-right:26px; }
             <p>Short, non-clinical coordination updates. Not part of the clinical record.</p>
             <div class="comments-grid">
               <label class="check-option"><input type="checkbox" id="predefinedCommentsEnabled" checked onchange="togglePredefinedCommentsVisibility(this.checked); updateReadiness();"> Predefined comments</label>
-              <div class="field" id="predefinedCommentsCategoriesField"><label for="commentCategoriesBtn">Categories</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="commentCategoriesBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false" onclick="toggleCommentCategoriesPicker()">Select categories…</button></div><div class="picker-menu" id="commentCategoriesMenu"></div></div></div>
+              <div class="field" id="predefinedCommentsCategoriesField"><label for="commentCategoriesBtn">Categories</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="commentCategoriesBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleCommentCategoriesPicker()">Select categories…</button></div><div class="picker-menu" id="commentCategoriesMenu"></div></div></div>
               <label class="check-option"><input type="checkbox" id="freeTextCommentsEnabled" checked onchange="toggleFreeTextCommentsVisibility(this.checked); updateReadiness();"> Free text</label>
               <div class="field" id="commentCharLimitField"><label for="commentCharLimit">Character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">20&ndash;280</span></span></div>
             </div>
@@ -709,7 +769,7 @@ select.control{ padding-right:26px; }
 <div class="modal-backdrop" id="samplePreviewBackdrop">
   <div class="modal large" id="samplePreviewModal" role="dialog" aria-modal="true" aria-label="Sample trackerboard preview">
     <div class="modal-head"><h2>Sample trackerboard preview</h2><button class="icon-btn" type="button" onclick="closeSamplePreview()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-2.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
-    <div class="modal-body" style="background:#f4f6f8;">
+    <div class="modal-body" style="background:var(--bg);">
       <p class="muted" style="margin:0 0 12px;">A generic example, not a preview of the board you're building — this shows roughly where things will sit once you configure Widgets, Statuses, and Table columns below.</p>
 
       <!-- Top strip: maps to Widgets. Populated dynamically from the actual enabled widget
@@ -720,32 +780,32 @@ select.control{ padding-right:26px; }
       <div id="previewMainRow" style="display:grid;grid-template-columns:1fr 220px;gap:8px;">
         <div>
           <!-- Status tabs with counts -->
-          <div style="display:flex;align-items:center;border-bottom:1px solid var(--line);background:#fff;padding:0 4px;">
+          <div style="display:flex;align-items:center;border-bottom:1px solid var(--line);background:var(--white);padding:0 4px;">
             <div style="padding:9px 12px;border-bottom:2px solid var(--navy);font-size:var(--text-sm);font-weight:700;">Status 1 <span class="muted">(0)</span></div>
             <div style="padding:9px 12px;color:var(--muted);font-size:var(--text-sm);">Status 2 <span class="muted">(0)</span></div>
             <div style="padding:9px 12px;color:var(--muted);font-size:var(--text-sm);">Status 3 <span class="muted">(0)</span></div>
             <div style="padding:9px 12px;color:var(--muted);font-size:var(--text-sm);">Status 4 <span class="muted">(0)</span></div>
           </div>
           <!-- Filter chips, matching Care Setting filter row -->
-          <div style="display:flex;align-items:center;gap:6px;background:#fff;padding:8px 10px;border-bottom:1px solid var(--line);">
+          <div style="display:flex;align-items:center;gap:6px;background:var(--white);padding:8px 10px;border-bottom:1px solid var(--line);">
             <span class="tag">All</span><span class="tag">Filter 1</span><span class="tag">Filter 2</span><span class="tag">Filter 3</span>
             <span style="flex:1 1 auto;"></span>
             <span class="muted" style="font-size:var(--text-xs);">Provider: Select ▾</span>
           </div>
           <!-- Patient table, matching Patient Table columns -->
-          <table class="history" style="width:100%;background:#fff;">
+          <table class="history" style="width:100%;background:var(--white);">
             <thead><tr><th>Name/PID</th><th>Bed No</th><th>Vitals</th><th>Duration</th><th>Diagnosis</th><th>Care Setting</th><th>Actions</th></tr></thead>
             <tbody>
-              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#c7ced4;">• • •</td></tr>
-              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#c7ced4;">• • •</td></tr>
-              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:#c7ced4;">• • •</td></tr>
+              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:var(--muted-soft);">• • •</td></tr>
+              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:var(--muted-soft);">• • •</td></tr>
+              <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="color:var(--muted-soft);">• • •</td></tr>
             </tbody>
           </table>
         </div>
         <!-- Side panel: maps to the Side Panel Widgets group (e.g. Cardex). Shown only when a
              panel widget is enabled; when it's not, this column disappears and the top strip
              reclaims the full 5-slot width, matching the actual widget capacity rules. -->
-        <div id="previewPanelCol" style="background:#fff;border:1px solid var(--line);"></div>
+        <div id="previewPanelCol" style="background:var(--white);border:1px solid var(--line);"></div>
       </div>
     </div>
     <div class="modal-foot"><button class="btn primary" type="button" onclick="closeSamplePreview()">Close</button></div>
@@ -755,13 +815,15 @@ select.control{ padding-right:26px; }
 <!-- Care Setting information — large modal with a real table, replacing the old always-visible
      inline block. Values come from Care Settings Configuration's Clinical Defaults; Trackerboard
      doesn't maintain its own copy. -->
-<div class="modal-backdrop" id="careSettingInfoModalBackdrop">
-  <div class="modal large" role="dialog" aria-modal="true" aria-label="Care setting information">
-    <div class="modal-head"><h2>Care setting information</h2><button class="icon-btn" type="button" onclick="closeCareSettingInfoModal()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
-    <div class="modal-body" id="careSettingInfoModalBody"></div>
-    <div class="modal-foot"><button class="btn primary" type="button" onclick="closeCareSettingInfoModal()">Close</button></div>
+<div class="backdrop" id="csInfoBackdrop" onclick="closeCareSettingInfoModal()"></div>
+<div class="cs-info-panel" id="csInfoPanel" role="dialog" aria-modal="true" aria-label="Care setting information">
+  <div class="cs-info-panel-head">
+    <h2 class="cs-info-panel-title">Care setting information</h2>
+    <button class="icon-btn" type="button" onclick="closeCareSettingInfoModal()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
   </div>
+  <div class="cs-info-panel-body" id="careSettingInfoModalBody"></div>
 </div>
+
 
 <div class="modal-backdrop" id="widgetConfigModalBackdrop">
   <div class="modal large" role="dialog" aria-modal="true" aria-label="Configure widget">
@@ -802,14 +864,14 @@ select.control{ padding-right:26px; }
     stripRow.style.gridTemplateColumns = 'repeat(4,1fr)';
     stripRow.innerHTML = topSlots.map(function(s, i){
       if(!s){
-        return '<div style="border:1px dashed #c9d2da;background:#fff;padding:10px;">'+
+        return '<div style="border:1px dashed var(--line-soft);background:var(--white);padding:10px;">'+
           '<div class="muted" style="font-size:var(--text-xs);text-transform:uppercase;margin-bottom:4px;">Widget '+(i+1)+'</div>'+
-          '<div style="color:#c7ced4;font-size:var(--text-sm);">Not configured</div>'+
+          '<div style="color:var(--muted-soft);font-size:var(--text-sm);">Not configured</div>'+
         '</div>';
       }
-      return '<div style="border:1px solid var(--line);background:#fff;padding:10px;">'+
+      return '<div style="border:1px solid var(--line);background:var(--white);padding:10px;">'+
         '<div class="muted" style="font-size:var(--text-xs);text-transform:uppercase;margin-bottom:4px;">'+s.name+'</div>'+
-        '<div style="color:#c7ced4;font-size:var(--text-sm);">— / —</div>'+
+        '<div style="color:var(--muted-soft);font-size:var(--text-sm);">— / —</div>'+
       '</div>';
     }).join('');
 
@@ -1509,7 +1571,7 @@ select.control{ padding-right:26px; }
     var selected = dashboardFilters[type];
     var menu = document.getElementById(type + 'FilterMenu');
     if(!menu) return;
-    var allRow = '<label class="picker-option" style="cursor:pointer;font-weight:700;"><input type="checkbox"'+(selected.length?'':' checked')+' onchange="selectAllDashboardFilter(\''+type+'\')"> All</label><div style="margin:3px 0;border-top:1px solid #ebebeb;"></div>';
+    var allRow = '<label class="picker-option" style="cursor:pointer;font-weight:700;"><input type="checkbox"'+(selected.length?'':' checked')+' onchange="selectAllDashboardFilter(\''+type+'\')"> All</label><div style="margin:3px 0;border-top:1px solid var(--line-soft);"></div>';
     menu.innerHTML = options.length ? allRow + options.map(function(opt){
       var checked = selected.indexOf(opt) > -1 ? ' checked' : '';
       return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+opt+'"'+checked+' onchange="toggleDashboardFilter(\''+type+'\', \''+opt.replace(/'/g,"\\'")+'\', this.checked)"> '+opt+'</label>';
@@ -1701,8 +1763,16 @@ select.control{ padding-right:26px; }
       var bv = key === 'careSetting' ? (b.careSettings||[]).join(', ') : b[key];
       return av < bv ? -1*dir : av > bv ? 1*dir : 0;
     });
+    var CARET_UP_D = 'm7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z';
+    var CARET_DOWN_D = 'M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z';
     document.querySelectorAll('.table th[data-key-th]').forEach(function(th){
-      th.setAttribute('aria-sort', th.dataset.keyTh === key ? (dir===1?'ascending':'descending') : 'none');
+      var isActive = th.dataset.keyTh === key;
+      th.setAttribute('aria-sort', isActive ? (dir===1?'ascending':'descending') : 'none');
+      var glyph = th.querySelector('.sort-glyph');
+      if(glyph){
+        var down = isActive && dir === -1;
+        glyph.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-'+(down?'down':'up')+'-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="'+(down?CARET_DOWN_D:CARET_UP_D)+'"/></svg>';
+      }
     });
     var body = document.getElementById('dashboardBody');
     if(!TRACKERBOARDS.length){
@@ -1718,7 +1788,7 @@ select.control{ padding-right:26px; }
         var updatedParts = (t.updated||'').split(' ');
         var updatedDate = updatedParts[0] || t.updated;
         return '<tr>'+
-          '<td><span class="cell-title">'+t.name+'</span><div class="muted" style="font-size:var(--text-xs);margin-top:2px;">'+(t.shortName||'—')+'</div></td>'+
+          '<td><span class="cell-title">'+t.name+'</span>'+(t.shortName?' <span class="muted" style="font-size:var(--text-xs);">('+t.shortName+')</span>':'')+'</td>'+
           '<td>'+careSettingChips+'</td>'+
           '<td><span title="'+t.updated+'">'+updatedDate+'</span></td>'+
           '<td>'+(t.updatedBy||'—')+'</td>'+
@@ -2010,33 +2080,33 @@ select.control{ padding-right:26px; }
   // configuring a different board into thinking that was their own board's real data.) ----
   function renderMiniSourcePreview(sk, grouping){
     if(sk === 'totalPatients'){
-      if(grouping === 'none' || !grouping) return '<div style="text-align:center;"><div style="font-size:22px;font-weight:700;line-height:1;">29</div><div style="font-size:10px;color:var(--muted);">Total Patients</div></div>';
+      if(grouping === 'none' || !grouping) return '<div style="text-align:center;"><div style="font-size:var(--text-2xl);font-weight:700;line-height:1;">29</div><div style="font-size:var(--text-2xs);color:var(--muted);">Total Patients</div></div>';
       var lists = {
         subcs:['12 — Category A','9 — Category B','5 — Category C','3 — Category D'],
         status:['12 — Status A','9 — Status B','8 — Status C'],
-        severity:['<span style="color:#b3261e;">\u25cf</span> 0','<span style="color:#c07a00;">\u25cf</span> 0','<span style="color:#1a7a41;">\u25cf</span> 1']
+        severity:['<span style="color:var(--bad);">\u25cf</span> 0','<span style="color:var(--warn);">\u25cf</span> 0','<span style="color:var(--ok);">\u25cf</span> 1']
       };
       var rows = (lists[grouping] || []).map(function(r){ return '<div>'+r+'</div>'; }).join('');
-      return '<div style="display:flex;gap:8px;align-items:flex-start;"><div style="text-align:center;flex:0 0 auto;"><div style="font-size:22px;font-weight:700;line-height:1;">29</div><div style="font-size:10px;color:var(--muted);">Total</div></div><div style="font-size:10px;line-height:1.5;text-align:left;">'+rows+'</div></div>';
+      return '<div style="display:flex;gap:8px;align-items:flex-start;"><div style="text-align:center;flex:0 0 auto;"><div style="font-size:var(--text-2xl);font-weight:700;line-height:1;">29</div><div style="font-size:var(--text-2xs);color:var(--muted);">Total</div></div><div style="font-size:var(--text-2xs);line-height:1.5;text-align:left;">'+rows+'</div></div>';
     }
     if(sk === 'capacity'){
       var grids = {
         subcs:[['Category A','14/15'],['Category B','9/10'],['Category C','2/5'],['Category D','0/2']],
         status:[['Status A','7/8'],['Status B','3/5'],['Status C','8/8']]
       };
-      return '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;">'+(grids[grouping] || []).map(function(c){ return '<div style="border:1px solid var(--line);padding:3px 5px;text-align:center;"><div style="font-weight:700;font-size:11px;">'+c[1]+'</div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;">'+c[0]+'</div></div>'; }).join('')+'</div>';
+      return '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;">'+(grids[grouping] || []).map(function(c){ return '<div style="border:1px solid var(--line);padding:3px 5px;text-align:center;"><div style="font-weight:700;font-size:var(--text-xs);">'+c[1]+'</div><div style="font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;">'+c[0]+'</div></div>'; }).join('')+'</div>';
     }
     if(sk === 'resourceAvailability'){
-      return '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;">'+[['Beds','4/5'],['Chairs','1/5'],['Lobby','0']].map(function(c){ return '<div style="border:1px solid var(--line);padding:3px 5px;text-align:center;"><div style="font-weight:700;font-size:11px;">'+c[1]+'</div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;">'+c[0]+'</div></div>'; }).join('')+'</div>';
+      return '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;">'+[['Beds','4/5'],['Chairs','1/5'],['Lobby','0']].map(function(c){ return '<div style="border:1px solid var(--line);padding:3px 5px;text-align:center;"><div style="font-weight:700;font-size:var(--text-xs);">'+c[1]+'</div><div style="font-size:var(--text-2xs);color:var(--muted);text-transform:uppercase;">'+c[0]+'</div></div>'; }).join('')+'</div>';
     }
-    if(sk === 'codeTeam') return '<div style="font-size:10px;text-align:left;"><div>Jane Doe — Líder</div><div>John Smith — Compres…</div></div>';
-    if(sk === 'doctorsOnDuty') return '<div style="font-size:10px;text-align:left;"><div>Jane Doe</div><div>John Smith \ud83d\udcf1</div></div>';
+    if(sk === 'codeTeam') return '<div style="font-size:var(--text-2xs);text-align:left;"><div>Jane Doe — Líder</div><div>John Smith — Compres…</div></div>';
+    if(sk === 'doctorsOnDuty') return '<div style="font-size:var(--text-2xs);text-align:left;"><div>Jane Doe</div><div>John Smith \ud83d\udcf1</div></div>';
     return '';
   }
   function renderWidgetSlotPreview(slot){
     return slot.sources.map(function(s, idx){
       var src = sourceByKey(s.key);
-      var label = slot.sources.length > 1 ? '<div style="font-size:8px;font-weight:700;text-transform:uppercase;color:var(--navy);margin-bottom:2px;">'+src.label+'</div>' : '';
+      var label = slot.sources.length > 1 ? '<div style="font-size:var(--text-2xs);font-weight:700;text-transform:uppercase;color:var(--navy);margin-bottom:2px;">'+src.label+'</div>' : '';
       var topRule = idx > 0 ? 'border-top:1px dashed var(--line);padding-top:4px;margin-top:4px;' : '';
       return '<div style="'+topRule+'">'+label+renderMiniSourcePreview(s.key, s.grouping)+'</div>';
     }).join('');
@@ -2050,7 +2120,7 @@ select.control{ padding-right:26px; }
         '<div style="display:flex;gap:6px;"><button type="button" class="btn small" style="color:var(--bad);border-color:var(--bad);" onclick="confirmRemoveWidgetSlot('+i+')">Yes, remove</button>'+
         '<button type="button" class="btn small" onclick="cancelRemoveWidgetSlot()">Cancel</button></div></div>';
     } else if(!s){
-      html += '<div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" style="color:#c4ced8;"><path d="M8 3a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2H9v3a1 1 0 1 1-2 0V9H4a1 1 0 1 1 0-2h3V4a1 1 0 0 1 1-1"/></svg>'+
+      html += '<div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" style="color:var(--muted-soft);" aria-hidden="true"><path d="M8 3a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2H9v3a1 1 0 1 1-2 0V9H4a1 1 0 1 1 0-2h3V4a1 1 0 0 1 1-1"/></svg>'+
         '<div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startWidgetSlotConfig('+i+')">+ Add a widget</button></div>';
     } else {
       html += '<div class="wg-slot-configured"><div class="wg-slot-name">'+s.name+'</div>'+
@@ -2117,7 +2187,7 @@ select.control{ padding-right:26px; }
         var gr = g && src.groupings ? src.groupings.find(function(x){ return x.key === g; }) : null;
         html += '<div class="wg-review-item"><div class="wg-order-btns"><button type="button" onclick="moveWidgetSourceInReview(\''+k+'\',-1)" '+(idx===0?'disabled':'')+'>\u25b2</button><button type="button" onclick="moveWidgetSourceInReview(\''+k+'\',1)" '+(idx===wcSourceKeys.length-1?'disabled':'')+'>\u25bc</button></div><div style="flex:1 1 auto;font-size:var(--text-sm);"><b>'+src.label+'</b>'+(gr && gr.key!=='none' ? ' — '+gr.label : '')+'</div><button type="button" class="btn small tertiary" onclick="removeWidgetSourceInReview(\''+k+'\')">Remove</button></div>';
       });
-      html += '</div></div><div style="flex:0 0 220px;"><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div class="wg-slot-configured" style="border:1px solid var(--line);background:#fff;"><div class="wg-slot-preview">'+renderWidgetSlotPreview({ sources: wcSourceKeys.map(function(k){ return { key:k, grouping: wcGroupings[k] }; }) })+'</div></div></div></div></div>';
+      html += '</div></div><div style="flex:0 0 220px;"><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div class="wg-slot-configured" style="border:1px solid var(--line);background:var(--white);"><div class="wg-slot-preview">'+renderWidgetSlotPreview({ sources: wcSourceKeys.map(function(k){ return { key:k, grouping: wcGroupings[k] }; }) })+'</div></div></div></div></div>';
     }
 
     document.getElementById('widgetConfigModalBody').innerHTML = html;
@@ -2138,7 +2208,7 @@ select.control{ padding-right:26px; }
         '<button type="button" class="btn small" onclick="wcRemoveConfirm=null;renderWidgetLibrary();">Cancel</button></div></div></div>';
     }
     if(!sidePanel.enabled){
-      return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" style="color:#c4ced8;"><path d="M8 3a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2H9v3a1 1 0 1 1-2 0V9H4a1 1 0 1 1 0-2h3V4a1 1 0 0 1 1-1"/></svg><div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startSidePanelConfig()">+ Add side panel</button></div></div>';
+      return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" style="color:var(--muted-soft);" aria-hidden="true"><path d="M8 3a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2H9v3a1 1 0 1 1-2 0V9H4a1 1 0 1 1 0-2h3V4a1 1 0 0 1 1-1"/></svg><div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startSidePanelConfig()">+ Add side panel</button></div></div>';
     }
     var rows = sidePanel.sections.map(function(k){
       var s = sidePanelSectionByKey(k);
@@ -2162,7 +2232,7 @@ select.control{ padding-right:26px; }
         html += '<div class="wg-order-btns"><button type="button" onclick="moveSidePanelSection(\''+k+'\',-1)" '+(idx===0?'disabled':'')+'>\u25b2</button><button type="button" onclick="moveSidePanelSection(\''+k+'\',1)" '+(idx===wcPanelPending.order.length-1?'disabled':'')+'>\u25bc</button></div></div>';
       });
       html += '</div></div>';
-      html += '<div class="field"><label>Preview <span class="hint">sample data — not live, collapsed view</span></label><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div style="width:220px;margin:0 auto;border:1px solid var(--line);background:#fff;">';
+      html += '<div class="field"><label>Preview <span class="hint">sample data — not live, collapsed view</span></label><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div style="width:220px;margin:0 auto;border:1px solid var(--line);background:var(--white);">';
       wcPanelPending.order.filter(function(k){ return wcPanelPending.checked[k]; }).forEach(function(k){
         var s = sidePanelSectionByKey(k);
         html += '<div class="wg-mini-section" style="border:0;border-bottom:1px solid var(--line);">'+s.label+'</div>';
@@ -2809,26 +2879,37 @@ select.control{ padding-right:26px; }
     btn.disabled = !selectedCareSettings.length;
   }
 
-  // Large modal version of Care Setting info — replaces the old always-visible inline block.
-  // Rendered as a real table (rows = selected Care Settings, columns = the same Clinical
-  // Defaults fields) rather than repeated label/value pairs, per the "clean and organized
-  // table" ask.
+  // Info panel version of Care Setting info — one flat card per selected Care Setting. Header
+  // always shows the Sub's own name + Short Name; when that Sub belongs to a Main with real
+  // Subs (i.e. it's not just a solo Main standing in for itself), the Main's Short Name is
+  // also shown, pushed to the right of the same header row.
   function openCareSettingInfoModal(){
     var body = document.getElementById('careSettingInfoModalBody');
     if(body){
-      var rowsHtml = selectedCareSettings.map(function(cs){
+      body.innerHTML = selectedCareSettings.map(function(cs){
         var cfg = careSettingRecord(cs);
         if(!cfg) return '';
         var duration = cfg.duration.value+' '+cfg.duration.unit;
-        var form = cfg.chiefComplaintForm ? '<span class="info-value link">'+cfg.chiefComplaintForm+'</span>' : '—';
-        return '<tr><td>'+cfg.name+' <span class="muted">('+cfg.mainShortName+')</span></td><td>'+cfg.visitCategory+'</td><td>'+duration+'</td><td>'+form+'</td></tr>';
+        var form = cfg.chiefComplaintForm ? '<span class="info-value">'+cfg.chiefComplaintForm+'</span>' : '<span class="info-value muted">—</span>';
+        var hasSub = cfg.shortName !== cfg.mainShortName;
+        var title = '<span>'+cfg.name+' <span class="muted" style="font-weight:400;">('+cfg.shortName+')</span></span>'+
+          (hasSub ? '<span class="muted" style="font-weight:400;">('+cfg.mainShortName+')</span>' : '');
+        return '<div class="cs-info-card">'+
+          '<div class="cs-info-card-head">'+title+'</div>'+
+          '<div class="info-grid">'+
+          '<div class="info-item"><span class="info-label">Default Visit Category</span><span class="info-value">'+cfg.visitCategory+'</span></div>'+
+          '<div class="info-item"><span class="info-label">Duration</span><span class="info-value">'+duration+'</span></div>'+
+          '<div class="info-item"><span class="info-label">Intake Form</span>'+form+'</div>'+
+          '</div></div>';
       }).join('');
-      body.innerHTML = '<table class="history" style="width:100%;"><thead><tr><th>Care Setting</th><th>Default Visit Category</th><th>Duration</th><th>Intake Form</th></tr></thead><tbody>'+rowsHtml+'</tbody></table>';
     }
-    showModalBackdrop('careSettingInfoModalBackdrop');
+    document.querySelectorAll('.modal-backdrop.open').forEach(function(el){ el.classList.remove('open'); });
+    document.getElementById('csInfoBackdrop').classList.add('open');
+    document.getElementById('csInfoPanel').classList.add('open');
   }
   function closeCareSettingInfoModal(){
-    document.getElementById('careSettingInfoModalBackdrop').classList.remove('open');
+    document.getElementById('csInfoBackdrop').classList.remove('open');
+    document.getElementById('csInfoPanel').classList.remove('open');
   }
 
   var selectedCareSettings = [];
@@ -2873,33 +2954,42 @@ select.control{ padding-right:26px; }
     if(!menu) return;
     var mains = Object.keys(CARE_SETTINGS_SOURCE).filter(function(m){ return CARE_SETTINGS_SOURCE[m].status === 'active'; }).sort();
     var html = '';
+    var groupIndex = 0;
     mains.forEach(function(mainName){
       var main = CARE_SETTINGS_SOURCE[mainName];
       var hasRealSubs = main.subs && main.subs.length > 0;
       var subs = subsForMain(mainName).filter(function(s){ return s.status === 'active'; })
         .slice().sort(function(a,b){ return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
       if(!subs.length) return;
+      var groupOpenClass = groupIndex > 0 ? ' cs-group-divided' : '';
+      groupIndex++;
       if(!hasRealSubs){
-        // Care Setting with no Subs — a plain, ungrouped row, no sub-header.
+        // Care Setting with no Subs — a plain, ungrouped row, no sub-header, but still boxed
+        // as its own group so it lines up with the grouped entries around it.
         var only = subs[0];
         var soloChecked = selectedCareSettings.indexOf(only.shortName) > -1 ? ' checked' : '';
-        html += '<label class="picker-option" style="cursor:pointer;display:flex;"><span style="flex:1 1 auto;"><input type="checkbox" value="'+only.shortName+'"'+soloChecked+' onchange="toggleCareSetting(this, \''+only.shortName.replace(/'/g,"\\'")+'\')"> '+only.name+'</span></label>';
+        html += '<div class="cs-group'+groupOpenClass+'">' +
+          '<label class="picker-option" style="cursor:pointer;display:flex;"><span style="display:inline-flex;align-items:center;gap:8px;flex:1 1 auto;"><input type="checkbox" value="'+only.shortName+'"'+soloChecked+' onchange="toggleCareSetting(this, \''+only.shortName.replace(/'/g,"\\'")+'\')">'+only.name+'</span></label>' +
+          '</div>';
       } else {
-        // Care Setting with Subs — grouped under a Main-name sub-header. Checking the Main
-        // selects every active Sub beneath it; each Sub can still be removed independently
-        // afterward without affecting the others.
+        // Care Setting with Subs — grouped under a shaded Main-name header so each Care
+        // Setting reads as its own clearly divided block. Checking the Main selects every
+        // active Sub beneath it; each Sub can still be removed independently afterward
+        // without affecting the others.
         var subShortNames = subs.map(function(s){ return s.shortName; });
         var selectedCount = subShortNames.filter(function(sn){ return selectedCareSettings.indexOf(sn) > -1; }).length;
         var allSelected = selectedCount === subShortNames.length;
         var noneSelected = selectedCount === 0;
-        html += '<div class="picker-group-head" style="padding:7px 10px 3px;margin-top:2px;border-top:1px solid #ebebeb;">' +
-          '<label style="display:flex;align-items:center;cursor:pointer;font-weight:700;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.03em;color:var(--muted);">' +
-          '<span style="display:inline-flex;align-items:center;gap:8px;"><input type="checkbox"'+(allSelected?' checked':'')+(!allSelected && !noneSelected ? ' data-indeterminate="1"' : '')+' onchange="toggleMainCareSetting(\''+mainName.replace(/'/g,"\\'")+'\', this.checked)"> '+mainName+'</span>' +
+        html += '<div class="cs-group'+groupOpenClass+'">' +
+          '<div class="cs-group-head">' +
+          '<label style="display:inline-flex;align-items:center;justify-content:flex-start;gap:8px;cursor:pointer;width:100%;font-weight:400;font-size:var(--text-sm);color:var(--ink);">' +
+          '<input type="checkbox"'+(allSelected?' checked':'')+(!allSelected && !noneSelected ? ' data-indeterminate="1"' : '')+' onchange="toggleMainCareSetting(\''+mainName.replace(/'/g,"\\'")+'\', this.checked)">'+mainName+
           '</label></div>';
         subs.forEach(function(sub){
           var checked = selectedCareSettings.indexOf(sub.shortName) > -1 ? ' checked' : '';
-          html += '<label class="picker-option" style="cursor:pointer;display:flex;padding-left:28px;"><span style="flex:1 1 auto;"><input type="checkbox" value="'+sub.shortName+'"'+checked+' onchange="toggleCareSetting(this, \''+sub.shortName.replace(/'/g,"\\'")+'\')"> '+sub.name+'</span></label>';
+          html += '<label class="picker-option" style="cursor:pointer;display:flex;padding-left:28px;"><span style="display:inline-flex;align-items:center;gap:8px;flex:1 1 auto;"><input type="checkbox" value="'+sub.shortName+'"'+checked+' onchange="toggleCareSetting(this, \''+sub.shortName.replace(/'/g,"\\'")+'\')">'+sub.name+'</span></label>';
         });
+        html += '</div>';
       }
     });
     menu.innerHTML = html;
@@ -3231,6 +3321,10 @@ select.control{ padding-right:26px; }
       // a plain check instead of a text pill.
       return touched ? { cls:'section-state ok icon-only', html:SECTION_CHECK_SVG, ariaLabel:'Complete', empty:false } : { empty:true };
     }
+    // Basic Information doesn't get an in-progress count badge — Board Name/Short Name/Care
+    // Setting are the very first fields anyone sees, so a "2 to go" tag adds no information
+    // they don't already have in front of them; it just clutters the card header.
+    if(key === 'caresetting') return { empty:true };
     if(!touched) return { empty:true };
     if(info.state === 'warning') return { cls:'section-state warn', html:info.issues.length > 1 ? info.issues.length + ' to review' : '1 to review', empty:false };
     return { cls:'section-state progress', html:info.issues.length > 1 ? info.issues.length + ' to go' : (info.issues.length === 1 ? '1 to go' : 'In progress'), empty:false };
@@ -3317,7 +3411,7 @@ select.control{ padding-right:26px; }
   var STATUSES = [];
   var selectedIndex = 0;
 
-  var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+  var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
 
   function renderStatusList(){
     document.getElementById('statusCountLabel').textContent = STATUSES.length + (STATUSES.length===1 ? ' status' : ' statuses');
@@ -3639,7 +3733,7 @@ select.control{ padding-right:26px; }
           '<div class="field"><label for="timerUnitSelect">Unit</label><select class="control" id="timerUnitSelect"'+(s.enableTimer?'':' disabled')+' onchange="updateTimerUnit(this.value)"><option'+(s.timerUnit==='minutes'?' selected':'')+'>minutes</option><option'+(s.timerUnit==='hours'?' selected':'')+'>hours</option></select></div>'+
           '<div class="field"><label for="timerHighlightInput">Highlight patient row</label><label class="check-option"'+(s.enableTimer?'':' style="opacity:.5"')+'><input type="checkbox" id="timerHighlightInput"'+(s.highlightRow?' checked':'')+(s.enableTimer?'':' disabled')+' onchange="updateHighlightRow(this.checked)"> Enabled</label></div>'+
           '<div class="field"><label for="timerAlertInput">Alert Message</label><input class="text" id="timerAlertInput" type="text" value="'+s.alert+'" placeholder="e.g. Patient waiting longer than expected"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertMessage(this.value)"></div>'+
-          '<div class="field"><label for="timerRecipientBtn">Recipient</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="timerRecipientBtn" style="text-align:left;" aria-haspopup="true" aria-expanded="false"'+(s.enableTimer?'':' disabled')+' onclick="toggleTimerRecipientPicker()">Select recipient…</button></div><div class="picker-menu" id="timerRecipientMenu"></div></div></div>'+
+          '<div class="field"><label for="timerRecipientBtn">Recipient</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="timerRecipientBtn" aria-haspopup="true" aria-expanded="false"'+(s.enableTimer?'':' disabled')+' onclick="toggleTimerRecipientPicker()">Select recipient…</button></div><div class="picker-menu" id="timerRecipientMenu"></div></div></div>'+
           '<div class="field"><label for="timerSeveritySelect">Urgency</label><select class="control" id="timerSeveritySelect"'+(s.enableTimer?'':' disabled')+' onchange="updateAlertSeverity(this.value)"><option value="passive"'+(s.alertSeverity==='passive'?' selected':'')+'>No notification &mdash; visible on the board only</option><option value="actionable"'+(s.alertSeverity==='actionable'?' selected':'')+'>Send a notification</option></select></div>'+
         '</div>'+
       '</div>';
@@ -3665,27 +3759,79 @@ select.control{ padding-right:26px; }
     auditModalBoardId = id;
     document.getElementById('auditModalBoardName').textContent = t.name;
     renderAuditHistory();
-    showModalBackdrop('auditModalBackdrop');
+    document.querySelectorAll('.modal-backdrop.open').forEach(function(el){ el.classList.remove('open'); });
+    document.getElementById('auditBackdrop').classList.add('open');
+    document.getElementById('auditPanel').classList.add('open');
   }
   function renderAuditHistory(){
     var t = TRACKERBOARDS.find(function(x){ return x.id === auditModalBoardId; });
     if(!t) return;
-    // Real events logged as they happened this session (see logAuditEvent). Boards seeded at
-    // load time never went through that path, so backfill a single synthetic "Created" row for
-    // them using what we know (t.updated) rather than showing an empty log for existing boards.
+    // seedAuditLog() guarantees every board has a real, board-specific history by the time
+    // this runs; live edits during this session are added on top via logAuditEvent.
     var events = (AUDIT_LOG[t.id] || []).slice();
-    if(!AUDIT_LOG[t.id] || !AUDIT_LOG[t.id].length){
-      events.push({ date: t.updated || '\u2014', event: t.status === 'Active' ? 'Activated' : (t.status === 'Inactive' ? 'Deactivated' : 'Saved as Draft'), detail: '', by: CURRENT_USER });
-    }
     if(t.pendingDraft) events = [{ date:'Just now', event:'Pending changes saved — not yet published', detail:'', by:CURRENT_USER }].concat(events);
     document.getElementById('auditHistoryBody').innerHTML = events.length ? events.map(function(e){
-      return '<tr><td>'+e.date+'</td><td>'+e.event+(e.detail?' <span class="muted">— '+e.detail+'</span>':'')+'</td><td>'+e.by+'</td></tr>';
-    }).join('') : '<tr><td colspan="3" class="muted">No activity yet</td></tr>';
+      return '<div class="audit-entry">'+
+        '<div class="audit-entry-title">'+e.event+(e.detail?' <span class="muted" style="font-weight:400;">— '+e.detail+'</span>':'')+'</div>'+
+        '<div class="audit-entry-line">Date: '+e.date+'</div>'+
+        '<div class="audit-entry-line">By: '+e.by+'</div>'+
+        '</div>';
+    }).join('') : '<p class="muted" style="padding:12px 0;">No activity yet</p>';
   }
   function closeAuditHistory(){
-    document.getElementById('auditModalBackdrop').classList.remove('open');
+    document.getElementById('auditBackdrop').classList.remove('open');
+    document.getElementById('auditPanel').classList.remove('open');
     auditModalBoardId = null;
   }
+
+  function sectionLabel(key){
+    var found = SIDE_PANEL_SECTIONS.find(function(s){ return s.key === key; });
+    return found ? found.label : key;
+  }
+  function parseSeedDate(str){
+    var m = /^(\d{2})\/(\d{2})\/(\d{4}) (\d{1,2}):(\d{2}) (AM|PM)$/.exec(str);
+    if(!m) return new Date();
+    var h = (+m[4] % 12) + (m[6] === 'PM' ? 12 : 0);
+    return new Date(+m[3], +m[1]-1, +m[2], h, +m[5]);
+  }
+  function formatSeedDate(dt){
+    var pad = function(n){ return String(n).length < 2 ? '0'+n : ''+n; };
+    var h = dt.getHours(), ap = h >= 12 ? 'PM' : 'AM', h12 = h % 12 || 12;
+    return pad(dt.getMonth()+1)+'/'+pad(dt.getDate())+'/'+dt.getFullYear()+' '+pad(h12)+':'+pad(dt.getMinutes())+' '+ap;
+  }
+  function daysBefore(str, days){
+    var dt = parseSeedDate(str);
+    dt.setDate(dt.getDate() - days);
+    return formatSeedDate(dt);
+  }
+  function seedAuditLog(){
+    // Backfills a realistic setup history for the boards that shipped pre-built (never went
+    // through the live create flow, so they never earned real logAuditEvent entries) — built
+    // entirely from that board's own record (care settings, widgets, side panel), so each
+    // board's history actually reflects what it's configured with, not templated filler text.
+    TRACKERBOARDS.forEach(function(t){
+      if(AUDIT_LOG[t.id] && AUDIT_LOG[t.id].length) return;
+      var events = [];
+      var widgetNames = (t.widgets && t.widgets.slots) ? t.widgets.slots.filter(Boolean).map(function(s){ return s.name; }) : [];
+      var sidePanelSections = (t.widgets && t.widgets.sidePanel && t.widgets.sidePanel.enabled) ? t.widgets.sidePanel.sections.map(sectionLabel) : [];
+      var step = 0;
+      var back = function(n){ step = n; return daysBefore(t.updated, n); };
+      // Oldest first here; reversed to newest-first before storing (matches how live entries
+      // are added, via unshift, elsewhere in the app).
+      events.push({ date: back(6), event: 'Created as Draft', detail: '', by: t.updatedBy });
+      events.push({ date: back(5), event: 'Care Setting assigned', detail: t.careSettings.join(', '), by: t.updatedBy });
+      if(widgetNames.length) events.push({ date: back(3), event: 'Dashboard widgets configured', detail: widgetNames.join(', '), by: t.updatedBy });
+      if(sidePanelSections.length) events.push({ date: back(3), event: 'Side panel enabled', detail: sidePanelSections.join(', '), by: t.updatedBy });
+      if(t.everActivated){
+        events.push({ date: t.status === 'Inactive' ? back(30) : t.updated, event: 'Activated', detail: '', by: t.updatedBy });
+        if(t.status === 'Inactive') events.push({ date: t.updated, event: 'Deactivated', detail: '', by: t.updatedBy });
+      } else {
+        events.push({ date: t.updated, event: 'Saved as Draft', detail: '', by: t.updatedBy });
+      }
+      AUDIT_LOG[t.id] = events.reverse();
+    });
+  }
+  seedAuditLog();
 
   initDashboardFilters();
   renderDashboard();
@@ -3696,14 +3842,17 @@ select.control{ padding-right:26px; }
   renderSectionNav();
 </script>
 <div class="toast-region" id="toastRegion" role="status" aria-live="polite" aria-atomic="true"></div>
-<div class="modal-backdrop" id="auditModalBackdrop">
-  <div class="modal" id="auditModal" role="dialog" aria-modal="true" aria-label="Audit history">
-    <div class="modal-head"><h2>Activity log &mdash; <span id="auditModalBoardName"></span></h2><button class="icon-btn" type="button" onclick="closeAuditHistory()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
-    <div class="modal-body">
-      <table class="history"><thead><tr><th>Date</th><th>Event</th><th>By</th></tr></thead><tbody id="auditHistoryBody"></tbody></table>
+<div class="backdrop" id="auditBackdrop" onclick="closeAuditHistory()"></div>
+<div class="audit-panel" id="auditPanel" role="dialog" aria-modal="true" aria-label="Activity log">
+  <div class="audit-panel-head">
+    <div>
+      <h2 class="audit-panel-title">Activity Log</h2>
+      <div class="audit-panel-sub" id="auditModalBoardName"></div>
     </div>
-    <div class="modal-foot"><button class="btn" type="button" onclick="closeAuditHistory()">Close</button></div>
+    <button class="icon-btn" type="button" onclick="closeAuditHistory()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
   </div>
+  <div class="audit-panel-body" id="auditHistoryBody"></div>
 </div>
+
 </body>
 </html>
