@@ -662,7 +662,8 @@ select.control{ padding-right:26px; }
         <div class="subsection">
           <h4><label class="switch-heading"><input type="checkbox" id="commentsSectionEnabled" onchange="toggleCommentsSection(this.checked); updateReadiness();"><span class="switch-track"></span><span class="switch-label">Comments</span></label></h4>
           <div class="widget-body" id="commentsBody" style="display:none;">
-            <div class="field" id="commentCharLimitField"><label for="commentCharLimit">Character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">20 to 280 characters</span></span></div>
+            <div class="field" id="commentCharLimitField"><label for="commentCharLimit">Character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"></div>
+
           </div>
         </div>
 
@@ -2063,10 +2064,10 @@ select.control{ padding-right:26px; }
     var html = '';
 
     // 1. Name — first field, typed up front.
-    html += '<div class="field full"><label>Widget name <span style="color:var(--bad)">*</span></label><input type="text" class="text" style="width:100%;" value="'+wcName.replace(/"/g,'&quot;')+'" oninput="onWidgetNameInput(this.value)" placeholder="e.g. ICU Census"></div>';
+    html += '<div class="field full"><label><span>Widget name <span style="color:var(--bad)">*</span></span></label><input type="text" class="text" style="width:100%;" value="'+wcName.replace(/"/g,'&quot;')+'" oninput="onWidgetNameInput(this.value)" placeholder="e.g. ICU Census"></div>';
 
     // 2. Type of widget — 3 radio cards.
-    html += '<div class="field full" style="margin-top:16px;"><label>Type of widget <span style="color:var(--bad)">*</span></label>'+
+    html += '<div class="field full" style="margin-top:16px;"><label><span>Type of widget <span style="color:var(--bad)">*</span></span></label>'+
       '<div class="wg-shape-grid">'+
       Object.keys(SHAPES).map(function(key){
         var t = SHAPES[key]; var sel = wcShape === key;
@@ -2080,7 +2081,7 @@ select.control{ padding-right:26px; }
     } else {
       // 3. Data source — single-select dropdown, filtered to sources that support this type.
       var matching = DATA_SOURCES.filter(function(s){ return s.shapes.indexOf(wcShape) > -1 && !s.isStub; });
-      html += '<div class="field full" style="margin-top:16px;"><label>Data source <span style="color:var(--bad)">*</span></label>'+
+      html += '<div class="field full" style="margin-top:16px;"><label><span>Data source <span style="color:var(--bad)">*</span></span></label>'+
         '<select class="control" style="width:100%;" onchange="pickWidgetSource(this.value)">'+
         '<option value="">Select a data source…</option>'+
         matching.map(function(s){ return '<option value="'+s.key+'"'+(wcSource===s.key?' selected':'')+'>'+s.label+'</option>'; }).join('')+
@@ -2091,7 +2092,7 @@ select.control{ padding-right:26px; }
       var groupingOpts = widgetSlotGroupingOptions();
       if(wcSource && groupingOpts.length > 1){
         // 4. Group by — only rendered when there's an actual choice to make.
-        html += '<div class="field full" style="margin-top:16px;"><label>Group by <span style="color:var(--bad)">*</span></label>'+
+        html += '<div class="field full" style="margin-top:16px;"><label><span>Group by <span style="color:var(--bad)">*</span></span></label>'+
           '<select class="control" style="width:100%;" onchange="pickWidgetGrouping(this.value)">'+
           '<option value="">Select a grouping…</option>'+
           groupingOpts.map(function(g){ return '<option value="'+g.key+'"'+(wcGrouping===g.key?' selected':'')+'>'+g.label+'</option>'; }).join('')+
@@ -2140,8 +2141,8 @@ select.control{ padding-right:26px; }
   // not a themed render, so there's nothing a mock preview would verify that the picker itself
   // doesn't already show.
   function renderSidePanelEditor(){
-    var html = '<div class="field full"><label>Side panel name <span style="color:var(--bad)">*</span></label><input type="text" class="text" style="width:100%;" value="'+wcPanelPending.name.replace(/"/g,'&quot;')+'" oninput="onSidePanelNameInput(this.value)" placeholder="e.g. Side Panel"></div>';
-    html += '<div class="field full" style="margin-top:16px;"><label for="sidePanelItemsBtn">Sections to show <span style="color:var(--bad)">*</span></label>'+
+    var html = '<div class="field full"><label><span>Side panel name <span style="color:var(--bad)">*</span></span></label><input type="text" class="text" style="width:100%;" value="'+wcPanelPending.name.replace(/"/g,'&quot;')+'" oninput="onSidePanelNameInput(this.value)" placeholder="e.g. Side Panel"></div>';
+    html += '<div class="field full" style="margin-top:16px;"><label for="sidePanelItemsBtn"><span>Sections to show <span style="color:var(--bad)">*</span></span></label>'+
       '<div class="picker"><div class="picker-input"><button type="button" class="text" id="sidePanelItemsBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleSidePanelItemsPicker()"></button></div><div class="picker-menu" id="sidePanelItemsMenu"></div></div></div>';
     document.getElementById('sidePanelEditorBody').innerHTML = html;
     updateSidePanelItemsButton();
