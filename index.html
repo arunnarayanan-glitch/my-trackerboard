@@ -227,7 +227,7 @@ button,input,select,textarea{font:inherit;color:inherit}button{border:0}button:f
    they need to be above the drawer's own z-index too — otherwise the drawer underneath stays
    clickable/editable while the panel is open, since the shared .backdrop class alone only
    reaches --z-backdrop (below the drawer). */
-#csInfoBackdrop, #statusEditBackdrop{ z-index:var(--z-modal); }
+#csInfoBackdrop, #statusEditBackdrop, #widgetSlotEditBackdrop, #sidePanelEditBackdrop{ z-index:var(--z-modal); }
 .side-panel-70{width:calc(60vw * 0.7);min-width:340px;max-width:640px}
 @media(max-width:980px){.side-panel-70{width:60vw}}
 @media(max-width:760px){.side-panel-70{width:100vw;max-width:none}}
@@ -308,6 +308,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .drag-handle:active{ cursor:grabbing; }
 .action-position-tag{ flex:0 0 auto; padding:2px 7px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; white-space:nowrap; }
 .action-position-tag.inline{ background:var(--blue-soft); color:var(--navy2); }
+.action-position-tag.menu{ background:var(--neutral); color:var(--muted); }
+.action-divider{ display:flex; align-items:center; justify-content:center; gap:8px; margin:4px 0; padding:3px 8px; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line); font-size:var(--text-2xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); background:var(--surface-tint); }
 .signal-color-input{ flex:0 0 auto; width:30px; height:26px; padding:1px; border:1px solid var(--line); border-radius:var(--radius); cursor:pointer; background:var(--white); }
 .signal-color-input:disabled{ opacity:.5; cursor:default; }
 .signal-preview-badge{ display:inline-block; max-width:100%; padding:2px 8px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; background:var(--warn-bg); color:var(--warn); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -658,16 +660,9 @@ select.control{ padding-right:26px; }
         </div>
 
         <div class="subsection">
-          <h4><label class="switch-heading"><input type="checkbox" id="commentsSectionEnabled" onchange="toggleCommentsSection(this.checked); updateReadiness();"><span class="switch-track"></span><span class="switch-label">Operational comments</span></label></h4>
+          <h4><label class="switch-heading"><input type="checkbox" id="commentsSectionEnabled" onchange="toggleCommentsSection(this.checked); updateReadiness();"><span class="switch-track"></span><span class="switch-label">Comments</span></label></h4>
           <div class="widget-body" id="commentsBody" style="display:none;">
-            <p>Short, non-clinical coordination updates. Not part of the clinical record.</p>
-            <div class="comments-grid">
-              <label class="check-option"><input type="checkbox" id="predefinedCommentsEnabled" checked onchange="togglePredefinedCommentsVisibility(this.checked); updateReadiness();"> Predefined comments</label>
-              <div class="field" id="predefinedCommentsCategoriesField"><label for="commentCategoriesBtn">Categories</label><div class="picker"><div class="picker-input"><button type="button" class="text" id="commentCategoriesBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleCommentCategoriesPicker()">Select categories…</button></div><div class="picker-menu" id="commentCategoriesMenu"></div></div></div>
-              <label class="check-option"><input type="checkbox" id="freeTextCommentsEnabled" checked onchange="toggleFreeTextCommentsVisibility(this.checked); updateReadiness();"> Free text</label>
-              <div class="field" id="commentCharLimitField"><label for="commentCharLimit">Character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">20&ndash;280</span></span></div>
-            </div>
-            <p class="field-error" id="commentsBothOffWarning" style="display:none;">Operational comments is on, but both Predefined comments and Free text are off — turn on at least one, or turn off Operational comments.</p>
+            <div class="field" id="commentCharLimitField"><label for="commentCharLimit">Character limit</label><input class="text" type="number" id="commentCharLimit" value="140" min="20" max="280" onchange="clampCommentLimit(this)"><span class="short-meta"><span class="help">20 to 280 characters</span></span></div>
           </div>
         </div>
 
@@ -819,20 +814,26 @@ select.control{ padding-right:26px; }
 </div>
 
 
-<div class="modal-backdrop" id="widgetConfigModalBackdrop">
-  <div class="modal large" role="dialog" aria-modal="true" aria-label="Configure widget">
-    <div class="modal-head"><h2 id="widgetConfigModalTitle">Configuring Widget</h2><button class="icon-btn" type="button" onclick="requestCancelWidgetSlotConfig()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
-    <div class="modal-body" id="widgetConfigModalBody"></div>
-    <div class="modal-foot" id="widgetConfigModalFoot"></div>
+<div class="backdrop" id="widgetSlotEditBackdrop" onclick="requestCancelWidgetSlotConfig()"></div>
+<div class="widget-slot-edit-panel side-panel side-panel-stacked side-panel-70" id="widgetSlotEditPanel" role="dialog" aria-modal="true" aria-label="Configure widget">
+  <div class="side-panel-head">
+    <div>
+      <h2 class="side-panel-title" id="widgetSlotEditorTitle">Configure Widget</h2>
+    </div>
+    <button class="icon-btn" type="button" onclick="requestCancelWidgetSlotConfig()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
   </div>
+  <div class="side-panel-body" id="widgetSlotEditorBody"></div>
+  <div class="modal-foot" id="widgetSlotEditorFoot"></div>
 </div>
 
-<div class="modal-backdrop" id="sidePanelConfigModalBackdrop">
-  <div class="modal" role="dialog" aria-modal="true" aria-label="Configure side panel">
-    <div class="modal-head"><h2>Configuring Side Panel</h2><button class="icon-btn" type="button" onclick="requestCancelSidePanelConfig()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button></div>
-    <div class="modal-body" id="sidePanelConfigModalBody"></div>
-    <div class="modal-foot" id="sidePanelConfigModalFoot"></div>
+<div class="backdrop" id="sidePanelEditBackdrop" onclick="requestCancelSidePanelConfig()"></div>
+<div class="side-panel-widget-edit-panel side-panel side-panel-stacked side-panel-70" id="sidePanelEditPanel" role="dialog" aria-modal="true" aria-label="Configure side panel">
+  <div class="side-panel-head">
+    <h2 class="side-panel-title">Side Panel</h2>
+    <button class="icon-btn" type="button" onclick="requestCancelSidePanelConfig()" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg></button>
   </div>
+  <div class="side-panel-body" id="sidePanelEditorBody"></div>
+  <div class="modal-foot" id="sidePanelEditorFoot"></div>
 </div>
 
 <script>
@@ -869,14 +870,14 @@ select.control{ padding-right:26px; }
       '</div>';
     }).join('');
 
-    if(!sidePanel.enabled || !sidePanel.sections.length){
+    if(!sidePanel.sections.length){
       mainRow.style.gridTemplateColumns = '1fr';
       panelCol.style.display = 'none';
       panelCol.innerHTML = '';
     } else {
       mainRow.style.gridTemplateColumns = '1fr 220px';
       panelCol.style.display = '';
-      panelCol.innerHTML = sidePanel.sections.map(function(k, i){
+      panelCol.innerHTML = '<div style="padding:9px 10px;border-bottom:1px solid var(--line);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;color:var(--navy);">'+sidePanel.name+'</div>'+sidePanel.sections.map(function(k, i){
         var s = sidePanelSectionByKey(k);
         var isLast = i === sidePanel.sections.length - 1;
         return '<div style="padding:9px 10px;'+(isLast?'':'border-bottom:1px solid var(--line);')+'font-size:var(--text-sm);display:flex;justify-content:space-between;"><span>'+(s?s.label:k)+'</span><span class="muted">0</span></div>';
@@ -1484,11 +1485,11 @@ select.control{ padding-right:26px; }
     // an ophthalmology board the way it does to IP or ED).
     { name:'Ophthalmology Trackerboard', id:'OPTT001', shortName:'OPTH', careSettings:['Opth'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/12/2026 03:20 PM', updatedBy:'Michael Reynolds', status:'Inactive', activePatients:0, dependents:0,
       widgets:{ slots:[
-        { name:'Total Patients', shape:'number', sources:[{ key:'totalPatients', grouping:'none' }] },
+        { name:'Total Patients', shape:'number', source:'totalPatients', grouping:'none' },
         null,
-        { name:'Code Team', shape:'list', sources:[{ key:'codeTeam', grouping:null }] },
-        { name:'Doctors on Duty', shape:'list', sources:[{ key:'doctorsOnDuty', grouping:null }] }
-      ], sidePanel:{ enabled:true, sections:['meds','labRadiology'] } } },
+        { name:'Code Team', shape:'list', source:'codeTeam', grouping:null },
+        { name:'Doctors on Duty', shape:'list', source:'doctorsOnDuty', grouping:null }
+      ], sidePanel:{ name:'Side Panel', sections:['meds','labRadiology'] } } },
     // ED, IP, and OR are the three real, currently-Active boards — each gets the full setup
     // matching the actual pattern confirmed from real board screenshots: a patient-count tile
     // grouped the way that board type naturally groups (by Severity for ED, by Sub Care Setting
@@ -1496,25 +1497,25 @@ select.control{ padding-right:26px; }
     // 4-section Side Panel.
     { name:'Emergency Department Trackerboard', id:'EDT001', shortName:'ED', careSettings:['ED'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/24/2026 09:15 AM', updatedBy:'James Weaver', status:'Active', activePatients:4, dependents:0,
       widgets:{ slots:[
-        { name:'Patients by Severity', shape:'breakdown', sources:[{ key:'totalPatients', grouping:'severity' }] },
-        { name:'Resource Availability', shape:'breakdown', sources:[{ key:'resourceAvailability', grouping:'resource' }] },
-        { name:'Code Team', shape:'list', sources:[{ key:'codeTeam', grouping:null }] },
-        { name:'Doctors on Duty', shape:'list', sources:[{ key:'doctorsOnDuty', grouping:null }] }
-      ], sidePanel:{ enabled:true, sections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } } },
+        { name:'Patients by Severity', shape:'breakdown', source:'totalPatients', grouping:'severity' },
+        { name:'Resource Availability', shape:'breakdown', source:'resourceAvailability', grouping:'resource' },
+        { name:'Code Team', shape:'list', source:'codeTeam', grouping:null },
+        { name:'Doctors on Duty', shape:'list', source:'doctorsOnDuty', grouping:null }
+      ], sidePanel:{ name:'Side Panel', sections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } } },
     { name:'Inpatient Trackerboard', id:'IPT001', shortName:'IP', careSettings:['ICU','Neo','Hosp','Maternity'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/11/2026 04:22 PM', updatedBy:'Sarah Mitchell', status:'Active', activePatients:9, dependents:0,
       widgets:{ slots:[
-        { name:'Patients by Sub Care Setting', shape:'breakdown', sources:[{ key:'totalPatients', grouping:'subcs' }] },
-        { name:'Capacity by Sub Care Setting', shape:'breakdown', sources:[{ key:'capacity', grouping:'subcs' }] },
-        { name:'Code Team', shape:'list', sources:[{ key:'codeTeam', grouping:null }] },
-        { name:'Doctors on Duty', shape:'list', sources:[{ key:'doctorsOnDuty', grouping:null }] }
-      ], sidePanel:{ enabled:true, sections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } } },
+        { name:'Patients by Sub Care Setting', shape:'breakdown', source:'totalPatients', grouping:'subcs' },
+        { name:'Capacity by Sub Care Setting', shape:'breakdown', source:'capacity', grouping:'subcs' },
+        { name:'Code Team', shape:'list', source:'codeTeam', grouping:null },
+        { name:'Doctors on Duty', shape:'list', source:'doctorsOnDuty', grouping:null }
+      ], sidePanel:{ name:'Side Panel', sections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } } },
     { name:'Operating Room Trackerboard', id:'ORT001', shortName:'OR', careSettings:['OR'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/22/2026 10:50 AM', updatedBy:'James Weaver', status:'Active', activePatients:3, dependents:0,
       widgets:{ slots:[
-        { name:'Patients by Workflow Status', shape:'breakdown', sources:[{ key:'totalPatients', grouping:'status' }] },
-        { name:'Capacity by Workflow Status', shape:'breakdown', sources:[{ key:'capacity', grouping:'status' }] },
-        { name:'Code Team', shape:'list', sources:[{ key:'codeTeam', grouping:null }] },
-        { name:'Doctors on Duty', shape:'list', sources:[{ key:'doctorsOnDuty', grouping:null }] }
-      ], sidePanel:{ enabled:true, sections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } } }
+        { name:'Patients by Workflow Status', shape:'breakdown', source:'totalPatients', grouping:'status' },
+        { name:'Capacity by Workflow Status', shape:'breakdown', source:'capacity', grouping:'status' },
+        { name:'Code Team', shape:'list', source:'codeTeam', grouping:null },
+        { name:'Doctors on Duty', shape:'list', source:'doctorsOnDuty', grouping:null }
+      ], sidePanel:{ name:'Side Panel', sections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } } }
   ];
 
   function allCareSettingsUsed(){
@@ -1856,46 +1857,33 @@ select.control{ padding-right:26px; }
 
   // ---- persisted-while-editing state ----
   var topSlots = [null, null, null, null];
-  var sidePanel = { enabled:false, sections:[] };
+  var sidePanel = { name:'Side Panel', sections:[] };
   function defaultTopSlots(){ return [null, null, null, null]; }
-  function defaultSidePanel(){ return { enabled:false, sections:['awaitingApprovals','meds','labRadiology'] }; }
+  function defaultSidePanel(){ return { name:'Side Panel', sections:[] }; }
 
   // ---- transient "currently configuring" state ----
   var wcSlot = null;        // 0-3 for a Top Strip slot, 'panel' for the Side Panel, else null
-  var wcStep = 1;
   var wcShape = null;
-  var wcSourceKeys = [];
-  var wcGroupings = {};
+  var wcSource = null;      // single data source key, or null
+  var wcGrouping = null;    // that source's grouping choice, or null
   var wcName = '';
-  var wcNameEdited = false;
-  var wcCatalogFilter = '';
   var wcPanelPending = null;
   var wcRemoveConfirm = null; // a slot index, 'panel', or null
 
-  function suggestedWidgetName(){
-    var labels = wcSourceKeys.map(function(k){
-      var src = sourceByKey(k);
-      var g = wcGroupings[k];
-      var gr = g && src.groupings ? src.groupings.find(function(x){ return x.key === g; }) : null;
-      return gr && gr.key !== 'none' ? src.label + ' ' + gr.label.replace('By ', 'by ') : src.label;
-    });
-    return labels.join(' + ');
+  function widgetSlotGroupingOptions(){
+    if(!wcShape || !wcSource) return [];
+    var src = sourceByKey(wcSource);
+    if(!src.groupings) return [];
+    return src.groupings.filter(function(g){ return g.onlyFor === wcShape; });
   }
-  function widgetSlotSourceNeedsGroupingStep(){
-    return wcSourceKeys.some(function(k){
-      var src = sourceByKey(k);
-      if(!src.groupings) return false;
-      return src.groupings.filter(function(g){ return g.onlyFor === wcShape; }).length > 1;
-    });
+  function canSaveWidgetSlot(){
+    var opts = widgetSlotGroupingOptions();
+    return !!(wcName.trim() && wcShape && wcSource && (opts.length <= 1 || wcGrouping));
   }
-  function widgetSlotAllGroupingsChosen(){
-    return wcSourceKeys.every(function(k){
-      var src = sourceByKey(k);
-      if(!src.groupings) return true;
-      var opts = src.groupings.filter(function(g){ return g.onlyFor === wcShape; });
-      if(opts.length <= 1) return true;
-      return !!wcGroupings[k];
-    });
+  function widgetSlotEditDirty(){
+    var existing = topSlots[wcSlot];
+    if(!existing) return !!(wcShape || wcSource || wcName.trim());
+    return existing.shape !== wcShape || existing.source !== wcSource || existing.grouping !== wcGrouping || wcName.trim() !== existing.name;
   }
 
   function startWidgetSlotConfig(i){
@@ -1903,90 +1891,49 @@ select.control{ padding-right:26px; }
     wcRemoveConfirm = null;
     var existing = topSlots[i];
     wcShape = existing ? existing.shape : null;
-    wcSourceKeys = existing ? existing.sources.map(function(s){ return s.key; }) : [];
-    wcGroupings = {};
-    if(existing) existing.sources.forEach(function(s){ if(s.grouping) wcGroupings[s.key] = s.grouping; });
+    wcSource = existing ? existing.source : null;
+    wcGrouping = existing ? existing.grouping : null;
     wcName = existing ? existing.name : '';
-    wcNameEdited = !!existing;
-    wcCatalogFilter = '';
-    wcStep = existing ? 4 : 1;
-    showModalBackdrop('widgetConfigModalBackdrop');
-    renderWidgetConfigModalContent();
+    document.querySelectorAll('.modal-backdrop.open').forEach(function(el){ el.classList.remove('open'); });
+    document.getElementById('widgetSlotEditBackdrop').classList.add('open');
+    document.getElementById('widgetSlotEditPanel').classList.add('open');
+    renderWidgetSlotEditor();
   }
-  function closeWidgetConfigModal(){
-    document.getElementById('widgetConfigModalBackdrop').classList.remove('open');
+  function closeWidgetSlotEditor(){
+    document.getElementById('widgetSlotEditBackdrop').classList.remove('open');
+    document.getElementById('widgetSlotEditPanel').classList.remove('open');
     wcSlot = null;
   }
-  function cancelWidgetSlotConfig(){ closeWidgetConfigModal(); }
   function requestCancelWidgetSlotConfig(){
-    if(wcStep > 1){
+    if(widgetSlotEditDirty()){
       openConfirmModal('Discard this widget\'s setup?', 'What you\'ve picked so far for this slot will be lost.', function(){
-        closeWidgetConfigModal();
-      }, { confirmLabel:'Discard', danger:true, onCancel:function(){ showModalBackdrop('widgetConfigModalBackdrop'); } });
+        closeWidgetSlotEditor();
+      }, { confirmLabel:'Discard', danger:true });
     } else {
-      closeWidgetConfigModal();
+      closeWidgetSlotEditor();
     }
   }
-  function pickWidgetShape(key){ wcShape = key; renderWidgetConfigModalContent(); }
-  function continueFromWidgetShape(){
-    if(!wcShape) return;
-    wcSourceKeys = []; wcGroupings = {};
-    wcStep = 2;
-    renderWidgetConfigModalContent();
+  // Changing the shape can invalidate the current source (a source only supports certain
+  // shapes) — drop it rather than leave the form pointing at an option that's no longer on the
+  // list. Grouping always resets with a shape change since grouping options are shape-specific.
+  function pickWidgetShape(key){
+    wcShape = key;
+    if(wcSource && sourceByKey(wcSource).shapes.indexOf(wcShape) === -1) wcSource = null;
+    wcGrouping = null;
+    renderWidgetSlotEditor();
   }
-  function toggleWidgetSource(key){
-    if(key === '__custom_stub') return;
-    var idx = wcSourceKeys.indexOf(key);
-    if(idx > -1){ wcSourceKeys.splice(idx, 1); delete wcGroupings[key]; }
-    else { wcSourceKeys.push(key); }
-    renderWidgetConfigModalContent();
+  function pickWidgetSource(key){
+    wcSource = key || null;
+    var opts = widgetSlotGroupingOptions();
+    wcGrouping = opts.length === 1 ? opts[0].key : null;
+    renderWidgetSlotEditor();
   }
-  function updateWidgetCatalogFilter(v){ wcCatalogFilter = v; renderWidgetConfigModalContent(); }
-  function continueFromWidgetSources(){
-    if(!wcSourceKeys.length) return;
-    wcSourceKeys.forEach(function(k){
-      var src = sourceByKey(k);
-      if(src.groupings){
-        var opts = src.groupings.filter(function(g){ return g.onlyFor === wcShape; });
-        if(opts.length === 1) wcGroupings[k] = opts[0].key;
-      }
-    });
-    wcStep = widgetSlotSourceNeedsGroupingStep() ? 3 : 4;
-    if(wcStep === 4 && !wcNameEdited) wcName = suggestedWidgetName();
-    renderWidgetConfigModalContent();
-  }
-  function pickWidgetGrouping(key, g){ wcGroupings[key] = g; renderWidgetConfigModalContent(); }
-  function continueFromWidgetGroupings(){
-    if(!widgetSlotAllGroupingsChosen()) return;
-    wcStep = 4;
-    if(!wcNameEdited) wcName = suggestedWidgetName();
-    renderWidgetConfigModalContent();
-  }
-  function removeWidgetSourceInReview(key){
-    var idx = wcSourceKeys.indexOf(key);
-    if(idx > -1) wcSourceKeys.splice(idx, 1);
-    delete wcGroupings[key];
-    if(!wcSourceKeys.length) wcStep = 2;
-    renderWidgetConfigModalContent();
-  }
-  function moveWidgetSourceInReview(key, dir){
-    var idx = wcSourceKeys.indexOf(key);
-    var swap = idx + dir;
-    if(swap < 0 || swap >= wcSourceKeys.length) return;
-    var tmp = wcSourceKeys[idx]; wcSourceKeys[idx] = wcSourceKeys[swap]; wcSourceKeys[swap] = tmp;
-    renderWidgetConfigModalContent();
-  }
-  function onWidgetNameInput(v){ wcName = v; wcNameEdited = true; }
-  function goToWidgetStep(n){ wcStep = n; renderWidgetConfigModalContent(); }
+  function pickWidgetGrouping(g){ wcGrouping = g; renderWidgetSlotEditor(); }
+  function onWidgetNameInput(v){ wcName = v; document.getElementById('widgetSlotEditorTitle').textContent = v.trim() || ('Widget ' + (wcSlot+1)); }
   function saveWidgetSlot(){
-    if(!wcName.trim() || !wcSourceKeys.length) return;
-    topSlots[wcSlot] = {
-      name: wcName.trim(),
-      shape: wcShape,
-      sources: wcSourceKeys.map(function(k){ return { key:k, grouping: wcGroupings[k] || null }; })
-    };
-    document.getElementById('widgetConfigModalBackdrop').classList.remove('open');
-    wcSlot = null;
+    if(!canSaveWidgetSlot()) return;
+    topSlots[wcSlot] = { name: wcName.trim(), shape: wcShape, source: wcSource, grouping: wcGrouping || null };
+    closeWidgetSlotEditor();
     renderWidgetLibrary();
     updateReadiness();
   }
@@ -1999,73 +1946,55 @@ select.control{ padding-right:26px; }
     updateReadiness();
   }
 
+
   // ---- Side Panel ----
   function startSidePanelConfig(){
-    if(sidePanel.enabled){
-      var order = SIDE_PANEL_SECTIONS.map(function(s){ return s.key; }).slice().sort(function(a,b){
-        var ai = sidePanel.sections.indexOf(a), bi = sidePanel.sections.indexOf(b);
-        if(ai === -1 && bi === -1) return 0;
-        if(ai === -1) return 1;
-        if(bi === -1) return -1;
-        return ai - bi;
-      });
-      var checked = {};
-      SIDE_PANEL_SECTIONS.forEach(function(s){ checked[s.key] = sidePanel.sections.indexOf(s.key) > -1; });
-      wcPanelPending = { enabled:true, order:order, checked:checked };
-    } else {
-      wcPanelPending = {
-        enabled:true,
-        order: SIDE_PANEL_SECTIONS.map(function(s){ return s.key; }),
-        checked: { awaitingApprovals:true, meds:true, rejectedMeds:false, labRadiology:true }
-      };
-    }
+    var checked = {};
+    SIDE_PANEL_SECTIONS.forEach(function(s){ checked[s.key] = sidePanel.sections.indexOf(s.key) > -1; });
+    wcPanelPending = { name: sidePanel.name || 'Side Panel', checked: checked };
     wcSlot = 'panel';
-    showModalBackdrop('sidePanelConfigModalBackdrop');
-    renderSidePanelConfigModalContent();
+    document.querySelectorAll('.modal-backdrop.open').forEach(function(el){ el.classList.remove('open'); });
+    document.getElementById('sidePanelEditBackdrop').classList.add('open');
+    document.getElementById('sidePanelEditPanel').classList.add('open');
+    renderSidePanelEditor();
   }
-  function closeSidePanelConfigModal(){
-    document.getElementById('sidePanelConfigModalBackdrop').classList.remove('open');
+  function closeSidePanelEditor(){
+    document.getElementById('sidePanelEditBackdrop').classList.remove('open');
+    document.getElementById('sidePanelEditPanel').classList.remove('open');
     wcSlot = null;
     wcPanelPending = null;
   }
-  function cancelSidePanelConfig(){ closeSidePanelConfigModal(); }
+  function sidePanelPendingSections(){
+    return SIDE_PANEL_SECTIONS.filter(function(s){ return wcPanelPending.checked[s.key]; }).map(function(s){ return s.key; });
+  }
+  function sidePanelEditDirty(){
+    var before = { name: sidePanel.name, sections: sidePanel.sections };
+    var after = { name: wcPanelPending.name.trim(), sections: sidePanelPendingSections() };
+    return JSON.stringify(before) !== JSON.stringify(after);
+  }
   function requestCancelSidePanelConfig(){
-    openConfirmModal('Discard side panel changes?', 'Your changes to the side panel setup will be lost.', function(){
-      closeSidePanelConfigModal();
-    }, { confirmLabel:'Discard', danger:true, onCancel:function(){ showModalBackdrop('sidePanelConfigModalBackdrop'); } });
+    if(sidePanelEditDirty()){
+      openConfirmModal('Discard side panel changes?', 'Your changes to the side panel setup will be lost.', function(){
+        closeSidePanelEditor();
+      }, { confirmLabel:'Discard', danger:true });
+    } else {
+      closeSidePanelEditor();
+    }
   }
-  function toggleSidePanelEnabled(){ wcPanelPending.enabled = !wcPanelPending.enabled; renderSidePanelConfigModalContent(); }
-  function sidePanelCheckedCount(){ return wcPanelPending.order.filter(function(k){ return wcPanelPending.checked[k]; }).length; }
+  function onSidePanelNameInput(v){ wcPanelPending.name = v; updateSidePanelFooter(); }
   function toggleSidePanelSection(key){
-    if(wcPanelPending.checked[key] && sidePanelCheckedCount() <= 1) return;
     wcPanelPending.checked[key] = !wcPanelPending.checked[key];
-    renderSidePanelConfigModalContent();
-  }
-  function moveSidePanelSection(key, dir){
-    var idx = wcPanelPending.order.indexOf(key);
-    var swap = idx + dir;
-    if(swap < 0 || swap >= wcPanelPending.order.length) return;
-    var tmp = wcPanelPending.order[idx]; wcPanelPending.order[idx] = wcPanelPending.order[swap]; wcPanelPending.order[swap] = tmp;
-    renderSidePanelConfigModalContent();
+    renderSidePanelItemsMenu();
+    updateSidePanelItemsButton();
+    updateSidePanelFooter();
   }
   function saveSidePanelConfig(){
-    if(wcPanelPending.enabled && sidePanelCheckedCount() < 1) return;
-    sidePanel = {
-      enabled: wcPanelPending.enabled,
-      sections: wcPanelPending.enabled ? wcPanelPending.order.filter(function(k){ return wcPanelPending.checked[k]; }) : []
-    };
-    document.getElementById('sidePanelConfigModalBackdrop').classList.remove('open');
-    wcSlot = null;
-    wcPanelPending = null;
+    var sections = sidePanelPendingSections();
+    if(sections.length && !wcPanelPending.name.trim()) return;
+    sidePanel = { name: wcPanelPending.name.trim() || 'Side Panel', sections: sections };
+    closeSidePanelEditor();
     renderWidgetLibrary();
     updateReadiness();
-  }
-  function requestTurnOffSidePanel(){
-    openConfirmModal('Turn off the side panel?', 'It will no longer appear on this board.', function(){
-      sidePanel = { enabled:false, sections:[] };
-      renderWidgetLibrary();
-      updateReadiness();
-    }, { confirmLabel:'Turn off', danger:true });
   }
 
   // ---- mini sample-data previews (illustrative only, never live, deliberately generic — see
@@ -2098,12 +2027,7 @@ select.control{ padding-right:26px; }
     return '';
   }
   function renderWidgetSlotPreview(slot){
-    return slot.sources.map(function(s, idx){
-      var src = sourceByKey(s.key);
-      var label = slot.sources.length > 1 ? '<div style="font-size:var(--text-2xs);font-weight:700;text-transform:uppercase;color:var(--navy);margin-bottom:2px;">'+src.label+'</div>' : '';
-      var topRule = idx > 0 ? 'border-top:1px dashed var(--line);padding-top:4px;margin-top:4px;' : '';
-      return '<div style="'+topRule+'">'+label+renderMiniSourcePreview(s.key, s.grouping)+'</div>';
-    }).join('');
+    return renderMiniSourcePreview(slot.source, slot.grouping);
   }
 
   function renderTopSlotCard(i){
@@ -2114,8 +2038,8 @@ select.control{ padding-right:26px; }
         '<div style="display:flex;gap:6px;"><button type="button" class="btn small" style="color:var(--bad);border-color:var(--bad);" onclick="confirmRemoveWidgetSlot('+i+')">Yes, remove</button>'+
         '<button type="button" class="btn small" onclick="cancelRemoveWidgetSlot()">Cancel</button></div></div>';
     } else if(!s){
-      html += '<div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" style="color:var(--muted-soft);" aria-hidden="true"><path d="M8 3a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2H9v3a1 1 0 1 1-2 0V9H4a1 1 0 1 1 0-2h3V4a1 1 0 0 1 1-1"/></svg>'+
-        '<div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startWidgetSlotConfig('+i+')">+ Add a widget</button></div>';
+      html += '<div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" style="color:var(--muted-soft);" aria-hidden="true"><line x1="3" y1="3" x2="3" y2="13"/><circle cx="3" cy="6.5" r="1.4"/><line x1="8" y1="3" x2="8" y2="13"/><circle cx="8" cy="9.5" r="1.4"/><line x1="13" y1="3" x2="13" y2="13"/><circle cx="13" cy="5.5" r="1.4"/></svg>'+
+        '<div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startWidgetSlotConfig('+i+')">Configure</button></div>';
     } else {
       html += '<div class="wg-slot-configured"><div class="wg-slot-name">'+s.name+'</div>'+
         '<div class="wg-slot-preview">'+renderWidgetSlotPreview(s)+'</div>'+
@@ -2126,122 +2050,133 @@ select.control{ padding-right:26px; }
     return html;
   }
 
-  function renderWidgetConfigModalContent(){
+  // Single dynamic form, one continuous scroll, no step gating: picking a shape reveals the
+  // Single dynamic form, one continuous scroll, no step gating: Name, Type, Data source,
+  // Group by (only when the chosen source actually has more than one grouping option for the
+  // chosen type — otherwise there's nothing to decide, so it stays hidden), Preview. Every
+  // handler above just mutates state and calls this — same full-rebuild-on-every-change pattern
+  // as renderStatusEditor.
+  function renderWidgetSlotEditor(){
     var i = wcSlot;
-    document.getElementById('widgetConfigModalTitle').textContent = (topSlots[i] ? 'Editing' : 'Configuring') + ' Widget ' + (i+1) + ' — Step ' + wcStep + ' of 4';
+    document.getElementById('widgetSlotEditorTitle').textContent = wcName.trim() || ('Widget ' + (i+1));
+
     var html = '';
 
-    if(wcStep > 1){
-      html += '<div class="wg-crumb"><button type="button" onclick="goToWidgetStep(1)">Shape: '+SHAPES[wcShape].name+'</button>';
-      if(wcStep > 2) html += ' <span>\u203a</span> <button type="button" onclick="goToWidgetStep(2)">'+wcSourceKeys.length+' source'+(wcSourceKeys.length===1?'':'s')+' selected</button>';
-      html += '</div>';
-    }
+    // 1. Name — first field, typed up front.
+    html += '<div class="field full"><label>Widget name <span style="color:var(--bad)">*</span></label><input type="text" class="text" style="width:100%;" value="'+wcName.replace(/"/g,'&quot;')+'" oninput="onWidgetNameInput(this.value)" placeholder="e.g. ICU Census"></div>';
 
-    if(wcStep === 1){
-      html += '<div class="field"><label>Step 1 — Choose a shape</label></div><div class="wg-shape-grid">';
-      Object.keys(SHAPES).forEach(function(key){
+    // 2. Type of widget — 3 radio cards.
+    html += '<div class="field full" style="margin-top:16px;"><label>Type of widget <span style="color:var(--bad)">*</span></label>'+
+      '<div class="wg-shape-grid">'+
+      Object.keys(SHAPES).map(function(key){
         var t = SHAPES[key]; var sel = wcShape === key;
-        html += '<button type="button" class="wg-shape-card'+(sel?' selected':'')+'" onclick="pickWidgetShape(\''+key+'\')"><div class="wg-shape-name">'+t.name+'</div><div class="wg-shape-desc">'+t.desc+'</div></button>';
-      });
-      html += '</div>';
-    } else if(wcStep === 2){
-      var matching = DATA_SOURCES.filter(function(s){ return s.shapes.indexOf(wcShape) > -1; });
-      var filtered = matching.filter(function(s){ return !wcCatalogFilter || s.label.toLowerCase().indexOf(wcCatalogFilter.toLowerCase()) > -1; });
-      html += '<div class="field"><label>Step 2 — Choose data sources <span class="hint">for this '+SHAPES[wcShape].name+' tile</span></label></div>';
-      html += '<div class="wg-catalog-toolbar"><input type="text" class="text" style="flex:1 1 auto;" placeholder="Search data sources…" oninput="updateWidgetCatalogFilter(this.value)" value="'+wcCatalogFilter+'"><span class="muted" style="font-size:var(--text-xs);white-space:nowrap;">'+wcSourceKeys.length+' selected</span></div>';
-      html += '<div class="wg-catalog-list">';
-      filtered.forEach(function(s){
-        var sel = wcSourceKeys.indexOf(s.key) > -1;
-        html += '<button type="button" class="wg-source-opt'+(sel?' selected':'')+(s.isStub?' stub':'')+'" '+(s.isStub?'disabled':'')+' onclick="toggleWidgetSource(\''+s.key+'\')">';
-        html += '<input type="checkbox" '+(sel?'checked':'')+' readonly tabindex="-1">';
-        html += '<div style="flex:1 1 auto;"><div class="wg-source-label">'+s.label+'</div><div class="wg-source-desc">'+s.desc+'</div></div>';
-        html += '<span class="wg-tagpill">'+(s.isStub?'Coming later':s.category)+'</span></button>';
-      });
-      html += '</div>';
-    } else if(wcStep === 3){
-      html += '<div class="field"><label>Step 3 — Group each selected source</label></div>';
-      wcSourceKeys.forEach(function(k){
-        var src = sourceByKey(k);
-        if(!src.groupings) return;
-        var opts = src.groupings.filter(function(g){ return g.onlyFor === wcShape; });
-        if(opts.length <= 1) return;
-        html += '<div class="subsection" style="margin-bottom:12px;"><h5 style="margin:0 0 8px;font-size:var(--text-sm);font-weight:700;">'+src.label+'</h5><div class="wg-radio-list">';
-        opts.forEach(function(g){
-          var sel = wcGroupings[k] === g.key;
-          html += '<button type="button" class="wg-radio-opt'+(sel?' selected':'')+'" onclick="pickWidgetGrouping(\''+k+'\',\''+g.key+'\')"><input type="radio" '+(sel?'checked':'')+' readonly tabindex="-1"><div><div class="wg-radio-label">'+g.label+'</div><div class="wg-radio-desc">'+g.desc+'</div></div></button>';
-        });
-        html += '</div></div>';
-      });
-    } else if(wcStep === 4){
-      html += '<div class="field"><label>Name this widget</label><input type="text" class="text" style="width:100%;" value="'+wcName.replace(/"/g,'&quot;')+'" oninput="onWidgetNameInput(this.value)" placeholder="e.g. ICU Census"></div>';
-      html += '<div style="display:flex;gap:24px;align-items:flex-start;"><div style="flex:1 1 auto;"><div class="field"><label style="margin-bottom:8px;">Sources in this widget <span class="hint">reorder or remove</span></label>';
-      wcSourceKeys.forEach(function(k, idx){
-        var src = sourceByKey(k);
-        var g = wcGroupings[k];
-        var gr = g && src.groupings ? src.groupings.find(function(x){ return x.key === g; }) : null;
-        html += '<div class="wg-review-item"><div class="wg-order-btns"><button type="button" onclick="moveWidgetSourceInReview(\''+k+'\',-1)" '+(idx===0?'disabled':'')+'>\u25b2</button><button type="button" onclick="moveWidgetSourceInReview(\''+k+'\',1)" '+(idx===wcSourceKeys.length-1?'disabled':'')+'>\u25bc</button></div><div style="flex:1 1 auto;font-size:var(--text-sm);"><b>'+src.label+'</b>'+(gr && gr.key!=='none' ? ' — '+gr.label : '')+'</div><button type="button" class="btn small tertiary" onclick="removeWidgetSourceInReview(\''+k+'\')">Remove</button></div>';
-      });
-      html += '</div></div><div style="flex:0 0 220px;"><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div class="wg-slot-configured" style="border:1px solid var(--line);background:var(--white);"><div class="wg-slot-preview">'+renderWidgetSlotPreview({ sources: wcSourceKeys.map(function(k){ return { key:k, grouping: wcGroupings[k] }; }) })+'</div></div></div></div></div>';
+        return '<button type="button" class="wg-shape-card'+(sel?' selected':'')+'" onclick="pickWidgetShape(\''+key+'\')"><div class="wg-shape-name">'+t.name+'</div><div class="wg-shape-desc">'+t.desc+'</div></button>';
+      }).join('')+
+      '</div></div>';
+
+    if(!wcShape){
+      html += '<p class="muted" style="margin-top:14px;">Choose a type above to see the data sources it supports.</p>';
+      document.getElementById('widgetSlotEditorBody').innerHTML = html;
+    } else {
+      // 3. Data source — single-select dropdown, filtered to sources that support this type.
+      var matching = DATA_SOURCES.filter(function(s){ return s.shapes.indexOf(wcShape) > -1 && !s.isStub; });
+      html += '<div class="field full" style="margin-top:16px;"><label>Data source <span style="color:var(--bad)">*</span></label>'+
+        '<select class="control" style="width:100%;" onchange="pickWidgetSource(this.value)">'+
+        '<option value="">Select a data source…</option>'+
+        matching.map(function(s){ return '<option value="'+s.key+'"'+(wcSource===s.key?' selected':'')+'>'+s.label+'</option>'; }).join('')+
+        '</select>'+
+        (wcSource ? '<div class="muted" style="font-size:var(--text-xs);margin-top:4px;">'+sourceByKey(wcSource).desc+'</div>' : '')+
+        '</div>';
+
+      var groupingOpts = widgetSlotGroupingOptions();
+      if(wcSource && groupingOpts.length > 1){
+        // 4. Group by — only rendered when there's an actual choice to make.
+        html += '<div class="field full" style="margin-top:16px;"><label>Group by <span style="color:var(--bad)">*</span></label>'+
+          '<select class="control" style="width:100%;" onchange="pickWidgetGrouping(this.value)">'+
+          '<option value="">Select a grouping…</option>'+
+          groupingOpts.map(function(g){ return '<option value="'+g.key+'"'+(wcGrouping===g.key?' selected':'')+'>'+g.label+'</option>'; }).join('')+
+          '</select>'+
+          (wcGrouping ? '<div class="muted" style="font-size:var(--text-xs);margin-top:4px;">'+groupingOpts.find(function(g){ return g.key===wcGrouping; }).desc+'</div>' : '')+
+          '</div>';
+      }
+
+      if(wcSource){
+        // 5. Live mock preview — sample data, updates with every change above.
+        html += '<div class="field full" style="margin-top:16px;"><label>Preview <span class="hint">sample data — not live</span></label><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div class="wg-slot-configured" style="border:1px solid var(--line);background:var(--white);width:100%;max-width:260px;"><div class="wg-slot-preview">'+renderWidgetSlotPreview({ source: wcSource, grouping: wcGrouping })+'</div></div></div></div>';
+      }
+
+      document.getElementById('widgetSlotEditorBody').innerHTML = html;
     }
 
-    document.getElementById('widgetConfigModalBody').innerHTML = html;
-
-    var canSave = wcName.trim() && wcSourceKeys.length;
+    var canSave = canSaveWidgetSlot();
     var footHtml = '<button type="button" class="btn" onclick="requestCancelWidgetSlotConfig()">Cancel</button>';
-    if(wcStep === 1) footHtml += (wcShape?'':'<span class="wg-foot-hint">Choose a shape to continue</span>')+'<button type="button" class="btn primary" '+(wcShape?'':'disabled')+' onclick="continueFromWidgetShape()">Continue</button>';
-    else if(wcStep === 2) footHtml += (wcSourceKeys.length?'':'<span class="wg-foot-hint">Choose at least one data source</span>')+'<button type="button" class="btn primary" '+(wcSourceKeys.length?'':'disabled')+' onclick="continueFromWidgetSources()">Continue</button>';
-    else if(wcStep === 3) footHtml += (widgetSlotAllGroupingsChosen()?'':'<span class="wg-foot-hint">Choose a grouping for each source</span>')+'<button type="button" class="btn primary" '+(widgetSlotAllGroupingsChosen()?'':'disabled')+' onclick="continueFromWidgetGroupings()">Continue</button>';
-    else footHtml += (canSave?'':'<span class="wg-foot-hint">Name this widget to save it</span>')+'<button type="button" class="btn primary" '+(canSave?'':'disabled')+' onclick="saveWidgetSlot()">Save widget</button>';
-    document.getElementById('widgetConfigModalFoot').innerHTML = footHtml;
+    footHtml += (canSave?'':'<span class="wg-foot-hint">'+(!wcName.trim()?'Name this widget':!wcShape?'Choose a type':!wcSource?'Choose a data source':'Choose a grouping')+' to save it</span>')+
+      '<button type="button" class="btn primary" '+(canSave?'':'disabled')+' onclick="saveWidgetSlot()">Save widget</button>';
+    document.getElementById('widgetSlotEditorFoot').innerHTML = footHtml;
   }
 
   function renderSidePanelCard(){
     if(wcRemoveConfirm === 'panel'){
-      return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-body"><div class="wg-slot-empty-text">Turn off the side panel?</div>'+
-        '<div style="display:flex;gap:6px;"><button type="button" class="btn small" style="color:var(--bad);border-color:var(--bad);" onclick="sidePanel={enabled:false,sections:[]};wcRemoveConfirm=null;renderWidgetLibrary();updateReadiness();">Yes, turn off</button>'+
+      return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-body"><div class="wg-slot-empty-text">Remove "'+sidePanel.name+'"?</div>'+
+        '<div style="display:flex;gap:6px;"><button type="button" class="btn small" style="color:var(--bad);border-color:var(--bad);" onclick="sidePanel={name:\'Side Panel\',sections:[]};wcRemoveConfirm=null;renderWidgetLibrary();updateReadiness();">Yes, remove</button>'+
         '<button type="button" class="btn small" onclick="wcRemoveConfirm=null;renderWidgetLibrary();">Cancel</button></div></div></div>';
     }
-    if(!sidePanel.enabled){
-      return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor" style="color:var(--muted-soft);" aria-hidden="true"><path d="M8 3a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2H9v3a1 1 0 1 1-2 0V9H4a1 1 0 1 1 0-2h3V4a1 1 0 0 1 1-1"/></svg><div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startSidePanelConfig()">+ Add side panel</button></div></div>';
+    if(!sidePanel.sections.length){
+      return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-body"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" style="color:var(--muted-soft);" aria-hidden="true"><line x1="3" y1="3" x2="3" y2="13"/><circle cx="3" cy="6.5" r="1.4"/><line x1="8" y1="3" x2="8" y2="13"/><circle cx="8" cy="9.5" r="1.4"/><line x1="13" y1="3" x2="13" y2="13"/><circle cx="13" cy="5.5" r="1.4"/></svg><div class="wg-slot-empty-text">Not configured</div><button type="button" class="btn small" onclick="startSidePanelConfig()">Configure</button></div></div>';
     }
     var rows = sidePanel.sections.map(function(k){
       var s = sidePanelSectionByKey(k);
       return '<div class="wg-mini-section">'+(s?s.label:k)+'</div>';
     }).join('');
-    return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-configured">'+rows+
+    return '<div class="wg-slot" style="max-width:260px;"><div class="wg-slot-label">Side Panel</div><div class="wg-slot-configured"><div class="wg-slot-name">'+sidePanel.name+'</div>'+rows+
       '<div class="wg-slot-actions"><button type="button" class="btn small" onclick="startSidePanelConfig()">Edit</button>'+
-      '<button type="button" class="btn small tertiary" onclick="requestRemoveWidgetSlot(\'panel\')">Turn off</button></div></div></div>';
+      '<button type="button" class="btn small tertiary" onclick="requestRemoveWidgetSlot(\'panel\')">Remove</button></div></div></div>';
   }
 
-  function renderSidePanelConfigModalContent(){
-    var html = '<div class="field"><label>Side panel</label><div class="wg-toggle-row"><label class="switch-heading" style="display:inline-flex;"><input type="checkbox" '+(wcPanelPending.enabled?'checked':'')+' onchange="toggleSidePanelEnabled()"><span class="switch-track"></span></label><div><div style="font-size:var(--text-sm);font-weight:600;">Show side panel on this board</div><div class="muted" style="font-size:var(--text-xs);">Awaiting Approvals, Meds, Rejected Med List, Lab/Radiology</div></div></div></div>';
-    if(wcPanelPending.enabled){
-      html += '<div class="field"><label>Sections <span class="hint">at least one must stay checked · reorder with the arrows</span></label><div class="wg-section-list">';
-      wcPanelPending.order.forEach(function(k, idx){
-        var s = sidePanelSectionByKey(k);
-        var isChecked = wcPanelPending.checked[k];
-        var onlyOneLeft = isChecked && sidePanelCheckedCount() <= 1;
-        html += '<div class="wg-section-row'+(isChecked?'':' unchecked')+'"><input type="checkbox" '+(isChecked?'checked':'')+(onlyOneLeft?' disabled title="At least one section must stay checked"':'')+' onchange="toggleSidePanelSection(\''+k+'\')">';
-        html += '<span class="wg-section-name'+(isChecked?'':' unchecked')+'">'+s.label+'</span>';
-        html += '<div class="wg-order-btns"><button type="button" onclick="moveSidePanelSection(\''+k+'\',-1)" '+(idx===0?'disabled':'')+'>\u25b2</button><button type="button" onclick="moveSidePanelSection(\''+k+'\',1)" '+(idx===wcPanelPending.order.length-1?'disabled':'')+'>\u25bc</button></div></div>';
-      });
-      html += '</div></div>';
-      html += '<div class="field"><label>Preview <span class="hint">sample data — not live, collapsed view</span></label><div class="wg-preview-box"><div class="wg-preview-tag">Preview · Sample data</div><div style="width:220px;margin:0 auto;border:1px solid var(--line);background:var(--white);">';
-      wcPanelPending.order.filter(function(k){ return wcPanelPending.checked[k]; }).forEach(function(k){
-        var s = sidePanelSectionByKey(k);
-        html += '<div class="wg-mini-section" style="border:0;border-bottom:1px solid var(--line);">'+s.label+'</div>';
-      });
-      html += '</div></div></div>';
-    } else {
-      html += '<div class="muted" style="font-size:var(--text-xs);">Side panel will not appear on this board.</div>';
-    }
-    document.getElementById('sidePanelConfigModalBody').innerHTML = html;
-
-    var canSave = !wcPanelPending.enabled || sidePanelCheckedCount() >= 1;
+  // Same two-question shape as the top-strip slot editor: Name, then a multi-select picker of
+  // which sections show. No enable toggle — zero sections selected is the "off" state, same as
+  // a top-strip slot with nothing configured — and no reorder: sections always show in the
+  // fixed catalog order. No preview: the panel's sections are fixed labels with a live count,
+  // not a themed render, so there's nothing a mock preview would verify that the picker itself
+  // doesn't already show.
+  function renderSidePanelEditor(){
+    var html = '<div class="field full"><label>Side panel name <span style="color:var(--bad)">*</span></label><input type="text" class="text" style="width:100%;" value="'+wcPanelPending.name.replace(/"/g,'&quot;')+'" oninput="onSidePanelNameInput(this.value)" placeholder="e.g. Side Panel"></div>';
+    html += '<div class="field full" style="margin-top:16px;"><label for="sidePanelItemsBtn">Sections to show <span style="color:var(--bad)">*</span></label>'+
+      '<div class="picker"><div class="picker-input"><button type="button" class="text" id="sidePanelItemsBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleSidePanelItemsPicker()"></button></div><div class="picker-menu" id="sidePanelItemsMenu"></div></div></div>';
+    document.getElementById('sidePanelEditorBody').innerHTML = html;
+    updateSidePanelItemsButton();
+    updateSidePanelFooter();
+  }
+  function updateSidePanelItemsButton(){
+    var btn = document.getElementById('sidePanelItemsBtn');
+    if(!btn) return;
+    var n = sidePanelPendingSections().length;
+    btn.textContent = n ? n + ' selected' : 'Select sections…';
+  }
+  function renderSidePanelItemsMenu(){
+    var menu = document.getElementById('sidePanelItemsMenu');
+    if(!menu) return;
+    menu.innerHTML = SIDE_PANEL_SECTIONS.map(function(s){
+      var checked = wcPanelPending.checked[s.key] ? ' checked' : '';
+      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+s.key+'"'+checked+' onchange="toggleSidePanelSection(\''+s.key+'\')"> '+s.label+'</label>';
+    }).join('');
+  }
+  function toggleSidePanelItemsPicker(){
+    var menu = document.getElementById('sidePanelItemsMenu');
+    var btn = document.getElementById('sidePanelItemsBtn');
+    if(!menu) return;
+    var willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
+    if(willOpen){ renderSidePanelItemsMenu(); menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    else { btn.setAttribute('aria-expanded','false'); }
+  }
+  function updateSidePanelFooter(){
+    var sections = sidePanelPendingSections();
+    var canSave = !sections.length || !!wcPanelPending.name.trim();
     var footHtml = '<button type="button" class="btn" onclick="requestCancelSidePanelConfig()">Cancel</button>';
-    if(wcPanelPending.enabled && sidePanelCheckedCount() < 1) footHtml += '<span class="wg-foot-hint">Keep at least one section checked</span>';
+    if(sections.length && !wcPanelPending.name.trim()) footHtml += '<span class="wg-foot-hint">Name the side panel to save it</span>';
     footHtml += '<button type="button" class="btn primary" '+(canSave?'':'disabled')+' onclick="saveSidePanelConfig()">Save</button>';
-    document.getElementById('sidePanelConfigModalFoot').innerHTML = footHtml;
+    document.getElementById('sidePanelEditorFoot').innerHTML = footHtml;
   }
 
   function renderWidgetLibrary(){
@@ -2347,7 +2282,7 @@ select.control{ padding-right:26px; }
     { key:'vitals', label:'Vitals', category:'Clinical', recommended:true },
     { key:'bedNo', label:'Bed No', category:'Resource', recommended:true },
     { key:'duration', label:'Duration', category:'Workflow', recommended:true },
-    { key:'schTime', label:'Sch. Time', category:'Workflow', recommended:true },
+    { key:'schTime', label:'Scheduled Time', category:'Workflow', recommended:true },
     { key:'surgeryType', label:'Surgery Type', category:'OR', recommended:true },
     { key:'chiefComplaints', label:'Chief Complaints', category:'ED', recommended:true },
     { key:'triage', label:'Triage', category:'ED', recommended:true },
@@ -2599,7 +2534,7 @@ select.control{ padding-right:26px; }
       if(bi>-1) return 1;
       return ACTION_CATEGORY_ORDER.indexOf(a.category) - ACTION_CATEGORY_ORDER.indexOf(b.category) || (a.label < b.label ? -1 : 1);
     });
-    list.innerHTML = sorted.length ? sorted.map(function(a){
+    list.innerHTML = sorted.length ? sorted.map(function(a, idx){
       var pos = selectedActions.indexOf(a.key);
       var checked = pos > -1;
       var dragHandle = checked ?
@@ -2608,9 +2543,15 @@ select.control{ padding-right:26px; }
       // A small tag at the right end of each selected row shows exactly where it lands —
       // "Inline" for the actions that fit on the patient row, "Menu" for the rest — instead of
       // a separate list-of-names summary underneath that repeats the same information.
-      var positionTag = checked && pos < limit ? '<span class="action-position-tag inline">Inline</span>' : '';
+      var positionTag = checked ? (pos < limit ? '<span class="action-position-tag inline">Inline</span>' : '<span class="action-position-tag menu">Menu</span>') : '';
       var iconHtml = '<span class="col-icon" aria-hidden="true">'+actionIconSvg(a.icon)+'</span>';
-      return '<label class="col-row" ondragover="onReorderDragOver(event,\'action\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'action\',\''+a.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> '+iconHtml+'<span class="col-name">'+a.label+'</span>'+positionTag+'</label>';
+      // A divider sits right at the inline/menu boundary among the selected (checked) rows —
+      // between the last row that fits inline and the first that overflows — so dragging an
+      // action across it is visibly "moving it into the menu" rather than an ambiguous reorder.
+      // Only drawn when there's actually an overflow to separate from.
+      var divider = (idx === limit && limit < selectedActions.length) ?
+        '<div class="action-divider"><span>Overflows to menu below</span></div>' : '';
+      return divider + '<label class="col-row" ondragover="onReorderDragOver(event,\'action\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'action\',\''+a.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> '+iconHtml+'<span class="col-name">'+a.label+'</span>'+positionTag+'</label>';
     }).join('') : '<p class="muted" style="padding:8px;">No matching actions</p>';
     var countEl = document.getElementById('actionSelectedCount');
     if(countEl) countEl.textContent = selectedActions.length + ' of ' + ACTION_LIBRARY.length + ' actions selected';
@@ -2623,6 +2564,9 @@ select.control{ padding-right:26px; }
   // for "Clinical & safety alerts". This gives each signal an actual enabled state plus a
   // severity that maps to how it presents on the live board.
   var SIGNAL_LIBRARY = [
+    { key:'allergies', label:'Allergies', defaultEnabled:true, defaultSeverity:'informational', icon:'allergies' },
+    { key:'medicalCondition', label:'Medical condition', defaultEnabled:true, defaultSeverity:'informational', icon:'medical-condition' },
+    { key:'isolation', label:'Isolation', defaultEnabled:true, defaultSeverity:'informational', icon:'isolation' },
     { key:'clinicalSafety', label:'Clinical & safety alerts', defaultEnabled:false, defaultSeverity:'critical', icon:'exclamation-octagon' },
     { key:'visitorRestriction', label:'Visitor / confidentiality restriction', defaultEnabled:false, defaultSeverity:'critical', icon:'eye-slash' },
     { key:'assessmentRequired', label:'Assessment required', defaultEnabled:false, defaultSeverity:'caution', icon:'clipboard-check' },
@@ -2637,6 +2581,9 @@ select.control{ padding-right:26px; }
   // actual glyph that signal will use on the board — not one generic info circle standing in
   // for all of them.
   var SIGNAL_ICON_PATHS = {
+    'allergies':'<path d="M8 1L14.5 13.5H1.5L8 1Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><rect x="7.35" y="6" width="1.3" height="3.3" rx="0.6"/><circle cx="8" cy="11.2" r="0.9"/>',
+    'medical-condition':'<path d="M8 13.6S2.2 9.7 2.2 5.9A2.7 2.7 0 0 1 8 4.7a2.7 2.7 0 0 1 5.8 1.2C13.8 9.7 8 13.6 8 13.6z" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="M4.3 8.2h1.9l1-2 1.6 4 1.2-2h1.7" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>',
+    'isolation':'<circle cx="8" cy="5" r="2.1" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M3.8 14c0-2.7 1.8-4.3 4.2-4.3s4.2 1.6 4.2 4.3" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M2 2l12 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>',
     'exclamation-octagon':'<path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>',
     'eye-slash':'<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7 7 0 0 0-2.79.588l.77.771A6 6 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755q-.247.248-.517.486z"/><path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829"/><path d="M3.35 5.47q-.27.24-.518.487A13 13 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7 7 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12z"/>',
     'clipboard-check':'<path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>',
@@ -2752,88 +2699,16 @@ select.control{ padding-right:26px; }
     input.value = v;
   }
 
-  // Named categories a predefined comment can belong to — lets each role's shortcut list stay
-  // scoped to what's actually relevant to them, instead of one flat list everyone wades through.
-  var COMMENT_CATEGORIES = ['Nurse Comments', 'Provider Comments', 'Charge Nurse Comments', 'Care Coordination Comments', 'General Comments', 'Discharge Planning Comments', 'Behavioral Health Comments', 'Transport Comments'];
-  var DEFAULT_COMMENT_CATEGORIES = ['Nurse Comments', 'General Comments'];
-  var selectedCommentCategories = DEFAULT_COMMENT_CATEGORIES.slice();
-  function togglePredefinedCommentsVisibility(checked){
-    var field = document.getElementById('predefinedCommentsCategoriesField');
-    if(field) field.style.display = checked ? '' : 'none';
-    updateCommentsBothOffWarning();
-  }
-  function toggleFreeTextCommentsVisibility(checked){
-    var field = document.getElementById('commentCharLimitField');
-    if(field) field.style.display = checked ? '' : 'none';
-    updateCommentsBothOffWarning();
-  }
-  // Option B: an Operational comments section that's on but has neither Predefined comments
-  // nor Free text turned on lets someone save a board where nobody can actually leave a
-  // comment. That's not blocked outright while mid-edit (both toggles are ordinary controls,
-  // not locked against each other) — instead it surfaces here, the same way every other
-  // "needs at least one of X" gap in this drawer does, so it's visible without getting in the
-  // way of configuring the rest of the section first.
-  function updateCommentsBothOffWarning(){
-    var warning = document.getElementById('commentsBothOffWarning');
-    if(!warning) return;
-    var sectionCb = document.getElementById('commentsSectionEnabled');
-    var predefined = document.getElementById('predefinedCommentsEnabled');
-    var freeText = document.getElementById('freeTextCommentsEnabled');
-    var bothOff = !!(sectionCb && sectionCb.checked && predefined && !predefined.checked && freeText && !freeText.checked);
-    warning.style.display = bothOff ? '' : 'none';
-  }
-  // Same convention as every other picker button in this drawer (Care Setting) —
-  // the button's own text reflects the current selection instead of staying generic.
-  function updateCommentCategoriesButton(){
-    var btn = document.getElementById('commentCategoriesBtn');
-    if(!btn) return;
-    btn.textContent = selectedCommentCategories.length ? selectedCommentCategories.length + ' selected' : 'Select categories…';
-  }
-  function renderCommentCategoriesMenu(){
-    var menu = document.getElementById('commentCategoriesMenu');
-    if(!menu) return;
-    menu.innerHTML = COMMENT_CATEGORIES.map(function(c){
-      var checked = selectedCommentCategories.indexOf(c) > -1 ? ' checked' : '';
-      return '<label class="picker-option" style="cursor:pointer;"><input type="checkbox" value="'+c+'"'+checked+' onchange="toggleCommentCategory(\''+c.replace(/'/g,"\\'")+'\', this.checked)"> '+c+'</label>';
-    }).join('');
-    updateCommentCategoriesButton();
-  }
-  function toggleCommentCategory(value, checked){
-    var pos = selectedCommentCategories.indexOf(value);
-    if(checked && pos===-1) selectedCommentCategories.push(value);
-    if(!checked && pos>-1) selectedCommentCategories.splice(pos,1);
-    updateCommentCategoriesButton();
-  }
-  function toggleCommentCategoriesPicker(){
-    var menu = document.getElementById('commentCategoriesMenu');
-    var btn = document.getElementById('commentCategoriesBtn');
-    if(!menu || btn.disabled) return;
-    var willOpen = !menu.classList.contains('open');
-    document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ renderCommentCategoriesMenu(); menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    else { btn.setAttribute('aria-expanded','false'); }
-  }
-
-  // Same functional-switch, clear-on-off behavior as Signals: off wipes the comment settings
-  // back to their defaults (not just hides them), on reveals that same clean default state.
+  // Same functional-switch, clear-on-off behavior as Signals: off resets the character limit
+  // back to its default (not just hides the field), on reveals that same clean default state.
   function toggleCommentsSection(checked){
     var body = document.getElementById('commentsBody');
     if(!checked){
-      var predefined = document.getElementById('predefinedCommentsEnabled');
-      var freeText = document.getElementById('freeTextCommentsEnabled');
       var limit = document.getElementById('commentCharLimit');
-      var categoriesChanged = selectedCommentCategories.slice().sort().join('|') !== DEFAULT_COMMENT_CATEGORIES.slice().sort().join('|');
-      var hasNonDefaultConfig = (predefined && !predefined.checked) || (freeText && !freeText.checked) || (limit && limit.value !== '140') || categoriesChanged;
-      if(hasNonDefaultConfig){
+      if(limit && limit.value !== '140'){
         document.getElementById('commentsSectionEnabled').checked = true; // revert until confirmed
-        openConfirmModal('Turn off Operational comments?', 'This resets predefined comments, free-text entry, and the character limit back to their defaults. If you turn this back on, your current settings won\'t be restored.', function(){
-          if(predefined) predefined.checked = true;
-          if(freeText) freeText.checked = true;
-          if(limit) limit.value = '140';
-          selectedCommentCategories = DEFAULT_COMMENT_CATEGORIES.slice();
-          updateCommentCategoriesButton();
-          togglePredefinedCommentsVisibility(true);
-          toggleFreeTextCommentsVisibility(true);
+        openConfirmModal('Turn off Comments?', 'This resets the character limit back to its default. If you turn this back on, your current setting won\'t be restored.', function(){
+          limit.value = '140';
           document.getElementById('commentsSectionEnabled').checked = false;
           if(body) body.style.display = 'none';
         }, { confirmLabel: 'Turn off and reset', danger: true });
@@ -2841,29 +2716,17 @@ select.control{ padding-right:26px; }
       }
     }
     if(body) body.style.display = checked ? '' : 'none';
-    updateCommentsBothOffWarning();
   }
 
-  // These fields aren't currently persisted with the record (pre-existing gap, unrelated to
-  // this change), so there's nothing to "load" — every drawer open resets Comments to its
-  // known-good default (off; the sub-options below are pre-filled with sensible starting values
-  // for whenever someone does turn it on, but the section itself doesn't start enabled).
+  // Not currently persisted with the record (pre-existing gap, unrelated to this change), so
+  // there's nothing to "load" — every drawer open resets Comments to off.
   function resetCommentsSectionToDefaults(){
-    var predefined = document.getElementById('predefinedCommentsEnabled');
-    var freeText = document.getElementById('freeTextCommentsEnabled');
     var limit = document.getElementById('commentCharLimit');
-    if(predefined) predefined.checked = true;
-    if(freeText) freeText.checked = true;
     if(limit) limit.value = '140';
-    selectedCommentCategories = DEFAULT_COMMENT_CATEGORIES.slice();
-    updateCommentCategoriesButton();
-    togglePredefinedCommentsVisibility(true);
-    toggleFreeTextCommentsVisibility(true);
     var cb = document.getElementById('commentsSectionEnabled');
     var body = document.getElementById('commentsBody');
     if(cb) cb.checked = false;
     if(body) body.style.display = 'none';
-    updateCommentsBothOffWarning();
   }
 
   function renderCareSettingInfo(){
@@ -3358,21 +3221,12 @@ select.control{ padding-right:26px; }
     }
     if(key === 'widgets'){
       var configuredSlots = topSlots.filter(function(s){ return !!s; }).length;
-      if(!configuredSlots && !sidePanel.enabled) return { state:'warning', issues:['No widgets are configured for this board — the top strip and side panel will both be empty'] };
+      if(!configuredSlots && !sidePanel.sections.length) return { state:'warning', issues:['No widgets are configured for this board — the top strip and side panel will both be empty'] };
       return { state:'complete', issues:[] };
     }
     if(key === 'table'){
       // §42.1 lists "at least one valid status-change path" as a blocking Patient Table requirement.
       if(!actionLibraryState.statusChange) return { state:'incomplete', issues:['No status-change action is enabled. Patients have no way to move through the workflow.'] };
-      // Operational comments switched on with neither delivery method enabled is a dead
-      // setting — nobody can actually leave a comment. Blocking, same tier as the status-change
-      // gap above, since there's no valid state that produces: it's not a stylistic choice.
-      var commentsSectionCb = document.getElementById('commentsSectionEnabled');
-      var predefinedCb = document.getElementById('predefinedCommentsEnabled');
-      var freeTextCb = document.getElementById('freeTextCommentsEnabled');
-      if(commentsSectionCb && commentsSectionCb.checked && predefinedCb && !predefinedCb.checked && freeTextCb && !freeTextCb.checked){
-        return { state:'incomplete', issues:['Operational comments is on, but both Predefined comments and Free text are off — turn on at least one, or turn off Operational comments.'] };
-      }
       var total = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
       if(total > 12) return { state:'warning', issues:[total + ' columns selected — more than 12 may not fit a typical viewport.'] };
       return { state:'complete', issues:[] };
@@ -3864,7 +3718,7 @@ select.control{ padding-right:26px; }
       if(AUDIT_LOG[t.id] && AUDIT_LOG[t.id].length) return;
       var events = [];
       var widgetNames = (t.widgets && t.widgets.slots) ? t.widgets.slots.filter(Boolean).map(function(s){ return s.name; }) : [];
-      var sidePanelSections = (t.widgets && t.widgets.sidePanel && t.widgets.sidePanel.enabled) ? t.widgets.sidePanel.sections.map(sectionLabel) : [];
+      var sidePanelSections = (t.widgets && t.widgets.sidePanel && t.widgets.sidePanel.sections && t.widgets.sidePanel.sections.length) ? t.widgets.sidePanel.sections.map(sectionLabel) : [];
       var step = 0;
       var back = function(n){ step = n; return daysBefore(t.updated, n); };
       // Oldest first here; reversed to newest-first before storing (matches how live entries
