@@ -493,20 +493,13 @@ select.control{ padding-right:26px; }
     </section>
 
     <section class="content">
-      <div class="table-shell">
+      <div class="table-shell" id="dashboardTableShell" style="max-height:520px;overflow-y:auto;">
         <table class="table" aria-label="Trackerboards">
           <colgroup><col style="width:30%"><col style="width:20%"><col style="width:13%"><col style="width:15%"><col style="width:12%"><col style="width:10%"></colgroup>
           <thead><tr><th data-key-th="name"><button type="button" class="sort-th" onclick="setDashboardSort('name')">Board Name<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="careSetting"><button type="button" class="sort-th" onclick="setDashboardSort('careSetting')">Care Setting<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="updated"><button type="button" class="sort-th" onclick="setDashboardSort('updated')">Updated On<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="updatedBy"><button type="button" class="sort-th" onclick="setDashboardSort('updatedBy')">Updated By<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th data-key-th="status"><button type="button" class="sort-th" onclick="setDashboardSort('status')">Status<span class="sort-glyph"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16" style="vertical-align:-0.125em;" aria-hidden="true"><path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/></svg></span></button></th><th class="actions">Actions</th></tr></thead>
           <tbody id="dashboardBody"></tbody>
         </table>
-        <div class="table-footer">
-          <span class="muted" id="dashboardFooterSummary">Showing 3 of 3 trackerboards</span>
-          <div class="pager">
-            <button class="icon-btn" type="button" aria-label="Previous page"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg></button>
-            <span>1</span>
-            <button class="icon-btn" type="button" aria-label="Next page"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></button>
-          </div>
-        </div>
+        <div class="table-scroll-sentinel" id="dashboardScrollSentinel" aria-hidden="true"></div>
       </div>
     </section>
   </main>
@@ -1527,6 +1520,9 @@ select.control{ padding-right:26px; }
 
   var dashboardFilters = { careSetting: [], status: [], search: '' };
   var dashboardSort = { key: 'name', dir: 1 };
+  var DASHBOARD_PAGE_SIZE = 20;
+  var dashboardVisibleCount = DASHBOARD_PAGE_SIZE;
+  var dashboardLastSignature = '';
 
   function filterOptionsFor(type){
     if(type === 'status') return ['Draft','Active','Inactive'];
@@ -1759,6 +1755,14 @@ select.control{ padding-right:26px; }
       var bv = key === 'careSetting' ? (b.careSettings||[]).join(', ') : b[key];
       return av < bv ? -1*dir : av > bv ? 1*dir : 0;
     });
+    var signature = JSON.stringify(dashboardFilters) + '|' + key + dir;
+    if(signature !== dashboardLastSignature){
+      dashboardVisibleCount = DASHBOARD_PAGE_SIZE;
+      dashboardLastSignature = signature;
+      var shellEl = document.getElementById('dashboardTableShell');
+      if(shellEl) shellEl.scrollTop = 0;
+    }
+    var visible = filtered.slice(0, dashboardVisibleCount);
     var CARET_UP_D = 'm7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z';
     var CARET_DOWN_D = 'M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z';
     document.querySelectorAll('.table th[data-key-th]').forEach(function(th){
@@ -1776,7 +1780,7 @@ select.control{ padding-right:26px; }
     } else if(!filtered.length){
       body.innerHTML = '<tr><td colspan="6"><div class="empty"><strong>No Trackerboards match the current search and filters.</strong><div style="margin-top:10px;"><button class="btn" type="button" onclick="clearAllFilters()">Clear filters</button></div></div></td></tr>';
     } else {
-      body.innerHTML = filtered.map(function(t){
+      body.innerHTML = visible.map(function(t){
         var statusClass = statusPillClass(t.status);
         var careSettingList = t.careSettings || [];
         var careSettingNames = careSettingList.map(function(cs){ var rec = careSettingRecord(cs); return rec ? rec.name : cs; });
@@ -1803,7 +1807,26 @@ select.control{ padding-right:26px; }
         '</tr>';
       }).join('');
     }
-    document.getElementById('dashboardFooterSummary').textContent = 'Showing ' + filtered.length + ' of ' + TRACKERBOARDS.length + ' trackerboards';
+  }
+
+  function initDashboardInfiniteScroll(){
+    var shell = document.getElementById('dashboardTableShell');
+    if(!shell) return;
+    shell.addEventListener('scroll', function(){
+      var nearBottom = shell.scrollTop + shell.clientHeight >= shell.scrollHeight - 80;
+      if(!nearBottom) return;
+      var q = (dashboardFilters.search||'').trim().toLowerCase();
+      var total = TRACKERBOARDS.filter(function(t){
+        var searchOk = !q || t.name.toLowerCase().indexOf(q)>-1 || (t.shortName||'').toLowerCase().indexOf(q)>-1 || t.id.toLowerCase().indexOf(q)>-1;
+        var careOk = !dashboardFilters.careSetting.length || (t.careSettings||[]).some(function(cs){ return dashboardFilters.careSetting.indexOf(cs) > -1; });
+        var statusOk = !dashboardFilters.status.length || dashboardFilters.status.indexOf(t.status) > -1;
+        return searchOk && careOk && statusOk;
+      }).length;
+      if(dashboardVisibleCount < total){
+        dashboardVisibleCount = Math.min(total, dashboardVisibleCount + DASHBOARD_PAGE_SIZE);
+        renderDashboard();
+      }
+    });
   }
 
   function toggleInfoPopover(btn){
@@ -3741,6 +3764,7 @@ select.control{ padding-right:26px; }
 
   initDashboardFilters();
   renderDashboard();
+  initDashboardInfiniteScroll();
   renderStatusList();
   renderStatusEditor();
   renderColumnLibrary();
