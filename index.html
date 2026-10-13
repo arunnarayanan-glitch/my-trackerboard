@@ -966,7 +966,7 @@
     display:block;
     visibility:hidden;
     min-height:14px;
-    margin-top:2px;
+    margin:2px 0 0;
     color:var(--bad);
     font-size:var(--text-sm);
   }
@@ -1059,6 +1059,10 @@
   }
   .picker-menu.open{
     display:block;
+  }
+  .picker-menu.open-up{
+    top:auto;
+    bottom:calc(100% + 3px);
   }
   .picker-option{
     display:flex;
@@ -1433,6 +1437,24 @@
 .widget-card .widget-body{ margin-top:9px; }
 .widget-head{ display:flex; align-items:center; gap:9px; }
 .widget-head h4{ flex:1; min-width:0; margin:0; }
+  /* Board behavior: flat settings list. One row per setting, control on the right; a dependent
+     setting is indented under its parent and stays visible (disabled) while the parent is off,
+     so nothing reflows and an "off" setting is still readable against a spec. */
+  .bb-list{ display:flex; flex-direction:column; }
+  .bb-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px 2px; border-bottom:1px solid var(--line-soft); min-height:44px; }
+  .bb-row:last-of-type{ border-bottom:0; }
+  .bb-main{ display:flex; align-items:center; gap:6px; }
+  .bb-row .switch-label{ font-size:var(--text-sm); font-weight:600; color:var(--ink); }
+  .bb-row.dependent{ margin-left:22px; padding-left:14px; border-left:2px solid var(--line-soft); }
+  .bb-row.dependent .switch-label{ font-weight:400; }
+  .bb-row.disabled .switch-label{ color:var(--muted); }
+  .bb-row.disabled .switch-heading{ cursor:default; }
+  .bb-stack{ flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:8px; }
+  .bb-field{ width:100%; max-width:280px; margin:0 0 4px; }
+  .bb-duration{ display:flex; }
+  .bb-duration input.text{ flex:1; min-width:0; height:32px; border-top-right-radius:0; border-bottom-right-radius:0; }
+  .bb-duration select.control{ width:110px; height:32px; border-left:0; border-top-left-radius:0; border-bottom-left-radius:0; }
+  .bb-warn{ color:var(--warn); margin:5px 0 0; }
 .widget-tile-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin-top:10px; }
 .widget-tile{ display:flex; flex-direction:column; gap:7px; padding:9px 10px; background:var(--surface-alt); border:1px solid var(--line-soft); border-radius:4px; min-height:76px; }
 .widget-tile.enabled{ background:var(--blue-soft); border-color:var(--blue-border); }
@@ -1457,6 +1479,12 @@
 .switch-heading input:checked ~ .switch-track{ background:var(--blue); }
 .switch-heading input:checked ~ .switch-track::after{ transform:translateX(15px); }
 .switch-heading input:focus-visible ~ .switch-track{ outline:2px solid var(--focus); outline-offset:2px; }
+/* Smaller variant used inline in the Columns capability zone (Provider/Nurse/Surgery Type). */
+.switch-heading.compact{ gap:6px; }
+.switch-heading.compact .switch-track{ width:24px; height:14px; }
+.switch-heading.compact .switch-track::after{ width:10px; height:10px; top:2px; left:2px; }
+.switch-heading.compact input:checked ~ .switch-track::after{ transform:translateX(10px); }
+.switch-heading.compact .switch-label{ font-size:var(--text-xs); font-weight:400; color:var(--muted); }
 .switch-label{ font-size:var(--text-sm); font-weight:600; }
 /* .field label sets justify-content:space-between for regular field labels (label text + a
    helper icon on the right). Checkbox labels like .check-option that happen to sit inside a
@@ -1513,6 +1541,7 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .status-item-wrapper:not(.expanded) .status-card-header .card-chevron{ transform:rotate(-90deg); }
 .status-order-num{ flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--navy); color:var(--white); font-size:var(--text-xs); font-weight:700; }
 .status-card-title{ flex:1 1 auto; min-width:0; font-size:var(--text-md); font-weight:600; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.auto-tag{ flex:0 0 auto; margin-left:8px; padding:0 8px; font-size:var(--text-xs); color:var(--muted); border:1px solid var(--line-soft); border-radius:999px; white-space:nowrap; }
 .status-role-tag{ flex:0 0 auto; font-size:var(--text-xs); font-style:italic; font-weight:400; color:#808080; white-space:nowrap; }
 .status-warning-tag{ flex:0 0 auto; padding:2px 7px; border-radius:var(--chip-radius); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.02em; background:var(--bad-bg); color:var(--bad); white-space:nowrap; }
 .status-remove-btn{ flex:0 0 auto; padding:3px; background:transparent; border:0; display:inline-flex; align-items:center; justify-content:center; color:var(--bad); cursor:pointer; }
@@ -1559,6 +1588,9 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .drag-handle{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:24px; height:24px; background:transparent; border:0; color:var(--muted); cursor:grab; }
 .drag-handle:hover{ color:var(--ink); }
 .drag-handle:active{ cursor:grabbing; }
+.col-capabilities{ flex:0 0 auto; display:flex; align-items:center; gap:12px; min-width:170px; justify-content:flex-end; white-space:nowrap; }
+.col-capabilities select.control.compact{ height:26px; font-size:var(--text-xs); padding:0 22px 0 8px; max-width:170px; }
+.col-cap-tag{ font-size:var(--text-xs); color:var(--muted-soft); border:1px dashed var(--line); border-radius:var(--chip-radius); padding:2px 7px; white-space:nowrap; }
 .action-position-tag{ flex:0 0 auto; font-size:var(--text-xs); font-style:italic; font-weight:400; text-transform:none; letter-spacing:normal; white-space:nowrap; color:#808080; }
 .action-position-tag.inline, .action-position-tag.menu{ background:transparent; color:#808080; }
 .action-divider{ display:flex; align-items:center; justify-content:center; gap:8px; margin:4px 0; padding:3px 8px; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line); font-size:var(--text-2xs); font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); background:var(--surface-tint); }
@@ -1713,7 +1745,7 @@ select.control{ padding-right:26px; }
   <header class="topbar">
     <div class="topgroup"></div>
     <div class="topgroup">
-      <span class="avatar">AR</span><span>Arun</span>
+      <span class="avatar">JW</span><span>James Weaver</span>
     </div>
   </header>
   <main class="main">
@@ -1790,7 +1822,7 @@ select.control{ padding-right:26px; }
 
     <div class="card collapsed" id="sec-workflow" data-section-key="workflow">
       <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle statuses section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Statuses <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Order controls how statuses are presented. Patient movement follows the configured allowed transitions.</span></span></h2>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle statuses section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Statuses <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">The first status is the Starting status and the last is the Completion status. Where a patient can move next is set in each status.</span></span></h2>
         <div style="display:flex;align-items:center;gap:10px;">
           <span class="section-state" id="cardState-workflow"></span>
           <button class="btn small workflow-add-btn" type="button" onclick="insertStatus()">+ Add new status</button>
@@ -1811,7 +1843,7 @@ select.control{ padding-right:26px; }
 
     <div class="card collapsed" id="sec-widgets" data-section-key="widgets">
       <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle widgets section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Widgets <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About widget reordering" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">The top strip has 4 fixed slots. Pick any 4 of the 6 available widgets, in drag order; the side panel is a single accordion panel you can turn on and pick which sections it shows.</span></span></h2>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-widgets-body" aria-label="Toggle widgets section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Widgets <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About widget slots" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">The top strip has 4 slots. Choose up to 4 of the 6 widgets.</span></span></h2>
         <span class="section-state" id="cardState-widgets"></span>
       </div>
       <div class="inline-issues" id="widgetsInlineIssues" style="display:none;"></div>
@@ -1828,7 +1860,7 @@ select.control{ padding-right:26px; }
         </div>
 
         <div class="subsection">
-          <h4><label class="switch-heading"><input type="checkbox" id="sidePanelEnabled" onchange="toggleSidePanelSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Side panel</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the side panel" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">When on, the side panel renders as an accordion on the board — each item you pick here becomes its own collapsible section.</span></span></h4>
+          <h4><label class="switch-heading"><input type="checkbox" id="sidePanelEnabled" onchange="toggleSidePanelSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Side panel</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the side panel" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Each section you pick appears as a collapsible section in the side panel.</span></span></h4>
           <div class="widget-body" id="sidePanelBody" style="display:none;">
             <div class="col-unified-list" id="sidePanelSectionList"></div>
           </div>
@@ -1847,7 +1879,7 @@ select.control{ padding-right:26px; }
 
         <div class="subsection" style="margin-top:0;padding-top:0;border-top:0;">
           <div class="col-builder-controls" style="flex-wrap:wrap;">
-            <h4 style="margin:0;">Columns <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About column reordering" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Checked columns get a drag handle — drag them into the order they'll appear on the board. Name/PID is always included and pinned first.</span></span></h4>
+            <h4 style="margin:0;">Columns <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About column reordering" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Drag to set the order columns appear on the board. The first columns show on the main row.</span></span></h4>
             <span style="flex:1 1 auto;"></span>
             <span id="columnSelectedCount" class="muted" style="white-space:nowrap;"></span>
             <span class="help" style="margin:0;flex:1 1 100%;">The first <input class="text" type="number" id="inlineColumnLimit" value="8" min="1" max="20" style="width:52px;height:24px;padding:0 5px;display:inline-block;vertical-align:middle;" onchange="renderColumnLibrary();"> selected columns show on the main row, in drag order; the rest move to Level 2, shown when the row is expanded.</span>
@@ -1873,12 +1905,44 @@ select.control{ padding-right:26px; }
         </div>
 
         <div class="subsection">
-          <h4><label class="switch-heading"><input type="checkbox" id="signalsSectionEnabled" onchange="toggleSignalsSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Signals</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About signals" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Icon-only alerts that show up next to a patient's name &mdash; separate from the row actions below.</span></span></h4>
+          <h4><label class="switch-heading"><input type="checkbox" id="signalsSectionEnabled" onchange="toggleSignalsSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Signals</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About signals" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Small icons next to the patient's name that flag something to notice. They are alerts only; actions are set separately.</span></span></h4>
           <div class="widget-body" id="signalsBody" style="display:none;">
             <div class="col-unified-list">
               <div class="col-list-search"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg><input class="text" type="text" id="signalSearchInput" placeholder="Search signals…" oninput="renderSignalsGrid()"></div>
               <div id="signalsGrid"></div>
             </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h4><label class="switch-heading"><input type="checkbox" id="filtersSectionEnabled" onchange="toggleFiltersSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Filters</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About filters" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Lets staff narrow the patient table by up to 3 columns you choose below.</span></span></h4>
+          <div class="widget-body" id="filtersBody">
+            <div class="picker" style="max-width:220px;margin-top:8px;"><button type="button" class="filter-select-btn" id="filterColumnFilterBtn" aria-haspopup="true" aria-expanded="false" onclick="toggleFilterPicker('filterColumn')">Select</button><div class="picker-menu" id="filterColumnFilterMenu"></div></div>
+            <p class="help" id="filterColumnLimitNote" style="margin:6px 0 0;"></p>
+            <p class="help" id="filterColumnWarning" style="display:none;color:var(--warn);">Pick at least one column to filter by, or turn Filters off.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card collapsed" id="sec-boardbehavior" data-section-key="boardbehavior">
+      <div class="card-head">
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-boardbehavior-body" aria-label="Toggle board behavior section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Board behavior</h2>
+        <span class="section-state" id="cardState-boardbehavior"></span>
+      </div>
+      <div class="card-body" id="sec-boardbehavior-body">
+
+        <div class="bb-list">
+          <div class="bb-row" id="schedulingTile">
+            <div class="bb-main"><label class="switch-heading"><input type="checkbox" id="schedulingSectionEnabled" onchange="toggleSchedulingSection(this.checked)"><span class="switch-track"></span><span class="switch-label">Appointment scheduling</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About appointment scheduling" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Book patients in advance without leaving the board.</span></span></div>
+          </div>
+          <div class="bb-row" id="preferenceCardTile">
+            <div class="bb-main"><label class="switch-heading"><input type="checkbox" id="preferenceCardEnabled" onchange="togglePreferenceCard(this.checked)"><span class="switch-track"></span><span class="switch-label">Preference cards</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About preference cards" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Shows what to prepare for each surgery and provider.</span></span></div>
+          </div>
+          <div class="bb-row bb-stack" id="autoRemovalTile">
+            <div class="bb-main"><label class="switch-heading"><input type="checkbox" id="autoRemovalEnabled" onchange="toggleAutoRemoval(this.checked)"><span class="switch-track"></span><span class="switch-label">Auto-remove inactive patients</span></label> <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About auto-removal" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Clears patients who wait in the Starting status with no activity.</span></span></div>
+            <div class="field bb-field" id="autoRemovalDetail" style="display:none;"><label for="autoRemovalValue"><span>Duration <span style="color:var(--bad)">*</span></span></label><div class="bb-duration"><input class="text" type="text" id="autoRemovalValue" placeholder="e.g. 5" oninput="onAutoRemovalValueInput(this.value)" onblur="onAutoRemovalBlur()"><select class="control" id="autoRemovalUnit" onchange="onAutoRemovalUnitChange(this.value)" aria-label="Unit of time"><option value="hours">hours</option><option value="days" selected>days</option></select></div><p class="help bb-warn" id="autoRemovalWarning" style="display:none;">Enter a duration greater than 0.</p></div>
           </div>
         </div>
 
@@ -2014,9 +2078,19 @@ select.control{ padding-right:26px; }
     expandedStatusId = null;
     renderStatusList();
     selectedColumns = data && data.columns ? data.columns.slice() : recommendedColumnKeys();
+    columnCapabilities = data && data.columnCapabilities ? JSON.parse(JSON.stringify(data.columnCapabilities)) : {};
+    columnSubOptions = data && data.columnSubOptions ? JSON.parse(JSON.stringify(data.columnSubOptions)) : {};
     document.getElementById('columnSearchInput').value = '';
     document.getElementById('inlineColumnLimit').value = data && data.inlineColumnLimit ? data.inlineColumnLimit : 8;
     renderColumnLibrary();
+    filtersSectionEnabled = data && data.filters ? !!data.filters.enabled : false;
+    filterColumnKeys = data && data.filters && data.filters.columns ? data.filters.columns.slice() : [];
+    renderFilterColumnSelect();
+    syncFiltersSectionToggle();
+    schedulingEnabled = !!(data && data.boardBehavior && data.boardBehavior.schedulingEnabled);
+    preferenceCard = !!(data && data.boardBehavior && data.boardBehavior.preferenceCard);
+    syncSchedulingSection();
+    autoRemovalFromRecord(data && data.boardBehavior);
     if(data && data.actions){
       var enabledActionKeys = Object.keys(data.actions).filter(function(k){ return data.actions[k]; });
       // Prefer the saved order; fall back to library order for keys an older record (saved
@@ -2165,10 +2239,14 @@ select.control{ padding-right:26px; }
       name: document.getElementById('trackerboardNameInput').value.trim(),
       id: (pendingUniqueId || '').trim(),
       careSettings: selectedCareSettings.slice(),
-      statuses: JSON.parse(JSON.stringify(STATUSES)),
+      statuses: JSON.parse(JSON.stringify(STATUSES)).map(function(st){ if(!boardHasMaternity()) delete st.linkedMove; return st; }),
       widgets: { widgets: selectedWidgets.slice(), sidePanelEnabled: sidePanelEnabled, sidePanelSections: selectedSidePanelSections.slice() },
       columns: selectedColumns.slice(),
+      columnCapabilities: JSON.parse(JSON.stringify(columnCapabilities)),
+      columnSubOptions: JSON.parse(JSON.stringify(columnSubOptions)),
       inlineColumnLimit: parseInt((document.getElementById('inlineColumnLimit')||{}).value, 10) || 8,
+      filters: { enabled: filtersSectionEnabled, columns: filterColumnKeys.slice() },
+      boardBehavior: { schedulingEnabled: schedulingEnabled, preferenceCard: preferenceCard, autoRemoval: autoRemovalForRecord() },
       actions: Object.assign({}, actionLibraryState),
       actionOrder: selectedActions.slice(),
       signals: selectedSignals.slice(),
@@ -2197,7 +2275,7 @@ select.control{ padding-right:26px; }
   // no auth model in this prototype to attribute events to a real signed-in user. Once there's
   // a backend, this is the shape (id -> ordered event list) it should write through to.
   var AUDIT_LOG = {};
-  var CURRENT_USER = 'Arun';
+  var CURRENT_USER = 'James Weaver';
   function logAuditEvent(id, event, detail){
     if(!id) return;
     if(!AUDIT_LOG[id]) AUDIT_LOG[id] = [];
@@ -2251,11 +2329,27 @@ select.control{ padding-right:26px; }
         openAlertModal('Can\'t remove from a live board', 'An active board\'s existing Care Settings and Statuses can only be added to, not removed. Please restore: '+parts.join(' and ')+'.');
         return;
       }
+      // Saving an Active board applies live, so an incomplete Auto-removal setting is
+      // stopped here rather than stored with no day count.
+      if(autoRemovalEnabled && !autoRemovalValid()){
+        goToFirstIncompleteSection();
+        return;
+      }
       record.status = 'Active';
       record.everActivated = true;
+      var oldBB = existing.boardBehavior || {};
+      var behaviorChanges = [];
+      if(!!oldBB.schedulingEnabled !== record.boardBehavior.schedulingEnabled) behaviorChanges.push('Appointment scheduling: '+(oldBB.schedulingEnabled?'on':'off')+' to '+(record.boardBehavior.schedulingEnabled?'on':'off'));
+      if(!!oldBB.preferenceCard !== record.boardBehavior.preferenceCard) behaviorChanges.push('Preference cards: '+(oldBB.preferenceCard?'on':'off')+' to '+(record.boardBehavior.preferenceCard?'on':'off'));
+      var oldAR = oldBB.autoRemoval || { enabled:false };
+      var newAR = record.boardBehavior.autoRemoval;
+      if(autoRemovalDuration(oldAR) !== autoRemovalDuration(newAR)) behaviorChanges.push('Auto-removal: '+autoRemovalDuration(oldAR)+' to '+autoRemovalDuration(newAR));
+      var oldRoles = !!(existing.columnSubOptions && existing.columnSubOptions.provider && existing.columnSubOptions.provider.primarySecondary);
+      var newRoles = !!(record.columnSubOptions && record.columnSubOptions.provider && record.columnSubOptions.provider.primarySecondary);
+      if(oldRoles !== newRoles) behaviorChanges.push('Provider Primary / Secondary: '+(oldRoles?'on':'off')+' to '+(newRoles?'on':'off'));
       Object.assign(existing, record);
       formDirty = false; dirtySections = {}; touchedGroups = {};
-      logAuditEvent(existing.id, 'Updated');
+      logAuditEvent(existing.id, 'Updated', behaviorChanges.join('; '));
       hideDrawer();
       renderDashboard();
       return;
@@ -2271,6 +2365,8 @@ select.control{ padding-right:26px; }
         '<ul style="margin:0 0 8px;padding-left:18px;">'+
           '<li>Care Setting: '+((record.careSettings||[]).join(', ')||'—')+'</li>'+
           '<li>Workflow: '+record.statuses.length+' statuses</li>'+
+          '<li>Board behavior: '+boardBehaviorSummary(record.boardBehavior)+'</li>'+
+          (boardHasMaternity() ? '<li>Maternity: '+linkedPatientSummary(record.statuses)+'</li>' : '')+
         '</ul>'+
         'The board will become available to permitted users immediately.',
         function(){
@@ -2372,6 +2468,7 @@ select.control{ padding-right:26px; }
       var key = SECTION_ORDER[i].key;
       if(computeSectionState(key).issues.length){
         dirtySections[key] = true;
+        if(key === 'boardbehavior'){ autoRemovalTouched = true; syncAutoRemoval(); }
         if(key === 'caresetting'){ touchedGroups['basic'] = true; touchedGroups['scope'] = true; }
         updateReadiness();
         goToSection(key);
@@ -2507,7 +2604,7 @@ select.control{ padding-right:26px; }
       widgets:{ widgets:['totalPatients','resources','codeTeam','doctorsOnDuty'], sidePanelEnabled:true, sidePanelSections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } },
     { name:'Inpatient Trackerboard', id:'IPT001', careSettings:['ICU','Neo','Hosp','Maternity'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'08/11/2026 04:22 PM', updatedBy:'Sarah Mitchell', status:'Active', activePatients:9, dependents:0,
       widgets:{ widgets:['totalPatients','capacity','codeTeam','doctorsOnDuty'], sidePanelEnabled:true, sidePanelSections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } },
-    { name:'Operating Room Trackerboard', id:'ORT001', careSettings:['OR'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, everActivated:true, updated:'07/22/2026 10:50 AM', updatedBy:'James Weaver', status:'Active', activePatients:3, dependents:0,
+    { name:'Operating Room Trackerboard', id:'ORT001', careSettings:['OR'], statuses:SEED_MIN_STATUSES, actions:SEED_ACTIONS, boardBehavior:{ schedulingEnabled:true, autoRemoval:{ enabled:true, value:5, unit:'days' } }, everActivated:true, updated:'07/22/2026 10:50 AM', updatedBy:'James Weaver', status:'Active', activePatients:3, dependents:0,
       widgets:{ widgets:['totalPatients','capacity','codeTeam','doctorsOnDuty'], sidePanelEnabled:true, sidePanelSections:['awaitingApprovals','meds','rejectedMeds','labRadiology'] } }
   ];
 
@@ -2599,7 +2696,17 @@ select.control{ padding-right:26px; }
     var btn = document.getElementById(type + 'FilterBtn');
     var willOpen = !menu.classList.contains('open');
     document.querySelectorAll('.picker-menu.open').forEach(function(m){ m.classList.remove('open'); });
-    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    if(willOpen){
+      menu.classList.remove('open-up');
+      menu.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      // Open upward when the menu would run past the bottom of its scroll area (e.g. a picker
+      // sitting at the end of the drawer) — but only if there is actually more room above.
+      var body = btn.closest('.drawer-body');
+      var limit = Math.min(window.innerHeight, body ? body.getBoundingClientRect().bottom : window.innerHeight);
+      var m = menu.getBoundingClientRect(), b = btn.getBoundingClientRect();
+      if(m.bottom > limit && (b.top - (body ? body.getBoundingClientRect().top : 0)) > (limit - b.bottom)) menu.classList.add('open-up');
+    }
     else { btn.setAttribute('aria-expanded','false'); }
   }
 
@@ -2845,8 +2952,8 @@ select.control{ padding-right:26px; }
     { key:'resources', label:'Resources', icon:'box-seam' },
     { key:'codeTeam', label:'Code team', icon:'people' },
     { key:'doctorsOnDuty', label:'Doctors on duty', icon:'people' },
-    { key:'capacity', label:'Capacity', icon:'pie-chart' },
-    { key:'waitTimes', label:'Wait times', icon:'clock' }
+    { key:'capacity', label:'Patients grouped by Gender', icon:'pie-chart' },
+    { key:'waitTimes', label:'Patients grouped by age', icon:'people' }
   ];
   var SIDE_PANEL_SECTIONS = [
     { key:'awaitingApprovals', label:'Awaiting approvals - MAR' },
@@ -3102,16 +3209,21 @@ select.control{ padding-right:26px; }
       var positionTag = checked ? (pos < limit ? '<span class="action-position-tag inline">Level 1</span>' : '<span class="action-position-tag menu">Level 2</span>') : '';
       var divider = (idx === limit && limit < selectedColumns.length) ?
         '<div class="action-divider"><span>Moves to Level 2 below (shown when the row is expanded)</span></div>' : '';
-      return divider + '<label class="col-row" ondragover="onReorderDragOver(event,\'column\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'column\',\''+c.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleColumnSelected(\''+c.key+'\', this.checked)"> <span class="col-name">'+c.label+'</span>'+positionTag+'</label>';
+      // Capability zone only renders once the column is checked on — an unchecked Provider/Nurse
+      // row shows no Single/Multi choice to make, since there's nothing yet to configure.
+      var capZone = checked ? columnCapabilityZoneHtml(c) : '<span class="col-capabilities"></span>';
+      return divider + '<label class="col-row" ondragover="onReorderDragOver(event,\'column\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'column\',\''+c.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleColumnSelected(\''+c.key+'\', this.checked)"> <span class="col-name">'+c.label+'</span>'+capZone+positionTag+'</label>';
     }).join('') : '<p class="muted" style="padding:8px;">No matching columns</p>';
 
     list.innerHTML = lockedHtml + rowsHtml;
+    renderFilterColumnSelect();
     var countEl = document.getElementById('columnSelectedCount');
-    // Only Level 1 columns compete for main-row width — Level 2 columns live in the accordion
-    // and never affect horizontal scrolling, so they're excluded from the soft-limit count.
-    var l1SelectedCount = Math.min(selectedColumns.length, limit);
-    var totalForLimit = LOCKED_COLUMN_KEYS.length + l1SelectedCount;
-    if(countEl) countEl.textContent = (LOCKED_COLUMN_KEYS.length + selectedColumns.length) + ' of ' + COLUMN_COUNT_SOFT_LIMIT + ' columns selected';
+    var totalForLimit = level1ColumnCount();
+    var totalSelected = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
+    // "of 12" only ever describes Level 1 — showing the combined Level 1 + Level 2 total against
+    // that number implied a cap that doesn't exist, since Level 2 columns don't compete for
+    // main-row width at all. Report the two counts separately instead.
+    if(countEl) countEl.textContent = totalSelected + ' columns selected (' + totalForLimit + ' on Level 1)';
     var warning = document.getElementById('columnCountWarning');
     if(warning){
       if(totalForLimit > COLUMN_COUNT_SOFT_LIMIT){ warning.style.display=''; warning.textContent = totalForLimit + ' Level 1 columns selected — more than ' + COLUMN_COUNT_SOFT_LIMIT + ' may not fit a typical viewport without horizontal scrolling.'; }
@@ -3127,6 +3239,7 @@ select.control{ padding-right:26px; }
   var ACTION_LIBRARY = [
     { key:'statusChange', label:'Status change', category:'Workflow', icon:'arrow-repeat' },
     { key:'encounterNote', label:'Encounter note', category:'Clinical', icon:'journal-text' },
+    { key:'addChild', label:'Add child', category:'Workflow', icon:'people', auto:'maternity' },
     { key:'specimenCollection', label:'Specimen collection', category:'Clinical', icon:'droplet' },
     { key:'cardexAlerts', label:'Cardex alerts', category:'Clinical', icon:'card-checklist' },
     { key:'comments', label:'Comments', category:'Clinical', icon:'chat-left-text' },
@@ -3183,6 +3296,22 @@ select.control{ padding-right:26px; }
   // actionLibraryState is kept as a derived boolean map — other code (readiness checks, record
   // save/load) reads it as {key: true/false}, unchanged from before.
   var actionLibraryState = Object.assign({}, DEFAULT_ACTION_STATE);
+  // Add child is not chosen from the library: it is added to selectedActions while the board
+  // selects a Maternity care setting and removed when none is selected. It defaults to the slot
+  // after Status change (inline) and can be reordered (inline vs menu) but not unchecked. Called at the top of every render so every path that
+  // changes care settings or loads a board stays in step.
+  function syncMaternityAddChild(){
+    var has = boardHasMaternity();
+    var pos = selectedActions.indexOf('addChild');
+    // New to the board: it lands right after the pinned Status change, so it sits inline by
+    // default. A position the admin has already set (saved order) is left alone.
+    if(has && pos === -1) selectedActions.splice(selectedActions.indexOf('statusChange') + 1, 0, 'addChild');
+    if(!has && pos > -1) selectedActions.splice(pos, 1);
+    syncActionLibraryState();
+  }
+  function availableActionCount(){
+    return ACTION_LIBRARY.length - (boardHasMaternity() ? 0 : 1);
+  }
   function syncActionLibraryState(){
     actionLibraryState = {};
     selectedActions.forEach(function(key){ actionLibraryState[key] = true; });
@@ -3200,6 +3329,7 @@ select.control{ padding-right:26px; }
   function renderActionLibrary(){
     var list = document.getElementById('actionLibraryList');
     if(!list) return;
+    syncMaternityAddChild();
     // Status change is pinned, same as Name/PID in Columns: always on, no checkbox to turn it
     // off, since a board with no way to change status has no way to move patients through the
     // workflow. Excluded from the normal searchable/sortable/draggable list below.
@@ -3209,7 +3339,7 @@ select.control{ padding-right:26px; }
     var searchInput = document.getElementById('actionSearchInput');
     var query = ((searchInput ? searchInput.value : '') || '').toLowerCase();
     var filtered = ACTION_LIBRARY.filter(function(a){
-      return a.key !== 'statusChange' && (!query || a.label.toLowerCase().indexOf(query) > -1);
+      return a.key !== 'statusChange' && !(a.auto && !boardHasMaternity()) && (!query || a.label.toLowerCase().indexOf(query) > -1);
     });
     // Checked-but-filtered-out actions stay visible with their drag handle — otherwise a
     // search could hide an action you already selected, same as Columns.
@@ -3242,16 +3372,17 @@ select.control{ padding-right:26px; }
       // a separate list-of-names summary underneath that repeats the same information.
       var positionTag = checked ? (pos < nonLockedLimit ? '<span class="action-position-tag inline">Inline</span>' : '<span class="action-position-tag menu">Menu</span>') : '';
       var iconHtml = '<span class="col-icon" aria-hidden="true">'+actionIconSvg(a.icon)+'</span>';
+      var autoTag = a.auto ? '<span class="auto-tag">Added by Maternity care setting</span>' : '';
       // A divider sits right at the inline/menu boundary among the selected (checked) rows —
       // between the last row that fits inline and the first that overflows — so dragging an
       // action across it is visibly "moving it into the menu" rather than an ambiguous reorder.
       // Only drawn when there's actually an overflow to separate from.
       var divider = (idx === nonLockedLimit && nonLockedLimit < nonLockedSelected.length) ?
         '<div class="action-divider"><span>Overflows to menu below</span></div>' : '';
-      return divider + '<label class="col-row" ondragover="onReorderDragOver(event,\'action\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'action\',\''+a.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> '+iconHtml+'<span class="col-name">'+a.label+'</span>'+positionTag+'</label>';
+      return divider + '<label class="col-row" ondragover="onReorderDragOver(event,\'action\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'action\',\''+a.key+'\')">'+dragHandle+'<input type="checkbox"'+(checked?' checked':'')+(a.auto?' disabled':'')+' onchange="toggleActionSelected(\''+a.key+'\', this.checked)"> '+iconHtml+'<span class="col-name">'+a.label+'</span>'+autoTag+positionTag+'</label>';
     }).join('') : '<p class="muted" style="padding:8px;">No matching actions</p>');
     var countEl = document.getElementById('actionSelectedCount');
-    if(countEl) countEl.textContent = selectedActions.length + ' of ' + ACTION_LIBRARY.length + ' actions selected';
+    if(countEl) countEl.textContent = selectedActions.length + ' of ' + availableActionCount() + ' actions selected';
   }
 
   // Signals are now a fixed set of 3 icon-only alerts — no severity, no color, no ordering.
@@ -3344,6 +3475,152 @@ select.control{ padding-right:26px; }
     if(body) body.style.display = anyOn ? '' : 'none';
   }
 
+  /* ---------- Board behavior: Scheduling ---------- */
+  // Two stored booleans (scheduling, preference cards). A dependent "Book only in available
+  // slots" setting existed here and was removed for now; the flat-list row style still supports
+  // an indented dependent row (.bb-row.dependent) if it comes back.
+  var schedulingEnabled = false;
+  var preferenceCard = false;
+  function toggleSchedulingSection(checked){
+    schedulingEnabled = checked;
+    syncSchedulingSection();
+  }
+  function syncSchedulingSection(){
+    var cb = document.getElementById('schedulingSectionEnabled');
+    if(cb) cb.checked = schedulingEnabled;
+    var pcb = document.getElementById('preferenceCardEnabled');
+    if(pcb) pcb.checked = preferenceCard;
+  }
+  function togglePreferenceCard(checked){
+    preferenceCard = checked;
+    syncSchedulingSection();
+  }
+
+  /* ---------- Board behavior: Auto-removal ---------- */
+  // Toggle plus a duration (number + hours/days), the same shape as a status's "Alert on
+  // extended duration". The number has no default and must be typed in while the toggle is on;
+  // it is checked once the field has been left (blur) or the user tries to activate. The unit
+  // defaults to days. Switching the toggle off clears the number and resets the unit.
+  var autoRemovalEnabled = false;
+  var autoRemovalValue = '';
+  var autoRemovalUnit = 'days';
+  var autoRemovalTouched = false;
+  function autoRemovalValid(){
+    var n = Number(autoRemovalValue);
+    return autoRemovalValue !== '' && isFinite(n) && n > 0;
+  }
+  function toggleAutoRemoval(checked){
+    autoRemovalEnabled = checked;
+    if(!checked){ autoRemovalValue = ''; autoRemovalUnit = 'days'; autoRemovalTouched = false; }
+    syncAutoRemoval();
+    if(checked){ var inp = document.getElementById('autoRemovalValue'); if(inp) inp.focus(); }
+  }
+  function onAutoRemovalValueInput(v){
+    autoRemovalValue = String(v).trim();
+    syncAutoRemoval(true);
+  }
+  function onAutoRemovalUnitChange(v){
+    autoRemovalUnit = (v === 'hours') ? 'hours' : 'days';
+  }
+  function onAutoRemovalBlur(){
+    autoRemovalTouched = true;
+    syncAutoRemoval();
+    updateReadiness();
+  }
+  function syncAutoRemoval(keepInput){
+    var cb = document.getElementById('autoRemovalEnabled');
+    if(cb) cb.checked = autoRemovalEnabled;
+    var detail = document.getElementById('autoRemovalDetail');
+    if(detail) detail.style.display = autoRemovalEnabled ? '' : 'none';
+    var inp = document.getElementById('autoRemovalValue');
+    if(inp && !keepInput) inp.value = autoRemovalValue;
+    var unit = document.getElementById('autoRemovalUnit');
+    if(unit) unit.value = autoRemovalUnit;
+    var warn = document.getElementById('autoRemovalWarning');
+    var showErr = autoRemovalEnabled && autoRemovalTouched && !autoRemovalValid();
+    if(warn) warn.style.display = showErr ? '' : 'none';
+    if(detail) detail.classList.toggle('error', showErr);
+  }
+  function autoRemovalFromRecord(b){
+    var a = b && b.autoRemoval;
+    autoRemovalEnabled = !!(a && a.enabled);
+    // Older records stored only a day count (a.days); read those as days.
+    var v = a && a.enabled ? (a.value != null ? a.value : a.days) : null;
+    autoRemovalValue = v != null ? String(v) : '';
+    autoRemovalUnit = (a && a.unit === 'hours') ? 'hours' : 'days';
+    autoRemovalTouched = false;
+    syncAutoRemoval();
+  }
+  function autoRemovalForRecord(){
+    return autoRemovalEnabled ? { enabled:true, value:autoRemovalValid() ? Number(autoRemovalValue) : null, unit:autoRemovalUnit } : { enabled:false, value:null, unit:null };
+  }
+  function autoRemovalDuration(a){
+    if(!a || !a.enabled) return 'off';
+    var v = a.value != null ? a.value : a.days;
+    var u = a.unit === 'hours' ? 'hour' : 'day';
+    return v + ' ' + u + (v === 1 ? '' : 's');
+  }
+  function autoRemovalLabel(a){
+    return (a && a.enabled) ? ('Auto-removal on \u00b7 after ' + autoRemovalDuration(a) + ' with no activity') : 'Auto-removal off';
+  }
+  function boardBehaviorSummary(b){
+    var sched = (!b || !b.schedulingEnabled) ? 'Appointment scheduling off' : 'Appointment scheduling on';
+    return sched + ' \u00b7 Preference cards ' + ((b && b.preferenceCard) ? 'on' : 'off') + ' \u00b7 ' + autoRemovalLabel(b && b.autoRemoval);
+  }
+
+  /* ---------- Patient Table filters ---------- */
+  // A toggle (default OFF) plus a capped multi-select checklist (up to FILTER_MAX_SELECTED),
+  // drawn only from FILTER_ELIGIBLE_KEYS — columns backed by a small, bounded set of values —
+  // and further cut down to whichever of those are actually checked in Columns above. Care
+  // Setting and Status stay as their own fixed filters on the live board regardless of what's
+  // picked here; this is a separate, patient-table-scoped filter.
+  var filtersSectionEnabled = false;
+  var filterColumnKeys = [];
+
+  function toggleFiltersSection(checked){
+    filtersSectionEnabled = checked;
+    var body = document.getElementById('filtersBody');
+    if(body) body.style.display = checked ? '' : 'none';
+    updateReadiness();
+  }
+  function syncFiltersSectionToggle(){
+    var cb = document.getElementById('filtersSectionEnabled');
+    var body = document.getElementById('filtersBody');
+    if(cb) cb.checked = filtersSectionEnabled;
+    if(body) body.style.display = filtersSectionEnabled ? '' : 'none';
+  }
+  // Same picker pattern as the live board's Care Setting / Status filter buttons (flat
+  // checkbox list in a dropdown menu) — just flat, no "All" shortcut and no divider, since
+  // this list is already small and curated (FILTER_ELIGIBLE_KEYS), unlike Care Setting's.
+  function toggleFilterColumnOption(key, checked){
+    var pos = filterColumnKeys.indexOf(key);
+    if(checked && pos===-1){
+      if(filterColumnKeys.length >= FILTER_MAX_SELECTED) filterColumnKeys.shift(); // drop oldest to make room
+      filterColumnKeys.push(key);
+    }
+    if(!checked && pos>-1) filterColumnKeys.splice(pos,1);
+    renderFilterColumnSelect();
+    updateReadiness();
+  }
+  // Always lists every FILTER_ELIGIBLE_KEYS column, independent of what's checked in Columns.
+  function renderFilterColumnSelect(){
+    var menu = document.getElementById('filterColumnFilterMenu');
+    var btn = document.getElementById('filterColumnFilterBtn');
+    if(!menu || !btn) return;
+    var eligible = FILTER_ELIGIBLE_KEYS.map(columnByKey).filter(Boolean);
+    var atMax = filterColumnKeys.length >= FILTER_MAX_SELECTED;
+    menu.innerHTML = eligible.length ? eligible.map(function(c){
+      var checked = filterColumnKeys.indexOf(c.key) > -1;
+      var disabled = atMax && !checked;
+      return '<label class="picker-option" style="cursor:'+(disabled?'default':'pointer')+';'+(disabled?'opacity:.5;':'')+'"><input type="checkbox" value="'+c.key+'"'+(checked?' checked':'')+(disabled?' disabled':'')+' onchange="toggleFilterColumnOption(\''+c.key+'\', this.checked)"> '+c.label+'</label>';
+    }).join('') : '<div class="picker-option" style="cursor:default;color:var(--muted)">No options</div>';
+    btn.textContent = filterColumnKeys.length ? filterColumnKeys.length + ' selected' : 'Select';
+    var warning = document.getElementById('filterColumnWarning');
+    if(warning) warning.style.display = (filtersSectionEnabled && filterColumnKeys.length===0) ? '' : 'none';
+    var limitNote = document.getElementById('filterColumnLimitNote');
+    if(limitNote) limitNote.textContent = 'Up to ' + FILTER_MAX_SELECTED + ' filters at a time (' + filterColumnKeys.length + ' of ' + FILTER_MAX_SELECTED + ' selected).';
+  }
+
   var selectedCareSettings = [];
 
   /* CARE_SETTINGS_SOURCE mirrors Care Settings Configuration's Main/Sub tree for this demo.
@@ -3365,7 +3642,7 @@ select.control{ padding-right:26px; }
       { name:'ICU', shortName:'ICU', status:'active', visitCategory:'Urgent', duration:{ value:3, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' },
       { name:'Neonatal', shortName:'Neo', status:'active', visitCategory:'New Patient', duration:{ value:1, unit:'hours' }, chiefComplaintForm:null },
       { name:'Hospitalization', shortName:'Hosp', status:'active', visitCategory:'Follow-up', duration:{ value:4, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' },
-      { name:'Maternity', shortName:'Maternity', status:'active', visitCategory:'New Patient', duration:{ value:4, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' }
+      { name:'Maternity', shortName:'Maternity', status:'active', isMaternity:true, visitCategory:'New Patient', duration:{ value:4, unit:'hours' }, chiefComplaintForm:'Standard Complaint Form' }
     ] },
     'ED': { shortName:'ED', fullName:'Emergency Department', status:'active', visitCategory:'Urgent', duration:{ value:60, unit:'minutes' }, chiefComplaintForm:'ED Triage Form', subs:[] },
     'OR': { shortName:'OR', fullName:'Operating Room', status:'active', visitCategory:'Procedure', duration:{ value:90, unit:'minutes' }, chiefComplaintForm:null, subs:[] },
@@ -3407,21 +3684,137 @@ select.control{ padding-right:26px; }
   function careSettingRecord(shortName){
     return flattenedCareSettings().find(function(s){ return s.shortName === shortName; }) || null;
   }
+  // isMaternity is set on a care setting in the Care Settings tool (mirrored here as demo data).
+  // A board "has Maternity" when any care setting it selects carries the flag; that alone
+  // switches on the Add child action and the linked-baby field on status cards. Nothing about
+  // it is configured on the board itself.
+  function isMaternityCareSetting(shortName){
+    var r = careSettingRecord(shortName);
+    return !!(r && r.isMaternity);
+  }
+  function boardHasMaternity(){
+    return selectedCareSettings.some(isMaternityCareSetting);
+  }
 
 
+  // capabilities (optional): describes the per-column controls that appear inline in the
+  // Columns list once that column is checked on. Every other column stays plain (no inline
+  // control) — including Vitals, Bed No, Duration and Patient type, which used to carry a
+  // None/combination dropdown but turned out not to need one: Vitals is always Add & Edit,
+  // Bed No always Assign & Change, Duration always Start Timer, Patient type always single
+  // select — nothing there was ever a real decision for the admin to make.
+  //   type:'checkbox' — independent verbs, any combination can be on (kept as a mechanism for
+  //                      future columns that do need it; no column currently uses it)
+  //   type:'toggle'    — one small Multiselect switch; off = single select, on = multi select
+  //                      (Provider, Nurse, Surgery Type). A toggle may declare a `dependent`
+  //                      sub-option (Provider: Primary / Secondary), shown only while Multiselect
+  //                      is on and stored separately in columnSubOptions.
   var PATIENT_COLUMNS = [
     { key:'nameOrPid', label:'Name/PID', category:'Identity', locked:true },
     { key:'careSetting', label:'Care setting', category:'Identity', recommended:true },
+    { key:'programs', label:'Programs', category:'Identity' },
     { key:'queuedFor', label:'Queued for', category:'Workflow', recommended:true },
     { key:'vitals', label:'Vitals', category:'Clinical', recommended:true },
     { key:'bedNo', label:'Bed No', category:'Resource', recommended:true },
     { key:'duration', label:'Duration', category:'Workflow', recommended:true },
     { key:'schTime', label:'Scheduled Time', category:'Workflow', recommended:true },
-    { key:'surgeryType', label:'Surgery Type', category:'OR', recommended:true },
+    { key:'patientType', label:'Patient type', category:'Identity' },
+    { key:'provider', label:'Provider', category:'Clinical',
+      capabilities:{ type:'toggle', defaultValue:false,
+                     dependent:{ key:'primarySecondary', label:'Primary / Secondary' } } },
+    { key:'nurse', label:'Nurse', category:'Clinical',
+      capabilities:{ type:'toggle', defaultValue:false } },
+    { key:'surgeryType', label:'Surgery Type', category:'OR', recommended:true,
+      capabilities:{ type:'toggle', defaultValue:false } },
     { key:'chiefComplaints', label:'Chief Complaints', category:'ED', recommended:true },
     { key:'triage', label:'Triage', category:'ED', recommended:true },
-    { key:'diagnosis', label:'Diagnosis', category:'Clinical', recommended:true }
+    { key:'diagnosis', label:'Diagnosis', category:'Clinical', recommended:true },
+    { key:'currentMedication', label:'Current Medication', category:'Clinical' }
   ];
+
+  // Filters is a curated subset, not "whatever's checked in Columns" — only columns backed by a
+  // small, bounded set of values make sense as a board filter. Still cross-referenced against
+  // selectedColumns at render time, so a column not actually on the table never appears here.
+  var FILTER_ELIGIBLE_KEYS = ['patientType','provider','nurse','surgeryType','triage','programs'];
+  var FILTER_MAX_SELECTED = 3;
+
+  // columnCapabilities: key -> array of enabled option keys (type:'checkbox') or a boolean
+  // (type:'toggle', true = Multiselect on). Only columns with a capabilities definition appear
+  // here.
+  var columnCapabilities = {};
+  // columnSubOptions: colKey -> { subKey: boolean } for a toggle's dependent sub-option (e.g.
+  // provider -> { primarySecondary:true }). Cleared whenever its parent Multiselect goes off
+  // or the column is unchecked, so a hidden sub-option can never stay silently on.
+  var columnSubOptions = {};
+  function defaultCapabilityValue(c){
+    if(!c.capabilities) return null;
+    return c.capabilities.type === 'checkbox' ? c.capabilities.defaultValue.slice() : !!c.capabilities.defaultValue;
+  }
+  function ensureColumnCapabilityDefault(key){
+    var c = columnByKey(key);
+    if(!c || !c.capabilities) return;
+    if(!(key in columnCapabilities)) columnCapabilities[key] = defaultCapabilityValue(c);
+  }
+  // Builds the dropdown's option list for a type:'checkbox' capability — every combination of
+  // the independent verbs, "None" first, then singles, then combined (e.g. Bed No -> None /
+  // Assign / Change / Assign & Change).
+  function capabilityCombosFor(cap){
+    var opts = cap.options, combos = [{ comboKey:'none', label:'None', value:[] }];
+    for(var mask=1; mask<(1<<opts.length); mask++){
+      var chosen = opts.filter(function(o,i){ return mask & (1<<i); });
+      combos.push({
+        comboKey: chosen.map(function(o){ return o.key; }).join('_'),
+        label: chosen.map(function(o){ return o.label; }).join(' & '),
+        value: chosen.map(function(o){ return o.key; })
+      });
+    }
+    return combos;
+  }
+  // Recovers a combo key from a stored checkbox array, always in the option list's own order
+  // (not insertion order) so it matches whatever capabilityCombosFor generated.
+  function comboKeyForArray(cap, arr){
+    var chosen = cap.options.filter(function(o){ return (arr||[]).indexOf(o.key) > -1; });
+    return chosen.length ? chosen.map(function(o){ return o.key; }).join('_') : 'none';
+  }
+  function setColumnCapabilityCombo(colKey, comboKey){
+    var c = columnByKey(colKey);
+    if(!c || !c.capabilities || c.capabilities.type !== 'checkbox') return;
+    var match = capabilityCombosFor(c.capabilities).filter(function(combo){ return combo.comboKey === comboKey; })[0];
+    if(!match) return;
+    columnCapabilities[colKey] = match.value.slice();
+    renderColumnLibrary();
+  }
+  function setColumnCapabilityMultiselect(colKey, checked){
+    columnCapabilities[colKey] = !!checked;
+    if(!checked) delete columnSubOptions[colKey];
+    renderColumnLibrary();
+  }
+  function setColumnSubOption(colKey, subKey, checked){
+    if(!columnSubOptions[colKey]) columnSubOptions[colKey] = {};
+    columnSubOptions[colKey][subKey] = !!checked;
+    renderColumnLibrary();
+  }
+  function columnCapabilityZoneHtml(c){
+    if(!c.capabilities) return '<span class="col-capabilities"></span>';
+    ensureColumnCapabilityDefault(c.key);
+    if(c.capabilities.type === 'toggle'){
+      var on = !!columnCapabilities[c.key];
+      var dep = c.capabilities.dependent;
+      var depHtml = '';
+      if(dep && on){
+        var depOn = !!(columnSubOptions[c.key] && columnSubOptions[c.key][dep.key]);
+        depHtml = '<label class="switch-heading compact" onclick="event.stopPropagation();"><input type="checkbox"'+(depOn?' checked':'')+' onchange="event.stopPropagation();setColumnSubOption(\''+c.key+'\', \''+dep.key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+dep.label+'</span></label>';
+      }
+      return '<span class="col-capabilities">'+depHtml+'<label class="switch-heading compact" onclick="event.stopPropagation();"><input type="checkbox"'+(on?' checked':'')+' onchange="event.stopPropagation();setColumnCapabilityMultiselect(\''+c.key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">Multiselect</span></label></span>';
+    }
+    // type === 'checkbox': a single dropdown enumerating every combination of the verbs
+    var combos = capabilityCombosFor(c.capabilities);
+    var currentKey = comboKeyForArray(c.capabilities, columnCapabilities[c.key]);
+    var optionsHtml = combos.map(function(combo){
+      return '<option value="'+combo.comboKey+'"'+(combo.comboKey===currentKey?' selected':'')+'>'+combo.label+'</option>';
+    }).join('');
+    return '<span class="col-capabilities"><select class="control compact" onclick="event.stopPropagation();" onchange="event.stopPropagation();setColumnCapabilityCombo(\''+c.key+'\', this.value)">'+optionsHtml+'</select></span>';
+  }
 
   var selectedColumns = []; // ordered array of non-locked column keys
   var LOCKED_COLUMN_KEYS = ['nameOrPid'];
@@ -3442,6 +3835,29 @@ select.control{ padding-right:26px; }
 
   function recommendedColumnKeys(){
     return columnsForCareSetting().filter(function(c){ return c.recommended && !c.locked; }).map(function(c){ return c.key; });
+  }
+
+  // Level 1 = main row (competes for horizontal space); Level 2 = expanded-row-only, so it
+  // never affects viewport fit no matter how many columns land there. The soft limit below
+  // only ever applies to Level 1 — a board can have well over 12 columns total across both
+  // levels with no warning, as long as Level 1 itself stays under the limit.
+  function level1ColumnCount(){
+    var limitInput = document.getElementById('inlineColumnLimit');
+    var limit = limitInput ? parseInt(limitInput.value, 10) || 8 : 8;
+    return LOCKED_COLUMN_KEYS.length + Math.min(selectedColumns.length, limit);
+  }
+
+  function toggleColumnSelected(key, checked){
+    var pos = selectedColumns.indexOf(key);
+    if(checked && pos===-1) selectedColumns.push(key);
+    if(!checked && pos>-1) selectedColumns.splice(pos,1);
+    if(!checked){
+      // Capability choices (if any) get a clean slate if the column is checked back on later.
+      delete columnCapabilities[key];
+      delete columnSubOptions[key];
+    }
+    renderColumnLibrary();
+    updateReadiness();
   }
 
 
@@ -3556,7 +3972,7 @@ select.control{ padding-right:26px; }
         subs.forEach(function(sub){
           var checked = selectedCareSettings.indexOf(sub.shortName) > -1 ? ' checked' : '';
           var subLocked = activeBoardLockedCareSettings.indexOf(sub.shortName) > -1;
-          html += '<label class="picker-option" style="cursor:pointer;display:flex;padding-left:28px;"><span style="display:inline-flex;align-items:center;gap:8px;flex:1 1 auto;"><input type="checkbox" value="'+sub.shortName+'"'+checked+(subLocked?' disabled title="This board\'s existing Care Settings can\'t be removed."':'')+' onchange="toggleCareSetting(this, \''+sub.shortName.replace(/'/g,"\\'")+'\')">'+sub.name+'</span></label>';
+          html += '<label class="picker-option" style="cursor:pointer;display:flex;padding-left:28px;"><span style="display:inline-flex;align-items:center;gap:8px;flex:1 1 auto;"><input type="checkbox" value="'+sub.shortName+'"'+checked+(subLocked?' disabled title="This board\'s existing Care Settings can\'t be removed."':'')+' onchange="toggleCareSetting(this, \''+sub.shortName.replace(/'/g,"\\'")+'\')">'+sub.name+(sub.isMaternity?'<span class="auto-tag">Maternity</span>':'')+'</span></label>';
         });
         html += '</div>';
       }
@@ -3623,6 +4039,11 @@ select.control{ padding-right:26px; }
     var items = [];
     var droppedColumns = selectedColumns.map(columnByKey).filter(function(c){ return c && c.settings && c.settings.length && !c.settings.some(function(s){ return remaining.indexOf(s) > -1; }); });
     droppedColumns.forEach(function(c){ items.push(c.label + ' column'); });
+    if(isMaternityCareSetting(removedValue) && !remaining.some(isMaternityCareSetting)){
+      items.push('Add child action');
+      var linkedCount = STATUSES.filter(function(st){ return st.linkedMove; }).length;
+      if(linkedCount) items.push('Linked baby setting on ' + linkedCount + (linkedCount === 1 ? ' status' : ' statuses'));
+    }
     return items;
   }
 
@@ -3662,14 +4083,19 @@ select.control{ padding-right:26px; }
     updateCareSettingButton();
     renderColumnLibrary();
     renderWidgetLibrary();
+    renderActionLibrary();
+    renderStatusList();
     updateReadiness();
   }
 
   function applyCareSettingRemove(){
     updateCareSettingButton();
     selectedColumns = selectedColumns.filter(function(k){ var c = columnByKey(k); return !c || settingsStillCovered(c.settings); });
+    if(!boardHasMaternity()) STATUSES.forEach(function(st){ delete st.linkedMove; });
     renderColumnLibrary();
     renderWidgetLibrary();
+    renderActionLibrary();
+    renderStatusList();
     updateReadiness();
   }
 
@@ -3689,7 +4115,8 @@ select.control{ padding-right:26px; }
     { key:'caresetting', label:'Basic information' },
     { key:'workflow', label:'Statuses' },
     { key:'widgets', label:'Widgets' },
-    { key:'table', label:'Patient table' }
+    { key:'table', label:'Patient table' },
+    { key:'boardbehavior', label:'Board behavior' }
   ];
 
   function toggleCardSection(btn){
@@ -3857,8 +4284,14 @@ select.control{ padding-right:26px; }
     if(key === 'table'){
       // §42.1 lists "at least one valid status-change path" as a blocking Patient Table requirement.
       if(!actionLibraryState.statusChange) return { state:'incomplete', issues:['No status-change action is enabled. Patients have no way to move through the workflow.'] };
-      var total = LOCKED_COLUMN_KEYS.length + selectedColumns.length;
-      if(total > 12) return { state:'warning', issues:[total + ' columns selected — more than 12 may not fit a typical viewport.'] };
+      var total = level1ColumnCount();
+      if(total > COLUMN_COUNT_SOFT_LIMIT) return { state:'warning', issues:[total + ' Level 1 columns selected — more than ' + COLUMN_COUNT_SOFT_LIMIT + ' may not fit a typical viewport.'] };
+      return { state:'complete', issues:[] };
+    }
+    if(key === 'boardbehavior'){
+      // Optional settings, except one dependent field: Auto-removal needs a valid day count
+      // while its toggle is on.
+      if(autoRemovalEnabled && !autoRemovalValid()) return { state:'incomplete', issues:['Auto-removal is on without a valid duration'] };
       return { state:'complete', issues:[] };
     }
     return { state:'incomplete', issues:[] };
@@ -3957,6 +4390,36 @@ select.control{ padding-right:26px; }
     updateReadiness();
   }
 
+  // Mother-baby cascade, set per destination status and only while the board has a Maternity
+  // care setting. It applies when a mother moves into this status while her linked baby is on
+  // the same board. Absent = "stays" (the default); transfers to another care setting never
+  // cascade.
+  var LINKED_MOVE_OPTIONS = [ ['stays','Stays where it is'], ['moves','Moves too'], ['ask','Asked each time'] ];
+  function linkedMoveFieldHtml(s){
+    if(!boardHasMaternity()) return '';
+    var cur = s.linkedMove || 'stays';
+    var info = '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the linked baby setting" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">When a mother moves to this status, choose whether her linked baby moves too, is asked about, or stays where it is. Transfers to another care setting are always separate.</span></span>';
+    var opts = LINKED_MOVE_OPTIONS.map(function(o){ return '<option value="'+o[0]+'"'+(cur===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('');
+    return '<div class="field full" style="margin-top:12px;max-width:320px;"><label for="linkedMoveSelect_'+s.id+'"><span>Linked baby when the mother moves here '+info+'</span></label>'+
+      '<select class="control" id="linkedMoveSelect_'+s.id+'" onchange="setLinkedMove(\''+s.id+'\', this.value)">'+opts+'</select></div>';
+  }
+  function setLinkedMove(id, value){
+    var s = STATUSES.find(function(x){ return x.id === id; });
+    if(!s) return;
+    if(value === 'moves' || value === 'ask') s.linkedMove = value; else delete s.linkedMove;
+    updateReadiness();
+  }
+  function linkedPatientSummary(sts){
+    var moves = sts.filter(function(x){ return x.linkedMove === 'moves'; }).length;
+    var asks = sts.filter(function(x){ return x.linkedMove === 'ask'; }).length;
+    var base = 'Add child action added';
+    if(!moves && !asks) return base + '; the baby stays in its own status when the mother moves';
+    var parts = [];
+    if(moves) parts.push('the baby moves with the mother into ' + moves + (moves === 1 ? ' status' : ' statuses'));
+    if(asks) parts.push('asked in ' + asks + (asks === 1 ? ' status' : ' statuses'));
+    return base + '; ' + parts.join(', ');
+  }
+
   function toggleAllowExit(id, checked){
     var s = STATUSES.find(function(x){ return x.id === id; });
     if(!s) return;
@@ -4024,6 +4487,7 @@ select.control{ padding-right:26px; }
           '<label class="switch-heading"><input type="checkbox"'+(s.allowExit?' checked':'')+' onchange="toggleAllowExit(\''+s.id+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">Allow leaving without completing (left without treatment)</span></label>'+
         '</div>'+
       '</div>'+
+      linkedMoveFieldHtml(s)+
       '<div class="subsection">'+
         '<h4>Allowed transitions</h4>'+
         transitionsHtml+
