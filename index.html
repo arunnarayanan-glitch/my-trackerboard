@@ -3686,7 +3686,7 @@ select.control{ padding-right:26px; }
   }
   // isMaternity is set on a care setting in the Care Settings tool (mirrored here as demo data).
   // A board "has Maternity" when any care setting it selects carries the flag; that alone
-  // switches on the Add child action and the linked-baby field on status cards. Nothing about
+  // switches on the Add child action and the linked-newborn field on status cards. Nothing about
   // it is configured on the board itself.
   function isMaternityCareSetting(shortName){
     var r = careSettingRecord(shortName);
@@ -4042,7 +4042,7 @@ select.control{ padding-right:26px; }
     if(isMaternityCareSetting(removedValue) && !remaining.some(isMaternityCareSetting)){
       items.push('Add child action');
       var linkedCount = STATUSES.filter(function(st){ return st.linkedMove; }).length;
-      if(linkedCount) items.push('Linked baby setting on ' + linkedCount + (linkedCount === 1 ? ' status' : ' statuses'));
+      if(linkedCount) items.push('Linked newborn setting on ' + linkedCount + (linkedCount === 1 ? ' status' : ' statuses'));
     }
     return items;
   }
@@ -4394,13 +4394,13 @@ select.control{ padding-right:26px; }
   // care setting. It applies when a mother moves into this status while her linked baby is on
   // the same board. Absent = "stays" (the default); transfers to another care setting never
   // cascade.
-  var LINKED_MOVE_OPTIONS = [ ['stays','Stays where it is'], ['moves','Moves too'], ['ask','Asked each time'] ];
+  var LINKED_MOVE_OPTIONS = [ ['stays','No change'], ['ask','Confirm each time'], ['moves','Apply automatically'] ];
   function linkedMoveFieldHtml(s){
     if(!boardHasMaternity()) return '';
     var cur = s.linkedMove || 'stays';
-    var info = '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the linked baby setting" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">When a mother moves to this status, choose whether her linked baby moves too, is asked about, or stays where it is. Transfers to another care setting are always separate.</span></span>';
+    var info = '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the linked newborn setting" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Keeps the newborn\'s status in line with the mother\'s. Care setting transfers are handled separately.</span></span>';
     var opts = LINKED_MOVE_OPTIONS.map(function(o){ return '<option value="'+o[0]+'"'+(cur===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('');
-    return '<div class="field full" style="margin-top:12px;max-width:320px;"><label for="linkedMoveSelect_'+s.id+'"><span>Linked baby when the mother moves here '+info+'</span></label>'+
+    return '<div class="field full" style="margin-top:12px;max-width:320px;"><label for="linkedMoveSelect_'+s.id+'"><span>Apply to linked newborn '+info+'</span></label>'+
       '<select class="control" id="linkedMoveSelect_'+s.id+'" onchange="setLinkedMove(\''+s.id+'\', this.value)">'+opts+'</select></div>';
   }
   function setLinkedMove(id, value){
@@ -4413,10 +4413,10 @@ select.control{ padding-right:26px; }
     var moves = sts.filter(function(x){ return x.linkedMove === 'moves'; }).length;
     var asks = sts.filter(function(x){ return x.linkedMove === 'ask'; }).length;
     var base = 'Add child action added';
-    if(!moves && !asks) return base + '; the baby stays in its own status when the mother moves';
+    if(!moves && !asks) return base + '; linked newborn status is not changed when the mother\'s status changes';
     var parts = [];
-    if(moves) parts.push('the baby moves with the mother into ' + moves + (moves === 1 ? ' status' : ' statuses'));
-    if(asks) parts.push('asked in ' + asks + (asks === 1 ? ' status' : ' statuses'));
+    if(moves) parts.push('newborn status applied automatically in ' + moves + (moves === 1 ? ' status' : ' statuses'));
+    if(asks) parts.push('confirmation required in ' + asks + (asks === 1 ? ' status' : ' statuses'));
     return base + '; ' + parts.join(', ');
   }
 
