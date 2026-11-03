@@ -1984,11 +1984,10 @@ select.control{ padding-right:26px; }
     <div class="modal-head"><h2 id="deleteConfirmTitle">Delete this trackerboard?</h2></div>
     <div class="modal-body">
       <p>This draft will be permanently deleted.</p>
-      <div class="field full"><label for="deleteConfirmInput" id="deleteConfirmLabel">Type the Board Name to confirm</label><input class="text" type="text" id="deleteConfirmInput" oninput="checkDeleteConfirmInput(this.value)"></div>
     </div>
     <div class="modal-foot">
       <button class="btn" type="button" onclick="closeDeleteModal()">Cancel</button>
-      <button class="btn primary danger" type="button" id="deleteConfirmBtn" disabled onclick="confirmDeleteTrackerboard()">Delete permanently</button>
+      <button class="btn primary danger" type="button" id="deleteConfirmBtn" onclick="confirmDeleteTrackerboard()">Delete permanently</button>
     </div>
   </div>
 </div>
@@ -2292,8 +2291,7 @@ select.control{ padding-right:26px; }
     var existing = editingId ? TRACKERBOARDS.find(function(x){ return x.id === editingId; }) : null;
 
     // Board Name is required even for a Draft save — everything else can be filled in later,
-    // but a nameless board can't be identified, sorted, searched, or safely deleted (the
-    // delete-confirmation modal asks you to type the Board Name back). Block it here rather
+    // but a nameless board can't be identified, sorted, or searched. Block it here rather
     // than only at Activation, which used to let a completely blank board get saved.
     if(!record.name){
       dirtySections['caresetting'] = true;
@@ -2721,29 +2719,15 @@ select.control{ padding-right:26px; }
   }
 
   var deleteTargetId = null;
-  var DELETE_FALLBACK_PHRASE = 'DELETE';
   function deleteTrackerboard(id){
     var t = TRACKERBOARDS.find(function(x){ return x.id === id; });
     if(!t || !canDeleteTrackerboard(t)) return;
     deleteTargetId = id;
-    // A board can reach here with a blank name (shouldn't happen going forward now that Save
-    // as Draft requires a name, but this stays defensive rather than assuming that guarantee
-    // holds everywhere forever). Typing back an empty name is impossible, so fall back to a
-    // fixed phrase instead of silently making deletion undiscoverable.
+    // A board can reach here with a blank name (shouldn't happen now that Save as Draft
+    // requires a name, but this stays defensive), so the title falls back to a generic one.
     var hasName = !!(t.name && t.name.trim());
     document.getElementById('deleteConfirmTitle').textContent = hasName ? 'Delete "'+t.name+'"?' : 'Delete this untitled draft?';
-    document.getElementById('deleteConfirmLabel').textContent = hasName ? 'Type the Board Name to confirm' : 'Type ' + DELETE_FALLBACK_PHRASE + ' to confirm';
-    document.getElementById('deleteConfirmInput').value = '';
-    document.getElementById('deleteConfirmBtn').disabled = true;
     showModalBackdrop('deleteModalBackdrop');
-    document.getElementById('deleteConfirmInput').focus();
-  }
-  function checkDeleteConfirmInput(value){
-    var t = TRACKERBOARDS.find(function(x){ return x.id === deleteTargetId; });
-    if(!t){ document.getElementById('deleteConfirmBtn').disabled = true; return; }
-    var hasName = !!(t.name && t.name.trim());
-    var expected = hasName ? t.name : DELETE_FALLBACK_PHRASE;
-    document.getElementById('deleteConfirmBtn').disabled = value !== expected;
   }
   function closeDeleteModal(){
     document.getElementById('deleteModalBackdrop').classList.remove('open');
