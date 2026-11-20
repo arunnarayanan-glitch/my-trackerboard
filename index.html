@@ -1474,6 +1474,7 @@
 .desc-popover{ display:none; position:absolute; z-index:var(--z-popover); top:130%; left:0; width:max-content; max-width:260px; padding:8px 10px; background:var(--surface-dark); color:var(--white); border-radius:var(--radius); box-shadow:var(--shadow-md); font-size:var(--text-xs); font-weight:400; line-height:1.4; text-transform:none; letter-spacing:normal; white-space:normal; }
 .switch-heading{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; vertical-align:middle; }
 .switch-heading input{ position:absolute; opacity:0; width:1px; height:1px; }
+.switch-heading input:disabled ~ .switch-track{ opacity:.5; cursor:not-allowed; }
 .switch-track{ position:relative; flex:0 0 auto; width:34px; height:19px; background:var(--line); border-radius:var(--chip-radius); transition:background var(--dur-fast); }
 .switch-track::after{ content:''; position:absolute; top:2px; left:2px; width:15px; height:15px; background:var(--white); border-radius:50%; transition:transform var(--dur-fast); box-shadow:var(--shadow-sm); }
 .switch-heading input:checked ~ .switch-track{ background:var(--blue); }
@@ -1533,9 +1534,16 @@
 th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ color:#003466; }
 .check-option.heading{ border:0; background:none; padding:0; font-weight:600; font-size:var(--text-sm); }
 .status-list-body{ display:flex; flex-direction:column; gap:4px; }
+.status-group + .status-group{ margin-top:8px; padding-top:8px; border-top:1px solid var(--line); }
+.status-group-title{ margin:0 0 5px; font-size:var(--text-md); font-weight:500; color:var(--ink); }
+.status-group-title.drag-over{ box-shadow:inset 0 -2px 0 var(--blue); }
+.status-group-cards{ display:flex; flex-direction:column; gap:4px; }
+.subsection.status-transfer-block{ margin-top:8px; padding-top:8px; }
+.status-transfer-block h4{ margin:0 0 6px; }
+.status-transfer-block #transferStatusBody{ margin-top:0 !important; }
 .status-item-wrapper{ display:flex; flex-direction:column; border:1px solid var(--line); background:var(--white); }
 .status-item-wrapper.expanded .status-card-header{ background:#EDF2F9; }
-.status-card-header{ position:relative; display:flex; align-items:center; gap:10px; padding:11px 14px; cursor:pointer; }
+.status-card-header{ position:relative; display:flex; align-items:center; gap:10px; padding:7px 14px; cursor:pointer; }
 .status-card-header.bad{ background:var(--bad-bg); }
 .status-card-header .card-toggle{ padding:0; background:transparent; border:0; display:inline-flex; align-items:center; justify-content:center; color:var(--muted); cursor:pointer; }
 .status-item-wrapper:not(.expanded) .status-card-header .card-chevron{ transform:rotate(-90deg); }
@@ -1602,6 +1610,8 @@ th[aria-sort="ascending"] .sort-glyph, th[aria-sort="descending"] .sort-glyph{ c
 .info-popover-trigger:hover{ color:var(--navy2); background:var(--blue-soft); }
 .info-popover{ display:none; position:absolute; z-index:var(--z-popover); top:130%; left:0; width:max-content; min-width:200px; max-width:280px; padding:10px 12px; background:var(--white); border:1px solid var(--line); box-shadow:var(--shadow-sm); font-size:var(--text-sm); font-weight:400; text-align:left; }
 .info-popover.wide{ max-width:620px; min-width:460px; }
+.info-popover.right{ left:auto; right:0; }
+.col-capabilities .info-popover{ white-space:normal; width:280px; }
 .info-popover-wrap.open .info-popover{ display:block; }
 .info-popover .ip-title{ margin:0 0 6px; font-weight:600; font-size:var(--text-sm); }
 .info-popover .ip-row{ display:flex; align-items:baseline; gap:5px; padding:3px 0; }
@@ -1822,7 +1832,7 @@ select.control{ padding-right:26px; }
 
     <div class="card collapsed" id="sec-workflow" data-section-key="workflow">
       <div class="card-head">
-        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle statuses section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Statuses <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">The first status is the Starting status and the last is the Completion status. Where a patient can move next is set in each status.</span></span></h2>
+        <h2 class="card-title"><button type="button" class="card-toggle" onclick="toggleCardSection(this)" aria-expanded="false" aria-controls="sec-workflow-body" aria-label="Toggle statuses section"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button> Statuses <span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About status order" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">The first status is where patients start and the last is where they finish. Patients who reach the last status leave the board, so it needs only a name and has no tab. For every other status, you set where a patient can move next.</span></span></h2>
         <div style="display:flex;align-items:center;gap:10px;">
           <span class="section-state" id="cardState-workflow"></span>
           <button class="btn small workflow-add-btn" type="button" onclick="insertStatus()">+ Add new status</button>
@@ -1833,9 +1843,11 @@ select.control{ padding-right:26px; }
 
         <div class="status-list-body" id="statusListBody"></div>
 
-        <div class="subsection">
+        <div class="subsection status-transfer-block">
           <h4><label class="switch-heading"><input type="checkbox" id="transferEnabled" onchange="toggleTransferEnabled(this.checked)"><span class="switch-track"></span><span class="switch-label">Transfer to other care settings</span></label></h4>
           <p class="muted" id="transferDisabledNote" style="display:none;margin:6px 0 0;">Set a Care Setting first to enable transfers.</p>
+          <p class="muted" id="transferLockedNote" style="display:none;margin:6px 0 0;">Transfers are on for this active board and can only be left on.</p>
+          <div class="status-list-body" id="transferStatusBody" style="display:none;margin-top:10px;"></div>
         </div>
 
       </div>
@@ -1855,7 +1867,7 @@ select.control{ padding-right:26px; }
             <span style="flex:1 1 auto;"></span>
             <span id="widgetSelectedCount" class="muted" style="white-space:nowrap;"></span>
           </div>
-          <p class="field-error" id="widgetLimitError">Only 4 widgets can be shown at once. Remove one before adding another.</p>
+          <p class="field-error" id="widgetLimitError" style="display:none;">Only 4 widgets can be shown at once. Remove one before adding another.</p>
           <div class="widget-card-grid" id="widgetLibraryList"></div>
         </div>
 
@@ -2074,6 +2086,7 @@ select.control{ padding-right:26px; }
     selectedCareSettings = data ? (data.careSettings || (data.careSetting ? [data.careSetting] : [])).slice() : [];
     updateCareSettingButton();
     STATUSES = (data && data.statuses) ? JSON.parse(JSON.stringify(data.statuses)) : [];
+    clearCompletionFields();
     expandedStatusId = null;
     renderStatusList();
     selectedColumns = data && data.columns ? data.columns.slice() : recommendedColumnKeys();
@@ -2109,11 +2122,15 @@ select.control{ padding-right:26px; }
     selectedWidgets = savedWidgets && savedWidgets.widgets ? savedWidgets.widgets.slice().filter(function(k){ return !!widgetByKey(k); }) : WIDGET_LIBRARY.slice(0,4).map(function(w){ return w.key; });
     sidePanelEnabled = !!(savedWidgets && savedWidgets.sidePanelEnabled);
     selectedSidePanelSections = savedWidgets && savedWidgets.sidePanelSections ? savedWidgets.sidePanelSections.slice().filter(function(k){ return !!sidePanelSectionByKey(k); }) : [];
+    showWidgetLimitError(false);
     renderWidgetLibrary();
     renderSidePanelSectionList();
     syncSidePanelToggle();
     var transferOn = data ? !!data.transferEnabled : false;
     document.getElementById('transferEnabled').checked = transferOn;
+    activeBoardTransferLocked = !!(t && t.status === 'Active' && t.transferEnabled);
+    transferStatus = (data && data.transferStatus) ? JSON.parse(JSON.stringify(data.transferStatus)) : null;
+    transferExpanded = false;
     toggleTransferEnabled(transferOn);
     var pendingBanner = document.getElementById('activeBoardNoticeBanner');
     if(pendingBanner) pendingBanner.classList.toggle('open', !!(t && t.status === 'Active'));
@@ -2227,7 +2244,11 @@ select.control{ padding-right:26px; }
       var reachable = {};
       if(startId) reachable[startId] = true;
       t.statuses.forEach(function(st){ (st.allowedNext||[]).forEach(function(id){ reachable[id] = true; }); });
+      if(t.transferEnabled && t.transferStatus && t.statuses.slice(0,-1).some(function(st){ return st.allowTransfer !== false; })){
+        (t.transferStatus.allowedNext||[]).forEach(function(id){ reachable[id] = true; });
+      }
       if(t.statuses.some(function(st){ return !reachable[st.id]; })) issues.push('a reachable path for every status');
+      if(t.transferEnabled && t.statuses.length >= 2 && !t.statuses.slice(0,-1).some(function(st){ return st.allowTransfer !== false; })) issues.push('at least one status that allows transfers');
     }
     if(t.actions && !t.actions.statusChange) issues.push('an enabled status-change action');
     return issues;
@@ -2238,7 +2259,7 @@ select.control{ padding-right:26px; }
       name: document.getElementById('trackerboardNameInput').value.trim(),
       id: (pendingUniqueId || '').trim(),
       careSettings: selectedCareSettings.slice(),
-      statuses: JSON.parse(JSON.stringify(STATUSES)).map(function(st){ if(!boardHasMaternity()) delete st.linkedMove; return st; }),
+      statuses: JSON.parse(JSON.stringify(STATUSES)).map(function(st, i, arr){ var isLast = i === arr.length-1; if(isLast){ st.allowedNext = []; st.allowExit = false; st.enableTimer = false; st.timerValue = ''; st.timerUnit = 'minutes'; } if(isLast || !boardHasMaternity()) delete st.linkedMove; if(isLast || !transferIsOn()) delete st.allowTransfer; else st.allowTransfer = st.allowTransfer !== false; return st; }),
       widgets: { widgets: selectedWidgets.slice(), sidePanelEnabled: sidePanelEnabled, sidePanelSections: selectedSidePanelSections.slice() },
       columns: selectedColumns.slice(),
       columnCapabilities: JSON.parse(JSON.stringify(columnCapabilities)),
@@ -2251,6 +2272,7 @@ select.control{ padding-right:26px; }
       signals: selectedSignals.slice(),
       inlineActionLimit: parseInt((document.getElementById('inlineActionLimit')||{}).value, 10) || 3,
       transferEnabled: document.getElementById('transferEnabled').checked,
+      transferStatus: transferIsOn() ? (function(){ var ts = JSON.parse(JSON.stringify(transferStatus)); if(!boardHasMaternity()) delete ts.linkedMove; return ts; })() : undefined,
       updated: formatUpdatedTimestamp(new Date()),
       updatedBy: CURRENT_USER
     };
@@ -2320,6 +2342,10 @@ select.control{ padding-right:26px; }
     if(existing && existing.status === 'Active'){
       var removedCareSettings = activeBoardLockedCareSettings.filter(function(cs){ return selectedCareSettings.indexOf(cs) === -1; });
       var removedStatuses = activeBoardLockedStatuses.filter(function(ls){ return !STATUSES.some(function(s){ return s.id === ls.id; }); });
+      if(activeBoardTransferLocked && !record.transferEnabled){
+        openAlertModal('Can\'t remove from a live board', 'Transfer to other care settings is on for this active board and can only be left on.');
+        return;
+      }
       if(removedCareSettings.length || removedStatuses.length){
         var parts = [];
         if(removedCareSettings.length) parts.push('Care Setting(s) '+removedCareSettings.join(', '));
@@ -2344,7 +2370,7 @@ select.control{ padding-right:26px; }
       if(autoRemovalDuration(oldAR) !== autoRemovalDuration(newAR)) behaviorChanges.push('Auto-removal: '+autoRemovalDuration(oldAR)+' to '+autoRemovalDuration(newAR));
       var oldRoles = !!(existing.columnSubOptions && existing.columnSubOptions.provider && existing.columnSubOptions.provider.primarySecondary);
       var newRoles = !!(record.columnSubOptions && record.columnSubOptions.provider && record.columnSubOptions.provider.primarySecondary);
-      if(oldRoles !== newRoles) behaviorChanges.push('Provider Primary / Secondary: '+(oldRoles?'on':'off')+' to '+(newRoles?'on':'off'));
+      if(oldRoles !== newRoles) behaviorChanges.push('Provider Select primary: '+(oldRoles?'on':'off')+' to '+(newRoles?'on':'off'));
       Object.assign(existing, record);
       formDirty = false; dirtySections = {}; touchedGroups = {};
       logAuditEvent(existing.id, 'Updated', behaviorChanges.join('; '));
@@ -2953,12 +2979,19 @@ select.control{ padding-right:26px; }
   var sidePanelEnabled = false;
   var selectedSidePanelSections = [];
 
+  // Hidden means gone (display none), so the empty message never leaves a gap above the cards.
+  function showWidgetLimitError(show){
+    var el = document.getElementById('widgetLimitError');
+    if(!el) return;
+    el.style.display = show ? 'block' : 'none';
+    el.style.visibility = 'visible';
+  }
   function toggleWidgetSelected(key, checked){
     var pos = selectedWidgets.indexOf(key);
     if(checked){
       if(pos === -1){
         if(selectedWidgets.length >= WIDGET_SLOT_LIMIT){
-          setFieldError('widgetLimitError', true);
+          showWidgetLimitError(true);
           renderWidgetLibrary();
           return;
         }
@@ -2967,7 +3000,7 @@ select.control{ padding-right:26px; }
     } else if(pos > -1){
       selectedWidgets.splice(pos,1);
     }
-    setFieldError('widgetLimitError', false);
+    showWidgetLimitError(false);
     renderWidgetLibrary();
     updateReadiness();
   }
@@ -3123,13 +3156,16 @@ select.control{ padding-right:26px; }
       var roleChanges = [];
       if(newFirstId !== oldFirstId) roleChanges.push('"'+preview[0].name+'" will become the Starting status');
       if(newLastId !== oldLastId && preview.length > 1) roleChanges.push('"'+preview[preview.length-1].name+'" will become the Completion status');
+      var newLastStatus = preview[preview.length-1];
+      var clearNote = (newLastId !== oldLastId && preview.length > 1 && statusHasConfig(newLastStatus)) ? ' Its transitions and alerts will be cleared.' : '';
       function applyStatusReorder(){
         STATUSES = preview;
+        clearCompletionFields();
         renderStatusList();
         updateReadiness();
       }
       if(roleChanges.length){
-        openConfirmModal('Change status order?', 'This reorder means ' + roleChanges.join(' and ') + '.', applyStatusReorder, { confirmLabel: 'Reorder anyway' });
+        openConfirmModal('Change status order?', 'This reorder means ' + roleChanges.join(' and ') + '.' + clearNote, applyStatusReorder, { confirmLabel: 'Reorder anyway' });
       } else {
         applyStatusReorder();
       }
@@ -3683,15 +3719,16 @@ select.control{ padding-right:26px; }
 
   // capabilities (optional): describes the per-column controls that appear inline in the
   // Columns list once that column is checked on. Every other column stays plain (no inline
-  // control) — including Vitals, Bed No, Duration and Patient type, which used to carry a
-  // None/combination dropdown but turned out not to need one: Vitals is always Add & Edit,
-  // Bed No always Assign & Change, Duration always Start Timer, Patient type always single
-  // select — nothing there was ever a real decision for the admin to make.
+  // control) — including Vitals, Bed No and Patient type, which used to carry a None/combination
+  // dropdown but turned out not to need one: Vitals is always Add & Edit, Bed No always
+  // Assign & Change, Patient type always single select. Duration is the exception again: it has a
+  // Start timer switch (off = the clock starts at check-in; on = staff start it from the cell).
   //   type:'checkbox' — independent verbs, any combination can be on (kept as a mechanism for
   //                      future columns that do need it; no column currently uses it)
   //   type:'toggle'    — one small Multiselect switch; off = single select, on = multi select
-  //                      (Provider, Nurse, Surgery Type). A toggle may declare a `dependent`
-  //                      sub-option (Provider: Primary / Secondary), shown only while Multiselect
+  //                      (Provider, Nurse, Surgery Type). A toggle may carry its own `label` and
+  //                      `info` (Duration: Start timer) and may declare a `dependent`
+  //                      sub-option (Provider: Select primary), shown only while Multiselect
   //                      is on and stored separately in columnSubOptions.
   var PATIENT_COLUMNS = [
     { key:'nameOrPid', label:'Name/PID', category:'Identity', locked:true },
@@ -3700,12 +3737,14 @@ select.control{ padding-right:26px; }
     { key:'queuedFor', label:'Queued for', category:'Workflow', recommended:true },
     { key:'vitals', label:'Vitals', category:'Clinical', recommended:true },
     { key:'bedNo', label:'Bed No', category:'Resource', recommended:true },
-    { key:'duration', label:'Duration', category:'Workflow', recommended:true },
+    { key:'duration', label:'Duration', category:'Workflow', recommended:true,
+      capabilities:{ type:'toggle', defaultValue:false, label:'Start timer',
+                     info:'Lets staff decide when the Duration clock starts, instead of it starting at check-in. Use it where time should count from a later point, such as when a procedure begins.' } },
     { key:'schTime', label:'Scheduled Time', category:'Workflow', recommended:true },
     { key:'patientType', label:'Patient type', category:'Identity' },
     { key:'provider', label:'Provider', category:'Clinical',
       capabilities:{ type:'toggle', defaultValue:false,
-                     dependent:{ key:'primarySecondary', label:'Primary / Secondary' } } },
+                     dependent:{ key:'primarySecondary', label:'Select primary' } } },
     { key:'nurse', label:'Nurse', category:'Clinical',
       capabilities:{ type:'toggle', defaultValue:false } },
     { key:'surgeryType', label:'Surgery Type', category:'OR', recommended:true,
@@ -3789,7 +3828,9 @@ select.control{ padding-right:26px; }
         var depOn = !!(columnSubOptions[c.key] && columnSubOptions[c.key][dep.key]);
         depHtml = '<label class="switch-heading compact" onclick="event.stopPropagation();"><input type="checkbox"'+(depOn?' checked':'')+' onchange="event.stopPropagation();setColumnSubOption(\''+c.key+'\', \''+dep.key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+dep.label+'</span></label>';
       }
-      return '<span class="col-capabilities">'+depHtml+'<label class="switch-heading compact" onclick="event.stopPropagation();"><input type="checkbox"'+(on?' checked':'')+' onchange="event.stopPropagation();setColumnCapabilityMultiselect(\''+c.key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">Multiselect</span></label></span>';
+      var toggleLabel = c.capabilities.label || 'Multiselect';
+      var toggleInfo = c.capabilities.info ? infoPopoverHtml('About '+toggleLabel.toLowerCase(), c.capabilities.info, true) : '';
+      return '<span class="col-capabilities">'+depHtml+'<label class="switch-heading compact" onclick="event.stopPropagation();"><input type="checkbox"'+(on?' checked':'')+' onchange="event.stopPropagation();setColumnCapabilityMultiselect(\''+c.key+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">'+toggleLabel+'</span></label>'+toggleInfo+'</span>';
     }
     // type === 'checkbox': a single dropdown enumerating every combination of the verbs
     var combos = capabilityCombosFor(c.capabilities);
@@ -4092,7 +4133,9 @@ select.control{ padding-right:26px; }
           despite sitting next to the Statuses code below).
      ========================================================================== */
   function toggleTransferEnabled(checked){
-    updateReadiness();
+    if(checked && !transferStatus) transferStatus = newTransferStatus();
+    if(!checked) transferExpanded = false;
+    renderStatusList();
   }
 
   var SECTION_ORDER = [
@@ -4147,6 +4190,55 @@ select.control{ padding-right:26px; }
   var STATUSES = [];
   var expandedStatusId = null;
 
+  // The "Queued for transfer" status lives outside STATUSES on purpose: position in STATUSES
+  // decides Starting, Completion and forward/backward, and this status must never take part in that.
+  var TRANSFER_STATUS_ID = 'transfer_queue';
+  var TRANSFER_STATUS_DEFAULT_NAME = 'Queued for transfer';
+  var transferStatus = null;
+  var transferExpanded = false;
+  var activeBoardTransferLocked = false;
+  function newTransferStatus(){
+    return { id:TRANSFER_STATUS_ID, name:TRANSFER_STATUS_DEFAULT_NAME, allowExit:false, allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes' };
+  }
+  function findStatusById(id){
+    if(id === TRANSFER_STATUS_ID) return transferStatus;
+    return STATUSES.find(function(x){ return x.id === id; });
+  }
+  function transferIsOn(){
+    var el = document.getElementById('transferEnabled');
+    return !!(el && el.checked && transferStatus);
+  }
+  function statusHasConfig(st){
+    return !!(st && ((st.allowedNext||[]).length || st.enableTimer || st.allowExit || st.linkedMove));
+  }
+  // Per-status transfer permission. Undefined means "not decided yet" and defaults to allowed for
+  // every status except Completion; an explicit false (the admin unticked it) is always kept.
+  function defaultTransferTicks(){
+    STATUSES.forEach(function(st, i){
+      if(i === STATUSES.length-1) return;
+      if(st.allowTransfer === undefined) st.allowTransfer = true;
+    });
+  }
+  // The Completion status (the last one) carries a name only.
+  function clearCompletionFields(){
+    if(!STATUSES.length) return;
+    var st = STATUSES[STATUSES.length-1];
+    st.allowedNext = []; st.allowExit = false; st.enableTimer = false; st.timerValue = ''; st.timerUnit = 'minutes';
+    delete st.linkedMove;
+    delete st.allowTransfer;
+  }
+  function nextStatusName(){
+    var used = {};
+    STATUSES.forEach(function(st){ used[(st.name||'').trim().toLowerCase()] = true; });
+    if(transferIsOn()) used[(transferStatus.name||'').trim().toLowerCase()] = true;
+    var n = 1;
+    while(used['status '+n]) n++;
+    return 'Status '+n;
+  }
+  function infoPopoverHtml(label, text, alignRight){
+    return '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="'+label+'" onclick="event.stopPropagation();toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover'+(alignRight ? ' right' : '')+'">'+text+'</span></span>';
+  }
+
   function isStartId(id){ return !!STATUSES.length && STATUSES[0].id === id; }
   function isCompleteId(id){ return !!STATUSES.length && STATUSES[STATUSES.length-1].id === id; }
 
@@ -4157,6 +4249,7 @@ select.control{ padding-right:26px; }
     // (computeSectionState) and the status list's own inline warning icons.
     var byId = {};
     STATUSES.forEach(function(st){ byId[st.id] = st; });
+    if(transferIsOn()) byId[TRANSFER_STATUS_ID] = transferStatus;
     var startId = STATUSES.length ? STATUSES[0].id : null;
     var completeId = STATUSES.length ? STATUSES[STATUSES.length-1].id : null;
     var unreachable = {};
@@ -4167,7 +4260,11 @@ select.control{ padding-right:26px; }
       while(queue.length){
         var current = byId[queue.shift()];
         if(!current) continue;
-        (current.allowedNext||[]).forEach(function(nextId){
+        // A status that allows transfer leads to the transfer status; the transfer status then
+        // leads to whatever its own Allowed transitions list.
+        var nexts = (current.allowedNext||[]).slice();
+        if(current.id !== TRANSFER_STATUS_ID && transferIsOn() && current.allowTransfer !== false && !isCompleteId(current.id)) nexts.push(TRANSFER_STATUS_ID);
+        nexts.forEach(function(nextId){
           if(!reachableFromStart[nextId]){ reachableFromStart[nextId] = true; queue.push(nextId); }
         });
       }
@@ -4190,7 +4287,7 @@ select.control{ padding-right:26px; }
       STATUSES.forEach(function(st){
         if(st.id === completeId) return;
         if(unreachable[st.id]) return; // already flagged as unreachable, don't double-flag
-        var hasExit = canReachCompletion[st.id] || st.allowExit || transferOn;
+        var hasExit = canReachCompletion[st.id] || st.allowExit || (transferOn && st.allowTransfer !== false);
         if(!hasExit) noExit[st.id] = true;
       });
     }
@@ -4234,14 +4331,12 @@ select.control{ padding-right:26px; }
         namesSeen[n.toLowerCase()] = true;
       });
 
-      // Completion (the last status) may move a patient backward, but never forward.
-      if(STATUSES.length){
-        var lastStatus = STATUSES[STATUSES.length-1];
-        var forwardNext = (lastStatus.allowedNext||[]).filter(function(id){ return statusDirectionLabel(lastStatus.id, id) === 'forward'; });
-        if(forwardNext.length){
-          var names = forwardNext.map(function(id){ var t = STATUSES.find(function(x){ return x.id===id; }); return t ? t.name : id; });
-          workflowBlocking.push('"'+lastStatus.name+'" is the Completion status but has a forward transition configured: '+names.join(', '));
-        }
+      // The transfer status (when transfers are on) needs a name that no other status uses.
+      if(transferIsOn()){
+        var tn = (transferStatus.name||'').trim();
+        if(!tn) workflowBlocking.push('The transfer status is missing a Status Name');
+        else if(namesSeen[tn.toLowerCase()]) workflowBlocking.push('"'+tn+'" is used by more than one status &mdash; Status Names must be unique');
+        if(STATUSES.length >= 2 && !STATUSES.slice(0,-1).some(function(st){ return st.allowTransfer !== false; })) workflowBlocking.push('Transfer is on but no status allows it');
       }
 
       var diagnostics = computeStatusDiagnostics();
@@ -4256,6 +4351,10 @@ select.control{ padding-right:26px; }
         var v = parseFloat(st.timerValue);
         if(!v || v <= 0) workflowBlocking.push('"'+st.name+'" has a longer-stay alert enabled without a valid duration');
       });
+      if(transferIsOn() && transferStatus.enableTimer){
+        var tv = parseFloat(transferStatus.timerValue);
+        if(!tv || tv <= 0) workflowBlocking.push('"'+transferStatus.name+'" has a longer-stay alert enabled without a valid duration');
+      }
 
       if(workflowBlocking.length) return { state:'incomplete', issues:workflowBlocking };
       return { state:'complete', issues:[] };
@@ -4334,7 +4433,9 @@ select.control{ padding-right:26px; }
   }
 
   function insertStatus(){
-    var s = { id:nextStatusId(), name:'New status', allowExit:false, allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes' };
+    var s = { id:nextStatusId(), name:nextStatusName(), allowExit:false, allowedNext:[], enableTimer:false, timerValue:'', timerUnit:'minutes' };
+    // A new status is added at the end, so it becomes the Completion status and the list
+    // stays in the order the statuses were created.
     STATUSES.push(s);
     expandedStatusId = s.id;
     renderStatusList();
@@ -4352,13 +4453,19 @@ select.control{ padding-right:26px; }
       return;
     }
     var referencedBy = STATUSES.filter(function(st, i){ return i !== idx && (st.allowedNext||[]).indexOf(id) > -1; });
+    if(transferStatus && (transferStatus.allowedNext||[]).indexOf(id) > -1) referencedBy.push(transferStatus);
     var message = 'This cannot be undone.';
     if(referencedBy.length){
       message += ' It will also be removed from the Allowed Transitions of ' + referencedBy.map(function(st){ return '"'+st.name+'"'; }).join(', ') + '.';
     }
+    if(idx === STATUSES.length-1 && STATUSES.length > 1 && statusHasConfig(STATUSES[idx-1])){
+      message += ' "'+STATUSES[idx-1].name+'" will become the Completion status and its transitions and alerts will be cleared.';
+    }
     function performDelete(){
       STATUSES.splice(idx, 1);
       STATUSES.forEach(function(st){ st.allowedNext = (st.allowedNext||[]).filter(function(x){ return x !== id; }); });
+      if(transferStatus) transferStatus.allowedNext = (transferStatus.allowedNext||[]).filter(function(x){ return x !== id; });
+      clearCompletionFields();
       if(expandedStatusId === id) expandedStatusId = null;
       renderStatusList();
       updateReadiness();
@@ -4367,7 +4474,7 @@ select.control{ padding-right:26px; }
   }
 
   function renameStatus(id, value){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(!s) return;
     s.name = value;
     renderStatusList();
@@ -4378,17 +4485,17 @@ select.control{ padding-right:26px; }
   // care setting. It applies when a mother moves into this status while her linked baby is on
   // the same board. Absent = "stays" (the default); transfers to another care setting never
   // cascade.
-  var LINKED_MOVE_OPTIONS = [ ['stays','No change'], ['ask','Confirm each time'], ['moves','Apply automatically'] ];
+  var LINKED_MOVE_OPTIONS = [ ['stays','Keep current status'], ['ask','Ask before moving'], ['moves','Move with mother'] ];
   function linkedMoveFieldHtml(s){
     if(!boardHasMaternity()) return '';
     var cur = s.linkedMove || 'stays';
-    var info = '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the linked newborn setting" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Keeps the newborn\'s status in line with the mother\'s. Care setting transfers are handled separately.</span></span>';
+    var info = '<span class="info-popover-wrap"><button type="button" class="info-popover-trigger" tabindex="0" aria-haspopup="true" aria-label="About the linked newborn setting" onclick="toggleInfoPopover(this)"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></button><span class="info-popover">Decides whether a newborn follows its mother into this status, so staff don\'t update both records by hand. Applies only on this board, not to transfers.</span></span>';
     var opts = LINKED_MOVE_OPTIONS.map(function(o){ return '<option value="'+o[0]+'"'+(cur===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('');
-    return '<div class="field full" style="margin-top:12px;max-width:320px;"><label for="linkedMoveSelect_'+s.id+'"><span>Apply to linked newborn '+info+'</span></label>'+
+    return '<div class="field full" style="margin-top:12px;max-width:320px;"><label for="linkedMoveSelect_'+s.id+'"><span>Linked newborn '+info+'</span></label>'+
       '<select class="control" id="linkedMoveSelect_'+s.id+'" onchange="setLinkedMove(\''+s.id+'\', this.value)">'+opts+'</select></div>';
   }
   function setLinkedMove(id, value){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(!s) return;
     if(value === 'moves' || value === 'ask') s.linkedMove = value; else delete s.linkedMove;
     updateReadiness();
@@ -4405,14 +4512,22 @@ select.control{ padding-right:26px; }
   }
 
   function toggleAllowExit(id, checked){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(!s) return;
     s.allowExit = checked;
     updateReadiness();
   }
 
+  function toggleAllowTransfer(id, checked){
+    var st = findStatusById(id);
+    if(!st) return;
+    st.allowTransfer = checked;
+    renderStatusList();
+    updateReadiness();
+  }
+
   function toggleAllowedNext(id, targetId, checked){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(!s) return;
     var pos = s.allowedNext.indexOf(targetId);
     if(checked && pos===-1) s.allowedNext.push(targetId);
@@ -4422,41 +4537,45 @@ select.control{ padding-right:26px; }
   }
 
   function toggleTimerEnabled(id, checked){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(!s) return;
     s.enableTimer = checked;
     renderStatusList();
     updateReadiness();
   }
   function updateTimerValue(id, v){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(s){ s.timerValue = v; updateReadiness(); }
   }
   function updateTimerUnit(id, v){
-    var s = STATUSES.find(function(x){ return x.id === id; });
+    var s = findStatusById(id);
     if(s) s.timerUnit = v;
   }
 
-  function renderStatusBody(s, idx){
-    var isComplete = idx === STATUSES.length - 1;
-    var others = STATUSES.filter(function(o){ return o.id !== s.id; });
-    var transitionsHtml;
-    if(!others.length){
-      // Evidently shown, not just left blank — a brand-new first status has nothing to
-      // transition to yet, and that should read as "expected", not "broken".
-      transitionsHtml = '<p class="muted" style="margin:0;">No other statuses yet — add another status to allow transitions to it.</p>';
-    } else {
-      var optionsHtml = others.map(function(other){
-        var dir = statusDirectionLabel(s.id, other.id);
-        if(isComplete && dir === 'forward') return '';
-        var checked = s.allowedNext.indexOf(other.id) > -1;
-        return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext(\''+s.id+'\', \''+other.id+'\', this.checked)"> '+other.name+'</label>';
-      }).join('');
-      transitionsHtml = optionsHtml.trim() ? '<div class="check-grid check-grid-3">'+optionsHtml+'</div>' : '<p class="muted" style="margin:0;">No earlier statuses to move back to — this is the first status in the workflow order.</p>';
+  function renderStatusBody(s, idx, isTransfer){
+    var isComplete = !isTransfer && idx === STATUSES.length - 1;
+    var others = isTransfer ? STATUSES.slice() : STATUSES.filter(function(o){ return o.id !== s.id; });
+    var nameInfo = isTransfer ? ' ' + infoPopoverHtml('About the transfer status', 'Holds patients who are waiting to move to another care setting, so staff can see who is on their way out. Rename it to match your own wording.') : '';
+    var nameFieldHtml = '<div class="field full"><label for="statusNameInput_'+s.id+'"><span>Status name <span style="color:var(--bad)">*</span>'+nameInfo+'</span></label>'+
+      '<input class="text" id="statusNameInput_'+s.id+'" type="text" value="'+s.name+'" onchange="renameStatus(\''+s.id+'\', this.value)"></div>';
+    if(isComplete){
+      return '<div class="status-card-body">'+nameFieldHtml+
+        '<p class="muted" style="margin:12px 0 0;">The last status ends the workflow. Patients who reach it leave the board, so it has no tab, transitions or alerts.</p>'+
+      '</div>';
     }
+    var optionsHtml = others.map(function(other){
+      var checked = s.allowedNext.indexOf(other.id) > -1;
+      return '<label class="check-option"><input type="checkbox"'+(checked?' checked':'')+' onchange="toggleAllowedNext(\''+s.id+'\', \''+other.id+'\', this.checked)"> '+other.name+'</label>';
+    }).join('');
+    var showTransferTick = !isTransfer && transferIsOn();
+    if(showTransferTick){
+      optionsHtml += '<label class="check-option"><input type="checkbox"'+(s.allowTransfer !== false ? ' checked' : '')+' onchange="toggleAllowTransfer(\''+s.id+'\', this.checked)"> '+transferStatus.name+' <span class="muted">(transfer)</span></label>';
+    }
+    var transitionsHtml = optionsHtml
+      ? '<div class="check-grid check-grid-3">'+optionsHtml+'</div>'
+      : '<p class="muted" style="margin:0;">' + (isTransfer ? 'No statuses yet — add statuses above to choose where a patient can move from here.' : 'No other statuses yet — add another status to allow transitions to it.') + '</p>';
     return '<div class="status-card-body">' +
-      '<div class="field full"><label for="statusNameInput_'+s.id+'"><span>Status name <span style="color:var(--bad)">*</span></span></label>'+
-        '<input class="text" id="statusNameInput_'+s.id+'" type="text" value="'+s.name+'" onchange="renameStatus(\''+s.id+'\', this.value)"></div>'+
+      nameFieldHtml+
       '<div class="status-toggle-row">'+
         '<div>'+
           '<label class="switch-heading"><input type="checkbox"'+(s.enableTimer?' checked':'')+' onchange="toggleTimerEnabled(\''+s.id+'\', this.checked)"><span class="switch-track"></span><span class="switch-label">Alert on extended duration</span></label>'+
@@ -4473,25 +4592,45 @@ select.control{ padding-right:26px; }
       '</div>'+
       linkedMoveFieldHtml(s)+
       '<div class="subsection">'+
-        '<h4>Allowed transitions</h4>'+
+        '<h4>Allowed transitions'+(showTransferTick ? ' '+infoPopoverHtml('About transfers', 'Tick the transfer status to let staff move a patient out of this status to another care setting. Leave it unticked where a transfer should not be possible yet.') : '')+'</h4>'+
         transitionsHtml+
       '</div>'+
     '</div>';
   }
 
+  function toggleTransferAccordion(){
+    transferExpanded = !transferExpanded;
+    renderTransferStatus();
+  }
+  function renderTransferStatus(){
+    var host = document.getElementById('transferStatusBody');
+    var cb = document.getElementById('transferEnabled');
+    var lockedNote = document.getElementById('transferLockedNote');
+    if(cb) cb.disabled = !!activeBoardTransferLocked;
+    if(lockedNote) lockedNote.style.display = activeBoardTransferLocked ? '' : 'none';
+    if(!host) return;
+    if(!transferIsOn()){ host.style.display = 'none'; host.innerHTML = ''; return; }
+    host.style.display = '';
+    var st = transferStatus;
+    var header = '<div class="status-card-header" onclick="toggleTransferAccordion()">'+
+      '<button type="button" class="card-toggle" aria-expanded="'+(transferExpanded?'true':'false')+'" aria-label="Toggle '+st.name+'" onclick="event.stopPropagation();toggleTransferAccordion()"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button>'+
+      '<span class="status-card-title">'+st.name+'</span>'+
+    '</div>';
+    host.innerHTML = '<div class="status-item-wrapper'+(transferExpanded?' expanded':'')+'">'+header+(transferExpanded ? renderStatusBody(st, -1, true) : '')+'</div>';
+  }
+
   function renderStatusList(){
     var body = document.getElementById('statusListBody');
     if(!body) return;
+    if(transferIsOn()) defaultTransferTicks();
+    renderTransferStatus();
     if(!STATUSES.length){
       body.innerHTML = '<p class="muted" style="padding:14px;">No statuses yet. Click "+ Add new status" to create the first one.</p>';
       updateReadiness();
       return;
     }
     var diagnostics = computeStatusDiagnostics();
-    var html = STATUSES.map(function(s, idx){
-      var isStart = idx === 0;
-      var isComplete = idx === STATUSES.length - 1;
-      var roleTag = isStart && isComplete ? '<span class="status-role-tag">Starting &amp; Completion</span>' : isStart ? '<span class="status-role-tag">Starting</span>' : (isComplete ? '<span class="status-role-tag">Completion</span>' : '');
+    var cards = STATUSES.map(function(s, idx){
       var warningText = diagnostics.unreachable[s.id] ? 'Unreachable' : (diagnostics.noExit[s.id] ? 'No exit' : '');
       var warningTag = warningText ? '<span class="status-warning-tag">'+warningText+'</span>' : '';
       var expanded = expandedStatusId === s.id;
@@ -4502,13 +4641,31 @@ select.control{ padding-right:26px; }
         '<button type="button" class="card-toggle" aria-expanded="'+(expanded?'true':'false')+'" aria-label="Toggle '+s.name+'" onclick="event.stopPropagation();toggleStatusAccordion(\''+s.id+'\')"><span class="card-chevron"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="ic-chevron"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg></span></button>'+
         '<span class="status-order-num">'+(idx+1)+'</span>'+
         '<span class="status-card-title">'+s.name+'</span>'+
-        roleTag+warningTag+
+        warningTag+
         deleteBtn+
       '</div>';
       var body = expanded ? renderStatusBody(s, idx) : '';
       return '<div class="status-item-wrapper'+(expanded?' expanded':'')+'">'+header+body+'</div>';
-    }).join('');
-    body.innerHTML = html;
+    });
+    // Starting and Completion each get a heading; the statuses in between stay unlabelled.
+    // The headings are also drop targets, so a card dropped on one lands in that position.
+    function groupHtml(title, headingId, dropId, items){
+      var heading = title
+        ? '<h4 class="status-group-title" id="'+headingId+'" ondragover="onReorderDragOver(event,\'status\')" ondragleave="onReorderDragLeave(event)" ondrop="onReorderDrop(event,\'status\',\''+dropId+'\')">'+title+'</h4>'
+        : '';
+      var a11y = title ? ' role="group" aria-labelledby="'+headingId+'"' : ' role="group" aria-label="Other statuses"';
+      return '<div class="status-group"'+a11y+'>'+heading+'<div class="status-group-cards">'+items.join('')+'</div></div>';
+    }
+    var n = STATUSES.length;
+    var groups = [];
+    if(n === 1){
+      groups.push(groupHtml('Starting &amp; Completion Status', 'statusGroupStart', STATUSES[0].id, cards));
+    } else {
+      groups.push(groupHtml('Starting Status', 'statusGroupStart', STATUSES[0].id, cards.slice(0,1)));
+      if(n > 2) groups.push(groupHtml(null, null, null, cards.slice(1, n-1)));
+      groups.push(groupHtml('Completion Status', 'statusGroupComplete', STATUSES[n-1].id, cards.slice(n-1)));
+    }
+    body.innerHTML = groups.join('');
     updateReadiness();
   }
 
